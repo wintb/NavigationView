@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <CalendarView
+        android:id="@+id/calendarID"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:background="#3498db"
+        android:selectedDateVerticalBar="@color/colorAccent"
+        android:tag="my tag" />
+
+</LinearLayout>

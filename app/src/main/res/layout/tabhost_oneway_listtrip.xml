@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="vuvanthang.uit.testall.MainActivity"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/txtChuyenDi"
+            android:text="Tỉnh A -> Tỉnh B"
+            android:textColor="#2c3e50"
+            android:textSize="20dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/txtNgayDi"
+            android:text="Ngày a-b-c"
+            android:textColor="#2c3e50"
+            android:textSize="20dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/txtLoTrinh"
+            android:text="Lộ trình 100km"
+            android:textColor="#2c3e50"
+            android:textSize="20dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+
+    <!--Danh sach cac chuyen xe di trong ngay-->
+    <TextView
+        android:gravity="center"
+        android:textColor="#2c3e50"
+        android:textSize="25dp"
+        android:text="Danh sách các chuyến "
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Mã Tài"
+            android:id="@+id/txtTai"
+            android:layout_weight="1" />
+
+        <TextView
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Giờ Đi"
+            android:id="@+id/txtGioDi"
+            android:layout_weight="1" />
+
+        <TextView
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Giờ Đến"
+            android:id="@+id/txtGioDen"
+            android:layout_weight="1" />
+
+        <TextView
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Giá Vé"
+            android:id="@+id/txtGiaVe"
+            android:layout_weight="1" />
+
+        <TextView
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Chọn"
+            android:id="@+id/txtChon"
+            android:layout_weight="1" />
+    </TableRow>
+
+
+    <ListView
+        android:id="@+id/DanhSachChuyenDi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+
+</LinearLayout>
