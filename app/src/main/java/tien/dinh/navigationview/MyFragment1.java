@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import tien.dinh.navigationview.EventForTabHost.Fragment_OneWay.OneWay;
-import tien.dinh.navigationview.EventForTabHost.Fragment_RoundTrip.RoundTrip;
+import tien.dinh.navigationview.tabhost.oneway.OneWay;
+import tien.dinh.navigationview.tabhost.roundtrip.RoundTrip;
 
 
 /**

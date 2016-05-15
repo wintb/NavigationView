@@ -1,5 +1,6 @@
-package tien.dinh.navigationview.EventForTabHost.Fragment_RoundTrip;
+package tien.dinh.navigationview.tabhost.oneway;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,74 +30,128 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
-import tien.dinh.navigationview.EventForTabHost.DateTimeFormat.DatetimeFormater;
+import tien.dinh.navigationview.tabhost.datetime.CompareDateTime;
+import tien.dinh.navigationview.tabhost.datetime.DatetimeFormater;
 import tien.dinh.navigationview.R;
+import tien.dinh.navigationview.json.ReadJson;
 
 /**
  * Created by VuVanThang on 3/29/2016.
  */
-public class RoundTrip extends Fragment {
+public class OneWay extends Fragment{
 
-
-    TextView txtDateDitab2;
-    TextView txtDateVetab2;
-    TextView txtChuyenDitab2;
-    ImageView imgDateDitab2;
-    ImageView imgDateVetab2;
-    ImageView imgChuyenDitab2;
+    TextView txtDate;
+    TextView txtChuyenDi;
+    ImageView imgDate;
+    ImageView imgChuyenDi;
     Context context;
     String date,months,years;
-    DatetimeFormater datetimeFormaterDi;
-    DatetimeFormater datetimeFormaterVe;
+    DatetimeFormater datetimeFormater;
+    CompareDateTime compareDateTime;
     ListView listView;
     ArrayList<String> arrayList;
-    Button btnTimChuyentab2;
+    Button btnTimChuyen;
+    String url_TimChuyen_MotChieu = "http://10.0.3.2:8080/xekhach/danhsachchuyendimotchieu.php";
+    String Json_DanhSach_Chuyen = "";
+    OnNameSetListener onNameSetListener;
+    ReadJson readJsonChuyenDi;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tabhost_roundtrip_activity,container,false);
+        View rootView = inflater.inflate(R.layout.tabhost_oneway_acivity,container,false);
 
-        txtChuyenDitab2 = (TextView) rootView.findViewById(R.id.txtChuyenDiTab2);
-        imgChuyenDitab2 = (ImageView) rootView.findViewById(R.id.imgChuyenDiTab2);
-        txtDateDitab2 = (TextView) rootView.findViewById(R.id.txtDateDiTab2);
-        imgDateDitab2 = (ImageView) rootView.findViewById(R.id.imgDateDiTab2);
-        txtDateVetab2 = (TextView) rootView.findViewById(R.id.txtDateVeTab2);
-        imgDateVetab2 = (ImageView) rootView.findViewById(R.id.imgDateVeTab2);
-
-        btnTimChuyentab2 = (Button) rootView.findViewById(R.id.btnTimChuyenTab2);
-
-        datetimeFormaterDi = new DatetimeFormater();
-        datetimeFormaterDi.datetimecurrent(txtDateDitab2);
-
-        datetimeFormaterVe = new DatetimeFormater();
-        datetimeFormaterVe.datetimecurrent(txtDateVetab2);
-
-
+        txtDate = (TextView) rootView.findViewById(R.id.txtDate);
+        txtChuyenDi = (TextView) rootView.findViewById(R.id.txtChuyenDi);
+        imgDate = (ImageView) rootView.findViewById(R.id.imgDate);
+        imgChuyenDi = (ImageView) rootView.findViewById(R.id.imgChuyenDi);
+        btnTimChuyen = (Button) rootView.findViewById(R.id.btnTimChuyenTab1);
+        //Lấy ngày hiện tại lên textview
+        datetimeFormater = new DatetimeFormater();
+        datetimeFormater.datetimecurrent(txtDate);
+        // So sánh ngày hiện tại với ngày đã chọn
+        compareDateTime = new CompareDateTime(getActivity());
+        //chọn chuyến đi
         chonChuyen();
+
+        //chon ngay thang di
         ChonNgay();
+
+        //Sự kiệm click vào button Tìm chuyến sẽ hiển thị ra danh sách các chuyến
+        btnTimChuyen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readJsonChuyenDi = new ReadJson(txtChuyenDi.getText().toString(),txtDate.getText().toString());
+                try {
+                    Json_DanhSach_Chuyen = new GoiWebService().execute(url_TimChuyen_MotChieu).get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+                //Log.d("JSON DSC: ", Json_DanhSach_Chuyen);
+                String tenchuyendi = txtChuyenDi.getText().toString();
+                String ngaydi = txtDate.getText().toString();
+                onNameSetListener.setChuyenDi_NgayDi(tenchuyendi, ngaydi, Json_DanhSach_Chuyen);
+
+            }
+        });
+
 
         return rootView;
     }
 
 
+    //--------------------------POST DATA TO SERVER AND GET DATA FROM SERVER------------------------------
+
+
+    private class GoiWebService extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... params) {
+            return readJsonChuyenDi.makePostRequestChuyenDi(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Json_DanhSach_Chuyen = s;
+            Log.d("JSON DANH SACH CHUYEN: ", Json_DanhSach_Chuyen);
+            super.onPostExecute(s);
+        }
+    }
+
+    //------------------------------------INTERFACE FOR SEND DATA TO FRAGMENT LIST TRIP -------------------------------
+
+    public interface OnNameSetListener{
+         public void setChuyenDi_NgayDi(String ChuyenDi, String NgayDi, String json);
+    }
+
+
+   @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            onNameSetListener = (OnNameSetListener)activity;
+        } catch (Exception e){throw new ClassCastException(activity.toString() + " must implement OnNameSetListener");}
+
+    }
+
+
+    //--------------------------------------------CHOOSE TRIP-------------------------------------------------------------
+
     public void chonChuyen(){
-
-
-        imgChuyenDitab2.setOnClickListener(new View.OnClickListener() {
+        imgChuyenDi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 LayoutInflater inflater1 = (LayoutInflater) getContext().getSystemService(context.LAYOUT_INFLATER_SERVICE);
                 LinearLayout linearLayout = (LinearLayout) inflater1.inflate(R.layout.listview_dialog_activity, null, false);
                 listView = (ListView) linearLayout.findViewById(R.id.list);
-
-                /*DocJSON docJSON = new DocJSON();
-                docJSON.execute("http://vuvanthang-001-site1.1tempurl.com/json.php");*/
-
                 DocJSON docJSON = new DocJSON();
-                docJSON.execute("http://vuvanthang-001-site1.1tempurl.com/json.php");
+                docJSON.execute("http://10.0.3.2:8080/xekhach/jsontencacchuyen.php");
 
                 new AlertDialog.Builder(getActivity()).setTitle("List Trip").setMessage("Click to select Trip")
                         .setView(linearLayout)
@@ -116,81 +171,42 @@ public class RoundTrip extends Fragment {
         });
     }
 
+    //---------------------------------------CHOOSE DATE TIME FOR TRIP-----------------------------------------------------
+
     public void ChonNgay(){
-        //Sự kiện chọn ngày tháng năm vé đi
-        imgDateDitab2.setOnClickListener(new View.OnClickListener() {
+
+        imgDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(context.LAYOUT_INFLATER_SERVICE);
                 LinearLayout ll = (LinearLayout) inflater.inflate(R.layout.calendar, null, false);
                 CalendarView cv = (CalendarView) ll.getChildAt(0);
-
                 cv.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
                     @Override
                     public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 
                         date = Integer.toString(dayOfMonth);
-                        months = Integer.toString(month + 1);
+                        months = Integer.toString(month+1);
                         years = Integer.toString(year);
+
+                        compareDateTime.comparedatetime(dayOfMonth,month+1,year);
+
 
                     }
 
                 });
 
-                new AlertDialog.Builder(getActivity()).setTitle("Calendar").setMessage("Click to select date")
+                new AlertDialog.Builder(getActivity()).setTitle("Calendar").setMessage("Chọn ngày đi")
                         .setView(ll)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
+                                //String date_month_year = years + "-" + months + "-" + date;
                                 String date_month_year = date + "/" + months + "/" + years;
-                                txtDateDitab2.setText(date_month_year);
-
-                            }
-                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                }).show();
-
-
-            }
-        });
-
-
-        //su kiện chọn ngày tháng năm vé về
-        imgDateVetab2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(context.LAYOUT_INFLATER_SERVICE);
-                LinearLayout ll = (LinearLayout) inflater.inflate(R.layout.calendar, null, false);
-                CalendarView cv = (CalendarView) ll.getChildAt(0);
-
-                cv.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-                    @Override
-                    public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-
-                        date = Integer.toString(dayOfMonth);
-                        months = Integer.toString(month + 1);
-                        years = Integer.toString(year);
-
-                    }
-
-                });
-
-                new AlertDialog.Builder(getActivity()).setTitle("Calendar").setMessage("Click to select date")
-                        .setView(ll)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                String date_month_year = date + "/" + months + "/" + years;
-                                txtDateVetab2.setText(date_month_year);
+                                datetimeFormater.FormatDateTime(date_month_year, txtDate);
+                                //txtDate.setText(date_month_year);
 
                             }
                         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -206,11 +222,14 @@ public class RoundTrip extends Fragment {
     }
 
 
+    //----------------------------------READ DATE FROM JSON FILE ------------------------------------------------
+
     private class DocJSON extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
             return docNoiDung_Tu_URL(params[0]);
+
         }
 
 
@@ -232,7 +251,7 @@ public class RoundTrip extends Fragment {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        txtChuyenDitab2.setText(arrayList.get(position).toString());
+                        txtChuyenDi.setText(arrayList.get(position).toString());
 
                     }
                 });
@@ -243,25 +262,19 @@ public class RoundTrip extends Fragment {
     }
 
 
+    //đọc nội dung từ URL
     private static String docNoiDung_Tu_URL(String theUrl)
     {
         StringBuilder content = new StringBuilder();
-
-        // many of these calls can throw exceptions, so i've just
-        // wrapped them all in one try/catch statement.
         try
         {
             // create a url object
             URL url = new URL(theUrl);
-
             // create a urlconnection object
             URLConnection urlConnection = url.openConnection();
-
             // wrap the urlconnection in a bufferedreader
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-
             String line;
-
             // read from the urlconnection via the bufferedreader
             while ((line = bufferedReader.readLine()) != null)
             {
@@ -275,4 +288,6 @@ public class RoundTrip extends Fragment {
         }
         return content.toString();
     }
+
+
 }

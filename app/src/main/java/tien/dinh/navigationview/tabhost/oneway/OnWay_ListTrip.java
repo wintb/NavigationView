@@ -1,4 +1,4 @@
-package tien.dinh.navigationview.EventForTabHost.Fragment_OneWay;
+package tien.dinh.navigationview.tabhost.oneway;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

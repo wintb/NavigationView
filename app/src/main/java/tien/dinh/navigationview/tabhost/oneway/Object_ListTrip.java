@@ -1,4 +1,4 @@
-package tien.dinh.navigationview.EventForTabHost.Fragment_OneWay;
+package tien.dinh.navigationview.tabhost.oneway;
 
 /**
  * Created by VuVanThang on 4/17/2016.

@@ -1,4 +1,4 @@
-package tien.dinh.navigationview.EventForTabHost.DateTimeFormat;
+package tien.dinh.navigationview.tabhost.datetime;
 
 import android.content.Context;
 import android.widget.Toast;

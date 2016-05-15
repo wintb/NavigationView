@@ -10,8 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import tien.dinh.navigationview.EventForTabHost.Fragment_OneWay.OnWay_ListTrip;
-import tien.dinh.navigationview.EventForTabHost.Fragment_OneWay.OneWay;
+import tien.dinh.navigationview.tabhost.oneway.OnWay_ListTrip;
+import tien.dinh.navigationview.tabhost.oneway.OneWay;
 
 public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetListener{
 
