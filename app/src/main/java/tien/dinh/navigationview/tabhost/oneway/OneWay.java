@@ -92,7 +92,7 @@ public class OneWay extends Fragment{
                     e.printStackTrace();
                 }
 
-                // send data to fragment OnWay_ListTrip
+                // send data to fragment OnWay_ListTrip class
                 String tenchuyendi = txtChuyenDi.getText().toString();
                 String ngaydi = txtDate.getText().toString();
                 onNameSetListener.setChuyenDi_NgayDi(tenchuyendi, ngaydi, Json_DanhSach_Chuyen);
