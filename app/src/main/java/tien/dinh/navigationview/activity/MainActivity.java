@@ -1,8 +1,10 @@
-package tien.dinh.navigationview;
+package tien.dinh.navigationview.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,6 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import tien.dinh.navigationview.fragment.DatVe_Fragment;
+import tien.dinh.navigationview.fragment.MyFragment1;
+import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.tabhost.oneway.OnWay_ListTrip;
 import tien.dinh.navigationview.tabhost.oneway.OneWay;
 
@@ -18,29 +23,29 @@ public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetL
     DrawerLayout drawerLayout;
     NavigationView navigation;
     ActionBarDrawerToggle drawerToggle;
+    FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initInstances();
+    }
+
+    private void initInstances() {
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         MyFragment1 myFragment1 = new MyFragment1();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentholder, myFragment1);
         fragmentTransaction.commit();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         drawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.opendrawer, R.string.closedrawer);
         drawerLayout.setDrawerListener(drawerToggle);
-
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        initInstances();
-    }
-
-
-    private void initInstances() {
 
         navigation = (NavigationView) findViewById(R.id.navigation_view);
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -49,21 +54,19 @@ public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetL
                 int id = menuItem.getItemId();
                 switch (id) {
                     case R.id.navigation_item_1:
-                        //Do some thing here
-                        // add navigation drawer item onclick method here
                         MyFragment1 myFragment1 = new MyFragment1();
-                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.fragmentholder, myFragment1);
                         fragmentTransaction.commit();
-
+                        navigation.setCheckedItem(id);
+                        drawerLayout.closeDrawer(navigation);
                         break;
                     case R.id.navigation_item_2:
                         //Do some thing here
                         // add navigation drawer item onclick method here
                         break;
                     case R.id.navigation_item_3:
-                        //Do some thing here
-                        // add navigation drawer item onclick method here
+
                         break;
                     case R.id.navigation_item_4:
                         //Do some thing here

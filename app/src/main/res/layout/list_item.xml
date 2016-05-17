@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:padding="15dp"
     android:textColor="#354b60"
-
     android:textSize="20dp">
 
 </TextView>
