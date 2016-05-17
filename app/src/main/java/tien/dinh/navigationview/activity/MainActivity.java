@@ -11,10 +11,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import tien.dinh.navigationview.fragment.DatVe_Fragment;
 import tien.dinh.navigationview.fragment.MyFragment1;
 import tien.dinh.navigationview.R;
+import tien.dinh.navigationview.fragment.MyFragment1;
+import tien.dinh.navigationview.fragment.MyFragment2;
 import tien.dinh.navigationview.tabhost.oneway.OnWay_ListTrip;
 import tien.dinh.navigationview.tabhost.oneway.OneWay;
 
@@ -30,22 +33,23 @@ public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initInstances();
-    }
-
-    private void initInstances() {
-
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         MyFragment1 myFragment1 = new MyFragment1();
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentholder, myFragment1);
         fragmentTransaction.commit();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         drawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.opendrawer, R.string.closedrawer);
         drawerLayout.setDrawerListener(drawerToggle);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        initInstances();
+    }
+
+
+    private void initInstances() {
 
         navigation = (NavigationView) findViewById(R.id.navigation_view);
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -54,19 +58,26 @@ public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetL
                 int id = menuItem.getItemId();
                 switch (id) {
                     case R.id.navigation_item_1:
+                        //Do some thing here
+                        // add navigation drawer item onclick method here
                         MyFragment1 myFragment1 = new MyFragment1();
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.fragmentholder, myFragment1);
                         fragmentTransaction.commit();
                         navigation.setCheckedItem(id);
                         drawerLayout.closeDrawer(navigation);
                         break;
                     case R.id.navigation_item_2:
-                        //Do some thing here
-                        // add navigation drawer item onclick method here
+                        MyFragment2 myFragment2 = new MyFragment2();
+                        FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction2.replace(R.id.fragmentholder, myFragment2);
+                        fragmentTransaction2.commit();
+                        navigation.setCheckedItem(id);
+                        drawerLayout.closeDrawer(navigation);
                         break;
                     case R.id.navigation_item_3:
-
+                        //Do some thing here
+                        // add navigation drawer item onclick method here
                         break;
                     case R.id.navigation_item_4:
                         //Do some thing here
@@ -77,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetL
                         // add navigation drawer item onclick method here
                         break;
                 }
+
                 return false;
             }
         });
@@ -125,15 +137,18 @@ public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetL
 
     @Override
     public void setChuyenDi_NgayDi(String ChuyenDi, String NgayDi, String json) {
+        if (json == "[]"){
+            Toast.makeText(getApplication(),"No Trip on day",Toast.LENGTH_LONG).show();
+        }else {
             OnWay_ListTrip danhSachChuyen = new OnWay_ListTrip();
             Bundle data = new Bundle();
-            data.putString("ChuyenDi",ChuyenDi);
-            data.putString("NgayDi",NgayDi);
-            data.putString("JsonChuyen",json);
+            data.putString("ChuyenDi", ChuyenDi);
+            data.putString("NgayDi", NgayDi);
+            data.putString("JsonChuyen", json);
             danhSachChuyen.setArguments(data);
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragmentholder, danhSachChuyen);
             fragmentTransaction.commit();
-
+        }
     }
 }

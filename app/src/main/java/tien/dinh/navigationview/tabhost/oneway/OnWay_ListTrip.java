@@ -50,7 +50,6 @@ public class OnWay_ListTrip extends Fragment {
         chuyendi.setText(data.getString("ChuyenDi"));
         ngaydi.setText(data.getString("NgayDi"));
         Json_DanhSach_Chuyen = data.getString("JsonChuyen");
-
         //Show list trip
         gson =new Gson();
         Type listType = new TypeToken<List<Object_Chuyen>>(){}.getType();
@@ -58,7 +57,7 @@ public class OnWay_ListTrip extends Fragment {
         customApdaterOneTrip = new CustomAdapterOneTrip(getActivity(),list);
         listView.setAdapter(customApdaterOneTrip);
         //get distance
-        lotrinh.setText(list.get(0).getLoTrinh());
+        //lotrinh.setText(list.get(0).getLoTrinh());
         return rootView;
 
     }

@@ -16,16 +16,22 @@
         android:layout_margin="20dp"
         />-->
 
-    <TextView
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="70dp"
+    <RelativeLayout
+        android:padding="25dp"
         android:gravity="center"
-        android:layout_gravity="center"
-        android:textSize="20dp"
-        android:textColor="#8e44ad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ĐẶT VÉ MỘT CHIỀU" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:textColor="#8e44ad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ĐẶT VÉ MỘT CHIỀU" />
+
+    </RelativeLayout>
 
 
     <RelativeLayout
@@ -55,11 +61,6 @@
             />
 
     </RelativeLayout>
-
-
-
-
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -128,16 +129,20 @@
         android:gravity="center"/>
 -->
 
-    <Button
-        android:id="@+id/btnTimChuyenTab1"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:background="@drawable/rect_button"
-        android:layout_gravity="center"
+    <RelativeLayout
         android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:textColor="#fff"
-        android:textSize="20dp"
-        android:text="Tìm Chuyến"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnTimChuyenTab1"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:background="@drawable/rect_button"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            android:text="Tìm Chuyến"/>
+    </RelativeLayout>
 
 </LinearLayout>
