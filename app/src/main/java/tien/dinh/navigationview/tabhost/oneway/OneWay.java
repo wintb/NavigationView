@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,10 +33,10 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import tien.dinh.navigationview.tabhost.datetime.CompareDateTime;
-import tien.dinh.navigationview.tabhost.datetime.DatetimeFormater;
 import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.json.ReadJson;
+import tien.dinh.navigationview.tabhost.datetime.CompareDateTime;
+import tien.dinh.navigationview.tabhost.datetime.DatetimeFormater;
 
 /**
  * Created by VuVanThang on 3/29/2016.
@@ -54,7 +55,7 @@ public class OneWay extends Fragment{
     ArrayList<String> arrayList;
     Button btnTimChuyen;
     String url_TimChuyen_MotChieu = "http://10.0.3.2:8080/xekhach/danhsachchuyendimotchieu.php";
-    String Json_DanhSach_Chuyen = "";
+    String Json_DanhSach_Chuyen ;
     OnNameSetListener onNameSetListener;
     ReadJson readJsonChuyenDi;
 
@@ -83,30 +84,34 @@ public class OneWay extends Fragment{
         btnTimChuyen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //post data to server and get json string
                 readJsonChuyenDi = new ReadJson(txtChuyenDi.getText().toString(),txtDate.getText().toString());
                 try {
                     Json_DanhSach_Chuyen = new GoiWebService().execute(url_TimChuyen_MotChieu).get();
+                    Log.d("TEST_JSON_JSON_JSON:",Json_DanhSach_Chuyen);
+                    if (Json_DanhSach_Chuyen == "[]"){
+                        Toast.makeText(getActivity(), "No trip on day", Toast.LENGTH_LONG).show();
+                    }else {
+                        Log.d("JSON_TEST","TEST_TEST_TEST");
+                        // send data to fragment OnWay_ListTrip class
+                        String tenchuyendi = txtChuyenDi.getText().toString();
+                        String ngaydi = txtDate.getText().toString();
+                        onNameSetListener.setChuyenDi_NgayDi(tenchuyendi, ngaydi, Json_DanhSach_Chuyen);
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
 
-                // send data to fragment OnWay_ListTrip class
-                String tenchuyendi = txtChuyenDi.getText().toString();
-                String ngaydi = txtDate.getText().toString();
-                onNameSetListener.setChuyenDi_NgayDi(tenchuyendi, ngaydi, Json_DanhSach_Chuyen);
-
             }
         });
-
 
         return rootView;
     }
 
 
     //--------------------------POST DATA TO SERVER AND GET DATA FROM SERVER------------------------------
-
 
     private class GoiWebService extends AsyncTask<String, Void, String>{
 
@@ -117,8 +122,8 @@ public class OneWay extends Fragment{
 
         @Override
         protected void onPostExecute(String s) {
-            Json_DanhSach_Chuyen = s;
-            Log.d("JSON DANH SACH CHUYEN: ", Json_DanhSach_Chuyen);
+            //Json_DanhSach_Chuyen = s;
+            Log.d("JSON DANH SACH CHUYEN: ", s);
             super.onPostExecute(s);
         }
     }

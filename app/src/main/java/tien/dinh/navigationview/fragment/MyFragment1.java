@@ -1,4 +1,4 @@
-package tien.dinh.navigationview;
+package tien.dinh.navigationview.fragment;
 
 
 import android.graphics.Color;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.tabhost.oneway.OneWay;
 import tien.dinh.navigationview.tabhost.roundtrip.RoundTrip;
 
