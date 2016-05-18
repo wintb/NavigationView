@@ -2,20 +2,18 @@ package tien.dinh.navigationview.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import tien.dinh.navigationview.R;
+import tien.dinh.navigationview.adapter.CustomAdapterOneTrip;
+import tien.dinh.navigationview.fragment.DatVe_Fragment;
 import tien.dinh.navigationview.fragment.MyFragment1;
 import tien.dinh.navigationview.fragment.MyFragment2;
 import tien.dinh.navigationview.tabhost.oneway.OnWay_ListTrip;
@@ -24,7 +22,7 @@ import tien.dinh.navigationview.tabhost.oneway.OneWay;
 /**
  * Created by VuVanThang on 5/17/2016.
  */
-public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetListener{
+public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetListener,CustomAdapterOneTrip.SoDoGhe{
 
     DrawerLayout drawerLayout;
     NavigationView navigation;
@@ -70,12 +68,12 @@ public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetL
                         drawerLayout.closeDrawer(navigation);
                         break;
                     case R.id.navigation_item_2:
-                            MyFragment2 myFragment2 = new MyFragment2();
-                            FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
-                            fragmentTransaction2.replace(R.id.fragmentholder, myFragment2);
-                            fragmentTransaction2.commit();
-                            navigation.setCheckedItem(id);
-                            drawerLayout.closeDrawer(navigation);
+                        MyFragment2 myFragment2 = new MyFragment2();
+                        FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction2.replace(R.id.fragmentholder, myFragment2);
+                        fragmentTransaction2.commit();
+                        navigation.setCheckedItem(id);
+                        drawerLayout.closeDrawer(navigation);
                         break;
                     case R.id.navigation_item_3:
                         //Do some thing here
@@ -154,4 +152,17 @@ public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetL
         }
     }
 
+    @Override
+    public void setSoDoGhe(String TenChuyen, String GioDi, String NgayDi) {
+        DatVe_Fragment datVe_fragment = new DatVe_Fragment();
+        Bundle data = new Bundle();
+        data.putString("ChuyenDi", TenChuyen);
+        data.putString("GioDi", GioDi);
+        data.putString("NgayDi", NgayDi);
+        datVe_fragment.setArguments(data);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentholder,datVe_fragment);
+        fragmentTransaction.addToBackStack("SoDoGhe");
+        fragmentTransaction.commit();
+    }
 }

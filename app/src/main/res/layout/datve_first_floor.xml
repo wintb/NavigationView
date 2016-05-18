@@ -11,5 +11,16 @@
         android:textStyle="bold"
         android:layout_centerInParent="true"/>
 
+    <ImageView
+        android:src="@drawable/chairr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="back"
+        android:id="@+id/btnback"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
 
 </LinearLayout>

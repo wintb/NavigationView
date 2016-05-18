@@ -31,11 +31,13 @@ public class CustomAdapterOneTrip extends BaseAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
     private ReadJson readJsonTaiXe;
+    SoDoGhe interfaceSoDoGhe;
 
 
     public CustomAdapterOneTrip(Context context, List<Object_Chuyen> object_chuyenList) {
         this.context = context;
         this.object_chuyenList = object_chuyenList;
+        interfaceSoDoGhe = (SoDoGhe) context;
     }
 
     @Override
@@ -60,7 +62,7 @@ public class CustomAdapterOneTrip extends BaseAdapter {
 
         Object_Chuyen object_chuyen = (Object_Chuyen) getItem(position);
         final TextView txtTai = (TextView) view.findViewById(R.id.txtTai);
-        TextView txtGioDi = (TextView) view.findViewById(R.id.txtGioDi);
+        final TextView txtGioDi = (TextView) view.findViewById(R.id.txtGioDi);
         TextView txtGioDen = (TextView) view.findViewById(R.id.txtGioDen);
         TextView txtGiaVe = (TextView) view.findViewById(R.id.txtGiaVe);
         TextView txtChon = (TextView) view.findViewById(R.id.txtChon);
@@ -73,20 +75,29 @@ public class CustomAdapterOneTrip extends BaseAdapter {
         //xem chi tiet tai xe
         xemChiTietTaiXe(txtTai);
         //Show so do ghe
-
-
+         txtChon.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 interfaceSoDoGhe.setSoDoGhe("ChuyenDi",txtGioDi.getText().toString(),"NgayDi");
+             }
+         });
         return view;
     }
 
     //-----------------------------------DIAGRAMS FOR TRIP CHOOSED----------------------------------
-    public void sodoghe(TextView chon){
+    /*public void sodoghe(TextView chon){
         chon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                interfaceSoDoGhe.setSoDoGhe();
             }
         });
+    }*/
+
+    public interface SoDoGhe{
+        public void setSoDoGhe(String TenChuyen, String GioDi, String NgayDi);
     }
+
 
     // --------------------------------SEND MA TAI TO SERVER AND GET DATA FROM SERVER --------------
 
