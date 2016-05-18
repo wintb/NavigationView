@@ -72,11 +72,23 @@ public class CustomAdapterOneTrip extends BaseAdapter {
         txtChon.setText(">");
         //xem chi tiet tai xe
         xemChiTietTaiXe(txtTai);
+        //Show so do ghe
+
 
         return view;
     }
 
-    // ----------------------------------GỬI MÃ TÀI XẾ LÊN SERVER ĐỂ LẤY THÔNG TIN VỀ -----------------------
+    //-----------------------------------DIAGRAMS FOR TRIP CHOOSED----------------------------------
+    public void sodoghe(TextView chon){
+        chon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    // --------------------------------SEND MA TAI TO SERVER AND GET DATA FROM SERVER --------------
 
     public void xemChiTietTaiXe(final TextView tai){
         tai.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +100,7 @@ public class CustomAdapterOneTrip extends BaseAdapter {
         });
     }
 
-    //---------------------------------ĐỌC THÔNG TIN TÀI XẾ------------------------------------------------
+    //---------------------------------ĐỌC THÔNG TIN TÀI XẾ-----------------------------------------
 
     private class GoiWebServiceTaiXe extends AsyncTask<String, Void, String>{
 
