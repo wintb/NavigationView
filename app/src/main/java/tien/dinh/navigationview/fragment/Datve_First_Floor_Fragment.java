@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-
 import tien.dinh.navigationview.R;
 
 /**
@@ -16,15 +14,18 @@ import tien.dinh.navigationview.R;
  */
 public class Datve_First_Floor_Fragment extends Fragment {
 
+    private Button button;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.datve_first_floor,container,false);
-        Button button = (Button) rootView.findViewById(R.id.btnback);
-        ImageView imageView;
+         //button = (Button) rootView.findViewById(R.id.btnback);
 
         return rootView;
     }
+
+
 
 
 }

@@ -221,7 +221,6 @@ public class OneWay extends Fragment{
                     }
                 }).show();
 
-
             }
         });
     }

@@ -35,7 +35,6 @@ public class DatVe_Fragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final View rootView = inflater.inflate(R.layout.activity_dat_ve,container,false);
-
         viewPager = (ViewPager)rootView.findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(1);
         setupViewPager(viewPager);

@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetL
                         // add navigation drawer item onclick method here
                         MyFragment1 myFragment1 = new MyFragment1();
                         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragmentholder, myFragment1);
+                        fragmentTransaction.replace(R.id.fragmentholder, myFragment1).addToBackStack(null);
                         fragmentTransaction.commit();
                         navigation.setCheckedItem(id);
                         drawerLayout.closeDrawer(navigation);

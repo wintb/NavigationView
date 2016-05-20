@@ -98,8 +98,9 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_weight="3"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp">
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="#3fdaa1">
 
                 <TextView
                     android:gravity="center"
@@ -140,5 +141,6 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:scrollbars="vertical"/>
 </android.support.design.widget.CoordinatorLayout>
