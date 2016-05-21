@@ -70,7 +70,7 @@
 
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="1"
                 android:id="@+id/C1D" />
             <ImageView
@@ -82,7 +82,7 @@
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong1"
+                android:src="@drawable/ghedachon1"
                 android:layout_column="5"
                 android:id="@+id/A1D" />
 
@@ -97,19 +97,19 @@
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon2"
+                android:src="@drawable/a1"
                 android:layout_column="1"
                 android:id="@+id/C2D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong1"
+                android:src="@drawable/ghedachon1"
                 android:layout_column="3"
                 android:id="@+id/B2D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong1"
+                android:src="@drawable/ghedachon1"
                 android:layout_column="5"
                 android:id="@+id/A2D" />
 
@@ -124,19 +124,19 @@
             <ImageView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:src="@drawable/ghedachon3"
+            android:src="@drawable/a2"
             android:layout_column="1"
                 android:id="@+id/C3D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="3"
                 android:id="@+id/B3D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="5"
                 android:id="@+id/A3D" />
 
@@ -157,13 +157,13 @@
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="3"
                 android:id="@+id/B4D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="5"
                 android:id="@+id/A4D" />
 
@@ -178,19 +178,19 @@
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon5"
+                android:src="@drawable/a"
                 android:layout_column="1"
                 android:id="@+id/C5D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="3"
                 android:id="@+id/B5D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="5"
                 android:id="@+id/A5D" />
 
@@ -212,31 +212,31 @@
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="1"
                 android:id="@+id/D1D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="2"
                 android:id="@+id/D2D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="3"
                 android:id="@+id/D3D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="4"
                 android:id="@+id/D4D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="5"
                 android:id="@+id/D5D" />
 

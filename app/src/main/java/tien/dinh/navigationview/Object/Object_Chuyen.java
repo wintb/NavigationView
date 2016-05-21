@@ -9,6 +9,8 @@ public class Object_Chuyen {
     private String GioDi;
     private String GioDen;
     private String LoTrinh;
+    private String GiaVe;
+
 
     public String getLoTrinh() {
         return LoTrinh;
@@ -17,8 +19,6 @@ public class Object_Chuyen {
     public void setLoTrinh(String loTrinh) {
         LoTrinh = loTrinh;
     }
-
-    private String GiaVe;
 
 
     public String getGiaVe() {
