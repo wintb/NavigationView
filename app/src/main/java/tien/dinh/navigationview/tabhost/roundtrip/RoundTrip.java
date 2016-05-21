@@ -96,7 +96,7 @@ public class RoundTrip extends Fragment {
                 docJSON.execute("http://vuvanthang-001-site1.1tempurl.com/json.php");*/
 
                 DocJSON docJSON = new DocJSON();
-                docJSON.execute("http://vuvanthang-001-site1.1tempurl.com/json.php");
+                docJSON.execute("http://10.0.3.2:8080/xekhach/json.php");
 
                 new AlertDialog.Builder(getActivity()).setTitle("List Trip").setMessage("Click to select Trip")
                         .setView(linearLayout)

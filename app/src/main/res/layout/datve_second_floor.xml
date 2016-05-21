@@ -1,15 +1,262 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:scrollbars="vertical"
+    android:background="#EDF5FA">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Two"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"/>
+        android:layout_margin="10dp"
+        >
+
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            >
+
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedangchon"
+                android:layout_column="2"/>
+
+        </TableRow>
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="C"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="#FFE70909"
+                android:layout_column="1"
+                android:gravity="center"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="B"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="#FFE70909"
+                android:layout_column="3"
+                android:gravity="center"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="A"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="#FFE70909"
+                android:layout_column="5"
+                android:gravity="center"/>
+
+        </TableRow>
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            >
+
+            <ImageView
+
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedachon1"
+                android:layout_column="1"
+                android:id="@+id/C1T" />
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedangchon1"
+                android:layout_column="3"
+                android:id="@+id/B1T" />
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghetrong1"
+                android:layout_column="5"
+                android:id="@+id/A1T" />
+
+        </TableRow>
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedachon2"
+                android:layout_column="1"
+                android:id="@+id/C2T" />
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghetrong2"
+                android:layout_column="3"
+                android:id="@+id/B2T" />
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedachon1"
+                android:layout_column="5"
+                android:id="@+id/A2T" />
+
+        </TableRow>
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedachon3"
+                android:layout_column="1"
+                android:id="@+id/C3T" />
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedachon1"
+                android:layout_column="3"
+                android:id="@+id/B3T" />
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedachon1"
+                android:layout_column="5"
+                android:id="@+id/A3T" />
+
+        </TableRow>
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedangchon4"
+                android:layout_column="1"
+                android:id="@+id/C4T" />
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedachon1"
+                android:layout_column="3"
+                android:id="@+id/B4T" />
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedachon1"
+                android:layout_column="5"
+                android:id="@+id/A4T" />
+
+        </TableRow>
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedachon5"
+                android:layout_column="1"
+                android:id="@+id/C5T" />
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedachon1"
+                android:layout_column="3"
+                android:id="@+id/B5T" />
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedachon1"
+                android:layout_column="5"
+                android:id="@+id/A5T" />
+
+        </TableRow>
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="D"
+                android:textColor="#FFE70909"
+                android:layout_column="0" />
+
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedachon1"
+                android:layout_column="1"
+                android:id="@+id/D1T" />
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedachon1"
+                android:layout_column="2"
+                android:id="@+id/D2T" />
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedachon1"
+                android:layout_column="3"
+                android:id="@+id/D3T" />
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedachon1"
+                android:layout_column="4"
+                android:id="@+id/D4T" />
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghedachon1"
+                android:layout_column="5"
+                android:id="@+id/D5T" />
+
+        </TableRow>
+
+    </TableLayout>
+
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chọn Ghế"/>
+
+    </LinearLayout>
+
 
 
 </LinearLayout>

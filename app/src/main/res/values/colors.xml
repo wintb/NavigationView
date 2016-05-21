@@ -4,4 +4,5 @@
     <color name="PrimaryDarkColor">#ff134a88</color>
     <color name="Color_Tabhost">#d14233</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorTitleName">#ffffff</color>
 </resources>

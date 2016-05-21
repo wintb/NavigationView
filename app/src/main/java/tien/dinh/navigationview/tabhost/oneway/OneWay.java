@@ -169,7 +169,7 @@ public class OneWay extends Fragment{
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                txtChuyenDi.setText("");
                             }
                         }).show();
             }
@@ -194,7 +194,6 @@ public class OneWay extends Fragment{
                         date = Integer.toString(dayOfMonth);
                         months = Integer.toString(month+1);
                         years = Integer.toString(year);
-
                         compareDateTime.comparedatetime(dayOfMonth,month+1,year);
 
 

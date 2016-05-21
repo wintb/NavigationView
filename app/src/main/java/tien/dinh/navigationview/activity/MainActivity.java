@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetL
             danhSachChuyen.setArguments(data);
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragmentholder, danhSachChuyen);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
     }

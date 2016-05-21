@@ -22,6 +22,7 @@ import tien.dinh.navigationview.Object.Object_Chuyen;
 import tien.dinh.navigationview.Object.Object_TaiXe;
 import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.json.ReadJson;
+import tien.dinh.navigationview.tabhost.oneway.OnWay_ListTrip;
 
 /**
  * Created by VuVanThang on 5/11/2016.
@@ -32,6 +33,7 @@ public class CustomAdapterOneTrip extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private ReadJson readJsonTaiXe;
     SoDoGhe interfaceSoDoGhe;
+
 
 
     public CustomAdapterOneTrip(Context context, List<Object_Chuyen> object_chuyenList) {
@@ -78,29 +80,19 @@ public class CustomAdapterOneTrip extends BaseAdapter {
          txtChon.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 interfaceSoDoGhe.setSoDoGhe("ChuyenDi",txtGioDi.getText().toString(),"NgayDi");
+
+                 interfaceSoDoGhe.setSoDoGhe(OnWay_ListTrip.ChuyenDi,txtGioDi.getText().toString(),OnWay_ListTrip.NgayDi);
              }
          });
         return view;
     }
 
-    //-----------------------------------DIAGRAMS FOR TRIP CHOOSED----------------------------------
-    /*public void sodoghe(TextView chon){
-        chon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                interfaceSoDoGhe.setSoDoGhe();
-            }
-        });
-    }*/
 
     public interface SoDoGhe{
         public void setSoDoGhe(String TenChuyen, String GioDi, String NgayDi);
     }
 
-
     // --------------------------------SEND MA TAI TO SERVER AND GET DATA FROM SERVER --------------
-
     public void xemChiTietTaiXe(final TextView tai){
         tai.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +104,6 @@ public class CustomAdapterOneTrip extends BaseAdapter {
     }
 
     //---------------------------------ĐỌC THÔNG TIN TÀI XẾ-----------------------------------------
-
     private class GoiWebServiceTaiXe extends AsyncTask<String, Void, String>{
 
         @Override
@@ -123,7 +114,6 @@ public class CustomAdapterOneTrip extends BaseAdapter {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
             LayoutInflater inflater1 = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
             LinearLayout linearLayout = (LinearLayout) inflater1.inflate(R.layout.listview_dialog_activity, null, false);
             ListView listView = (ListView) linearLayout.findViewById(R.id.list);

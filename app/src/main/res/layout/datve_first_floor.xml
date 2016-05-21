@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:scrollbars="vertical"
-    android:background="#1975d1">
+    android:background="#EDF5FA">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -71,17 +71,20 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:src="@drawable/ghedachon1"
-                android:layout_column="1"/>
+                android:layout_column="1"
+                android:id="@+id/C1D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong1"
-                android:layout_column="3"/>
+                android:src="@drawable/ghedangchon1"
+                android:layout_column="3"
+                android:id="@+id/B1D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong1"
-                android:layout_column="5"/>
+                android:src="@drawable/testghetrong1"
+                android:layout_column="5"
+                android:id="@+id/A1D" />
 
         </TableRow>
         <TableRow
@@ -94,18 +97,21 @@
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong2"
-                android:layout_column="1"/>
+                android:src="@drawable/ghedachon2"
+                android:layout_column="1"
+                android:id="@+id/C2D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong2"
-                android:layout_column="3"/>
+                android:src="@drawable/testghetrong1"
+                android:layout_column="3"
+                android:id="@+id/B2D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong2"
-                android:layout_column="5"/>
+                android:src="@drawable/testghetrong1"
+                android:layout_column="5"
+                android:id="@+id/A2D" />
 
         </TableRow>
         <TableRow
@@ -118,18 +124,21 @@
             <ImageView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:src="@drawable/ghetrong3"
-            android:layout_column="1"/>
+            android:src="@drawable/ghedachon3"
+            android:layout_column="1"
+                android:id="@+id/C3D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong3"
-                android:layout_column="3"/>
+                android:src="@drawable/ghedachon1"
+                android:layout_column="3"
+                android:id="@+id/B3D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong3"
-                android:layout_column="5"/>
+                android:src="@drawable/ghedachon1"
+                android:layout_column="5"
+                android:id="@+id/A3D" />
 
         </TableRow>
         <TableRow
@@ -142,18 +151,21 @@
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong4"
-                android:layout_column="1"/>
+                android:src="@drawable/ghedangchon4"
+                android:layout_column="1"
+                android:id="@+id/C4D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong4"
-                android:layout_column="3"/>
+                android:src="@drawable/ghedachon1"
+                android:layout_column="3"
+                android:id="@+id/B4D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong4"
-                android:layout_column="5"/>
+                android:src="@drawable/ghedachon1"
+                android:layout_column="5"
+                android:id="@+id/A4D" />
 
         </TableRow>
         <TableRow
@@ -166,18 +178,21 @@
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong5"
-                android:layout_column="1"/>
+                android:src="@drawable/ghedachon5"
+                android:layout_column="1"
+                android:id="@+id/C5D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong5"
-                android:layout_column="3"/>
+                android:src="@drawable/ghedachon1"
+                android:layout_column="3"
+                android:id="@+id/B5D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong5"
-                android:layout_column="5"/>
+                android:src="@drawable/ghedachon1"
+                android:layout_column="5"
+                android:id="@+id/A5D" />
 
         </TableRow>
         <TableRow
@@ -197,37 +212,51 @@
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong5"
-                android:layout_column="1"/>
+                android:src="@drawable/ghedachon1"
+                android:layout_column="1"
+                android:id="@+id/D1D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong4"
-                android:layout_column="2"/>
+                android:src="@drawable/ghedachon1"
+                android:layout_column="2"
+                android:id="@+id/D2D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong3"
-                android:layout_column="3"/>
+                android:src="@drawable/ghedachon1"
+                android:layout_column="3"
+                android:id="@+id/D3D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong3"
-                android:layout_column="4"/>
+                android:src="@drawable/ghedachon1"
+                android:layout_column="4"
+                android:id="@+id/D4D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghetrong1"
-                android:layout_column="5"/>
+                android:src="@drawable/ghedachon1"
+                android:layout_column="5"
+                android:id="@+id/D5D" />
 
         </TableRow>
 
     </TableLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chọn Ghế"
-        android:layout_gravity="bottom|center"/>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chọn Ghế"/>
+
+    </LinearLayout>
+
+
 
 </LinearLayout>
