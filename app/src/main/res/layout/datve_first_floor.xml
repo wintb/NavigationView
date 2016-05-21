@@ -82,7 +82,7 @@
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/testghetrong1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="5"
                 android:id="@+id/A1D" />
 
@@ -103,13 +103,13 @@
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/testghetrong1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="3"
                 android:id="@+id/B2D" />
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/testghetrong1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="5"
                 android:id="@+id/A2D" />
 
