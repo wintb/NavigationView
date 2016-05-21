@@ -47,7 +47,7 @@ public class DatVe_Fragment extends Fragment{
         txtChuyenDi = (TextView) rootView.findViewById(R.id.txtSoDoGheChuyenDi);
         txtGioDi = (TextView) rootView.findViewById(R.id.txtSoDoGheGioDi);
         txtNgayDi = (TextView) rootView.findViewById(R.id.txtSoDoGheNgayDi);
-        //send data to fragment other
+
         txtChuyenDi.setText(data.getString("ChuyenDi"));
         txtGioDi.setText(data.getString("GioDi"));
         txtNgayDi.setText(data.getString("NgayDi"));
