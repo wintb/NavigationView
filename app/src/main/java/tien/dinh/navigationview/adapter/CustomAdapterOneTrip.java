@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,12 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import tien.dinh.navigationview.Object.Object_Chuyen;
 import tien.dinh.navigationview.Object.Object_TaiXe;
 import tien.dinh.navigationview.R;
+import tien.dinh.navigationview.json.JsonSoDoghe;
 import tien.dinh.navigationview.json.ReadJson;
 import tien.dinh.navigationview.tabhost.oneway.OnWay_ListTrip;
 
@@ -32,7 +35,12 @@ public class CustomAdapterOneTrip extends BaseAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
     private ReadJson readJsonTaiXe;
+    private JsonSoDoghe jsonSoDoghe;
     SoDoGhe interfaceSoDoGhe;
+    public static String sodoghe;
+
+    private static final String URL_TAIXE = "http://10.0.3.2:8080/xekhach/json_tai_xe.php";
+    private static final String URL_SODOGHE = "http://10.0.3.2:8080/xekhach/Json_so_do_ghe.php";
 
 
 
@@ -62,7 +70,7 @@ public class CustomAdapterOneTrip extends BaseAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.tabhost_oneway_listtrip_listitem,parent,false);
 
-        Object_Chuyen object_chuyen = (Object_Chuyen) getItem(position);
+        final Object_Chuyen object_chuyen = (Object_Chuyen) getItem(position);
         final TextView txtTai = (TextView) view.findViewById(R.id.txtTai);
         final TextView txtGioDi = (TextView) view.findViewById(R.id.txtGioDi);
         TextView txtGioDen = (TextView) view.findViewById(R.id.txtGioDen);
@@ -76,12 +84,21 @@ public class CustomAdapterOneTrip extends BaseAdapter {
         txtChon.setText(">");
         //xem chi tiet tai xe
         xemChiTietTaiXe(txtTai);
-        //Show so do ghe
+        //Gửi dữ liệu lên server để kiểm tra ghế đã đặt và hiện sơ đồ ghế
          txtChon.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-
-                 interfaceSoDoGhe.setSoDoGhe(OnWay_ListTrip.ChuyenDi,txtGioDi.getText().toString(),OnWay_ListTrip.NgayDi);
+                 //lấy chuỗi json các ghế đã chọn để đưa vào list
+                 try {
+                     jsonSoDoghe = new JsonSoDoghe(object_chuyen.getMaChuyen());
+                     sodoghe = new GoiWbServiceSoDoGhe().execute(URL_SODOGHE).get();
+                     Log.d("JSON_SODOGHE:",sodoghe);
+                 } catch (InterruptedException e) {
+                     e.printStackTrace();
+                 } catch (ExecutionException e) {
+                     e.printStackTrace();
+                 }
+                 interfaceSoDoGhe.setSoDoGhe(OnWay_ListTrip.ChuyenDi,txtGioDi.getText().toString(),OnWay_ListTrip.NgayDi,object_chuyen.getMaChuyen());
              }
          });
         return view;
@@ -89,7 +106,22 @@ public class CustomAdapterOneTrip extends BaseAdapter {
 
 
     public interface SoDoGhe{
-        public void setSoDoGhe(String TenChuyen, String GioDi, String NgayDi);
+        public void setSoDoGhe(String TenChuyen, String GioDi, String NgayDi,String MaChuyen);
+    }
+
+    //-------------------------SELECT SOGHE TỪ SERVER ĐỂ KIỂM TRA GHẾ ĐÃ CHỌN-----------------------
+
+    private class GoiWbServiceSoDoGhe extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... params) {
+            return jsonSoDoghe.makePostRequestSoDoGhe(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
     }
 
     // --------------------------------SEND MA TAI TO SERVER AND GET DATA FROM SERVER --------------
@@ -98,7 +130,7 @@ public class CustomAdapterOneTrip extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 readJsonTaiXe = new ReadJson(tai.getText().toString());
-                new GoiWebServiceTaiXe().execute("http://10.0.3.2:8080/xekhach/json_tai_xe.php");
+                new GoiWebServiceTaiXe().execute(URL_TAIXE);
             }
         });
     }

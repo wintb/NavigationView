@@ -9,6 +9,15 @@ public class Object_Chuyen {
     private String GioDi;
     private String GioDen;
     private String LoTrinh;
+    private String MaChuyen;
+
+    public String getMaChuyen() {
+        return MaChuyen;
+    }
+
+    public void setMaChuyen(String maChuyen) {
+        MaChuyen = maChuyen;
+    }
 
     public String getLoTrinh() {
         return LoTrinh;

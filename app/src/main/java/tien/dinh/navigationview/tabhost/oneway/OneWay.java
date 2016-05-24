@@ -89,7 +89,7 @@ public class OneWay extends Fragment{
                 try {
                     Json_DanhSach_Chuyen = new GoiWebService().execute(url_TimChuyen_MotChieu).get();
                     Log.d("TEST_JSON_JSON_JSON:",Json_DanhSach_Chuyen);
-                    if (Json_DanhSach_Chuyen == "[]"){
+                    if (Json_DanhSach_Chuyen.equalsIgnoreCase("[]")){
                         Toast.makeText(getActivity(), "No trip on day", Toast.LENGTH_LONG).show();
                     }else {
                         Log.d("JSON_TEST","TEST_TEST_TEST");

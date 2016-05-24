@@ -67,19 +67,21 @@
             >
 
             <ImageView
-
+                android:tag="@string/C1D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="1"
                 android:id="@+id/C1D" />
             <ImageView
+                android:tag="@string/B1D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedangchon1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="3"
                 android:id="@+id/B1D" />
             <ImageView
+                android:tag="@string/A1D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:src="@drawable/ghetrong1"
@@ -95,18 +97,21 @@
             android:layout_marginBottom="5dp">
 
             <ImageView
+                android:tag="@string/C2D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon2"
+                android:src="@drawable/ghetrong2"
                 android:layout_column="1"
                 android:id="@+id/C2D" />
             <ImageView
+                android:tag="@string/B2D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:src="@drawable/ghetrong2"
                 android:layout_column="3"
                 android:id="@+id/B2D" />
             <ImageView
+                android:tag="@string/A2D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:src="@drawable/ghetrong2"
@@ -122,18 +127,21 @@
             android:layout_marginBottom="5dp">
 
             <ImageView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:src="@drawable/ghedachon3"
-            android:layout_column="1"
+                android:tag="@string/C3D"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ghetrong3"
+                android:layout_column="1"
                 android:id="@+id/C3D" />
             <ImageView
+                android:tag="@string/B3D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:src="@drawable/ghetrong3"
                 android:layout_column="3"
                 android:id="@+id/B3D" />
             <ImageView
+                android:tag="@string/A3D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:src="@drawable/ghetrong3"
@@ -149,18 +157,21 @@
             android:layout_marginBottom="5dp">
 
             <ImageView
+                android:tag="@string/C4D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedangchon4"
+                android:src="@drawable/ghetrong4"
                 android:layout_column="1"
                 android:id="@+id/C4D" />
             <ImageView
+                android:tag="@string/B4D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:src="@drawable/ghetrong4"
                 android:layout_column="3"
                 android:id="@+id/B4D" />
             <ImageView
+                android:tag="@string/A4D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:src="@drawable/ghetrong4"
@@ -176,21 +187,24 @@
             android:layout_marginBottom="5dp">
 
             <ImageView
+                android:tag="@string/C5D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon5"
+                android:src="@drawable/ghetrong5"
                 android:layout_column="1"
                 android:id="@+id/C5D" />
             <ImageView
+                android:tag="@string/B5D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong5"
                 android:layout_column="3"
                 android:id="@+id/B5D" />
             <ImageView
+                android:tag="@string/A5D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong5"
                 android:layout_column="5"
                 android:id="@+id/A5D" />
 
@@ -210,33 +224,38 @@
                 android:layout_column="0" />
 
             <ImageView
+                android:tag="@string/D1D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong1"
                 android:layout_column="1"
                 android:id="@+id/D1D" />
             <ImageView
+                android:tag="@string/D2D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong2"
                 android:layout_column="2"
                 android:id="@+id/D2D" />
             <ImageView
+                android:tag="@string/D3D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong3"
                 android:layout_column="3"
                 android:id="@+id/D3D" />
             <ImageView
+                android:tag="@string/D4D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong4"
                 android:layout_column="4"
                 android:id="@+id/D4D" />
             <ImageView
+                android:tag="@string/D5D"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ghedachon1"
+                android:src="@drawable/ghetrong5"
                 android:layout_column="5"
                 android:id="@+id/D5D" />
 
@@ -251,6 +270,7 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/btnChonGheTang1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Chọn Ghế"/>

@@ -20,54 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by VuVanThang on 5/14/2016.
+ * Created by VuVanThang on 5/22/2016.
  */
-public class ReadJson {
+public class JsonSoDoghe {
+    private String MaChuyen;
 
-    private String MaTai;
-    private String TenChuyen;
-    private String NgayDi;
-
-
-    public ReadJson(String TenChuyen, String NgayDi){
-        this.TenChuyen = TenChuyen;
-        this.NgayDi = NgayDi;
-    }
-
-    public ReadJson(String MaTai){
-        this.MaTai = MaTai;
-    }
-
-
-
-    /**
-     * Post TenChuyen, NgayDi to server for see list Trip
-     * @param url
-     * @return
-     */
-    public String makePostRequestChuyenDi(String url){
-        String result = null;
-        HttpClient httpClient = new DefaultHttpClient();
-        HttpPost httpPost = new HttpPost(url);
-
-        try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("TenChuyen", TenChuyen);
-            jsonObject.put("NgayDi", NgayDi);
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("ChuyenDi", jsonObject.toString()));
-            Log.d("JSON POST DATA", "mainToPost: " + nameValuePairs.toString());
-            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
-            //execute HttpPost request
-            HttpResponse httpResponse = httpClient.execute(httpPost);
-            InputStream inputStream = httpResponse.getEntity().getContent();
-            InputStreamToString str = new InputStreamToString();
-            result = str.getStringFromInputStream(inputStream);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return result;
+    public JsonSoDoghe(){}
+    public JsonSoDoghe(String MaChuyen){
+        this.MaChuyen = MaChuyen;
     }
 
     /**
@@ -76,16 +36,16 @@ public class ReadJson {
      * @return file json
      */
 
-    public String makePostRequestTaiXe(String url){
+    public String makePostRequestSoDoGhe(String url){
         String result = null;
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
 
         try {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("MaTai", MaTai);
+            jsonObject.put("MaChuyen", MaChuyen);
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("TaiXe", jsonObject.toString()));
+            nameValuePairs.add(new BasicNameValuePair("Chuyen", jsonObject.toString()));
             Log.d("JSON POST DATA", "mainToPost: " + nameValuePairs.toString());
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
             //execute HttpPost request
@@ -93,7 +53,6 @@ public class ReadJson {
             InputStream inputStream = httpResponse.getEntity().getContent();
             InputStreamToString str = new InputStreamToString();
             result = str.getStringFromInputStream(inputStream);
-            Log.d("JSON_TAIXE: ",result);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -134,7 +93,4 @@ public class ReadJson {
             return sb.toString();
         }
     }
-
-
-
 }
