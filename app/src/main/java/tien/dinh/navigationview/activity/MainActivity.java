@@ -154,15 +154,16 @@ public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetL
     }
 
     @Override
-    public void setSoDoGhe(String TenChuyen, String GioDi, String NgayDi) {
+    public void setSoDoGhe(String TenChuyen, String GioDi, String NgayDi,String MaChuyen) {
         DatVe_Fragment datVe_fragment = new DatVe_Fragment();
         Bundle data = new Bundle();
         data.putString("ChuyenDi", TenChuyen);
         data.putString("GioDi", GioDi);
         data.putString("NgayDi", NgayDi);
+        data.putString("MaChuyen",MaChuyen);
         datVe_fragment.setArguments(data);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentholder,datVe_fragment);
+        fragmentTransaction.replace(R.id.fragmentholder, datVe_fragment);
         fragmentTransaction.addToBackStack("SoDoGhe");
         fragmentTransaction.commit();
     }
