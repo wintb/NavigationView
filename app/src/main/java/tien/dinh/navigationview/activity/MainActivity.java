@@ -16,13 +16,14 @@ import tien.dinh.navigationview.adapter.CustomAdapterOneTrip;
 import tien.dinh.navigationview.fragment.DatVe_Fragment;
 import tien.dinh.navigationview.fragment.MyFragment1;
 import tien.dinh.navigationview.fragment.MyFragment2;
+import tien.dinh.navigationview.fragment.XemVe;
 import tien.dinh.navigationview.tabhost.oneway.OnWay_ListTrip;
 import tien.dinh.navigationview.tabhost.oneway.OneWay;
 
 /**
  * Created by VuVanThang on 5/17/2016.
  */
-public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetListener,CustomAdapterOneTrip.SoDoGhe{
+public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetListener,CustomAdapterOneTrip.SoDoGhe,MyFragment2.OnNameSetListener{
 
     DrawerLayout drawerLayout;
     NavigationView navigation;
@@ -165,6 +166,18 @@ public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetL
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentholder, datVe_fragment);
         fragmentTransaction.addToBackStack("SoDoGhe");
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void setThongTinVe(String json) {
+        XemVe xemVe = new XemVe();
+        Bundle data = new Bundle();
+        data.putString("JsonThongTinVe",json);
+        xemVe.setArguments(data);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentholder, xemVe);
+        fragmentTransaction.addToBackStack("xemve");
         fragmentTransaction.commit();
     }
 }
