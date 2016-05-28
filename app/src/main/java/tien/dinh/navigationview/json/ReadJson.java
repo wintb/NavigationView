@@ -27,6 +27,9 @@ public class ReadJson {
     private String MaTai;
     private String TenChuyen;
     private String NgayDi;
+    private String MaVe;
+    private String CMND;
+    private String SDTKhach;
 
 
     public ReadJson(String TenChuyen, String NgayDi){
@@ -38,6 +41,41 @@ public class ReadJson {
         this.MaTai = MaTai;
     }
 
+    public ReadJson(String MaVe, String CMND, String SDTKhach){
+        this.MaVe = MaVe;
+        this.CMND = CMND;
+        this.SDTKhach = SDTKhach;
+    }
+
+    /**
+     * Post MaVe, CMND, SDTKhach to server for see json Thong Tin Ve
+     */
+
+    public String makePostRequestThongTinVe(String url){
+        String result = null;
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost(url);
+
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("MaVe", MaVe);
+            jsonObject.put("CMND", CMND);
+            jsonObject.put("SDTKhach", SDTKhach);
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("ThongTinVe", jsonObject.toString()));
+            Log.d("JSON POST DATA", "mainToPost: " + nameValuePairs.toString());
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
+            //execute HttpPost request
+            HttpResponse httpResponse = httpClient.execute(httpPost);
+            InputStream inputStream = httpResponse.getEntity().getContent();
+            InputStreamToString str = new InputStreamToString();
+            result = str.getStringFromInputStream(inputStream);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 
 
     /**

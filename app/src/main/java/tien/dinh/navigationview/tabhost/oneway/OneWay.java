@@ -55,6 +55,7 @@ public class OneWay extends Fragment{
     ArrayList<String> arrayList;
     Button btnTimChuyen;
     String url_TimChuyen_MotChieu = "http://10.0.3.2:8080/xekhach/danhsachchuyendimotchieu.php";
+    String url_TenCacChuyen = "http://10.0.3.2:8080/xekhach/jsontencacchuyen.php";
     String Json_DanhSach_Chuyen ;
     OnNameSetListener onNameSetListener;
     ReadJson readJsonChuyenDi;
@@ -156,7 +157,7 @@ public class OneWay extends Fragment{
                 LinearLayout linearLayout = (LinearLayout) inflater1.inflate(R.layout.listview_dialog_activity, null, false);
                 listView = (ListView) linearLayout.findViewById(R.id.list);
                 DocJSON docJSON = new DocJSON();
-                docJSON.execute("http://10.0.3.2:8080/xekhach/jsontencacchuyen.php");
+                docJSON.execute(url_TenCacChuyen);
 
                 new AlertDialog.Builder(getActivity()).setTitle("List Trip").setMessage("Click to select Trip")
                         .setView(linearLayout)
