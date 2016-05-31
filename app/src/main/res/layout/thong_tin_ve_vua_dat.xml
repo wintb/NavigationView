@@ -87,7 +87,7 @@
                         android:layout_column="1" />
                     <TextView
                         android:paddingLeft="7dp"
-                        android:id="@+id/txtVeHoTen"
+                        android:id="@+id/txtHoTenVuaDat"
                         android:text="Họ tên khách hàng"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_column="1"
-                        android:id="@+id/txtVeSDT" />
+                        android:id="@+id/txtSDTVuaDat" />
                 </TableRow>
 
                 <TableRow
@@ -123,7 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_column="1"
-                        android:id="@+id/txtVeCMND" />
+                        android:id="@+id/txtCMNDVuaDat" />
                 </TableRow>
 
                 <TableRow
@@ -139,7 +139,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_column="1"
-                        android:id="@+id/txtVeGhiChu" />
+                        android:id="@+id/txtGhiChuVuaDat" />
                 </TableRow>
 
             </TableLayout>
@@ -177,13 +177,31 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent">
                     <TextView
+                        android:text="Số lượng:"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1" />
+                    <TextView
+                        android:paddingLeft="7dp"
+                        android:id="@+id/txtSLVeVuaDat"
+                        android:text="Số lượng vé"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1" />
+                </TableRow>
+
+                <TableRow
+                    android:padding="3dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                    <TextView
                         android:text="Mã số vé:"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_column="1" />
                     <TextView
                         android:paddingLeft="7dp"
-                        android:id="@+id/txtVeMaVe"
+                        android:id="@+id/txtMaVeVuaDat"
                         android:text="Mã vé của khách hàng"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -203,7 +221,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_column="1"
-                        android:id="@+id/txtVeSoGhe" />
+                        android:id="@+id/txtSoGheVuaDat" />
                 </TableRow>
 
                 <TableRow
@@ -219,23 +237,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_column="1"
-                        android:id="@+id/txtVeMaTai" />
-                </TableRow>
-
-                <TableRow
-                    android:padding="3dp">
-                    <TextView
-                        android:text="Biển số xe: "
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                    <TextView
-                        android:paddingLeft="7dp"
-                        android:text="Biển số xe của tài xe"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:id="@+id/txtVeBienSoXe" />
+                        android:id="@+id/txtMaTaiVuaDat" />
                 </TableRow>
 
                 <TableRow
@@ -251,7 +253,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_column="1"
-                        android:id="@+id/txtVeTenChuyenDi" />
+                        android:id="@+id/txtTenChuyenDiVuaDat" />
                 </TableRow>
 
                 <TableRow
@@ -267,7 +269,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_column="1"
-                        android:id="@+id/txtVeNgayDi" />
+                        android:id="@+id/txtNgayDiVuaDat" />
                 </TableRow>
 
                 <TableRow
@@ -283,28 +285,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_column="1"
-                        android:id="@+id/txtVeGioDi" />
+                        android:id="@+id/txtGioDiVuaDat" />
                 </TableRow>
-
-                <TableRow
-                    android:padding="3dp">
-                    <TextView
-                        android:text="Ngày đặt:  "
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                    <TextView
-                        android:paddingLeft="7dp"
-                        android:text="Ngày khách hàng đặt vé"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:id="@+id/txtNgayDatVe" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"/>
 
 
             </TableLayout>

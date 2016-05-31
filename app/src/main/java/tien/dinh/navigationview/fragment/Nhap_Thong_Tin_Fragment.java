@@ -21,6 +21,7 @@ public class Nhap_Thong_Tin_Fragment extends Fragment {
 
     TextView editHoTen, editSDT, editCMND, editGhiChu;
     Button btnDatVe;
+    DatVe interfaceDatVe;
 
     @Nullable
     @Override
@@ -33,6 +34,7 @@ public class Nhap_Thong_Tin_Fragment extends Fragment {
         editHoTen = (TextView)view.findViewById(R.id.editNhapHoTen);
         btnDatVe = (Button)view.findViewById(R.id.btnDatVe);
 
+        interfaceDatVe = (DatVe) getActivity();
         btnDatVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,11 +47,19 @@ public class Nhap_Thong_Tin_Fragment extends Fragment {
                 Bundle data = getArguments();
                 String MaChuyen = data.getString("MaChuyen");
                 String MaTai = data.getString("MaTai");
-                List<String> soGhe = Datve_First_Floor_Fragment.listGheDaChonTang1;
-                int soLuong = soGhe.size();
+                List<String> listSoGhe = Datve_First_Floor_Fragment.listGheDaChonTang1;
+                int soLuong = listSoGhe.size();
+                String SoGhe = listSoGhe.get(0);
+
+                String SDT_3SoCuoi = SDT.substring(SDT.length() - 3);
+                String MaVe = SoGhe + SDT_3SoCuoi;
+
+
                 Log.d("JSON_NHAP_THONG_TIN_VE", MaChuyen + "++" + MaTai);
-                Log.d("LIST GHE", soGhe.toString());
+                Log.d("LIST GHE", listSoGhe.toString());
                 Log.d("SO LUONG",String.valueOf(soLuong));
+
+                interfaceDatVe.clickDatVe(MaTai,MaChuyen,HoTen,CMND,SDT,GhiChu,SoGhe,soLuong,MaVe);
             }
         });
         return view;
@@ -58,6 +68,6 @@ public class Nhap_Thong_Tin_Fragment extends Fragment {
     //========== Interface ==========//
     public interface DatVe{
         void clickDatVe(String MaTai,String MaChuyen, String HoTen,
-                        String CMND, String SDT, String GhiChu, String SoGhe, String SoLuong);
+                        String CMND, String SDT, String GhiChu, String SoGhe, int SoLuong, String MaVe);
     }
 }

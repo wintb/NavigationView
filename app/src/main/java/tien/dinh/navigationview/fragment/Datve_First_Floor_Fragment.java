@@ -60,6 +60,13 @@ public class Datve_First_Floor_Fragment extends Fragment {
 
     ChonGhe chonGhe;
 
+
+
+    public static Datve_First_Floor_Fragment newInstance() {
+
+        return new Datve_First_Floor_Fragment();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

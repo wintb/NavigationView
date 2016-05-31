@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.adapter.CustomAdapterOneTrip;
+import tien.dinh.navigationview.adapter.Thong_Tin_Ve_Vua_Dat_Fragment;
 import tien.dinh.navigationview.fragment.DatVe_Fragment;
 import tien.dinh.navigationview.fragment.Datve_First_Floor_Fragment;
 import tien.dinh.navigationview.fragment.MyFragment1;
@@ -29,7 +30,8 @@ public class MainActivity extends AppCompatActivity implements
         OneWay.OnNameSetListener,
         CustomAdapterOneTrip.SoDoGhe,
         MyFragment2.OnNameSetListener,
-        Datve_First_Floor_Fragment.ChonGhe{
+        Datve_First_Floor_Fragment.ChonGhe,
+        Nhap_Thong_Tin_Fragment.DatVe{
 
     DrawerLayout drawerLayout;
     NavigationView navigation;
@@ -204,6 +206,30 @@ public class MainActivity extends AppCompatActivity implements
                 .beginTransaction()
                 .replace(R.id.fragmentholder,nhap_thong_tin_fragment)
                 .addToBackStack("sodoghe")
+                .commit();
+    }
+
+    @Override
+    public void clickDatVe(String MaTai, String MaChuyen, String HoTen, String CMND,
+                           String SDT, String GhiChu, String SoGhe, int SoLuong, String MaVe) {
+
+        Bundle data = new Bundle();
+        data.putString("MaTai",MaTai);
+        data.putString("MaChuyen",MaChuyen);
+        data.putString("HoTen",HoTen);
+        data.putString("CMND",CMND);
+        data.putString("SDT",SDT);
+        data.putString("GhiChu",GhiChu);
+        data.putString("SoGhe", SoGhe);
+        data.putInt("SoLuong", SoLuong);
+        data.putString("MaVe", MaVe);
+
+        Thong_Tin_Ve_Vua_Dat_Fragment thongTinVeVuaDatFragment = new Thong_Tin_Ve_Vua_Dat_Fragment();
+        thongTinVeVuaDatFragment.setArguments(data);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentholder,thongTinVeVuaDatFragment)
+                .addToBackStack("nhapthongtin")
                 .commit();
     }
 }
