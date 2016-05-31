@@ -1,8 +1,11 @@
 package tien.dinh.navigationview.fragment;
 
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +58,8 @@ public class Datve_First_Floor_Fragment extends Fragment {
     boolean check = true;
     public static List<String> listGheDaChonTang1;
 
+    ChonGhe chonGhe;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -89,25 +94,25 @@ public class Datve_First_Floor_Fragment extends Fragment {
         final List<Object_Ve> list =  gson.fromJson(CustomAdapterOneTrip.sodoghe, listType);
 
         //set color cho ghế đã được người khác chọn
-        setGheDachon1(A1D,list);
-        setGheDachon1(B1D,list);
-        setGheDachon1(C1D,list);
+        setGheDachon1(A1D, list);
+        setGheDachon1(B1D, list);
+        setGheDachon1(C1D, list);
         setGheDachon1(D1D, list);
-        setGheDachon2(A2D,list);
-        setGheDachon2(B2D,list);
-        setGheDachon2(C2D,list);
+        setGheDachon2(A2D, list);
+        setGheDachon2(B2D, list);
+        setGheDachon2(C2D, list);
         setGheDachon2(D2D, list);
-        setGheDachon3(A3D,list);
-        setGheDachon3(B3D,list);
-        setGheDachon3(C3D,list);
+        setGheDachon3(A3D, list);
+        setGheDachon3(B3D, list);
+        setGheDachon3(C3D, list);
         setGheDachon3(D3D, list);
-        setGheDachon4(A4D,list);
-        setGheDachon4(B4D,list);
-        setGheDachon4(C4D,list);
+        setGheDachon4(A4D, list);
+        setGheDachon4(B4D, list);
+        setGheDachon4(C4D, list);
         setGheDachon4(D4D, list);
-        setGheDachon5(A5D,list);
-        setGheDachon5(B5D,list);
-        setGheDachon5(C5D,list);
+        setGheDachon5(A5D, list);
+        setGheDachon5(B5D, list);
+        setGheDachon5(C5D, list);
         setGheDachon5(D5D, list);
         //set color khi click chon ghe
         chonghe1(A1D);
@@ -131,15 +136,17 @@ public class Datve_First_Floor_Fragment extends Fragment {
         chonghe5(C5D);
         chonghe5(D5D);
 
+        chonGhe = (ChonGhe) getActivity();
+
         btnChonGheTang1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                chonGhe.clickChonGhe();
             }
         });
 
         return rootView;
     }
-
 
     //--------------------------------SET COLOR KHI CLICK CHỌN GHẾ----------------------------------
 
@@ -152,11 +159,13 @@ public class Datve_First_Floor_Fragment extends Fragment {
                     listGheDaChonTang1.add(imageView.getTag().toString());
                     Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                     check = false;
+                    return;
                 }else{
                     imageView.setImageResource(R.drawable.ghetrong1);
                     listGheDaChonTang1.remove(listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     check = true;
+                    return;
                 }
             }
         });
@@ -283,5 +292,11 @@ public class Datve_First_Floor_Fragment extends Fragment {
                 imageView.setEnabled(false);
             }
         }
+    }
+
+    //============== Interface ================//
+    public interface ChonGhe{
+//        void clickChonGhe(String MaTai,String MaChuyen, String SoGhe);
+        void clickChonGhe();
     }
 }

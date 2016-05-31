@@ -98,7 +98,8 @@ public class CustomAdapterOneTrip extends BaseAdapter {
                  } catch (ExecutionException e) {
                      e.printStackTrace();
                  }
-                 interfaceSoDoGhe.setSoDoGhe(OnWay_ListTrip.ChuyenDi,txtGioDi.getText().toString(),OnWay_ListTrip.NgayDi,object_chuyen.getMaChuyen());
+                 interfaceSoDoGhe.setSoDoGhe(OnWay_ListTrip.ChuyenDi,txtGioDi.getText().toString(),
+                         OnWay_ListTrip.NgayDi,object_chuyen.getMaChuyen(),object_chuyen.getMaTai());
              }
          });
         return view;
@@ -106,7 +107,7 @@ public class CustomAdapterOneTrip extends BaseAdapter {
 
 
     public interface SoDoGhe{
-        public void setSoDoGhe(String TenChuyen, String GioDi, String NgayDi,String MaChuyen);
+        void setSoDoGhe(String TenChuyen, String GioDi, String NgayDi,String MaChuyen, String MaTai);
     }
 
     //-------------------------SELECT SOGHE TỪ SERVER ĐỂ KIỂM TRA GHẾ ĐÃ CHỌN-----------------------

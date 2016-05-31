@@ -51,7 +51,6 @@ public class DatVe_Fragment extends Fragment{
         txtGioDi.setText(data.getString("GioDi"));
         txtNgayDi.setText(data.getString("NgayDi"));
 
-
         viewPager = (ViewPager)rootView.findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(1);
         setupViewPager(viewPager);

@@ -14,8 +14,10 @@ import android.widget.Toast;
 import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.adapter.CustomAdapterOneTrip;
 import tien.dinh.navigationview.fragment.DatVe_Fragment;
+import tien.dinh.navigationview.fragment.Datve_First_Floor_Fragment;
 import tien.dinh.navigationview.fragment.MyFragment1;
 import tien.dinh.navigationview.fragment.MyFragment2;
+import tien.dinh.navigationview.fragment.Nhap_Thong_Tin_Fragment;
 import tien.dinh.navigationview.fragment.XemVe;
 import tien.dinh.navigationview.tabhost.oneway.OnWay_ListTrip;
 import tien.dinh.navigationview.tabhost.oneway.OneWay;
@@ -23,7 +25,11 @@ import tien.dinh.navigationview.tabhost.oneway.OneWay;
 /**
  * Created by VuVanThang on 5/17/2016.
  */
-public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetListener,CustomAdapterOneTrip.SoDoGhe,MyFragment2.OnNameSetListener{
+public class MainActivity extends AppCompatActivity implements
+        OneWay.OnNameSetListener,
+        CustomAdapterOneTrip.SoDoGhe,
+        MyFragment2.OnNameSetListener,
+        Datve_First_Floor_Fragment.ChonGhe{
 
     DrawerLayout drawerLayout;
     NavigationView navigation;
@@ -154,19 +160,25 @@ public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetL
         }
     }
 
+    private String MaChuyen_temp;
+    private String MaTai_temp;
+
     @Override
-    public void setSoDoGhe(String TenChuyen, String GioDi, String NgayDi,String MaChuyen) {
+    public void setSoDoGhe(String TenChuyen, String GioDi, String NgayDi,String MaChuyen, String MaTai) {
         DatVe_Fragment datVe_fragment = new DatVe_Fragment();
         Bundle data = new Bundle();
         data.putString("ChuyenDi", TenChuyen);
         data.putString("GioDi", GioDi);
         data.putString("NgayDi", NgayDi);
-        data.putString("MaChuyen",MaChuyen);
+        data.putString("MaChuyen", MaChuyen);
+        MaChuyen_temp = MaChuyen;
+        MaTai_temp = MaTai;
         datVe_fragment.setArguments(data);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentholder, datVe_fragment);
         fragmentTransaction.addToBackStack("SoDoGhe");
         fragmentTransaction.commit();
+
     }
 
     @Override
@@ -179,5 +191,19 @@ public class MainActivity extends AppCompatActivity implements OneWay.OnNameSetL
         fragmentTransaction.replace(R.id.fragmentholder, xemVe);
         fragmentTransaction.addToBackStack("xemve");
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void clickChonGhe() {
+        Bundle data = new Bundle();
+        data.putString("MaChuyen",MaChuyen_temp);
+        data.putString("MaTai",MaTai_temp);
+        Nhap_Thong_Tin_Fragment nhap_thong_tin_fragment = new Nhap_Thong_Tin_Fragment();
+        nhap_thong_tin_fragment.setArguments(data);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentholder,nhap_thong_tin_fragment)
+                .addToBackStack("sodoghe")
+                .commit();
     }
 }
