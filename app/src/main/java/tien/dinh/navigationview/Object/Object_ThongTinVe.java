@@ -15,6 +15,15 @@ public class Object_ThongTinVe {
     private String TenChuyen;
     private String NgayDi;
     private String GioDi;
+    private String MaChuyen;
+
+    public String getMaChuyen() {
+        return MaChuyen;
+    }
+
+    public void setMaChuyen(String maChuyen) {
+        MaChuyen = maChuyen;
+    }
 
     public String getBienSo() {
         return BienSo;

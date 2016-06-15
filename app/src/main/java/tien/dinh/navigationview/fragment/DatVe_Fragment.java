@@ -42,11 +42,11 @@ public class DatVe_Fragment extends Fragment{
 
         final View rootView = inflater.inflate(R.layout.activity_dat_ve, container, false);
 
-        //get data from fragment previous
-        Bundle data = getArguments();
         txtChuyenDi = (TextView) rootView.findViewById(R.id.txtSoDoGheChuyenDi);
         txtGioDi = (TextView) rootView.findViewById(R.id.txtSoDoGheGioDi);
         txtNgayDi = (TextView) rootView.findViewById(R.id.txtSoDoGheNgayDi);
+        //get data from fragment previous
+        Bundle data = getArguments();
         txtChuyenDi.setText(data.getString("ChuyenDi"));
         txtGioDi.setText(data.getString("GioDi"));
         txtNgayDi.setText(data.getString("NgayDi"));
@@ -60,12 +60,14 @@ public class DatVe_Fragment extends Fragment{
         return rootView;
     }
 
+
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new Datve_First_Floor_Fragment(), "TẦNG 1");
         adapter.addFragment(new Datve_Second_Floor_Fragment(),"TẦNG 2");
         viewPager.setAdapter(adapter);
     }
+
 
     @Override
     public void onAttach(Context context) {

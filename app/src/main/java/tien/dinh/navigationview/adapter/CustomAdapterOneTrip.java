@@ -23,6 +23,7 @@ import java.util.concurrent.ExecutionException;
 import tien.dinh.navigationview.Object.Object_Chuyen;
 import tien.dinh.navigationview.Object.Object_TaiXe;
 import tien.dinh.navigationview.R;
+import tien.dinh.navigationview.Utils.AppConfig;
 import tien.dinh.navigationview.json.JsonSoDoghe;
 import tien.dinh.navigationview.json.ReadJson;
 import tien.dinh.navigationview.tabhost.oneway.OnWay_ListTrip;
@@ -38,10 +39,6 @@ public class CustomAdapterOneTrip extends BaseAdapter {
     private JsonSoDoghe jsonSoDoghe;
     SoDoGhe interfaceSoDoGhe;
     public static String sodoghe;
-
-    private static final String URL_TAIXE = "http://10.0.3.2:8080/xekhach/json_tai_xe.php";
-    private static final String URL_SODOGHE = "http://10.0.3.2:8080/xekhach/Json_so_do_ghe.php";
-
 
 
     public CustomAdapterOneTrip(Context context, List<Object_Chuyen> object_chuyenList) {
@@ -89,9 +86,10 @@ public class CustomAdapterOneTrip extends BaseAdapter {
              @Override
              public void onClick(View v) {
                  //lấy chuỗi json các ghế đã chọn để đưa vào list
+                 AppConfig.KEY_CHECK_FRAGMENT = 1;
                  try {
                      jsonSoDoghe = new JsonSoDoghe(object_chuyen.getMaChuyen());
-                     sodoghe = new GoiWbServiceSoDoGhe().execute(URL_SODOGHE).get();
+                     sodoghe = new GoiWbServiceSoDoGhe().execute(AppConfig.URL_SODOGHE).get();
                      Log.d("JSON_SODOGHE:",sodoghe);
                  } catch (InterruptedException e) {
                      e.printStackTrace();
@@ -131,7 +129,7 @@ public class CustomAdapterOneTrip extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 readJsonTaiXe = new ReadJson(tai.getText().toString());
-                new GoiWebServiceTaiXe().execute(URL_TAIXE);
+                new GoiWebServiceTaiXe().execute(AppConfig.URL_TAIXE);
             }
         });
     }

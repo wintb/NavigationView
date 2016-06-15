@@ -2,9 +2,11 @@ package tien.dinh.navigationview.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +18,12 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import tien.dinh.navigationview.Object.Object_ThongTinVe;
 import tien.dinh.navigationview.R;
+import tien.dinh.navigationview.Utils.AppConfig;
+import tien.dinh.navigationview.json.JsonSoDoghe;
 
 /**
  * Created by VuVanThang on 5/25/2016.
@@ -37,6 +42,12 @@ public class XemVe extends Fragment {
     TextView txtTextNgayDi;
     TextView txtGioDi;
     Button btnHuyve;
+    Button btnDoiVe;
+    Button btnSuaVe;
+
+    DoiGhe doighe;
+    private JsonSoDoghe jsonSoDoghe;
+    public static String sodogheDoiVe;
 
 
     @Nullable
@@ -56,11 +67,15 @@ public class XemVe extends Fragment {
         txtTextNgayDi = (TextView) view.findViewById(R.id.txtVeNgayDi);
         txtGioDi = (TextView) view.findViewById(R.id.txtVeGioDi);
         btnHuyve = (Button) view.findViewById(R.id.btnHuyVe);
+        btnDoiVe = (Button) view.findViewById(R.id.btnDoiVe);
+        btnSuaVe = (Button) view.findViewById(R.id.btnSuaVe);
+
+        doighe = (DoiGhe) getActivity();
         //Lấy dữ liệu từ fragment MyFragment2
         Bundle data = getArguments();
         String ThongTinVeKhach = data.getString("JsonThongTinVe");
         Type listType = new TypeToken<List<Object_ThongTinVe>>(){}.getType();
-        List<Object_ThongTinVe> thongTinVe  =  new Gson().fromJson(ThongTinVeKhach, listType);
+        final List<Object_ThongTinVe> thongTinVe  =  new Gson().fromJson(ThongTinVeKhach, listType);
 
         txtHoTen.setText(thongTinVe.get(0).getHoTen());
         txtSDT.setText(thongTinVe.get(0).getSDTKhach());
@@ -84,14 +99,55 @@ public class XemVe extends Fragment {
 
                             }
                         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                        }
+                    }
                 }).show();
             }
         });
 
+        btnDoiVe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppConfig.KEY_CHECK_FRAGMENT = 0;
+                //lấy chuỗi json các ghế đã chọn để đưa vào list
+                try {
+                    jsonSoDoghe = new JsonSoDoghe(thongTinVe.get(0).getMaChuyen());
+                    sodogheDoiVe = new GoiWbServiceSoDoGhe().execute(AppConfig.URL_SODOGHE).get();
+                    Log.d("JSON_SODOGHE_DOIVE:", sodogheDoiVe);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                doighe.setDoiGhe(thongTinVe.get(0).getMaVe(),
+                        thongTinVe.get(0).getMaChuyen(),
+                        thongTinVe.get(0).getTenChuyen(),
+                        thongTinVe.get(0).getGioDi(),
+                        thongTinVe.get(0).getNgayDi());
+            }
+        });
+
         return view;
+    }
+
+    //-------------------------SELECT SOGHE TỪ SERVER ĐỂ KIỂM TRA GHẾ ĐÃ CHỌN-----------------------
+
+    private class GoiWbServiceSoDoGhe extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            return jsonSoDoghe.makePostRequestSoDoGhe(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+    }
+
+    public interface DoiGhe{
+        void setDoiGhe(String MaVe, String MaChuyen, String TenChuyen, String GioDi, String NgayDi);
     }
 }

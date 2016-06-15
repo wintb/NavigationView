@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -39,27 +40,35 @@ public class Nhap_Thong_Tin_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String HoTen = editHoTen.getText().toString();
-                String CMND = editCMND.getText().toString();
-                String SDT = editSDT.getText().toString();
-                String GhiChu = editGhiChu.getText().toString();
 
-                Bundle data = getArguments();
-                String MaChuyen = data.getString("MaChuyen");
-                String MaTai = data.getString("MaTai");
-                List<String> listSoGhe = Datve_First_Floor_Fragment.listGheDaChonTang1;
-                int soLuong = listSoGhe.size();
-                String SoGhe = listSoGhe.get(0);
+                if (editCMND.getText().toString().equalsIgnoreCase("")
+                        || editGhiChu.getText().toString().equalsIgnoreCase("")
+                        || editHoTen.getText().toString().equalsIgnoreCase("")
+                        || editSDT.getText().toString().equalsIgnoreCase("")){
+                    Toast.makeText(getActivity(),"Bạn cần phải nhập đầy đủ thông tin",Toast.LENGTH_LONG).show();
+                }else {
+                    String HoTen = editHoTen.getText().toString();
+                    String CMND = editCMND.getText().toString();
+                    String SDT = editSDT.getText().toString();
+                    String GhiChu = editGhiChu.getText().toString();
 
-                String SDT_3SoCuoi = SDT.substring(SDT.length() - 3);
-                String MaVe = SoGhe + SDT_3SoCuoi;
+                    Bundle data = getArguments();
+                    String MaChuyen = data.getString("MaChuyen");
+                    String MaTai = data.getString("MaTai");
+                    List<String> listSoGhe = Datve_First_Floor_Fragment.listGheDaChonTang1;
+                    int soLuong = listSoGhe.size();
+                    String SoGhe = listSoGhe.get(0);
+
+                    String SDT_3SoCuoi = SDT.substring(SDT.length() - 3);
+                    String MaVe = SoGhe + SDT_3SoCuoi;
 
 
-                Log.d("JSON_NHAP_THONG_TIN_VE", MaChuyen + "++" + MaTai);
-                Log.d("LIST GHE", listSoGhe.toString());
-                Log.d("SO LUONG",String.valueOf(soLuong));
+                    Log.d("JSON_NHAP_THONG_TIN_VE", MaChuyen + "++" + MaTai);
+                    Log.d("LIST GHE", listSoGhe.toString());
+                    Log.d("SO LUONG", String.valueOf(soLuong));
 
-                interfaceDatVe.clickDatVe(MaTai,MaChuyen,HoTen,CMND,SDT,GhiChu,SoGhe,soLuong,MaVe);
+                    interfaceDatVe.clickDatVe(MaTai, MaChuyen, HoTen, CMND, SDT, GhiChu, SoGhe, soLuong, MaVe);
+                }
             }
         });
         return view;

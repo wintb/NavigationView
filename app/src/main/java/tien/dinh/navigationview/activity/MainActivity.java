@@ -31,7 +31,9 @@ public class MainActivity extends AppCompatActivity implements
         CustomAdapterOneTrip.SoDoGhe,
         MyFragment2.OnNameSetListener,
         Datve_First_Floor_Fragment.ChonGhe,
-        Nhap_Thong_Tin_Fragment.DatVe{
+        Nhap_Thong_Tin_Fragment.DatVe,
+        XemVe.DoiGhe,
+        Thong_Tin_Ve_Vua_Dat_Fragment.backDatve{
 
     DrawerLayout drawerLayout;
     NavigationView navigation;
@@ -199,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements
     public void clickChonGhe() {
         Bundle data = new Bundle();
         data.putString("MaChuyen",MaChuyen_temp);
-        data.putString("MaTai",MaTai_temp);
+        data.putString("MaTai", MaTai_temp);
         Nhap_Thong_Tin_Fragment nhap_thong_tin_fragment = new Nhap_Thong_Tin_Fragment();
         nhap_thong_tin_fragment.setArguments(data);
         getSupportFragmentManager()
@@ -230,6 +232,41 @@ public class MainActivity extends AppCompatActivity implements
                 .beginTransaction()
                 .replace(R.id.fragmentholder,thongTinVeVuaDatFragment)
                 .addToBackStack("nhapthongtin")
+                .commit();
+    }
+
+    /**
+     * Đổi ghế trong chuyến xe đã đặt sau khi điền thông tin và xem vé
+     * @param MaVe
+     * @param MaChuyen
+     */
+    @Override
+    public void setDoiGhe(String MaVe, String MaChuyen, String TenChuyen, String GioDi, String NgayDi) {
+        Bundle data = new Bundle();
+        data.putString("MaVe", MaVe);
+        data.putString("MaChuyen",MaChuyen);
+        data.putString("ChuyenDi",TenChuyen);
+        data.putString("GioDi",GioDi);
+        data.putString("NgayDi",NgayDi);
+
+        DatVe_Fragment datVe_fragment = new DatVe_Fragment();
+        datVe_fragment.setArguments(data);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentholder,datVe_fragment)
+                .addToBackStack("doighe")
+                .commit();
+    }
+
+    /**
+     * Sau khi đặt vé xong , báo thành công và trở về fragment Đặt vé (OneWay)
+     */
+    @Override
+    public void setBackDatVe() {
+        MyFragment1 myFragment1 = new MyFragment1();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentholder,myFragment1)
                 .commit();
     }
 }

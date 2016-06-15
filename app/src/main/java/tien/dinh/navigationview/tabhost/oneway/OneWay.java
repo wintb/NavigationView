@@ -2,6 +2,7 @@ package tien.dinh.navigationview.tabhost.oneway;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import tien.dinh.navigationview.R;
+import tien.dinh.navigationview.Utils.AppConfig;
 import tien.dinh.navigationview.json.ReadJson;
 import tien.dinh.navigationview.tabhost.datetime.CompareDateTime;
 import tien.dinh.navigationview.tabhost.datetime.DatetimeFormater;
@@ -54,8 +56,6 @@ public class OneWay extends Fragment{
     ListView listView;
     ArrayList<String> arrayList;
     Button btnTimChuyen;
-    String url_TimChuyen_MotChieu = "http://10.0.3.2:8080/xekhach/danhsachchuyendimotchieu.php";
-    String url_TenCacChuyen = "http://10.0.3.2:8080/xekhach/jsontencacchuyen.php";
     String Json_DanhSach_Chuyen ;
     OnNameSetListener onNameSetListener;
     ReadJson readJsonChuyenDi;
@@ -88,7 +88,7 @@ public class OneWay extends Fragment{
                 //post data to server and get json string
                 readJsonChuyenDi = new ReadJson(txtChuyenDi.getText().toString(),txtDate.getText().toString());
                 try {
-                    Json_DanhSach_Chuyen = new GoiWebService().execute(url_TimChuyen_MotChieu).get();
+                    Json_DanhSach_Chuyen = new GoiWebService().execute(AppConfig.URL_TIMCHUYEN_MOTCHIEU).get();
                     Log.d("TEST_JSON_JSON_JSON:",Json_DanhSach_Chuyen);
                     if (Json_DanhSach_Chuyen.equalsIgnoreCase("[]")){
                         Toast.makeText(getActivity(), "No trip on day", Toast.LENGTH_LONG).show();
@@ -115,17 +115,30 @@ public class OneWay extends Fragment{
     //--------------------------POST DATA TO SERVER AND GET DATA FROM SERVER------------------------------
 
     private class GoiWebService extends AsyncTask<String, Void, String>{
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setMessage("Creating Product..");
+            progressDialog.setIndeterminate(false);
+            progressDialog.setCancelable(true);
+            progressDialog.show();
+        }
 
         @Override
         protected String doInBackground(String... params) {
+            publishProgress();
             return readJsonChuyenDi.makePostRequestChuyenDi(params[0]);
         }
 
         @Override
         protected void onPostExecute(String s) {
             //Json_DanhSach_Chuyen = s;
-            Log.d("JSON DANH SACH CHUYEN: ", s);
             super.onPostExecute(s);
+            Log.d("JSON DANH SACH CHUYEN: ", s);
+            progressDialog.dismiss();
+
         }
     }
 
@@ -157,7 +170,7 @@ public class OneWay extends Fragment{
                 LinearLayout linearLayout = (LinearLayout) inflater1.inflate(R.layout.listview_dialog_activity, null, false);
                 listView = (ListView) linearLayout.findViewById(R.id.list);
                 DocJSON docJSON = new DocJSON();
-                docJSON.execute(url_TenCacChuyen);
+                docJSON.execute(AppConfig.URL_TENCACCHUYEN);
 
                 new AlertDialog.Builder(getActivity()).setTitle("List Trip").setMessage("Click to select Trip")
                         .setView(linearLayout)
@@ -230,8 +243,22 @@ public class OneWay extends Fragment{
 
     private class DocJSON extends AsyncTask<String, Void, String> {
 
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setMessage("Creating Product..");
+            progressDialog.setIndeterminate(false);
+            progressDialog.setCancelable(true);
+            progressDialog.show();
+
+        }
+
         @Override
         protected String doInBackground(String... params) {
+            publishProgress();
             return docNoiDung_Tu_URL(params[0]);
 
         }
@@ -262,7 +289,9 @@ public class OneWay extends Fragment{
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            progressDialog.dismiss();
         }
+
     }
 
 

@@ -1,5 +1,7 @@
 package tien.dinh.navigationview.adapter;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tien.dinh.navigationview.R;
+import tien.dinh.navigationview.Utils.AppConfig;
 
 /**
  * Created by DinhTien on 31-05-2016.
@@ -55,7 +57,9 @@ public class Thong_Tin_Ve_Vua_Dat_Fragment extends Fragment {
     private String MaTai;
     private String SoGhe;
 
-    private String INSERT_URL = "http://10.0.3.2:8080/xekhach/insertkhachhang.php";
+    backDatve backDatveFragment;
+    String ThongBao;
+
 
     @Nullable
     @Override
@@ -75,6 +79,7 @@ public class Thong_Tin_Ve_Vua_Dat_Fragment extends Fragment {
         txtMaVeVuaDat = (TextView)view.findViewById(R.id.txtMaVeVuaDat);
         txtSLVeVuaDat = (TextView)view.findViewById(R.id.txtSLVeVuaDat);
         txtXacNhan = (TextView)view.findViewById(R.id.txtXacNhan);
+        backDatveFragment = (backDatve)getActivity();
 
         Bundle data = getArguments();
 
@@ -102,7 +107,15 @@ public class Thong_Tin_Ve_Vua_Dat_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                new goiWebservice().execute(INSERT_URL);
+                new goiWebservice().execute(AppConfig.INSERT_URL);
+                new AlertDialog.Builder(getActivity()).setTitle("Đặt vé thành công").setMessage("\n\n"+"Quay trở lại menu chính để xem chi tiết vé đã đặt")
+                        .setIcon(R.drawable.success)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                backDatveFragment.setBackDatVe();
+                            }
+                        }).show();
                 Log.d("CLICK CLICK CLICK","AAAAAAAAAAAAAa");
             }
         });
@@ -110,7 +123,9 @@ public class Thong_Tin_Ve_Vua_Dat_Fragment extends Fragment {
         return view;
     }
 
-
+    public interface backDatve{
+        public void setBackDatVe();
+    }
 
 
     //============== AsyncTask class =================//
@@ -165,6 +180,7 @@ public class Thong_Tin_Ve_Vua_Dat_Fragment extends Fragment {
             HttpResponse httpResponse = httpClient.execute(httpPost);
             HttpEntity httpEntity = httpResponse.getEntity();
             result = EntityUtils.toString(httpEntity);
+            ThongBao = result;
         } catch (IOException e) {
             e.printStackTrace();
         }
