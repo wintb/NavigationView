@@ -36,6 +36,8 @@ public class JsonSoDoghe {
      * @return file json
      */
 
+
+    //
     public String makePostRequestSoDoGhe(String url){
         String result = null;
         HttpClient httpClient = new DefaultHttpClient();
