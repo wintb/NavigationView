@@ -40,7 +40,7 @@ public class DatVe_Fragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        final View rootView = inflater.inflate(R.layout.activity_dat_ve, container, false);
+        final View rootView = inflater.inflate(R.layout.activity_datve1, container, false);
 
         txtChuyenDi = (TextView) rootView.findViewById(R.id.txtSoDoGheChuyenDi);
         txtGioDi = (TextView) rootView.findViewById(R.id.txtSoDoGheGioDi);
