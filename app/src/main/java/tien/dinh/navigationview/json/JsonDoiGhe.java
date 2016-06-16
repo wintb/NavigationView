@@ -27,7 +27,9 @@ public class JsonDoiGhe {
     private String MaVe;
     private String SoGhe;
 
-    public JsonDoiGhe(){}
+    public JsonDoiGhe(){
+
+    }
 
     //constructor
 
