@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:padding="5dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textColor="#2c3e50"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="Tài xế: "
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="#2c3e50"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:id="@+id/txtTaiXe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="5dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textColor="#2c3e50"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="Phụ xe: "
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="#2c3e50"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:id="@+id/txtPhuXe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="5dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textColor="#2c3e50"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="Biển số xe: "
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="#2c3e50"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:id="@+id/txtBienSoXe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="5dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textColor="#2c3e50"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="Số điện thoại: "
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="#2c3e50"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:id="@+id/txtSoDienthoai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

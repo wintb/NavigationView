@@ -12,28 +12,28 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import tien.dinh.navigationview.R;
-import tien.dinh.navigationview.adapter.CustomAdapterOneTrip;
-import tien.dinh.navigationview.adapter.Thong_Tin_Ve_Vua_Dat_Fragment;
-import tien.dinh.navigationview.fragment.DatVe_Fragment;
-import tien.dinh.navigationview.fragment.Datve_First_Floor_Fragment;
-import tien.dinh.navigationview.fragment.MyFragment1;
-import tien.dinh.navigationview.fragment.MyFragment2;
-import tien.dinh.navigationview.fragment.Nhap_Thong_Tin_Fragment;
-import tien.dinh.navigationview.fragment.XemVe;
-import tien.dinh.navigationview.tabhost.oneway.OnWay_ListTrip;
-import tien.dinh.navigationview.tabhost.oneway.OneWay;
+import tien.dinh.navigationview.adapter.AdapterDanhSachChuyen;
+import tien.dinh.navigationview.fragment.FragmentThongTinVeVuaDat;
+import tien.dinh.navigationview.fragment.FragmentTabhostSoDoGhe;
+import tien.dinh.navigationview.fragment.FragmentSoDoGheTang1;
+import tien.dinh.navigationview.fragment.FragmentTabhostDatVe;
+import tien.dinh.navigationview.fragment.FragmentXemVe;
+import tien.dinh.navigationview.fragment.FragmentNhapThongTinKhach;
+import tien.dinh.navigationview.fragment.FragmentThongTinVeDaDat;
+import tien.dinh.navigationview.fragment.FragmentDatVeMotChieu;
+import tien.dinh.navigationview.fragment.FragmentDanhSachChuyen;
 
 /**
  * Created by VuVanThang on 5/17/2016.
  */
 public class MainActivity extends AppCompatActivity implements
-        OneWay.OnNameSetListener,
-        CustomAdapterOneTrip.SoDoGhe,
-        MyFragment2.OnNameSetListener,
-        Datve_First_Floor_Fragment.ChonGhe,
-        Nhap_Thong_Tin_Fragment.DatVe,
-        XemVe.DoiGhe,
-        Thong_Tin_Ve_Vua_Dat_Fragment.backDatve{
+        FragmentDatVeMotChieu.OnNameSetListener,
+        AdapterDanhSachChuyen.SoDoGhe,
+        FragmentXemVe.OnNameSetListener,
+        FragmentSoDoGheTang1.ChonGhe,
+        FragmentNhapThongTinKhach.DatVe,
+        FragmentThongTinVeDaDat.DoiGhe,
+        FragmentThongTinVeVuaDat.backDatve{
 
     DrawerLayout drawerLayout;
     NavigationView navigation;
@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MyFragment1 myFragment1 = new MyFragment1();
+        FragmentTabhostDatVe fragmentTabhostDatVe = new FragmentTabhostDatVe();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentholder, myFragment1);
+        fragmentTransaction.replace(R.id.fragmentholder, fragmentTabhostDatVe);
         fragmentTransaction.commit();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -71,17 +71,17 @@ public class MainActivity extends AppCompatActivity implements
                     case R.id.navigation_item_1:
                         //Do some thing here
                         // add navigation drawer item onclick method here
-                        MyFragment1 myFragment1 = new MyFragment1();
+                        FragmentTabhostDatVe fragmentTabhostDatVe = new FragmentTabhostDatVe();
                         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragmentholder, myFragment1).addToBackStack(null);
+                        fragmentTransaction.replace(R.id.fragmentholder, fragmentTabhostDatVe).addToBackStack(null);
                         fragmentTransaction.commit();
                         navigation.setCheckedItem(id);
                         drawerLayout.closeDrawer(navigation);
                         break;
                     case R.id.navigation_item_2:
-                        MyFragment2 myFragment2 = new MyFragment2();
+                        FragmentXemVe fragmentXemVe = new FragmentXemVe();
                         FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction2.replace(R.id.fragmentholder, myFragment2);
+                        fragmentTransaction2.replace(R.id.fragmentholder, fragmentXemVe);
                         fragmentTransaction2.commit();
                         navigation.setCheckedItem(id);
                         drawerLayout.closeDrawer(navigation);
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements
         if (json == "[]"){
             Toast.makeText(getApplication(), "No Trip on day", Toast.LENGTH_LONG).show();
         }else {
-            OnWay_ListTrip danhSachChuyen = new OnWay_ListTrip();
+            FragmentDanhSachChuyen danhSachChuyen = new FragmentDanhSachChuyen();
             Bundle data = new Bundle();
             data.putString("ChuyenDi", ChuyenDi);
             data.putString("NgayDi", NgayDi);
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void setSoDoGhe(String TenChuyen, String GioDi, String NgayDi,String MaChuyen, String MaTai) {
-        DatVe_Fragment datVe_fragment = new DatVe_Fragment();
+        FragmentTabhostSoDoGhe datVe_fragment = new FragmentTabhostSoDoGhe();
         Bundle data = new Bundle();
         data.putString("ChuyenDi", TenChuyen);
         data.putString("GioDi", GioDi);
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void setThongTinVe(String json) {
-        XemVe xemVe = new XemVe();
+        FragmentThongTinVeDaDat xemVe = new FragmentThongTinVeDaDat();
         Bundle data = new Bundle();
         data.putString("JsonThongTinVe",json);
         xemVe.setArguments(data);
@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements
         Bundle data = new Bundle();
         data.putString("MaChuyen",MaChuyen_temp);
         data.putString("MaTai", MaTai_temp);
-        Nhap_Thong_Tin_Fragment nhap_thong_tin_fragment = new Nhap_Thong_Tin_Fragment();
+        FragmentNhapThongTinKhach nhap_thong_tin_fragment = new FragmentNhapThongTinKhach();
         nhap_thong_tin_fragment.setArguments(data);
         getSupportFragmentManager()
                 .beginTransaction()
@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements
         data.putInt("SoLuong", SoLuong);
         data.putString("MaVe", MaVe);
 
-        Thong_Tin_Ve_Vua_Dat_Fragment thongTinVeVuaDatFragment = new Thong_Tin_Ve_Vua_Dat_Fragment();
+        FragmentThongTinVeVuaDat thongTinVeVuaDatFragment = new FragmentThongTinVeVuaDat();
         thongTinVeVuaDatFragment.setArguments(data);
         getSupportFragmentManager()
                 .beginTransaction()
@@ -249,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements
         data.putString("GioDi",GioDi);
         data.putString("NgayDi",NgayDi);
 
-        DatVe_Fragment datVe_fragment = new DatVe_Fragment();
+        FragmentTabhostSoDoGhe datVe_fragment = new FragmentTabhostSoDoGhe();
         datVe_fragment.setArguments(data);
         getSupportFragmentManager()
                 .beginTransaction()
@@ -259,14 +259,14 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     /**
-     * Sau khi đặt vé xong , báo thành công và trở về fragment Đặt vé (OneWay)
+     * Sau khi đặt vé xong , báo thành công và trở về fragment Đặt vé (FragmentDatVeMotChieu)
      */
     @Override
     public void setBackDatVe() {
-        MyFragment1 myFragment1 = new MyFragment1();
+        FragmentTabhostDatVe fragmentTabhostDatVe = new FragmentTabhostDatVe();
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragmentholder,myFragment1)
+                .replace(R.id.fragmentholder, fragmentTabhostDatVe)
                 .commit();
     }
 }
