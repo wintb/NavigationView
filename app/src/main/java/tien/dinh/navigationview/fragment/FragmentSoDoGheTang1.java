@@ -107,7 +107,7 @@ public class FragmentSoDoGheTang1 extends Fragment {
 
     ChonGhe chonGhe;
     JsonDoiGhe jsonDoiGhe;
-
+    int count = 0;
 
 
     public static FragmentSoDoGheTang1 newInstance() {
@@ -183,10 +183,15 @@ public class FragmentSoDoGheTang1 extends Fragment {
         btnChonGheTang1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Constant.KEY_CHECK_FRAGMENT == 1) {
-                    chonGhe.clickChonGhe();
-                }else if (Constant.KEY_CHECK_FRAGMENT == 0){
-                    jsonDoiGhe = new JsonDoiGhe();
+
+                if (count == 0 ){
+                    Toast.makeText(getActivity(), "Bạn chưa chọn ghế ,vui lòng chọn.", Toast.LENGTH_SHORT).show();
+                }else{
+                    if (Constant.KEY_CHECK_FRAGMENT == 1) {
+                        chonGhe.clickChonGhe();
+                    }else if (Constant.KEY_CHECK_FRAGMENT == 0){
+                        jsonDoiGhe = new JsonDoiGhe();
+                    }
                 }
             }
         });
@@ -219,6 +224,7 @@ public class FragmentSoDoGheTang1 extends Fragment {
                         listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_A1D = false;
+                        count++;
                     }
                     else {
                         Toast.makeText(getActivity(),"Bạn chỉ được chọn nhiều nhất 2 ghế",Toast.LENGTH_LONG).show();
@@ -229,6 +235,7 @@ public class FragmentSoDoGheTang1 extends Fragment {
                     listGheDaChonTang1.remove(listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_A1D = true;
+                    count--;
                     return;
                 }
             }

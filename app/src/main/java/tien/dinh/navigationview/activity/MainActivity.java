@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements
         nhap_thong_tin_fragment.setArguments(data);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragmentholder,nhap_thong_tin_fragment)
+                .replace(R.id.fragmentholder, nhap_thong_tin_fragment)
                 .addToBackStack("sodoghe")
                 .commit();
     }
@@ -269,4 +269,5 @@ public class MainActivity extends AppCompatActivity implements
                 .replace(R.id.fragmentholder, fragmentTabhostDatVe)
                 .commit();
     }
+
 }

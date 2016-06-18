@@ -14,15 +14,21 @@ import android.widget.Toast;
 import java.util.List;
 
 import tien.dinh.navigationview.R;
+import tien.dinh.navigationview.utils.CheckNumber;
 
 /**
  * Created by DinhTien on 29-05-2016.
  */
 public class FragmentNhapThongTinKhach extends Fragment {
 
-    TextView editHoTen, editSDT, editCMND, editGhiChu;
+    TextView editHoTen, editSDT, editCMND, editGhiChu, txtThongBao;
     Button btnDatVe;
     DatVe interfaceDatVe;
+
+    private String HoTen = "";
+    private String CMND = "";
+    private String SDT  = "";
+    private String GhiChu = "";
 
     @Nullable
     @Override
@@ -34,41 +40,58 @@ public class FragmentNhapThongTinKhach extends Fragment {
         editSDT = (TextView)view.findViewById(R.id.editNhapSDT);
         editHoTen = (TextView)view.findViewById(R.id.editNhapHoTen);
         btnDatVe = (Button)view.findViewById(R.id.btnDatVe);
+        txtThongBao = (TextView)view.findViewById(R.id.txtThongBao);
 
         interfaceDatVe = (DatVe) getActivity();
+
+
         btnDatVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                HoTen = editHoTen.getText().toString();
+                CMND = editCMND.getText().toString();
+                SDT = editSDT.getText().toString();
+                GhiChu = editGhiChu.getText().toString();
 
-                if (editCMND.getText().toString().equalsIgnoreCase("")
-                        || editGhiChu.getText().toString().equalsIgnoreCase("")
-                        || editHoTen.getText().toString().equalsIgnoreCase("")
-                        || editSDT.getText().toString().equalsIgnoreCase("")){
-                    Toast.makeText(getActivity(),"Bạn cần phải nhập đầy đủ thông tin",Toast.LENGTH_LONG).show();
-                }else {
-                    String HoTen = editHoTen.getText().toString();
-                    String CMND = editCMND.getText().toString();
-                    String SDT = editSDT.getText().toString();
-                    String GhiChu = editGhiChu.getText().toString();
+                if (HoTen.equalsIgnoreCase("")
+                        || CMND.equalsIgnoreCase("")
+                        || SDT.equalsIgnoreCase("")
+                        || GhiChu.equalsIgnoreCase("")) {
 
-                    Bundle data = getArguments();
-                    String MaChuyen = data.getString("MaChuyen");
-                    String MaTai = data.getString("MaTai");
-                    List<String> listSoGhe = FragmentSoDoGheTang1.listGheDaChonTang1;
-                    int soLuong = listSoGhe.size();
-                    String SoGhe = listSoGhe.get(0);
-
-                    String SDT_3SoCuoi = SDT.substring(SDT.length() - 3);
-                    String MaVe = SoGhe + SDT_3SoCuoi;
-
-
-                    Log.d("JSON_NHAP_THONG_TIN_VE", MaChuyen + "++" + MaTai);
-                    Log.d("LIST GHE", listSoGhe.toString());
-                    Log.d("SO LUONG", String.valueOf(soLuong));
-
-                    interfaceDatVe.clickDatVe(MaTai, MaChuyen, HoTen, CMND, SDT, GhiChu, SoGhe, soLuong, MaVe);
+                    txtThongBao.setVisibility(View.VISIBLE);
+                    txtThongBao.setText("Bạn cần phải nhập đầy đủ thông tin");
+                    return;
                 }
+
+                if (CMND.length() != 9 || !CheckNumber.checkNumber(CMND)){
+                    txtThongBao.setVisibility(View.VISIBLE);
+                    txtThongBao.setText("Số cmnd không phù hợp");
+                    return;
+                }
+
+                if ((SDT.length() < 10 || SDT.length() > 11) || !CheckNumber.checkNumber(SDT)){
+                    txtThongBao.setVisibility(View.VISIBLE);
+                    txtThongBao.setText("Số điện thoại không phù hợp");
+                    return;
+                }
+
+                Bundle data = getArguments();
+                String MaChuyen = data.getString("MaChuyen");
+                String MaTai = data.getString("MaTai");
+                List<String> listSoGhe = FragmentSoDoGheTang1.listGheDaChonTang1;
+                int soLuong = listSoGhe.size();
+                String SoGhe = listSoGhe.get(0);
+
+                String SDT_3SoCuoi = SDT.substring(SDT.length() - 3);
+                String MaVe = SoGhe + SDT_3SoCuoi;
+
+
+                Log.d("JSON_NHAP_THONG_TIN_VE", MaChuyen + "++" + MaTai);
+                Log.d("LIST GHE", listSoGhe.toString());
+                Log.d("SO LUONG", String.valueOf(soLuong));
+
+                interfaceDatVe.clickDatVe(MaTai, MaChuyen, HoTen, CMND, SDT, GhiChu, SoGhe, soLuong, MaVe);
             }
         });
         return view;

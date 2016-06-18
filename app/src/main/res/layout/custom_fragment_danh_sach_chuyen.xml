@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:orientation="horizontal"
     android:weightSum="7"
-    android:paddingTop="20dp"
-    android:paddingBottom="20dp"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
     android:layout_height="wrap_content"
     android:background="@drawable/rounded_item_list_trip">
 
@@ -19,7 +19,8 @@
             android:layout_height="match_parent"
             android:text="Mã Tài"
             android:id="@+id/txtTai"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            />
 
         <TextView
             android:gravity="center"
@@ -28,7 +29,8 @@
             android:layout_height="match_parent"
             android:text="Giờ Đi"
             android:id="@+id/txtGioDi"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            />
 
         <TextView
             android:gravity="center"

@@ -46,6 +46,7 @@ public class FragmentThongTinVeVuaDat extends Fragment {
     private TextView txtGioDiVuaDat;
     private TextView txtSLVeVuaDat ;
     private TextView txtXacNhan;
+    private TextView txtSua;
 
     private String SDTKhach;
     private String HoTen;
@@ -79,6 +80,7 @@ public class FragmentThongTinVeVuaDat extends Fragment {
         txtMaVeVuaDat = (TextView)view.findViewById(R.id.txtMaVeVuaDat);
         txtSLVeVuaDat = (TextView)view.findViewById(R.id.txtSLVeVuaDat);
         txtXacNhan = (TextView)view.findViewById(R.id.txtXacNhan);
+        txtSua = (TextView)view.findViewById(R.id.txtSua);
         backDatveFragment = (backDatve)getActivity();
 
         Bundle data = getArguments();
@@ -108,7 +110,9 @@ public class FragmentThongTinVeVuaDat extends Fragment {
             public void onClick(View v) {
 
                 new goiWebservice().execute(Constant.INSERT_URL);
-                new AlertDialog.Builder(getActivity()).setTitle("Đặt vé thành công").setMessage("\n\n"+"Quay trở lại menu chính để xem chi tiết vé đã đặt")
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Đặt vé thành công")
+                        .setMessage("\n\n" + "Quay trở lại menu chính để xem chi tiết vé đã đặt")
                         .setIcon(R.drawable.success)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
@@ -116,7 +120,14 @@ public class FragmentThongTinVeVuaDat extends Fragment {
                                 backDatveFragment.setBackDatVe();
                             }
                         }).show();
-                Log.d("CLICK CLICK CLICK","AAAAAAAAAAAAAa");
+                Log.d("CLICK CLICK CLICK", "AAAAAAAAAAAAAa");
+            }
+        });
+
+        txtSua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().popBackStack();
             }
         });
 
@@ -124,7 +135,7 @@ public class FragmentThongTinVeVuaDat extends Fragment {
     }
 
     public interface backDatve{
-        public void setBackDatVe();
+        void setBackDatVe();
     }
 
 
