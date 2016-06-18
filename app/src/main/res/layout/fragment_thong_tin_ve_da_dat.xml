@@ -306,7 +306,7 @@
                 android:background="@drawable/rectgroupbutton"
                 android:textColor="#fff"
                 android:textSize="15dp"
-                android:text="Đổi vé"/>
+                android:text="Đổi ghế"/>
         </RelativeLayout>
 
         <RelativeLayout

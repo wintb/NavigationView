@@ -20,34 +20,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by VuVanThang on 6/4/2016.
+ * Created by VuVanThang on 6/18/2016.
  */
-public class JsonDoiGhe {
+public class JsonSuaVe {
+
+    private String HoTen;
+    private String SDT;
+    private String CMND;
+    private String GhiChu;
     private String MaChuyen;
     private String MaVe;
-    private String SoGhe;
-    private String MaVeThayDoi;
 
-    public JsonDoiGhe(){
-
-    }
-
-    //constructor
-
-    public JsonDoiGhe(String MaChuyen, String MaVe, String SoGhe, String MaveThayDoi){
+    public JsonSuaVe(String HoTen, String SDT, String CMND, String GhiChu, String MaChuyen, String MaVe){
+        this.HoTen = HoTen;
+        this.SDT = SDT;
+        this.CMND = CMND;
+        this.GhiChu = GhiChu;
         this.MaChuyen = MaChuyen;
         this.MaVe = MaVe;
-        this.SoGhe = SoGhe;
-        this.MaVeThayDoi = MaveThayDoi;
     }
 
-    /**
-     * Post MaTai to server for see detail TaiXe
-     * @param url
-     * @return file json
-     */
-
-    public String makePostRequest_DoiGhe(String url){
+    public String makePostRequest_SuaVe(String url){
         String result = null;
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
@@ -56,8 +49,10 @@ public class JsonDoiGhe {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("MaChuyen", MaChuyen);
             jsonObject.put("MaVe", MaVe);
-            jsonObject.put("SoGhe", SoGhe);
-            jsonObject.put("MaVeThayDoi", MaVeThayDoi);
+            jsonObject.put("HoTen", HoTen);
+            jsonObject.put("SDTKhach", SDT);
+            jsonObject.put("CMND", CMND);
+            jsonObject.put("GhiChu", GhiChu);
 
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("Chuyen", jsonObject.toString()));
@@ -107,9 +102,5 @@ public class JsonDoiGhe {
             }
             return sb.toString();
         }
-    }
-
-    private void TestCommitfile(){
-
     }
 }

@@ -20,57 +20,64 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import tien.dinh.navigationview.dao.ThongTinVe;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import tien.dinh.navigationview.R;
-import tien.dinh.navigationview.mics.Constant;
+import tien.dinh.navigationview.dao.ThongTinVe;
+import tien.dinh.navigationview.json.JsonHuyVe;
 import tien.dinh.navigationview.json.JsonSoDoghe;
+import tien.dinh.navigationview.mics.Constant;
 
 /**
  * Created by VuVanThang on 5/25/2016.
  */
 public class FragmentThongTinVeDaDat extends Fragment {
 
+    @Bind(R.id.txtVeHoTen)
     TextView txtHoTen;
+    @Bind(R.id.txtVeSDT)
     TextView txtSDT;
+    @Bind(R.id.txtVeCMND)
     TextView txtCMND;
+    @Bind(R.id.txtVeGhiChu)
     TextView txtGhiChu;
+    @Bind(R.id.txtVeMaVe)
     TextView txtMaVe;
+    @Bind(R.id.txtVeSoGhe)
     TextView txtSoGhe;
+    @Bind(R.id.txtVeMaTai)
     TextView txtMaTai;
+    @Bind(R.id.txtVeBienSoXe)
     TextView txtBienSo;
+    @Bind(R.id.txtVeTenChuyenDi)
     TextView txtTenChuyen;
+    @Bind(R.id.txtVeNgayDi)
     TextView txtTextNgayDi;
+    @Bind(R.id.txtVeGioDi)
     TextView txtGioDi;
+    @Bind(R.id.btnHuyVe)
     Button btnHuyve;
+    @Bind(R.id.btnDoiVe)
     Button btnDoiVe;
+    @Bind(R.id.btnSuaVe)
     Button btnSuaVe;
 
     DoiGhe doighe;
     private JsonSoDoghe jsonSoDoghe;
     public static String sodogheDoiVe;
+    private JsonHuyVe jsonHuyVe;
+    private SuaVe suaVe;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_thong_tin_ve_da_dat,container,false);
-
-        txtHoTen = (TextView) view.findViewById(R.id.txtVeHoTen);
-        txtSDT = (TextView) view.findViewById(R.id.txtVeSDT);
-        txtCMND = (TextView) view.findViewById(R.id.txtVeCMND);
-        txtGhiChu = (TextView) view.findViewById(R.id.txtVeGhiChu);
-        txtMaVe = (TextView) view.findViewById(R.id.txtVeMaVe);
-        txtSoGhe = (TextView) view.findViewById(R.id.txtVeSoGhe);
-        txtMaTai = (TextView) view.findViewById(R.id.txtVeMaTai);
-        txtBienSo = (TextView) view.findViewById(R.id.txtVeBienSoXe);
-        txtTenChuyen = (TextView) view.findViewById(R.id.txtVeTenChuyenDi);
-        txtTextNgayDi = (TextView) view.findViewById(R.id.txtVeNgayDi);
-        txtGioDi = (TextView) view.findViewById(R.id.txtVeGioDi);
-        btnHuyve = (Button) view.findViewById(R.id.btnHuyVe);
-        btnDoiVe = (Button) view.findViewById(R.id.btnDoiVe);
-        btnSuaVe = (Button) view.findViewById(R.id.btnSuaVe);
+        ButterKnife.bind(this,view);
 
         doighe = (DoiGhe) getActivity();
+        suaVe = (SuaVe) getActivity();
+
         //Lấy dữ liệu từ fragment FragmentXemVe
         Bundle data = getArguments();
         String ThongTinVeKhach = data.getString("JsonThongTinVe");
@@ -92,10 +99,34 @@ public class FragmentThongTinVeDaDat extends Fragment {
         btnHuyve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // hien thong bao hoi nguoi dung co chac chan huy ve hay khong
                 new AlertDialog.Builder(getActivity()).setTitle("Hủy vé").setMessage("Bạn có chắc chắc muốn hủy vé ?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                jsonHuyVe = new JsonHuyVe(thongTinVe.get(0).getMaChuyen(), thongTinVe.get(0).getMaVe());
+                                String result = null;
+                                try {
+                                    result = new GoiWebServiceHuyVe().execute(Constant.URL_HUY_VE).get();
+                                    // thong bao huy ve co thanh cong hay khong
+                                    new AlertDialog.Builder(getActivity()).setTitle("Huy Ghe").setMessage(result)
+                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+
+                                                }
+                                            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                        }
+                                    }).show();
+
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                } catch (ExecutionException e) {
+                                    e.printStackTrace();
+                                }
 
                             }
                         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -125,12 +156,31 @@ public class FragmentThongTinVeDaDat extends Fragment {
                         thongTinVe.get(0).getMaChuyen(),
                         thongTinVe.get(0).getTenChuyen(),
                         thongTinVe.get(0).getGioDi(),
-                        thongTinVe.get(0).getNgayDi());
+                        thongTinVe.get(0).getNgayDi(),
+                        thongTinVe.get(0).getSDTKhach());
+
             }
         });
 
+        btnSuaVe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                suaVe.setSuaVe(thongTinVe.get(0).getHoTen(),
+                        thongTinVe.get(0).getSDTKhach(),
+                        thongTinVe.get(0).getCMND(),
+                        thongTinVe.get(0).getGhiChu(),
+                        thongTinVe.get(0).getMaChuyen(),
+                        thongTinVe.get(0).getMaVe());
+            }
+        });
+
+
         return view;
     }
+
+
+
+
 
     //-------------------------SELECT SOGHE TỪ SERVER ĐỂ KIỂM TRA GHẾ ĐÃ CHỌN-----------------------
 
@@ -147,7 +197,26 @@ public class FragmentThongTinVeDaDat extends Fragment {
         }
     }
 
+    //-----------------------POST DATA LÊN SERVER ĐỂ HUY VE-----------------------------------------
+
+    private class GoiWebServiceHuyVe extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... params) {
+            return jsonHuyVe.makePostRequest_HuyVe(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+    }
+
     public interface DoiGhe{
-        void setDoiGhe(String MaVe, String MaChuyen, String TenChuyen, String GioDi, String NgayDi);
+        void setDoiGhe(String MaVe, String MaChuyen, String TenChuyen, String GioDi, String NgayDi, String SDTKhach);
+    }
+
+    public interface SuaVe{
+        void setSuaVe(String HoTen, String SDT, String CMND, String NoiXuong, String MaChuyen, String MaVe);
     }
 }

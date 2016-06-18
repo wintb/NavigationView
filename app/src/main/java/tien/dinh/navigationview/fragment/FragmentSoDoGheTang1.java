@@ -1,5 +1,7 @@
 package tien.dinh.navigationview.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,14 +20,15 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import tien.dinh.navigationview.dao.Ve;
 import tien.dinh.navigationview.R;
-import tien.dinh.navigationview.mics.Constant;
 import tien.dinh.navigationview.adapter.AdapterDanhSachChuyen;
+import tien.dinh.navigationview.dao.Ve;
 import tien.dinh.navigationview.json.JsonDoiGhe;
+import tien.dinh.navigationview.mics.Constant;
 
 /**
  * Created by DinhTien on 15-05-2016.
@@ -110,6 +113,7 @@ public class FragmentSoDoGheTang1 extends Fragment {
     int count = 0;
 
 
+
     public static FragmentSoDoGheTang1 newInstance() {
 
         return new FragmentSoDoGheTang1();
@@ -183,14 +187,37 @@ public class FragmentSoDoGheTang1 extends Fragment {
         btnChonGheTang1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (Constant.KEY_CHECK_FRAGMENT == 1) {
+                    chonGhe.clickChonGhe();
+                }else if (Constant.KEY_CHECK_FRAGMENT == 0){
+                    Bundle data = getArguments();
+                    String MaChuyen = data.getString("MaChuyen");
+                    String MaVe = data.getString("MaVe");
+                    String SDTKhach = data.getString("SDTKhach");
+                    String SDT_3SoCuoi = SDTKhach.substring(SDTKhach.length() - 3);
+                    String MaVeThayDoi = listGheDaChonTang1.get(0) + SDT_3SoCuoi;
 
-                if (count == 0 ){
-                    Toast.makeText(getActivity(), "Bạn chưa chọn ghế ,vui lòng chọn.", Toast.LENGTH_SHORT).show();
-                }else{
-                    if (Constant.KEY_CHECK_FRAGMENT == 1) {
-                        chonGhe.clickChonGhe();
-                    }else if (Constant.KEY_CHECK_FRAGMENT == 0){
-                        jsonDoiGhe = new JsonDoiGhe();
+                    jsonDoiGhe = new JsonDoiGhe(MaChuyen, MaVe,listGheDaChonTang1.get(0),MaVeThayDoi);
+                    String result = null;
+                    try {
+                        result = new WebserviceDoiGhe().execute(Constant.URL_DOI_GHE).get();
+
+                        new AlertDialog.Builder(getActivity()).setTitle("Doi Ghe").setMessage(result)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).show();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
                     }
                 }
             }
@@ -204,7 +231,7 @@ public class FragmentSoDoGheTang1 extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-            return null;
+            return jsonDoiGhe.makePostRequest_DoiGhe(params[0]);
         }
 
         @Override
@@ -224,7 +251,6 @@ public class FragmentSoDoGheTang1 extends Fragment {
                         listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_A1D = false;
-                        count++;
                     }
                     else {
                         Toast.makeText(getActivity(),"Bạn chỉ được chọn nhiều nhất 2 ghế",Toast.LENGTH_LONG).show();
@@ -235,7 +261,6 @@ public class FragmentSoDoGheTang1 extends Fragment {
                     listGheDaChonTang1.remove(listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_A1D = true;
-                    count--;
                     return;
                 }
             }

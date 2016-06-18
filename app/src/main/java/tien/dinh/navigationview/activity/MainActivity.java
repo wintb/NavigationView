@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.adapter.AdapterDanhSachChuyen;
+import tien.dinh.navigationview.fragment.FragmentSuaThongTinVe;
 import tien.dinh.navigationview.fragment.FragmentThongTinVeVuaDat;
 import tien.dinh.navigationview.fragment.FragmentTabhostSoDoGhe;
 import tien.dinh.navigationview.fragment.FragmentSoDoGheTang1;
@@ -33,7 +34,8 @@ public class MainActivity extends AppCompatActivity implements
         FragmentSoDoGheTang1.ChonGhe,
         FragmentNhapThongTinKhach.DatVe,
         FragmentThongTinVeDaDat.DoiGhe,
-        FragmentThongTinVeVuaDat.backDatve{
+        FragmentThongTinVeVuaDat.backDatve,
+        FragmentThongTinVeDaDat.SuaVe{
 
     DrawerLayout drawerLayout;
     NavigationView navigation;
@@ -206,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements
         nhap_thong_tin_fragment.setArguments(data);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragmentholder, nhap_thong_tin_fragment)
+                .replace(R.id.fragmentholder,nhap_thong_tin_fragment)
                 .addToBackStack("sodoghe")
                 .commit();
     }
@@ -241,13 +243,14 @@ public class MainActivity extends AppCompatActivity implements
      * @param MaChuyen
      */
     @Override
-    public void setDoiGhe(String MaVe, String MaChuyen, String TenChuyen, String GioDi, String NgayDi) {
+    public void setDoiGhe(String MaVe, String MaChuyen, String TenChuyen, String GioDi, String NgayDi, String SDTKhach) {
         Bundle data = new Bundle();
         data.putString("MaVe", MaVe);
         data.putString("MaChuyen",MaChuyen);
         data.putString("ChuyenDi",TenChuyen);
         data.putString("GioDi",GioDi);
         data.putString("NgayDi",NgayDi);
+        data.putString("SDTKhach",SDTKhach);
 
         FragmentTabhostSoDoGhe datVe_fragment = new FragmentTabhostSoDoGhe();
         datVe_fragment.setArguments(data);
@@ -270,4 +273,25 @@ public class MainActivity extends AppCompatActivity implements
                 .commit();
     }
 
+    @Override
+    public void setSuaVe(String HoTen, String SDT, String CMND, String NoiXuong, String MaChuyen, String MaVe) {
+
+        Bundle data = new Bundle();
+        data.putString("HoTen",HoTen);
+        data.putString("SDT",SDT);
+        data.putString("CMND",CMND);
+        data.putString("NoiXuong", NoiXuong);
+        data.putString("MaChuyen", MaChuyen);
+        data.putString("MaVe", MaVe);
+
+        FragmentSuaThongTinVe fragmentSuaThongTinVe = new FragmentSuaThongTinVe();
+        fragmentSuaThongTinVe.setArguments(data);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentholder,fragmentSuaThongTinVe)
+                .addToBackStack("suave")
+                .commit();
+
+    }
 }

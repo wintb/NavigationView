@@ -32,6 +32,10 @@ public class FragmentTabhostSoDoGhe extends Fragment{
     TextView txtGioDi;
     TextView txtNgayDi;
 
+    private String MaChuyen;
+    private String MaVe;
+    private String SDTKhach;
+
     public FragmentTabhostSoDoGhe(){
 
     }
@@ -50,6 +54,9 @@ public class FragmentTabhostSoDoGhe extends Fragment{
         txtChuyenDi.setText(data.getString("ChuyenDi"));
         txtGioDi.setText(data.getString("GioDi"));
         txtNgayDi.setText(data.getString("NgayDi"));
+        MaChuyen = data.getString("MaChuyen");
+        MaVe = data.getString("MaVe");
+        SDTKhach = data.getString("SDTKhach");
 
         viewPager = (ViewPager)rootView.findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(1);
@@ -62,9 +69,18 @@ public class FragmentTabhostSoDoGhe extends Fragment{
 
 
     private void setupViewPager(ViewPager viewPager) {
+        FragmentSoDoGheTang1 fragmentSoDoGheTang1 = new FragmentSoDoGheTang1();
+        FragmentSoDoGheTang2 fragmentSoDoGheTang2 = new FragmentSoDoGheTang2();
+        Bundle dataDoiGhe = new Bundle();
+        dataDoiGhe.putString("MaChuyen",MaChuyen);
+        dataDoiGhe.putString("MaVe",MaVe);
+        dataDoiGhe.putString("SDTKhach", SDTKhach);
+
+        fragmentSoDoGheTang1.setArguments(dataDoiGhe);
+        fragmentSoDoGheTang2.setArguments(dataDoiGhe);
         AdapterViewPager adapter = new AdapterViewPager(getChildFragmentManager());
-        adapter.addFragment(new FragmentSoDoGheTang1(), "TẦNG 1");
-        adapter.addFragment(new FragmentSoDoGheTang2(),"TẦNG 2");
+        adapter.addFragment(fragmentSoDoGheTang1, "TẦNG 1");
+        adapter.addFragment(fragmentSoDoGheTang2,"TẦNG 2");
         viewPager.setAdapter(adapter);
     }
 

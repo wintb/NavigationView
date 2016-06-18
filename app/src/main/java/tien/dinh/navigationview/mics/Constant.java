@@ -11,5 +11,8 @@ public class Constant {
     public static final String URL_TIMCHUYEN_MOTCHIEU = "http://10.0.3.2:8080/xekhach/danhsachchuyendimotchieu.php";
     public static final String URL_TENCACCHUYEN = "http://10.0.3.2:8080/xekhach/jsontencacchuyen.php";
     public static final String INSERT_URL = "http://10.0.3.2:8080/xekhach/insertkhachhang.php";
-    public static final String URL_DOIGHE = "http://10.0.3.2:8080/xekhach/updatedoighe.php";
+    public static final String URL_DOI_GHE = "http://10.0.3.2:8080/xekhach/updatedoighe.php";
+    public static final String URL_HUY_VE = "http://10.0.3.2:8080/xekhach/delete_ve.php";
+    public static final String URL_SUA_VE = "http://10.0.3.2:8080/xekhach/update_thongtinve.php";
+
 }
