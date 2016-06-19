@@ -74,8 +74,6 @@ public class FragmentSoDoGheTang2 extends Fragment {
     @Bind(R.id.D5T)
     ImageView D5T;
 
-    @Bind(R.id.btnChonGheTang2)
-    Button btnChongheTang2;
 
     boolean Check_A1T = true;
     boolean Check_A2T = true;
@@ -166,12 +164,6 @@ public class FragmentSoDoGheTang2 extends Fragment {
         chongheC5T(C5T);
         chongheD5T(D5T);
 
-        btnChongheTang2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         return rootView;
     }

@@ -11,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.List;
+
 import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.adapter.AdapterDanhSachChuyen;
 import tien.dinh.navigationview.fragment.FragmentSuaThongTinVe;
@@ -215,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void clickDatVe(String MaTai, String MaChuyen, String HoTen, String CMND,
-                           String SDT, String GhiChu, String SoGhe, int SoLuong, String MaVe) {
+                           String SDT, String GhiChu, List<String> listSoGhe, int SoLuong, String MaVe) {
 
         Bundle data = new Bundle();
         data.putString("MaTai",MaTai);
@@ -224,9 +226,13 @@ public class MainActivity extends AppCompatActivity implements
         data.putString("CMND",CMND);
         data.putString("SDT",SDT);
         data.putString("GhiChu",GhiChu);
-        data.putString("SoGhe", SoGhe);
         data.putInt("SoLuong", SoLuong);
         data.putString("MaVe", MaVe);
+
+        for (int i = 0; i < listSoGhe.size(); i++){
+
+            data.putString("SoGhe" + (i+1),listSoGhe.get(i));
+        }
 
         FragmentThongTinVeVuaDat thongTinVeVuaDatFragment = new FragmentThongTinVeVuaDat();
         thongTinVeVuaDatFragment.setArguments(data);

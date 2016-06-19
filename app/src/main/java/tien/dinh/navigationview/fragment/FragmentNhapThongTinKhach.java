@@ -91,7 +91,7 @@ public class FragmentNhapThongTinKhach extends Fragment {
                 Log.d("LIST GHE", listSoGhe.toString());
                 Log.d("SO LUONG", String.valueOf(soLuong));
 
-                interfaceDatVe.clickDatVe(MaTai, MaChuyen, HoTen, CMND, SDT, GhiChu, SoGhe, soLuong, MaVe);
+                interfaceDatVe.clickDatVe(MaTai, MaChuyen, HoTen, CMND, SDT, GhiChu, listSoGhe, soLuong, MaVe);
             }
         });
         return view;
@@ -100,6 +100,6 @@ public class FragmentNhapThongTinKhach extends Fragment {
     //========== Interface ==========//
     public interface DatVe{
         void clickDatVe(String MaTai,String MaChuyen, String HoTen,
-                        String CMND, String SDT, String GhiChu, String SoGhe, int SoLuong, String MaVe);
+                        String CMND, String SDT, String GhiChu, List<String> listSoGhe, int SoLuong, String MaVe);
     }
 }

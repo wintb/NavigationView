@@ -56,7 +56,7 @@ public class FragmentThongTinVeVuaDat extends Fragment {
     private String MaChuyen;
     private int SoLuong;
     private String MaTai;
-    private String SoGhe;
+    private String SoGhe = "";
 
     backDatve backDatveFragment;
     String ThongBao;
@@ -91,9 +91,16 @@ public class FragmentThongTinVeVuaDat extends Fragment {
         GhiChu = data.getString("GhiChu");
         MaTai = data.getString("MaTai");
         MaVe = data.getString("MaVe");
-        SoGhe = data.getString("SoGhe");
+        //SoGhe = data.getString("SoGhe");
         SoLuong = data.getInt("SoLuong");
         MaChuyen = data.getString("MaChuyen");
+
+        for (int i = 0; i < FragmentSoDoGheTang1.listGheDaChonTang1.size(); i++){
+
+            SoGhe += data.getString("SoGhe" + (i+1));
+            if (i < FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1)
+                SoGhe += " - ";
+        }
 
         txtCMNDVuaDat.setText(CMND);
         txtHoTenVuaDat.setText(HoTen);

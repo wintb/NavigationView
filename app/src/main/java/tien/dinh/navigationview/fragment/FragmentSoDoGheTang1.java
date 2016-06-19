@@ -187,39 +187,45 @@ public class FragmentSoDoGheTang1 extends Fragment {
         btnChonGheTang1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Constant.KEY_CHECK_FRAGMENT == 1) {
-                    chonGhe.clickChonGhe();
-                }else if (Constant.KEY_CHECK_FRAGMENT == 0){
-                    Bundle data = getArguments();
-                    String MaChuyen = data.getString("MaChuyen");
-                    String MaVe = data.getString("MaVe");
-                    String SDTKhach = data.getString("SDTKhach");
-                    String SDT_3SoCuoi = SDTKhach.substring(SDTKhach.length() - 3);
-                    String MaVeThayDoi = listGheDaChonTang1.get(0) + SDT_3SoCuoi;
+                if (listGheDaChonTang1.size() == 0){
+                    Toast.makeText(getActivity(), "bạn chưa chọn ghế, vui lòng chọn.", Toast.LENGTH_SHORT).show();
+                }else{
 
-                    jsonDoiGhe = new JsonDoiGhe(MaChuyen, MaVe,listGheDaChonTang1.get(0),MaVeThayDoi);
-                    String result = null;
-                    try {
-                        result = new WebserviceDoiGhe().execute(Constant.URL_DOI_GHE).get();
+                    if (Constant.KEY_CHECK_FRAGMENT == 1) {
+                        chonGhe.clickChonGhe();
+                    }else if (Constant.KEY_CHECK_FRAGMENT == 0){
+                        Bundle data = getArguments();
+                        String MaChuyen = data.getString("MaChuyen");
+                        String MaVe = data.getString("MaVe");
+                        String SDTKhach = data.getString("SDTKhach");
+                        String SDT_3SoCuoi = SDTKhach.substring(SDTKhach.length() - 3);
+                        String MaVeThayDoi = listGheDaChonTang1.get(0) + SDT_3SoCuoi;
 
-                        new AlertDialog.Builder(getActivity()).setTitle("Doi Ghe").setMessage(result)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
+                        jsonDoiGhe = new JsonDoiGhe(MaChuyen, MaVe,listGheDaChonTang1.get(0),MaVeThayDoi);
+                        String result = null;
+                        try {
+                            result = new WebserviceDoiGhe().execute(Constant.URL_DOI_GHE).get();
 
-                                    }
-                                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            new AlertDialog.Builder(getActivity()).setTitle("Doi Ghe").setMessage(result)
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
 
-                            }
-                        }).show();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
+                                        }
+                                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
+
             }
         });
 
