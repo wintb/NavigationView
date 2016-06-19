@@ -15,6 +15,9 @@ import java.util.List;
 
 import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.adapter.AdapterDanhSachChuyen;
+import tien.dinh.navigationview.fragment.FragmentAbout;
+import tien.dinh.navigationview.fragment.FragmentHuongDan;
+import tien.dinh.navigationview.fragment.FragmentLienHe;
 import tien.dinh.navigationview.fragment.FragmentSuaThongTinVe;
 import tien.dinh.navigationview.fragment.FragmentThongTinVeVuaDat;
 import tien.dinh.navigationview.fragment.FragmentTabhostSoDoGhe;
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         FragmentTabhostDatVe fragmentTabhostDatVe = new FragmentTabhostDatVe();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentholder, fragmentTabhostDatVe);
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initInstances();
+
     }
 
 
@@ -91,16 +96,31 @@ public class MainActivity extends AppCompatActivity implements
                         drawerLayout.closeDrawer(navigation);
                         break;
                     case R.id.navigation_item_3:
-                        //Do some thing here
-                        // add navigation drawer item onclick method here
+                        FragmentHuongDan fragmentHuongDan = new FragmentHuongDan();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragmentholder, fragmentHuongDan)
+                                .commit();
+                        navigation.setCheckedItem(id);
+                        drawerLayout.closeDrawer(navigation);
                         break;
                     case R.id.navigation_item_4:
-                        //Do some thing here
-                        // add navigation drawer item onclick method here
+                        FragmentLienHe fragmentLienHe = new FragmentLienHe();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragmentholder, fragmentLienHe)
+                                .commit();
+                        navigation.setCheckedItem(id);
+                        drawerLayout.closeDrawer(navigation);
                         break;
                     case R.id.navigation_item_5:
-                        //Do some thing here
-                        // add navigation drawer item onclick method here
+                        FragmentAbout fragmentAbout = new FragmentAbout();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragmentholder, fragmentAbout)
+                                .commit();
+                        navigation.setCheckedItem(id);
+                        drawerLayout.closeDrawer(navigation);
                         break;
                 }
 

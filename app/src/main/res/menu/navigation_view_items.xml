@@ -4,11 +4,11 @@
         <item
             android:id="@+id/navigation_item_1"
             android:checked="true"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/magnifier"
             android:title="@string/navigation_view_item_1" />
         <item
             android:id="@+id/navigation_item_2"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/viewticket"
             android:title="@string/navigation_view_item_2" />
     </group>
 
@@ -18,15 +18,15 @@
         <menu>
             <item
                 android:id="@+id/navigation_item_3"
-                android:icon="@mipmap/ic_launcher"
+                android:icon="@drawable/guide"
                 android:title="@string/navigation_view_item_3" />
             <item
                 android:id="@+id/navigation_item_4"
-                android:icon="@mipmap/ic_launcher"
+                android:icon="@drawable/contact"
                 android:title="@string/navigation_view_item_4" />
             <item
                 android:id="@+id/navigation_item_5"
-                android:icon="@mipmap/ic_launcher"
+                android:icon="@drawable/bout"
                 android:title="@string/navigation_view_item_5" />
         </menu>
     </item>
