@@ -105,8 +105,9 @@ public class FragmentSoDoGheTang1 extends Fragment {
     boolean Check_D4D = true;
     boolean Check_D5D = true;
 
-
     public static List<String> listGheDaChonTang1;
+    private List<Ve> list;
+    List<String> listGhe;
 
     ChonGhe chonGhe;
     JsonDoiGhe jsonDoiGhe;
@@ -125,42 +126,86 @@ public class FragmentSoDoGheTang1 extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_so_do_ghe_tang_1,container,false);
         ButterKnife.bind(this,rootView);
 
-        List<Ve> list = new ArrayList<>();
+        list = new ArrayList<>();
+        listGhe = new ArrayList<>();
 
         if (Constant.KEY_CHECK_FRAGMENT == 1){
             listGheDaChonTang1 = new ArrayList<String>();
             Gson gson =new Gson();
             Type listType = new TypeToken<List<Ve>>(){}.getType();
             list =  gson.fromJson(AdapterDanhSachChuyen.sodoghe, listType);
+            splitString();
+
         }else if (Constant.KEY_CHECK_FRAGMENT == 0){
             listGheDaChonTang1 = new ArrayList<String>();
             Gson gson =new Gson();
             Type listType = new TypeToken<List<Ve>>(){}.getType();
             list =  gson.fromJson(FragmentThongTinVeDaDat.sodogheDoiVe, listType);
+            splitString();
         }
 
         //set color cho ghế đã được người khác chọn
-        setGheDachon1(A1D, list);
-        setGheDachon1(B1D, list);
-        setGheDachon1(C1D, list);
-        setGheDachon1(D1D, list);
-        setGheDachon2(A2D, list);
-        setGheDachon2(B2D, list);
-        setGheDachon2(C2D, list);
-        setGheDachon2(D2D, list);
-        setGheDachon3(A3D, list);
-        setGheDachon3(B3D, list);
-        setGheDachon3(C3D, list);
-        setGheDachon3(D3D, list);
-        setGheDachon4(A4D, list);
-        setGheDachon4(B4D, list);
-        setGheDachon4(C4D, list);
-        setGheDachon4(D4D, list);
-        setGheDachon5(A5D, list);
-        setGheDachon5(B5D, list);
-        setGheDachon5(C5D, list);
-        setGheDachon5(D5D, list);
+        setColorGheDaChon();
         //set color khi click chon ghe
+        setColorClickChonGhe();
+
+        chonGhe = (ChonGhe) getActivity();
+
+        btnChonGheTang1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setOnClickChonGhe();
+            }
+        });
+
+        return rootView;
+    }
+
+
+    //==============================================================================================
+
+    //tách chuỗi
+    private void splitString(){
+        //lấy danh sách ghế trong list vé và trong list string
+        for (int i = 0 ; i<list.size(); i++){
+            listGhe.add(list.get(i).getSoGhe());
+        }
+        //tách vé có số lượng nhiều hơn 2
+        for (int j = 0; j < listGhe.size(); j++){
+            if (listGhe.get(j).length() > 3){
+                String[] temp = listGhe.get(j).split(" - ");
+                listGhe.remove(j);
+                for (int i = 0 ; i < temp.length; i++) {
+                    listGhe.add(temp[i]);
+                }
+            }
+        }
+    }
+
+    private void setColorGheDaChon(){
+        setGheDachon1(A1D, listGhe);
+        setGheDachon1(B1D, listGhe);
+        setGheDachon1(C1D, listGhe);
+        setGheDachon1(D1D, listGhe);
+        setGheDachon2(A2D, listGhe);
+        setGheDachon2(B2D, listGhe);
+        setGheDachon2(C2D, listGhe);
+        setGheDachon2(D2D, listGhe);
+        setGheDachon3(A3D, listGhe);
+        setGheDachon3(B3D, listGhe);
+        setGheDachon3(C3D, listGhe);
+        setGheDachon3(D3D, listGhe);
+        setGheDachon4(A4D, listGhe);
+        setGheDachon4(B4D, listGhe);
+        setGheDachon4(C4D, listGhe);
+        setGheDachon4(D4D, listGhe);
+        setGheDachon5(A5D, listGhe);
+        setGheDachon5(B5D, listGhe);
+        setGheDachon5(C5D, listGhe);
+        setGheDachon5(D5D, listGhe);
+    }
+
+    private void setColorClickChonGhe(){
         chongheA1D(A1D);
         chongheB1D(B1D);
         chongheC1D(C1D);
@@ -181,56 +226,49 @@ public class FragmentSoDoGheTang1 extends Fragment {
         chongheB5D(B5D);
         chongheC5D(C5D);
         chongheD5D(D5D);
+    }
 
-        chonGhe = (ChonGhe) getActivity();
+    private void setOnClickChonGhe(){
+        if (listGheDaChonTang1.size() == 0){
+            Toast.makeText(getActivity(), "bạn chưa chọn ghế, vui lòng chọn.", Toast.LENGTH_SHORT).show();
+        }else{
 
-        btnChonGheTang1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listGheDaChonTang1.size() == 0){
-                    Toast.makeText(getActivity(), "bạn chưa chọn ghế, vui lòng chọn.", Toast.LENGTH_SHORT).show();
-                }else{
+            if (Constant.KEY_CHECK_FRAGMENT == 1) {
+                chonGhe.clickChonGhe();
+            }else if (Constant.KEY_CHECK_FRAGMENT == 0){
+                Bundle data = getArguments();
+                String MaChuyen = data.getString("MaChuyen");
+                String MaVe = data.getString("MaVe");
+                String SDTKhach = data.getString("SDTKhach");
+                String SDT_3SoCuoi = SDTKhach.substring(SDTKhach.length() - 3);
+                String MaVeThayDoi = listGheDaChonTang1.get(0) + SDT_3SoCuoi;
 
-                    if (Constant.KEY_CHECK_FRAGMENT == 1) {
-                        chonGhe.clickChonGhe();
-                    }else if (Constant.KEY_CHECK_FRAGMENT == 0){
-                        Bundle data = getArguments();
-                        String MaChuyen = data.getString("MaChuyen");
-                        String MaVe = data.getString("MaVe");
-                        String SDTKhach = data.getString("SDTKhach");
-                        String SDT_3SoCuoi = SDTKhach.substring(SDTKhach.length() - 3);
-                        String MaVeThayDoi = listGheDaChonTang1.get(0) + SDT_3SoCuoi;
+                jsonDoiGhe = new JsonDoiGhe(MaChuyen, MaVe,listGheDaChonTang1.get(0),MaVeThayDoi);
+                String result = null;
+                try {
+                    result = new WebserviceDoiGhe().execute(Constant.URL_DOI_GHE).get();
 
-                        jsonDoiGhe = new JsonDoiGhe(MaChuyen, MaVe,listGheDaChonTang1.get(0),MaVeThayDoi);
-                        String result = null;
-                        try {
-                            result = new WebserviceDoiGhe().execute(Constant.URL_DOI_GHE).get();
-
-                            new AlertDialog.Builder(getActivity()).setTitle("Doi Ghe").setMessage(result)
-                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-
-                                        }
-                                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    new AlertDialog.Builder(getActivity()).setTitle("Doi Ghe").setMessage(result)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
                                 }
-                            }).show();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        } catch (ExecutionException e) {
-                            e.printStackTrace();
+                            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
                         }
-                    }
+                    }).show();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
                 }
-
             }
-        });
-
-        return rootView;
+        }
     }
+
 
     //-------------------------------GOI WEBSERVICE ĐỂ ĐỔI GHẾ -------------------------------------
     public class WebserviceDoiGhe extends AsyncTask<String, Void, String>{
@@ -722,45 +760,45 @@ public class FragmentSoDoGheTang1 extends Fragment {
 
     //---------------------------SET COLOR NHỮNG GHẾ ĐÃ ĐƯỢC NGƯỜI KHÁC CHỌN------------------------
 
-    public void setGheDachon1(ImageView imageView, List<Ve> list){
+    public void setGheDachon1(ImageView imageView, List<String> list){
         for (int i = 0; i<list.size(); i++){
-            if ((imageView.getTag().toString().equalsIgnoreCase(list.get(i).getSoGhe()))){
+            if ((imageView.getTag().toString().equalsIgnoreCase(list.get(i)))){
                 imageView.setImageResource(R.drawable.ghedachon1);
                 imageView.setEnabled(false);
             }
         }
     }
 
-    public void setGheDachon2(ImageView imageView, List<Ve> list){
+    public void setGheDachon2(ImageView imageView, List<String> list){
         for (int i = 0; i<list.size(); i++){
-            if ((imageView.getTag().toString().equalsIgnoreCase(list.get(i).getSoGhe()))){
+            if ((imageView.getTag().toString().equalsIgnoreCase(list.get(i)))){
                 imageView.setImageResource(R.drawable.ghedachon2);
                 imageView.setEnabled(false);
             }
         }
     }
 
-    public void setGheDachon3(ImageView imageView, List<Ve> list){
+    public void setGheDachon3(ImageView imageView, List<String> list){
         for (int i = 0; i<list.size(); i++){
-            if ((imageView.getTag().toString().equalsIgnoreCase(list.get(i).getSoGhe()))){
+            if ((imageView.getTag().toString().equalsIgnoreCase(list.get(i)))){
                 imageView.setImageResource(R.drawable.ghedachon3);
                 imageView.setEnabled(false);
             }
         }
     }
 
-    public void setGheDachon4(ImageView imageView, List<Ve> list){
+    public void setGheDachon4(ImageView imageView, List<String> list){
         for (int i = 0; i<list.size(); i++){
-            if ((imageView.getTag().toString().equalsIgnoreCase(list.get(i).getSoGhe()))){
+            if ((imageView.getTag().toString().equalsIgnoreCase(list.get(i)))){
                 imageView.setImageResource(R.drawable.ghedachon4);
                 imageView.setEnabled(false);
             }
         }
     }
 
-    public void setGheDachon5(ImageView imageView, List<Ve> list){
+    public void setGheDachon5(ImageView imageView, List<String> list){
         for (int i = 0; i<list.size(); i++){
-            if ((imageView.getTag().toString().equalsIgnoreCase(list.get(i).getSoGhe()))){
+            if ((imageView.getTag().toString().equalsIgnoreCase(list.get(i)))){
                 imageView.setImageResource(R.drawable.ghedachon5);
                 imageView.setEnabled(false);
             }
