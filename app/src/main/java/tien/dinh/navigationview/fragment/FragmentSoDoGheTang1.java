@@ -2,6 +2,7 @@ package tien.dinh.navigationview.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -78,6 +80,12 @@ public class FragmentSoDoGheTang1 extends Fragment {
     @Bind(R.id.D5D)
     ImageView D5D;
 
+    @Bind(R.id.fragment_sodoghe_tang1_A)
+    TextView txtTang1A;
+    @Bind(R.id.fragment_sodoghe_tang1_B)
+    TextView txtTang1B;
+    @Bind(R.id.fragment_sodoghe_tang1_C)
+    TextView txtTang1C;
     @Bind(R.id.btnChonGheTang1)
     Button btnChonGheTang1;
 
@@ -125,7 +133,7 @@ public class FragmentSoDoGheTang1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_so_do_ghe_tang_1,container,false);
         ButterKnife.bind(this,rootView);
-
+        setTypeFace();
         list = new ArrayList<>();
         listGhe = new ArrayList<>();
 
@@ -228,6 +236,17 @@ public class FragmentSoDoGheTang1 extends Fragment {
         chongheD5D(D5D);
     }
 
+    private void setTypeFace(){
+        Typeface face1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
+        Typeface face2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Bold.ttf");
+        txtTang1A.setTypeface(face1);
+        txtTang1B.setTypeface(face1);
+        txtTang1C.setTypeface(face1);
+        btnChonGheTang1.setTypeface(face1);
+
+    }
+
+
     private void setOnClickChonGhe(){
         if (listGheDaChonTang1.size() == 0){
             Toast.makeText(getActivity(), "bạn chưa chọn ghế, vui lòng chọn.", Toast.LENGTH_SHORT).show();
@@ -252,7 +271,7 @@ public class FragmentSoDoGheTang1 extends Fragment {
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-
+                                    //getFragmentManager().beginTransaction().replace(R.id.fragmentholder,new FragmentXemVe()).commit();
                                 }
                             }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         @Override

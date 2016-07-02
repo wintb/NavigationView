@@ -1,6 +1,7 @@
 package tien.dinh.navigationview.fragment;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.adapter.AdapterViewPager;
 
@@ -22,15 +25,28 @@ import tien.dinh.navigationview.adapter.AdapterViewPager;
  * Created by DinhTien on 15-05-2016.
  */
 public class FragmentTabhostSoDoGhe extends Fragment{
-    
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+
+
+    @Bind(R.id.txtSoDoGheChuyenDi)
+    TextView txtChuyenDi;
+    @Bind(R.id.txtSoDoGheGioDi)
+    TextView txtGioDi;
+    @Bind(R.id.txtSoDoGheNgayDi)
+    TextView txtNgayDi;
+    @Bind(R.id.tabhost_timchuyen_text_ghe_da_dat)
+    TextView txtGheDaDat;
+    @Bind(R.id.tabhost_timchuyen_text_ghe_dang_chon)
+    TextView txtGheDangChon;
+    @Bind(R.id.tabhost_timchuyen_text_ghe_trong)
+    TextView txtGheTrong;
+    @Bind(R.id.tabs)
+    TabLayout tabLayout;
+    @Bind(R.id.viewpager)
+    ViewPager viewPager;
+
     private FragmentActivity myContext;
     private Toolbar toolbar;
     private List<String> data;
-    TextView txtChuyenDi;
-    TextView txtGioDi;
-    TextView txtNgayDi;
 
     private String MaChuyen;
     private String MaVe;
@@ -43,12 +59,9 @@ public class FragmentTabhostSoDoGhe extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         final View rootView = inflater.inflate(R.layout.fragment_tabhost_so_do_ghe_1, container, false);
-
-        txtChuyenDi = (TextView) rootView.findViewById(R.id.txtSoDoGheChuyenDi);
-        txtGioDi = (TextView) rootView.findViewById(R.id.txtSoDoGheGioDi);
-        txtNgayDi = (TextView) rootView.findViewById(R.id.txtSoDoGheNgayDi);
+        ButterKnife.bind(this,rootView);
+        setTypeFace();
         //get data from fragment previous
         Bundle data = getArguments();
         txtChuyenDi.setText(data.getString("ChuyenDi"));
@@ -58,13 +71,22 @@ public class FragmentTabhostSoDoGhe extends Fragment{
         MaVe = data.getString("MaVe");
         SDTKhach = data.getString("SDTKhach");
 
-        viewPager = (ViewPager)rootView.findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(1);
         setupViewPager(viewPager);
-        tabLayout = (TabLayout)rootView.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
         return rootView;
+    }
+
+    private void setTypeFace(){
+        Typeface face1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
+        Typeface face2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Bold.ttf");
+        txtGheDaDat.setTypeface(face1);
+        txtGheDangChon.setTypeface(face1);
+        txtGheTrong.setTypeface(face1);
+        txtChuyenDi.setTypeface(face1);
+        txtGioDi.setTypeface(face1);
+        txtNgayDi.setTypeface(face1);
     }
 
 

@@ -35,8 +35,8 @@ public class FragmentTabhostDatVe extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_tabhost_dat_ve,container,false);
         tabHost = (FragmentTabHost) rootView.findViewById(android.R.id.tabhost);
         tabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
-        tabHost.addTab(tabHost.newTabSpec("MOT CHIEU").setIndicator("MOT CHIEU"), FragmentDatVeMotChieu.class, null);
-        tabHost.addTab(tabHost.newTabSpec("HAI CHIEU").setIndicator("HAI CHIEU"), FragmentDatVeKhuHoi.class, null);
+        tabHost.addTab(tabHost.newTabSpec("Một chiều").setIndicator("Một chiều"), FragmentDatVeMotChieu.class, null);
+        tabHost.addTab(tabHost.newTabSpec("Khứ hồi").setIndicator("Khứ hồi"), FragmentDatVeKhuHoi.class, null);
         setForTabHost();
         return rootView;
     }
@@ -49,10 +49,11 @@ public class FragmentTabhostDatVe extends Fragment {
 
     //--------------------------------SET EVENT FOR TABHOST ------------------------------------------------------------------
 
+    @SuppressWarnings("deprecation")
     public void setForTabHost(){
         tv = (TextView) tabHost.getCurrentTabView().findViewById(android.R.id.title); //for Selected Tab
-        tv.setTextColor(Color.parseColor("#2980b9"));
-        tv.setTextSize(15);
+        tv.setTextColor(getResources().getColor(R.color.colormain));
+        tv.setTextSize(12);
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
@@ -60,13 +61,13 @@ public class FragmentTabhostDatVe extends Fragment {
                     //Set text color for tabhost
                     tv = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
                     tv.setTextColor(Color.parseColor("#2c3e50"));
-                    tv.setTextSize(15);
+                    tv.setTextSize(12);
                 }
                 /*host.getTabWidget().getChildAt(host.getCurrentTab()).setBackgroundColor(Color.parseColor("#0000FF")); // selected*/
                 //Set text color for tabhost
                 tv = (TextView) tabHost.getCurrentTabView().findViewById(android.R.id.title); //for Selected Tab
-                tv.setTextColor(Color.parseColor("#2980b9"));
-                tv.setTextSize(15);
+                tv.setTextColor(getResources().getColor(R.color.colormain));
+                tv.setTextSize(12);
 
             }
         });

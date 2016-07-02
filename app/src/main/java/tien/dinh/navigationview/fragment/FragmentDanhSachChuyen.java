@@ -1,5 +1,6 @@
 package tien.dinh.navigationview.fragment;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,25 +16,39 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import tien.dinh.navigationview.dao.Chuyen;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.adapter.AdapterDanhSachChuyen;
+import tien.dinh.navigationview.dao.Chuyen;
 
 /**
  * Created by VuVanThang on 4/1/2016.
  */
 public class FragmentDanhSachChuyen extends Fragment {
 
+    @Bind(R.id.Fragment_DanhSachchuyen_txtChuyenDi)
     TextView chuyendi;
+    @Bind(R.id.Fragment_DanhSachchuyen_txtNgayDi)
     TextView ngaydi;
+    @Bind(R.id.Fragment_DanhSachchuyen_txtLoTrinh)
     TextView lotrinh;
-    TextView matai;
-    TextView giodi;
-    TextView gioden;
-    TextView giave;
-    TextView chon;
-    String Json_DanhSach_Chuyen ;
+    @Bind(R.id.Fragment_DanhSachchuyen_txtTitleDanhSachChuyen)
+    TextView txtTitleDanhSachChuyen;
+    @Bind(R.id.Fragment_DanhSachchuyen_txtTai)
+    TextView txtTai;
+    @Bind(R.id.Fragment_DanhSachchuyen_txtGioDi)
+    TextView txtGioDi;
+    @Bind(R.id.Fragment_DanhSachchuyen_txtGioDen)
+    TextView txtGioDen;
+    @Bind(R.id.Fragment_DanhSachchuyen_txtGiaVe)
+    TextView txtGiaVe;
+    @Bind(R.id.Fragment_DanhSachchuyen_txtChon)
+    TextView txtChon;
+
+    @Bind(R.id.DanhSachChuyenDi)
     ListView listView;
+    String Json_DanhSach_Chuyen ;
     Gson gson;
     AdapterDanhSachChuyen customApdaterOneTrip;
     public static String ChuyenDi;
@@ -44,11 +59,8 @@ public class FragmentDanhSachChuyen extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_danh_sach_chuyen, container, false);
-        listView = (ListView) rootView.findViewById(R.id.DanhSachChuyenDi);
-        chuyendi = (TextView) rootView.findViewById(R.id.txtChuyenDi);
-        ngaydi = (TextView) rootView.findViewById(R.id.txtNgayDi);
-        lotrinh = (TextView) rootView.findViewById(R.id.txtLoTrinh);
-
+        ButterKnife.bind(this, rootView);
+        setTypeFace();
         Bundle data = getArguments();
         chuyendi.setText(data.getString("ChuyenDi"));
         ngaydi.setText(data.getString("NgayDi"));
@@ -67,6 +79,21 @@ public class FragmentDanhSachChuyen extends Fragment {
         return rootView;
 
     }
+
+    private void setTypeFace(){
+        Typeface face1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
+        Typeface face2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Bold.ttf");
+        chuyendi.setTypeface(face1);
+        ngaydi.setTypeface(face1);
+        lotrinh.setTypeface(face1);
+        txtTitleDanhSachChuyen.setTypeface(face1);
+        txtTai.setTypeface(face1);
+        txtGioDi.setTypeface(face1);
+        txtGioDen.setTypeface(face1);
+        txtGiaVe.setTypeface(face1);
+        txtChon.setTypeface(face1);
+    }
+
 
 
 }

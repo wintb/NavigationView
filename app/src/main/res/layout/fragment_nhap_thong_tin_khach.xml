@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/fragment_nhapthongtinve_title"
         android:textSize="25dp"
         android:textColor="#FFFFFF"
         android:text="Nhập thông tin hành khách"
@@ -85,6 +86,7 @@
             android:layout_height="50dp"
             android:background="@drawable/rect_button"
             android:layout_gravity="center"
+            android:textAllCaps="false"
             android:gravity="center"
             android:textColor="#fff"
             android:textSize="20dp"

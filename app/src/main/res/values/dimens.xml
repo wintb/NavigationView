@@ -5,4 +5,34 @@
 
     <dimen name="rounded_main">5dp</dimen>
 
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="distance_smallest">2dp</dimen>
+    <dimen name="distance_smaller">3dp</dimen>
+    <dimen name="distance_small">5dp</dimen>
+    <dimen name="distance_normal">10dp</dimen>
+    <dimen name="distance_large">15dp</dimen>
+    <dimen name="distance_larger">20dp</dimen>
+    <dimen name="distance_largest">30dp</dimen>
+
+    <dimen name="text_size_smaller">10sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_normal">14sp</dimen>
+    <dimen name="text_size_large">16sp</dimen>
+    <dimen name="text_sise_larger1">18dp</dimen>
+    <dimen name="text_size_larger">20sp</dimen>
+    <dimen name="text_size_largest">24sp</dimen>
+    <dimen name="text_size_menu_ordered_payment">18sp</dimen>
+    <dimen name="text_size_fragment_profile_username">26sp</dimen>
+
+    <dimen name="guide_dots_margin_bottom">41dp</dimen>
+    <dimen name="guide_dots_wight">10dp</dimen>
+    <dimen name="guide_dots_height">10dp</dimen>
+    <dimen name="guide_dots_layout_padding">40dp</dimen>
+    <dimen name="guide_dots_width">1.5dp</dimen>
+
+    <!--navigation header-->
+    <dimen name="navigation_header_menu_height_width">60dp</dimen>
+    <dimen name="navigation_header_menu_height_width_image">120dp</dimen>
+
+
 </resources>

@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -34,6 +35,8 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.mics.Constant;
 import tien.dinh.navigationview.json.ReadJson;
@@ -45,17 +48,26 @@ import tien.dinh.navigationview.mics.datetime.DatetimeFormater;
  */
 public class FragmentDatVeMotChieu extends Fragment{
 
+    @Bind(R.id.fragment_motchieu_title)
+    TextView txtTitle;
+    @Bind(R.id.txtDate)
     TextView txtDate;
+    @Bind(R.id.txtChuyenDi)
     TextView txtChuyenDi;
+    @Bind(R.id.imgDate)
     ImageView imgDate;
+    @Bind(R.id.imgChuyenDi)
     ImageView imgChuyenDi;
+    @Bind(R.id.btnTimChuyenTab1)
+    Button btnTimChuyen;
+
     Context context;
     String date,months,years;
     DatetimeFormater datetimeFormater;
     CompareDateTime compareDateTime;
     ListView listView;
     ArrayList<String> arrayList;
-    Button btnTimChuyen;
+
     String Json_DanhSach_Chuyen ;
     OnNameSetListener onNameSetListener;
     ReadJson readJsonChuyenDi;
@@ -64,12 +76,9 @@ public class FragmentDatVeMotChieu extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_dat_ve_mot_chieu,container,false);
+        ButterKnife.bind(this,rootView);
+        setTypeFace();
 
-        txtDate = (TextView) rootView.findViewById(R.id.txtDate);
-        txtChuyenDi = (TextView) rootView.findViewById(R.id.txtChuyenDi);
-        imgDate = (ImageView) rootView.findViewById(R.id.imgDate);
-        imgChuyenDi = (ImageView) rootView.findViewById(R.id.imgChuyenDi);
-        btnTimChuyen = (Button) rootView.findViewById(R.id.btnTimChuyenTab1);
         //Lấy ngày hiện tại lên textview
         datetimeFormater = new DatetimeFormater();
         datetimeFormater.datetimecurrent(txtDate);
@@ -109,6 +118,15 @@ public class FragmentDatVeMotChieu extends Fragment{
         });
 
         return rootView;
+    }
+
+    private void setTypeFace(){
+        Typeface face1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
+        Typeface face2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Bold.ttf");
+        txtDate.setTypeface(face1);
+        txtChuyenDi.setTypeface(face1);
+        txtTitle.setTypeface(face1);
+        btnTimChuyen.setTypeface(face1);
     }
 
 

@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingTop="10dp"
             android:layout_weight="3"
@@ -27,8 +27,8 @@
                 android:layout_weight="1">
                 <Button
                     android:layout_centerHorizontal="true"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/distance_largest"
+                    android:layout_height="@dimen/distance_largest"
                     android:background="@drawable/ghedachon"/>
 
             </RelativeLayout>
@@ -40,9 +40,9 @@
                 android:layout_weight="1">
 
                 <Button
-                    android:layout_width="50dp"
+                    android:layout_width="@dimen/distance_largest"
                     android:layout_centerHorizontal="true"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/distance_largest"
                     android:background="@drawable/ghedangchon"/>
             </RelativeLayout>
 
@@ -54,8 +54,8 @@
 
                 <Button
                     android:layout_centerHorizontal="true"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/distance_largest"
+                    android:layout_height="@dimen/distance_largest"
                     android:background="@drawable/ghetrong"/>
             </RelativeLayout>
         </LinearLayout>
@@ -66,28 +66,31 @@
             android:layout_weight="3">
 
             <TextView
+                android:id="@+id/tabhost_timchuyen_text_ghe_da_dat"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ghe Da Dat"
-                android:textColor="#FFFFFF"/>
+                android:textColor="@color/tabhost_sodoghe_title_text_color"/>
 
             <TextView
+                android:id="@+id/tabhost_timchuyen_text_ghe_dang_chon"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ghe Dang Chon"
-                android:textColor="#FFFFFF"/>
+                android:textColor="@color/tabhost_sodoghe_title_text_color"/>
 
             <TextView
+                android:id="@+id/tabhost_timchuyen_text_ghe_trong"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ghe Trong"
-                android:textColor="#FFFFFF"/>
+                android:textColor="@color/tabhost_sodoghe_title_text_color"/>
         </LinearLayout>
 
         <LinearLayout

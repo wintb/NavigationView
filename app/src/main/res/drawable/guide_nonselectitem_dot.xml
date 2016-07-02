@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval" android:useLevel="true"
+    android:dither="true">
+
+    <size android:height="@dimen/guide_dots_height" android:width="@dimen/guide_dots_wight"/>
+
+    <stroke android:width="@dimen/guide_dots_width" android:color="@color/viewpager__dots_body"/>
+
+    <solid android:color="@color/transparent"/>
+
+
+</shape>

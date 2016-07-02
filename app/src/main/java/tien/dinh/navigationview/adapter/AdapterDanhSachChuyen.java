@@ -20,13 +20,14 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.dao.Chuyen;
 import tien.dinh.navigationview.dao.TaiXe;
-import tien.dinh.navigationview.R;
-import tien.dinh.navigationview.mics.Constant;
+import tien.dinh.navigationview.fragment.FragmentDanhSachChuyen;
 import tien.dinh.navigationview.json.JsonSoDoghe;
 import tien.dinh.navigationview.json.ReadJson;
-import tien.dinh.navigationview.fragment.FragmentDanhSachChuyen;
+import tien.dinh.navigationview.json.Select_TongSoGhe;
+import tien.dinh.navigationview.mics.Constant;
 
 /**
  * Created by VuVanThang on 5/11/2016.
@@ -37,8 +38,11 @@ public class AdapterDanhSachChuyen extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private ReadJson readJsonTaiXe;
     private JsonSoDoghe jsonSoDoghe;
+    private Select_TongSoGhe select_tongSoGhe;
+
     SoDoGhe interfaceSoDoGhe;
     public static String sodoghe;
+    private int tongghe;
 
 
     public AdapterDanhSachChuyen(Context context, List<Chuyen> _chuyenList) {
@@ -73,12 +77,33 @@ public class AdapterDanhSachChuyen extends BaseAdapter {
         TextView txtGioDen = (TextView) view.findViewById(R.id.txtGioDen);
         TextView txtGiaVe = (TextView) view.findViewById(R.id.txtGiaVe);
         TextView txtChon = (TextView) view.findViewById(R.id.txtChon);
+        LinearLayout itemDanhSachChuyen = (LinearLayout) view.findViewById(R.id.layout_custom_danhsachchuyen);
 
         txtTai.setText(_chuyen.getMaTai());
         txtGioDi.setText(_chuyen.getGioDi());
         txtGioDen.setText(_chuyen.getGioDen());
         txtGiaVe.setText(_chuyen.getGiaVe());
         txtChon.setText(">");
+
+        //Tô đậm những item đã full ghế
+        /*select_tongSoGhe = new Select_TongSoGhe(_chuyen.getMaChuyen());
+
+        try {
+            String TongSoGhe = new GoiWebserviceTongSoGhe().execute(Constant.URL_TONG_SO_GHE).get();
+            Log.d("TongSoGhe","-----"+TongSoGhe);
+            tongghe = Integer.parseInt(TongSoGhe);
+
+            if (tongghe >= 6){
+                itemDanhSachChuyen.setBackgroundColor(Color.parseColor("#1abc9c"));
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }catch (NumberFormatException e){
+            e.printStackTrace();
+        }*/
+
         //xem chi tiet tai xe
         xemChiTietTaiXe(txtTai);
         //Gửi dữ liệu lên server để kiểm tra ghế đã đặt và hiện sơ đồ ghế
@@ -115,6 +140,20 @@ public class AdapterDanhSachChuyen extends BaseAdapter {
         @Override
         protected String doInBackground(String... params) {
             return jsonSoDoghe.makePostRequestSoDoGhe(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+    }
+
+    //------------------GỌI WEBSERVICE ĐỂ ĐẾM TẤT CẢ CÁC GHẾ ĐÃ ĐƯỢC CHỌN TRONG CHUYẾN--------------
+    private class GoiWebserviceTongSoGhe extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... params) {
+            return select_tongSoGhe.makePostRequestTongSoGhe(params[0]);
         }
 
         @Override

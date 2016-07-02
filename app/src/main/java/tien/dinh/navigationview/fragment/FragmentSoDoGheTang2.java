@@ -1,5 +1,6 @@
 package tien.dinh.navigationview.fragment;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -73,6 +75,12 @@ public class FragmentSoDoGheTang2 extends Fragment {
     @Bind(R.id.D5T)
     ImageView D5T;
 
+    @Bind(R.id.fragment_sodoghe_tang2_A)
+    TextView txtTang2A;
+    @Bind(R.id.fragment_sodoghe_tang2_B)
+    TextView txtTang2B;
+    @Bind(R.id.fragment_sodoghe_tang2_C)
+    TextView txtTang2C;
 
     boolean Check_A1T = true;
     boolean Check_A2T = true;
@@ -107,7 +115,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_so_do_ghe_tang_2,container,false);
         ButterKnife.bind(this,rootView);
-
+        setTypeFace();
         list = new ArrayList<>();
         listGhe = new ArrayList<>();
         // KEY_CHECK_FRAGMENT == 1 Fragment
@@ -131,6 +139,15 @@ public class FragmentSoDoGheTang2 extends Fragment {
         setColorClickChonGhe();
 
         return rootView;
+    }
+
+
+    private void setTypeFace(){
+        Typeface face1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
+        Typeface face2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Bold.ttf");
+        txtTang2A.setTypeface(face1);
+        txtTang2B.setTypeface(face1);
+        txtTang2C.setTypeface(face1);
     }
 
     //==============================================================================================

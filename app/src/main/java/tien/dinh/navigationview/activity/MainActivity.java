@@ -235,6 +235,7 @@ public class MainActivity extends AppCompatActivity implements
                 .commit();
     }
 
+
     @Override
     public void clickDatVe(String MaTai, String MaChuyen, String HoTen, String CMND,
                            String SDT, String GhiChu, List<String> listSoGhe, int SoLuong, String MaVe) {

@@ -23,9 +23,10 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/fragment_motchieu_title"
             android:gravity="center"
             android:layout_gravity="center"
-            android:textSize="30dp"
+            android:textSize="20sp"
             android:textColor="@color/colormain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -125,12 +126,13 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="20dp">
         <Button
             android:id="@+id/btnTimChuyenTab1"
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:background="@drawable/rect_button"
+            android:textAllCaps="false"
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="#fff"

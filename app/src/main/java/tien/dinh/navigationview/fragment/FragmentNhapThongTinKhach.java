@@ -1,5 +1,6 @@
 package tien.dinh.navigationview.fragment;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import tien.dinh.navigationview.utils.CheckNumber;
  */
 public class FragmentNhapThongTinKhach extends Fragment {
 
-    TextView editHoTen, editSDT, editCMND, editGhiChu, txtThongBao;
+    TextView editHoTen, editSDT, editCMND, editGhiChu, txtThongBao, txtTitle;
     Button btnDatVe;
     DatVe interfaceDatVe;
 
@@ -41,6 +41,8 @@ public class FragmentNhapThongTinKhach extends Fragment {
         editHoTen = (TextView)view.findViewById(R.id.editNhapHoTen);
         btnDatVe = (Button)view.findViewById(R.id.btnDatVe);
         txtThongBao = (TextView)view.findViewById(R.id.txtThongBao);
+        txtTitle = (TextView) view.findViewById(R.id.fragment_nhapthongtinve_title);
+        setTypeFace();
 
         interfaceDatVe = (DatVe) getActivity();
 
@@ -95,6 +97,18 @@ public class FragmentNhapThongTinKhach extends Fragment {
             }
         });
         return view;
+    }
+
+    private void setTypeFace(){
+        Typeface face1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
+        Typeface face2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Bold.ttf");
+        editHoTen.setTypeface(face1);
+        editSDT.setTypeface(face1);
+        txtTitle.setTypeface(face1);
+        editCMND.setTypeface(face1);
+        editGhiChu.setTypeface(face1);
+        txtThongBao.setTypeface(face1);
+        btnDatVe.setTypeface(face1);
     }
 
     //========== Interface ==========//

@@ -6,6 +6,7 @@
     android:paddingTop="15dp"
     android:paddingBottom="15dp"
     android:layout_height="wrap_content"
+    android:id="@+id/layout_custom_danhsachchuyen"
     android:background="@drawable/rounded_item_list_trip">
 
     <TableRow
@@ -16,6 +17,7 @@
             android:gravity="center"
             android:textSize="20dp"
             android:layout_width="0dp"
+            android:textStyle="bold"
             android:layout_height="match_parent"
             android:text="Mã Tài"
             android:id="@+id/txtTai"
@@ -53,6 +55,7 @@
         <TextView
             android:gravity="center"
             android:textSize="20dp"
+            android:textStyle="bold"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text=">"
