@@ -5,27 +5,17 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/fragment_xeve_title"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Bạn vui lòng điền đầy đủ thông tin"
-        android:textSize="25sp"
+        android:textSize="23sp"
         android:layout_marginTop="50dp"
         android:layout_gravity="center"
         android:textColor="@color/colormain"/>
 
-    <EditText
-        android:id="@+id/editMaVe"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:hint="Nhập Mã Vé Của Bạn"
-        android:padding="10dp"
-        android:textSize="20dp"
-        android:background="@drawable/rect"
-        android:layout_marginTop="50dp"
-        />
+
     <EditText
         android:id="@+id/editCMND"
         android:layout_width="250dp"
@@ -34,7 +24,7 @@
         android:layout_gravity="center"
         android:hint="Nhập Số CMND"
         android:padding="10dp"
-        android:textSize="20dp"
+        android:textSize="18sp"
         android:background="@drawable/rect"
         android:layout_marginTop="30dp"
         />
@@ -46,7 +36,7 @@
         android:layout_gravity="center"
         android:hint="Nhập Số Điện Thoại"
         android:padding="10dp"
-        android:textSize="20dp"
+        android:textSize="18sp"
         android:background="@drawable/rect"
         android:layout_marginTop="30dp"/>
 
@@ -75,6 +65,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="#fff"
+            android:textAllCaps="false"
             android:textSize="20dp"
             android:text="Xem Vé"/>
     </RelativeLayout>

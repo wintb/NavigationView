@@ -34,5 +34,9 @@
     <dimen name="navigation_header_menu_height_width">60dp</dimen>
     <dimen name="navigation_header_menu_height_width_image">120dp</dimen>
 
+    <!--thong tin ve da dat-->
+    <dimen name="thongtinvedadat_button_width">70dp</dimen>
+    <dimen name="thongtinvedadat_button_height">40dp</dimen>
+
 
 </resources>

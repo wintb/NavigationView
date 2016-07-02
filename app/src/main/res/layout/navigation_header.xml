@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="16dp"
-            android:text="Pacific P. Regmi"
+            android:text="Vu Van Thang"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold"
             android:textColor="@color/fragment_sodoghe_tang1_text_color"/>
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="16dp"
-            android:text="pacific880@gmail.com"
+            android:text="vuvanthanguit@gmail.com"
             android:textColor="@color/fragment_sodoghe_tang1_text_color" />
     </LinearLayout>
 </FrameLayout>

@@ -100,7 +100,7 @@ public class FragmentDatVeMotChieu extends Fragment{
                     Json_DanhSach_Chuyen = new GoiWebService().execute(Constant.URL_TIMCHUYEN_MOTCHIEU).get();
                     Log.d("TEST_JSON_JSON_JSON:",Json_DanhSach_Chuyen);
                     if (Json_DanhSach_Chuyen.equalsIgnoreCase("[]")){
-                        Toast.makeText(getActivity(), "No trip on day", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Không có chuyến này trong ngày", Toast.LENGTH_LONG).show();
                     }else {
                         Log.d("JSON_TEST","TEST_TEST_TEST");
                         // send data to fragment FragmentDanhSachChuyen class
@@ -190,7 +190,7 @@ public class FragmentDatVeMotChieu extends Fragment{
                 DocJSON docJSON = new DocJSON();
                 docJSON.execute(Constant.URL_TENCACCHUYEN);
 
-                new AlertDialog.Builder(getActivity()).setTitle("List Trip").setMessage("Click to select Trip")
+                new AlertDialog.Builder(getActivity()).setTitle("List Trip").setMessage("Click to select trip")
                         .setView(linearLayout)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override

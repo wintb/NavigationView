@@ -117,6 +117,7 @@ public class FragmentThongTinVeVuaDat extends Fragment {
             public void onClick(View v) {
 
                 new goiWebservice().execute(Constant.INSERT_URL);
+
                 new AlertDialog.Builder(getActivity())
                         .setTitle("Đặt vé thành công")
                         .setMessage("\n\n" + "Quay trở lại menu chính để xem chi tiết vé đã đặt")

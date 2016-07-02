@@ -71,7 +71,7 @@
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ghe Da Dat"
+                android:text="Ghế Đã Đặt"
                 android:textColor="@color/tabhost_sodoghe_title_text_color"/>
 
             <TextView
@@ -80,7 +80,7 @@
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ghe Dang Chon"
+                android:text="Ghế Đang Chọn"
                 android:textColor="@color/tabhost_sodoghe_title_text_color"/>
 
             <TextView
@@ -89,7 +89,7 @@
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ghe Trong"
+                android:text="Ghế Trống"
                 android:textColor="@color/tabhost_sodoghe_title_text_color"/>
         </LinearLayout>
 

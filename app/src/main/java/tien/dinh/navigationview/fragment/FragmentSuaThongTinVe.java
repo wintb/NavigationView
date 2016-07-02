@@ -71,7 +71,7 @@ public class FragmentSuaThongTinVe extends Fragment {
                 try {
                     String result = new GoiWbServiceSuaVe().execute(Constant.URL_SUA_VE).get();
 
-                    new AlertDialog.Builder(getActivity()).setTitle("Sua vé").setMessage(result)
+                    new AlertDialog.Builder(getActivity()).setTitle("Sửa vé").setMessage(result)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

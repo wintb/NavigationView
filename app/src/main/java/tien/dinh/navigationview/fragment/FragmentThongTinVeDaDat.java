@@ -2,6 +2,7 @@ package tien.dinh.navigationview.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -61,6 +62,12 @@ public class FragmentThongTinVeDaDat extends Fragment {
     Button btnDoiVe;
     @Bind(R.id.btnSuaVe)
     Button btnSuaVe;
+    @Bind(R.id.fragment_vedadat_title)
+    TextView ttxVeDadatTitle;
+    @Bind(R.id.fragment_vedadat_thongtinkhach)
+    TextView ttxVeDadatThongTinKhach;
+    @Bind(R.id.fragment_vedadat_thongtinve)
+    TextView ttxVeDadatThongTinVe;
 
     DoiGhe doighe;
     private JsonSoDoghe jsonSoDoghe;
@@ -74,6 +81,7 @@ public class FragmentThongTinVeDaDat extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_thong_tin_ve_da_dat,container,false);
         ButterKnife.bind(this,view);
+        setTypeFace();
 
         doighe = (DoiGhe) getActivity();
         suaVe = (SuaVe) getActivity();
@@ -109,7 +117,7 @@ public class FragmentThongTinVeDaDat extends Fragment {
                                 try {
                                     result = new GoiWebServiceHuyVe().execute(Constant.URL_HUY_VE).get();
                                     // thong bao huy ve co thanh cong hay khong
-                                    new AlertDialog.Builder(getActivity()).setTitle("Huy Ghe").setMessage(result)
+                                    new AlertDialog.Builder(getActivity()).setTitle("Hủy vé").setMessage(result)
                                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
@@ -177,6 +185,18 @@ public class FragmentThongTinVeDaDat extends Fragment {
 
         return view;
     }
+
+    private void setTypeFace(){
+        Typeface face1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
+        Typeface face2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Bold.ttf");
+        ttxVeDadatTitle.setTypeface(face1);
+        ttxVeDadatThongTinKhach.setTypeface(face1);
+        ttxVeDadatThongTinVe.setTypeface(face1);
+        btnHuyve.setTypeface(face1);
+        btnDoiVe.setTypeface(face1);
+        btnSuaVe.setTypeface(face1);
+    }
+
 
 
 

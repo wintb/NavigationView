@@ -1,6 +1,7 @@
 package tien.dinh.navigationview.fragment;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,10 +25,10 @@ import tien.dinh.navigationview.json.ReadJson;
  */
 public class FragmentXemVe extends Fragment{
 
-    EditText editMaVe;
     EditText editCMND;
     EditText editSDT;
     TextView txtThongBao;
+    TextView txtTitleXemVe;
     Button btnXemVe;
     ReadJson ReadJsonThongTinVeKhach;
     String jsonThongTinVeKhach;
@@ -38,17 +39,19 @@ public class FragmentXemVe extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_xem_ve,container,false);
-        editMaVe = (EditText) view.findViewById(R.id.editMaVe);
         editCMND = (EditText) view.findViewById(R.id.editCMND);
         editSDT = (EditText) view.findViewById(R.id.editSDT);
         txtThongBao = (TextView) view.findViewById(R.id.txtThongBao);
+        txtTitleXemVe = (TextView) view.findViewById(R.id.fragment_xeve_title);
         btnXemVe = (Button) view.findViewById(R.id.btnXemVe);
+        setTypeFace();
+
         btnXemVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ReadJsonThongTinVeKhach = new ReadJson(editMaVe.getText().toString(),editCMND.getText().toString(),editSDT.getText().toString());
+                ReadJsonThongTinVeKhach = new ReadJson("",editCMND.getText().toString(),editSDT.getText().toString());
                 //Kiểm tra đã nhập đủ thông tin các ô hay chưa
-                if (editSDT.getText().toString().equalsIgnoreCase("") || editCMND.getText().toString().equalsIgnoreCase("") || editMaVe.getText().toString().equalsIgnoreCase("")){
+                if (editSDT.getText().toString().equalsIgnoreCase("") || editCMND.getText().toString().equalsIgnoreCase("") ){
                     txtThongBao.setVisibility(View.VISIBLE);
                 }else {
                     try {
@@ -83,6 +86,16 @@ public class FragmentXemVe extends Fragment{
             onNameSetListener = (OnNameSetListener)activity;
         } catch (Exception e){throw new ClassCastException(activity.toString() + " must implement OnNameSetListener");}
 
+    }
+
+    private void setTypeFace(){
+        Typeface face1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
+        Typeface face2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Bold.ttf");
+        editCMND.setTypeface(face1);
+        editSDT.setTypeface(face1);
+        txtThongBao.setTypeface(face1);
+        txtTitleXemVe .setTypeface(face1);
+        btnXemVe.setTypeface(face1);
     }
 
     //--------------------------POST DATA TO SERVER AND GET DATA FROM SERVER------------------------------

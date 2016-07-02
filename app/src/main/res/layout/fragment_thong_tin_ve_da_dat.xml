@@ -11,13 +11,14 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:padding="15dp"
+        android:padding="8dp"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colormain">
 
         <TextView
+            android:id="@+id/fragment_vedadat_title"
             android:textSize="25dp"
             android:textColor="#FFFFFF"
             android:text="Thông tin vé đã đặt"
@@ -29,13 +30,14 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:paddingTop="20dp"
+        android:paddingTop="15dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/fragment_vedadat_thongtinkhach"
             android:paddingBottom="10dp"
             android:textSize="20dp"
             android:textColor="@color/colormain"
@@ -137,6 +139,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/fragment_vedadat_thongtinve"
             android:paddingBottom="10dp"
             android:textSize="20dp"
             android:textColor="@color/colormain"
@@ -307,12 +310,13 @@
             android:layout_height="wrap_content">
             <Button
                 android:id="@+id/btnDoiVe"
-                android:layout_width="60dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/thongtinvedadat_button_width"
+                android:layout_height="@dimen/thongtinvedadat_button_height"
+                android:textAllCaps="false"
                 android:background="@drawable/rectgroupbutton"
                 android:textColor="#fff"
                 android:textSize="15dp"
-                android:text="Đổi ghế"/>
+                android:text="Đổi Vé"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -322,8 +326,9 @@
             android:layout_height="wrap_content">
             <Button
                 android:id="@+id/btnHuyVe"
-                android:layout_width="60dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/thongtinvedadat_button_width"
+                android:layout_height="@dimen/thongtinvedadat_button_height"
+                android:textAllCaps="false"
                 android:background="@drawable/rectgroupbutton"
                 android:textColor="#fff"
                 android:textSize="15dp"
@@ -337,8 +342,9 @@
             android:layout_height="wrap_content">
             <Button
                 android:id="@+id/btnSuaVe"
-                android:layout_width="60dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/thongtinvedadat_button_width"
+                android:layout_height="@dimen/thongtinvedadat_button_height"
+                android:textAllCaps="false"
                 android:background="@drawable/rectgroupbutton"
                 android:textColor="#fff"
                 android:textSize="15dp"

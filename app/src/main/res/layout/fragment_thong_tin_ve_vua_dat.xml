@@ -4,294 +4,309 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:padding="15dp"
-        android:gravity="center"
-        android:background="#F2C896"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:textSize="25dp"
-            android:textColor="#34495e"
-            android:text="Thông tin vé vừa đặt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingRight="10dp"
-        android:gravity="right">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="#FF0AE954"
-            android:textStyle="italic"
-            android:text="Sửa"
-            android:id="@+id/txtSua"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="  |  "/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="#FF0AE954"
-            android:textStyle="italic"
-            android:text="Xác Nhận"
-            android:id="@+id/txtXacNhan"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:paddingTop="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:paddingBottom="10dp"
-            android:textSize="20dp"
-            android:textColor="#34495e"
-            android:text="Thông tin hành khách"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none"
+        android:layout_weight="1">
         <LinearLayout
-            android:background="@drawable/rect"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
                 android:padding="10dp"
+                android:gravity="center"
+                android:background="@color/colormain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TableRow
-                    android:padding="3dp"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-                    <TextView
-                        android:text="Họ Tên: "
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                    <TextView
-                        android:paddingLeft="7dp"
-                        android:id="@+id/txtHoTenVuaDat"
-                        android:text="Họ tên khách hàng"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                </TableRow>
+                <TextView
+                    android:textSize="23dp"
+                    android:textColor="@color/fragment_sodoghe_tang1_text_color"
+                    android:text="Thông tin vé vừa đặt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-                <TableRow
-                    android:padding="3dp">
-                    <TextView
-                        android:text="SDT: "
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                    <TextView
-                        android:paddingLeft="7dp"
-                        android:text="Số điện thoại khách hàng"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:id="@+id/txtSDTVuaDat" />
-                </TableRow>
+            </LinearLayout>
 
-                <TableRow
-                    android:padding="3dp">
-                    <TextView
-                        android:text="CMND: "
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                    <TextView
-                        android:paddingLeft="7dp"
-                        android:text="CMND khách hàng"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:id="@+id/txtCMNDVuaDat" />
-                </TableRow>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:gravity="right">
 
-                <TableRow
-                    android:padding="3dp">
-                    <TextView
-                        android:text="Ghi chú: "
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                    <TextView
-                        android:paddingLeft="7dp"
-                        android:text="Ghi chú của khách hàng"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:id="@+id/txtGhiChuVuaDat" />
-                </TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="#FF0AE954"
+                    android:textStyle="italic"
+                    android:text="Sửa"
+                    android:id="@+id/txtSua"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="  |  "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="#FF0AE954"
+                    android:textStyle="italic"
+                    android:text="Xác Nhận"
+                    android:id="@+id/txtXacNhan"/>
 
-            </TableLayout>
-        </LinearLayout>
+            </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:paddingTop="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:paddingBottom="10dp"
-            android:textSize="20dp"
-            android:textColor="#34495e"
-            android:text="Thông tin vé"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <LinearLayout
-            android:background="@drawable/rect"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TableLayout
-                android:padding="10dp"
+            <LinearLayout
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TableRow
-                    android:padding="3dp"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-                    <TextView
-                        android:text="Số lượng:"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                    <TextView
-                        android:paddingLeft="7dp"
-                        android:id="@+id/txtSLVeVuaDat"
-                        android:text="Số lượng vé"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                </TableRow>
+                <TextView
+                    android:paddingBottom="10dp"
+                    android:textSize="20dp"
+                    android:textColor="#34495e"
+                    android:text="Thông tin hành khách"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-                <TableRow
-                    android:padding="3dp"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-                    <TextView
-                        android:text="Mã số vé:"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                    <TextView
-                        android:paddingLeft="7dp"
-                        android:id="@+id/txtMaVeVuaDat"
-                        android:text="Mã vé của khách hàng"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                </TableRow>
+                <LinearLayout
+                    android:background="@drawable/rect"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TableLayout
+                        android:padding="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                <TableRow
-                    android:padding="3dp">
-                    <TextView
-                        android:text="Số ghế: "
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                    <TextView
-                        android:paddingLeft="7dp"
-                        android:text="số ghế của khách hàng"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:id="@+id/txtSoGheVuaDat" />
-                </TableRow>
+                        <TableRow
+                            android:padding="3dp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
+                            <TextView
+                                android:text="Họ Tên: "
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1" />
+                            <TextView
+                                android:paddingLeft="7dp"
+                                android:id="@+id/txtHoTenVuaDat"
+                                android:text="Họ tên khách hàng"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1" />
+                        </TableRow>
 
-                <TableRow
-                    android:padding="3dp">
-                    <TextView
-                        android:text="Tài"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                    <TextView
-                        android:paddingLeft="7dp"
-                        android:text="Mã tài xe "
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:id="@+id/txtMaTaiVuaDat" />
-                </TableRow>
+                        <TableRow
+                            android:padding="3dp">
+                            <TextView
+                                android:text="SDT: "
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1" />
+                            <TextView
+                                android:paddingLeft="7dp"
+                                android:text="Số điện thoại khách hàng"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1"
+                                android:id="@+id/txtSDTVuaDat" />
+                        </TableRow>
 
-                <TableRow
-                    android:padding="3dp">
-                    <TextView
-                        android:text="Chuyến đi: "
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                    <TextView
-                        android:paddingLeft="7dp"
-                        android:text="Tên Chuyến đi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:id="@+id/txtTenChuyenDiVuaDat" />
-                </TableRow>
+                        <TableRow
+                            android:padding="3dp">
+                            <TextView
+                                android:text="CMND: "
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1" />
+                            <TextView
+                                android:paddingLeft="7dp"
+                                android:text="CMND khách hàng"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1"
+                                android:id="@+id/txtCMNDVuaDat" />
+                        </TableRow>
 
-                <TableRow
-                    android:padding="3dp">
-                    <TextView
-                        android:text="Ngày đi: "
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                    <TextView
-                        android:paddingLeft="7dp"
-                        android:text="Ngày khách hàng đi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:id="@+id/txtNgayDiVuaDat" />
-                </TableRow>
+                        <TableRow
+                            android:padding="3dp">
+                            <TextView
+                                android:text="Ghi chú: "
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1" />
+                            <TextView
+                                android:paddingLeft="7dp"
+                                android:text="Ghi chú của khách hàng"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1"
+                                android:id="@+id/txtGhiChuVuaDat" />
+                        </TableRow>
 
-                <TableRow
-                    android:padding="3dp">
-                    <TextView
-                        android:text="Giờ đi: "
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                    <TextView
-                        android:paddingLeft="7dp"
-                        android:text="Giờ đi của chuyến"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:id="@+id/txtGioDiVuaDat" />
-                </TableRow>
+                    </TableLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:paddingBottom="10dp"
+                    android:textSize="20dp"
+                    android:textColor="#34495e"
+                    android:text="Thông tin vé"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:background="@drawable/rect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TableLayout
+                        android:padding="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TableRow
+                            android:padding="3dp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
+                            <TextView
+                                android:text="Số lượng:"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1" />
+                            <TextView
+                                android:paddingLeft="7dp"
+                                android:id="@+id/txtSLVeVuaDat"
+                                android:text="Số lượng vé"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1" />
+                        </TableRow>
+
+                        <TableRow
+                            android:padding="3dp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
+                            <TextView
+                                android:text="Mã số vé:"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1" />
+                            <TextView
+                                android:paddingLeft="7dp"
+                                android:id="@+id/txtMaVeVuaDat"
+                                android:text="Mã vé của khách hàng"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1" />
+                        </TableRow>
+
+                        <TableRow
+                            android:padding="3dp">
+                            <TextView
+                                android:text="Số ghế: "
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1" />
+                            <TextView
+                                android:paddingLeft="7dp"
+                                android:text="số ghế của khách hàng"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1"
+                                android:id="@+id/txtSoGheVuaDat" />
+                        </TableRow>
+
+                        <TableRow
+                            android:padding="3dp">
+                            <TextView
+                                android:text="Tài"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1" />
+                            <TextView
+                                android:paddingLeft="7dp"
+                                android:text="Mã tài xe "
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1"
+                                android:id="@+id/txtMaTaiVuaDat" />
+                        </TableRow>
+
+                        <TableRow
+                            android:padding="3dp">
+                            <TextView
+                                android:text="Chuyến đi: "
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1" />
+                            <TextView
+                                android:paddingLeft="7dp"
+                                android:text="Tên Chuyến đi"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1"
+                                android:id="@+id/txtTenChuyenDiVuaDat" />
+                        </TableRow>
+
+                        <TableRow
+                            android:padding="3dp">
+                            <TextView
+                                android:text="Ngày đi: "
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1" />
+                            <TextView
+                                android:paddingLeft="7dp"
+                                android:text="Ngày khách hàng đi"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1"
+                                android:id="@+id/txtNgayDiVuaDat" />
+                        </TableRow>
+
+                        <TableRow
+                            android:padding="3dp">
+                            <TextView
+                                android:text="Giờ đi: "
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1" />
+                            <TextView
+                                android:paddingLeft="7dp"
+                                android:text="Giờ đi của chuyến"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_column="1"
+                                android:id="@+id/txtGioDiVuaDat" />
+                        </TableRow>
 
 
-            </TableLayout>
-        </LinearLayout>
+                    </TableLayout>
+                </LinearLayout>
 
-    </LinearLayout>
+            </LinearLayout>
+
+            </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
