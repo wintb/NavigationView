@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:id="@+id/layout_Title_VeMotChieu"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:textColor="@color/colormain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ĐẶT VÉ KHỨ HỒI" />
+
+
+    <RelativeLayout
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/txtChuyenDiTab2"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:hint="Chọn Chuyến đi"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:background="@drawable/rect"/>
+
+        <ImageButton
+            android:id="@+id/imgChuyenDiTab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:layout_marginLeft="210dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/transport1"
+            />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:layout_marginBottom="40dp">
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="#2c3e50"
+                        android:textSize="15dp"
+                        android:gravity="center"
+                        android:text="Ngày đi :"
+                        android:paddingBottom="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txtDateDiTab2"
+                        android:layout_width="250dp"
+                        android:layout_height="50dp"
+                        android:padding="10dp"
+                        android:textSize="20dp"
+                        android:background="@drawable/rect"/>
+
+                    <ImageButton
+                        android:id="@+id/imgDateDiTab2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="135dp"
+                        android:layout_marginTop="8dp"
+                        android:background="#fff"
+                        android:src="@drawable/date1"
+                        />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="#2c3e50"
+                        android:textSize="15dp"
+                        android:gravity="center"
+                        android:text="Ngày về :"
+                        android:paddingBottom="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txtDateVeTab2"
+                        android:layout_width="250dp"
+                        android:layout_height="50dp"
+                        android:padding="10dp"
+                        android:textSize="20dp"
+                        android:background="@drawable/rect"/>
+
+                    <ImageButton
+                        android:id="@+id/imgDateVeTab2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#fff"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="135dp"
+                        android:src="@drawable/date1"
+                        />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnTimChuyenTab2"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rect_button"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textAllCaps="false"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:text="Tìm chuyến"/>
+        </LinearLayout>
+
+</LinearLayout>

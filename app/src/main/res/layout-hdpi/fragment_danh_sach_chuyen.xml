@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="vuvanthang.uit.testall.MainActivity"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:background="@color/colormain"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/Fragment_DanhSachchuyen_txtChuyenDi"
+            android:text="Tỉnh A -> Tỉnh B"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/Fragment_DanhSachchuyen_txtNgayDi"
+            android:text="Ngày a-b-c"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:paddingBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/Fragment_DanhSachchuyen_txtLoTrinh"
+            android:text="Lộ trình 100km"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:paddingBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+
+    <!--Danh sach cac chuyen xe di trong ngay-->
+    <TextView
+        android:id="@+id/Fragment_DanhSachchuyen_txtTitleDanhSachChuyen"
+        android:gravity="center"
+        android:textColor="@color/colormain"
+        android:textSize="25dp"
+        android:text="Danh sách các chuyến"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        >
+
+        <TextView
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="@dimen/text_sise_larger1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Mã Tài"
+            android:id="@+id/Fragment_DanhSachchuyen_txtTai"
+            android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_main"/>
+
+        <TextView
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="@dimen/text_sise_larger1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Giờ Đi"
+            android:id="@+id/Fragment_DanhSachchuyen_txtGioDi"
+            android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_main"/>
+
+        <TextView
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="@dimen/text_sise_larger1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Giờ Đến"
+            android:id="@+id/Fragment_DanhSachchuyen_txtGioDen"
+            android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_main"/>
+
+        <TextView
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="@dimen/text_sise_larger1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Giá Vé"
+            android:id="@+id/Fragment_DanhSachchuyen_txtGiaVe"
+            android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_main"/>
+
+        <TextView
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="@dimen/text_sise_larger1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Chọn"
+            android:id="@+id/Fragment_DanhSachchuyen_txtChon"
+            android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_main"/>
+    </TableRow>
+
+
+    <ListView
+        android:dividerHeight="7dp"
+        android:id="@+id/DanhSachChuyenDi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp">
+
+    </ListView>
+
+
+</LinearLayout>

@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">Đặt vé xe khách</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="opendrawer">Open</string>
+    <string name="closedrawer">Close</string>
+    <string name="navigation_view_item_1">Tìm Chuyến</string>
+    <string name="navigation_view_item_2">Xem Vé</string>
+    <string name="navigation_view_item_3">Hướng Dẫn</string>
+    <string name="navigation_view_item_4">Liên Hệ</string>
+    <string name="navigation_view_item_5">About</string>
+    <string name="navigation_view_item_6">Navigation Item 6</string>
+    <string name="navigation_view_category_1">Navigation View Category</string>
+    <string name="navigation_view_category_2">Communicate</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="A1D">A1D</string>
+    <string name="B1D">B1D</string>
+    <string name="C1D">C1D</string>
+    <string name="D1D">D1D</string>
+    <string name="A2D">A2D</string>
+    <string name="B2D">B2D</string>
+    <string name="C2D">C2D</string>
+    <string name="D2D">D2D</string>
+    <string name="A3D">A3D</string>
+    <string name="B3D">B3D</string>
+    <string name="C3D">C3D</string>
+    <string name="D3D">D3D</string>
+    <string name="A4D">A4D</string>
+    <string name="B4D">B4D</string>
+    <string name="C4D">C4D</string>
+    <string name="D4D">D4D</string>
+    <string name="A5D">A5D</string>
+    <string name="B5D">B5D</string>
+    <string name="C5D">C5D</string>
+    <string name="D5D">D5D</string>
+
+    <string name="A1T">A1T</string>
+    <string name="B1T">B1T</string>
+    <string name="C1T">C1T</string>
+    <string name="D1T">D1T</string>
+    <string name="A2T">A2T</string>
+    <string name="B2T">B2T</string>
+    <string name="C2T">C2T</string>
+    <string name="D2T">D2T</string>
+    <string name="A3T">A3T</string>
+    <string name="B3T">B3T</string>
+    <string name="C3T">C3T</string>
+    <string name="D3T">D3T</string>
+    <string name="A4T">A4T</string>
+    <string name="B4T">B4T</string>
+    <string name="C4T">C4T</string>
+    <string name="D4T">D4T</string>
+    <string name="A5T">A5T</string>
+    <string name="B5T">B5T</string>
+    <string name="C5T">C5T</string>
+    <string name="D5T">D5T</string>
+
+    <!-- Lien he -->
+    <string name="lienhe">
+        Nha xe UIT xin kính chào quý khách!\n
+        Địa chỉ : ktx khu B - DHQG HCM.\n
+        Số điện thoại : 0839171625
+    </string>
+
+
+
+    <!-- list title -->
+
+    <string name="title1">title 1</string>
+    <string name="title2">title 2</string>
+    <string name="title3">title 3</string>
+    <string name="title4">title 4</string>
+    <string name="title5">title 5</string>
+
+
+    <!-- list content -->
+
+    <string name="content1">content 1</string>
+    <string name="content2">content 2</string>
+    <string name="content3">content 3</string>
+    <string name="content4">content 4</string>
+    <string name="content5">content 5</string>
+</resources>

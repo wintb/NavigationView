@@ -42,6 +42,8 @@ import tien.dinh.navigationview.mics.Constant;
 import tien.dinh.navigationview.json.ReadJson;
 import tien.dinh.navigationview.mics.datetime.CompareDateTime;
 import tien.dinh.navigationview.mics.datetime.DatetimeFormater;
+import tien.dinh.navigationview.utils.CheckInternet;
+import tien.dinh.navigationview.utils.ShowDialog;
 
 /**
  * Created by VuVanThang on 3/29/2016.
@@ -94,25 +96,33 @@ public class FragmentDatVeMotChieu extends Fragment{
         btnTimChuyen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //post data to server and get json string
-                readJsonChuyenDi = new ReadJson(txtChuyenDi.getText().toString(),txtDate.getText().toString());
-                try {
-                    Json_DanhSach_Chuyen = new GoiWebService().execute(Constant.URL_TIMCHUYEN_MOTCHIEU).get();
-                    Log.d("TEST_JSON_JSON_JSON:",Json_DanhSach_Chuyen);
-                    if (Json_DanhSach_Chuyen.equalsIgnoreCase("[]")){
-                        Toast.makeText(getActivity(), "Không có chuyến này trong ngày", Toast.LENGTH_LONG).show();
-                    }else {
-                        Log.d("JSON_TEST","TEST_TEST_TEST");
-                        // send data to fragment FragmentDanhSachChuyen class
-                        String tenchuyendi = txtChuyenDi.getText().toString();
-                        String ngaydi = txtDate.getText().toString();
-                        onNameSetListener.setChuyenDi_NgayDi(tenchuyendi, ngaydi, Json_DanhSach_Chuyen);
+
+                //if (CheckInternet.isConnected(context)){
+
+                    //post data to server and get json string
+                    readJsonChuyenDi = new ReadJson(txtChuyenDi.getText().toString(),txtDate.getText().toString());
+                    try {
+                        Json_DanhSach_Chuyen = new GoiWebService().execute(Constant.URL_TIMCHUYEN_MOTCHIEU).get();
+                        Log.d("TEST_JSON_JSON_JSON:",Json_DanhSach_Chuyen);
+                        if (Json_DanhSach_Chuyen.equalsIgnoreCase("[]")){
+                            Toast.makeText(getActivity(), "Không có chuyến này trong ngày", Toast.LENGTH_LONG).show();
+                        }else {
+                            Log.d("JSON_TEST","TEST_TEST_TEST");
+                            // send data to fragment FragmentDanhSachChuyen class
+                            String tenchuyendi = txtChuyenDi.getText().toString();
+                            String ngaydi = txtDate.getText().toString();
+                            onNameSetListener.setChuyenDi_NgayDi(tenchuyendi, ngaydi, Json_DanhSach_Chuyen);
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
+//                }else{
+//                    String t = "Note";
+//                    String m = "Vui lòng kiểm tra kết nối Internet.";
+//                    ShowDialog.show(context,t,m);
+//                }
 
             }
         });
