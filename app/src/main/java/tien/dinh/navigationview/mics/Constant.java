@@ -19,5 +19,5 @@ public class Constant {
     public static final String URL_HUY_VE = "http://10.0.3.2:8080/xekhach/delete_ve.php";
     public static final String URL_SUA_VE = "http://10.0.3.2:8080/xekhach/update_thongtinve.php";
     public static final String URL_TONG_SO_GHE = "http://10.0.3.2:8080/xekhach/select_soghe.php";
-
+    public static final String URL_THONGTINVE = "http://10.0.3.2:8080/xekhach/jsonxemve.php";
 }

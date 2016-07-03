@@ -19,6 +19,7 @@ import java.util.concurrent.ExecutionException;
 
 import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.json.ReadJson;
+import tien.dinh.navigationview.mics.Constant;
 
 /**
  * Created by DinhTien on 18-05-2016.
@@ -33,7 +34,7 @@ public class FragmentXemVe extends Fragment{
     ReadJson ReadJsonThongTinVeKhach;
     String jsonThongTinVeKhach;
     OnNameSetListener onNameSetListener;
-    private final String URL_THONGTINVE = "http://10.0.3.2:8080/xekhach/jsonxemve.php";
+
 
     @Nullable
     @Override
@@ -56,7 +57,7 @@ public class FragmentXemVe extends Fragment{
                 }else {
                     try {
                         //gọi webservice
-                       jsonThongTinVeKhach = new GoiWebService().execute(URL_THONGTINVE).get();
+                       jsonThongTinVeKhach = new GoiWebService().execute(Constant.URL_THONGTINVE).get();
                         if (jsonThongTinVeKhach.equalsIgnoreCase("[]")){
                             Toast.makeText(getActivity(),"Thông tin nhập vào không chính xác!",Toast.LENGTH_LONG).show();
                         }else {

@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements
     NavigationView navigation;
     ActionBarDrawerToggle drawerToggle;
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
