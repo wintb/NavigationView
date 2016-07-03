@@ -81,6 +81,10 @@ public class FragmentNhapThongTinKhach extends Fragment {
                 Bundle data = getArguments();
                 String MaChuyen = data.getString("MaChuyen");
                 String MaTai = data.getString("MaTai");
+                String TenChuyen = data.getString("TenChuyen");
+                String GioDi = data.getString("GioDi");
+                String NgayDi = data.getString("NgayDi");
+
                 List<String> listSoGhe = FragmentSoDoGheTang1.listGheDaChonTang1;
                 int soLuong = listSoGhe.size();
                 String SoGhe = listSoGhe.get(0);
@@ -93,7 +97,7 @@ public class FragmentNhapThongTinKhach extends Fragment {
                 Log.d("LIST GHE", listSoGhe.toString());
                 Log.d("SO LUONG", String.valueOf(soLuong));
 
-                interfaceDatVe.clickDatVe(MaTai, MaChuyen, HoTen, CMND, SDT, GhiChu, listSoGhe, soLuong, MaVe);
+                interfaceDatVe.clickDatVe(TenChuyen, GioDi, NgayDi, MaTai, MaChuyen, HoTen, CMND, SDT, GhiChu, listSoGhe, soLuong, MaVe);
             }
         });
         return view;
@@ -113,7 +117,7 @@ public class FragmentNhapThongTinKhach extends Fragment {
 
     //========== Interface ==========//
     public interface DatVe{
-        void clickDatVe(String MaTai,String MaChuyen, String HoTen,
+        void clickDatVe(String TenChuyen, String GioDi, String NgayDi, String MaTai,String MaChuyen, String HoTen,
                         String CMND, String SDT, String GhiChu, List<String> listSoGhe, int SoLuong, String MaVe);
     }
 }

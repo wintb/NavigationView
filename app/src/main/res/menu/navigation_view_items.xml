@@ -15,7 +15,7 @@
     <item
         android:id="@+id/navigation_view_category_2"
         android:title="@string/navigation_view_category_2">
-        <menu>
+        <menu >
             <item
                 android:id="@+id/navigation_item_3"
                 android:icon="@drawable/guide"

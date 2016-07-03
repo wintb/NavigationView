@@ -253,7 +253,11 @@ public class FragmentSoDoGheTang1 extends Fragment {
         }else{
 
             if (Constant.KEY_CHECK_FRAGMENT == 1) {
-                chonGhe.clickChonGhe();
+                Bundle data = getArguments();
+                String TenChuyen = data.getString("TenChuyen");
+                String GioDi = data.getString("GioDi");
+                String NgayDi = data.getString("NgayDi");
+                chonGhe.clickChonGhe(TenChuyen, GioDi, NgayDi);
             }else if (Constant.KEY_CHECK_FRAGMENT == 0){
                 Bundle data = getArguments();
                 String MaChuyen = data.getString("MaChuyen");
@@ -827,6 +831,6 @@ public class FragmentSoDoGheTang1 extends Fragment {
     //============== Interface ================//
     public interface ChonGhe{
 //        void clickChonGhe(String MaTai,String MaChuyen, String SoGhe);
-        void clickChonGhe();
+        void clickChonGhe(String TenChuyen, String GioDi, String NgayDi);
     }
 }

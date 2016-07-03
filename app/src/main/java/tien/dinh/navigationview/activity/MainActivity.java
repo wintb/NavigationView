@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements
                         drawerLayout.closeDrawer(navigation);
                         break;
                     case R.id.navigation_item_5:
-                        FragmentAbout fragmentAbout = new FragmentAbout(MainActivity.this);
+                        FragmentAbout fragmentAbout = new FragmentAbout();
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.fragmentholder, fragmentAbout)
@@ -222,10 +222,14 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void clickChonGhe() {
+    public void clickChonGhe(String TenChuyen, String GioDi, String NgayDi) {
         Bundle data = new Bundle();
         data.putString("MaChuyen",MaChuyen_temp);
         data.putString("MaTai", MaTai_temp);
+        data.putString("TenChuyen", TenChuyen);
+        data.putString("GioDi", GioDi);
+        data.putString("NgayDi", NgayDi);
+
         FragmentNhapThongTinKhach nhap_thong_tin_fragment = new FragmentNhapThongTinKhach();
         nhap_thong_tin_fragment.setArguments(data);
         getSupportFragmentManager()
@@ -237,10 +241,13 @@ public class MainActivity extends AppCompatActivity implements
 
 
     @Override
-    public void clickDatVe(String MaTai, String MaChuyen, String HoTen, String CMND,
+    public void clickDatVe(String TenChuyen, String GioDi, String NgayDi, String MaTai, String MaChuyen, String HoTen, String CMND,
                            String SDT, String GhiChu, List<String> listSoGhe, int SoLuong, String MaVe) {
 
         Bundle data = new Bundle();
+        data.putString("TenChuyen", TenChuyen);
+        data.putString("GioDi", GioDi);
+        data.putString("NgayDi", NgayDi);
         data.putString("MaTai",MaTai);
         data.putString("MaChuyen",MaChuyen);
         data.putString("HoTen",HoTen);
@@ -249,6 +256,7 @@ public class MainActivity extends AppCompatActivity implements
         data.putString("GhiChu",GhiChu);
         data.putInt("SoLuong", SoLuong);
         data.putString("MaVe", MaVe);
+
 
         for (int i = 0; i < listSoGhe.size(); i++){
 

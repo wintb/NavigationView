@@ -26,11 +26,12 @@ public class FragmentAbout extends Fragment {
     private ArrayList<Items> listItemses;
 
     public FragmentAbout(){}
-    public FragmentAbout(Context context) {
+
+   /* public FragmentAbout(Context context) {
         this.context = context;
         listItemses = new ArrayList<>() ;
         this.setItems();
-    }
+    }*/
 
     @Nullable
     @Override
@@ -38,7 +39,9 @@ public class FragmentAbout extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_about,container,false);
         recyclerAbout = (RecyclerView)view.findViewById(R.id.recyclerAbout);
+        listItemses = new ArrayList<>();
         setRecyclerAbout(recyclerAbout);
+        setItems();
         return view;
     }
 
@@ -76,28 +79,28 @@ public class FragmentAbout extends Fragment {
 
     private void setItems(){
         Items items1 = new Items();
-        items1.setTitle(String.valueOf(R.string.title1));
-        items1.setContent(String.valueOf(R.string.content1));
+        items1.setTitle(getActivity().getResources().getString(R.string.title1));
+        items1.setContent(getActivity().getResources().getString(R.string.content1));
         listItemses.add(items1);
 
         Items items2 = new Items();
-        items2.setTitle(String.valueOf(R.string.title2));
-        items2.setContent(String.valueOf(R.string.content2));
+        items2.setTitle(getActivity().getResources().getString(R.string.title2));
+        items2.setContent(getActivity().getResources().getString(R.string.content2));
         listItemses.add(items2);
 
         Items items3 = new Items();
-        items3.setTitle(String.valueOf(R.string.title3));
-        items3.setContent(String.valueOf(R.string.content3));
+        items3.setTitle(getActivity().getResources().getString(R.string.title3));
+        items3.setContent(getActivity().getResources().getString(R.string.content3));
         listItemses.add(items3);
 
         Items items4 = new Items();
-        items4.setTitle(String.valueOf(R.string.title4));
-        items4.setContent(String.valueOf(R.string.content4));
+        items4.setTitle(getActivity().getResources().getString(R.string.title4));
+        items4.setContent(getActivity().getResources().getString(R.string.content4));
         listItemses.add(items4);
 
         Items items5 = new Items();
-        items5.setTitle(String.valueOf(R.string.title5));
-        items5.setContent(String.valueOf(R.string.content5));
+        items5.setTitle(getActivity().getResources().getString(R.string.title5));
+        items5.setContent(getActivity().getResources().getString(R.string.content5));
         listItemses.add(items5);
     }
 

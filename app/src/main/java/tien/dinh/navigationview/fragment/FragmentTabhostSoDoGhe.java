@@ -51,6 +51,9 @@ public class FragmentTabhostSoDoGhe extends Fragment{
     private String MaChuyen;
     private String MaVe;
     private String SDTKhach;
+    private String TenChuyen;
+    private String GioDi;
+    private String NgayDi;
 
     public FragmentTabhostSoDoGhe(){
 
@@ -70,6 +73,9 @@ public class FragmentTabhostSoDoGhe extends Fragment{
         MaChuyen = data.getString("MaChuyen");
         MaVe = data.getString("MaVe");
         SDTKhach = data.getString("SDTKhach");
+        TenChuyen = txtChuyenDi.getText().toString();
+        GioDi = txtGioDi.getText().toString();
+        NgayDi = txtNgayDi.getText().toString();
 
         viewPager.setOffscreenPageLimit(1);
         setupViewPager(viewPager);
@@ -97,6 +103,9 @@ public class FragmentTabhostSoDoGhe extends Fragment{
         dataDoiGhe.putString("MaChuyen",MaChuyen);
         dataDoiGhe.putString("MaVe",MaVe);
         dataDoiGhe.putString("SDTKhach", SDTKhach);
+        dataDoiGhe.putString("TenChuyen",TenChuyen);
+        dataDoiGhe.putString("GioDi", GioDi);
+        dataDoiGhe.putString("NgayDi", NgayDi);
 
         fragmentSoDoGheTang1.setArguments(dataDoiGhe);
         fragmentSoDoGheTang2.setArguments(dataDoiGhe);
