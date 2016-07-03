@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements
                         drawerLayout.closeDrawer(navigation);
                         break;
                     case R.id.navigation_item_5:
-                        FragmentAbout fragmentAbout = new FragmentAbout();
+                        FragmentAbout fragmentAbout = new FragmentAbout(MainActivity.this);
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.fragmentholder, fragmentAbout)

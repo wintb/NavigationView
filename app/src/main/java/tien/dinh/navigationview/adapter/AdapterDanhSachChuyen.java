@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -76,14 +77,13 @@ public class AdapterDanhSachChuyen extends BaseAdapter {
         final TextView txtGioDi = (TextView) view.findViewById(R.id.txtGioDi);
         TextView txtGioDen = (TextView) view.findViewById(R.id.txtGioDen);
         TextView txtGiaVe = (TextView) view.findViewById(R.id.txtGiaVe);
-        TextView txtChon = (TextView) view.findViewById(R.id.txtChon);
+        ImageView txtChon = (ImageView) view.findViewById(R.id.txtChon);
         LinearLayout itemDanhSachChuyen = (LinearLayout) view.findViewById(R.id.layout_custom_danhsachchuyen);
 
         txtTai.setText(_chuyen.getMaTai());
         txtGioDi.setText(_chuyen.getGioDi());
         txtGioDen.setText(_chuyen.getGioDen());
         txtGiaVe.setText(_chuyen.getGiaVe());
-        txtChon.setText(">");
 
         //Tô đậm những item đã full ghế
         /*select_tongSoGhe = new Select_TongSoGhe(_chuyen.getMaChuyen());

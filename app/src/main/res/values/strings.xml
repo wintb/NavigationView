@@ -60,5 +60,20 @@
     <string name="D5T">D5T</string>
 
 
+    <!-- list title -->
 
+    <string name="title1">title 1</string>
+    <string name="title2">title 2</string>
+    <string name="title3">title 3</string>
+    <string name="title4">title 4</string>
+    <string name="title5">title 5</string>
+
+
+    <!-- list content -->
+
+    <string name="content1">content 1</string>
+    <string name="content2">content 2</string>
+    <string name="content3">content 3</string>
+    <string name="content4">content 4</string>
+    <string name="content5">content 5</string>
 </resources>
