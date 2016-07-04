@@ -20,6 +20,8 @@ import java.util.concurrent.ExecutionException;
 import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.json.ReadJson;
 import tien.dinh.navigationview.mics.Constant;
+import tien.dinh.navigationview.utils.CheckInternet;
+import tien.dinh.navigationview.utils.ShowDialog;
 
 /**
  * Created by DinhTien on 18-05-2016.
@@ -50,25 +52,35 @@ public class FragmentXemVe extends Fragment{
         btnXemVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ReadJsonThongTinVeKhach = new ReadJson("",editCMND.getText().toString(),editSDT.getText().toString());
-                //Kiểm tra đã nhập đủ thông tin các ô hay chưa
-                if (editSDT.getText().toString().equalsIgnoreCase("") || editCMND.getText().toString().equalsIgnoreCase("") ){
-                    txtThongBao.setVisibility(View.VISIBLE);
-                }else {
-                    try {
-                        //gọi webservice
-                       jsonThongTinVeKhach = new GoiWebService().execute(Constant.URL_THONGTINVE).get();
-                        if (jsonThongTinVeKhach.equalsIgnoreCase("[]")){
-                            Toast.makeText(getActivity(),"Thông tin nhập vào không chính xác!",Toast.LENGTH_LONG).show();
-                        }else {
-                            onNameSetListener.setThongTinVe(jsonThongTinVeKhach);
+
+                if (CheckInternet.isConnected(getActivity())){
+
+                    ReadJsonThongTinVeKhach = new ReadJson("",editCMND.getText().toString(),editSDT.getText().toString());
+                    //Kiểm tra đã nhập đủ thông tin các ô hay chưa
+                    if (editSDT.getText().toString().equalsIgnoreCase("") || editCMND.getText().toString().equalsIgnoreCase("") ){
+                        txtThongBao.setVisibility(View.VISIBLE);
+                    }else {
+                        try {
+                            //gọi webservice
+                            jsonThongTinVeKhach = new GoiWebService().execute(Constant.URL_THONGTINVE).get();
+                            if (jsonThongTinVeKhach.equalsIgnoreCase("[]")){
+                                Toast.makeText(getActivity(),"Thông tin nhập vào không chính xác!",Toast.LENGTH_LONG).show();
+                            }else {
+                                onNameSetListener.setThongTinVe(jsonThongTinVeKhach);
+                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
                         }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
                     }
+                }else{
+
+                    String title = "Warning";
+                    String message = "Vui lòng kiểm tra kết nối Internet.";
+                    ShowDialog.show(getActivity(),title,message);
                 }
+
             }
         });
         

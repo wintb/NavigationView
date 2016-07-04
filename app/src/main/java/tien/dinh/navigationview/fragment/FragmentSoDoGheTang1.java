@@ -31,6 +31,8 @@ import tien.dinh.navigationview.adapter.AdapterDanhSachChuyen;
 import tien.dinh.navigationview.dao.Ve;
 import tien.dinh.navigationview.json.JsonDoiGhe;
 import tien.dinh.navigationview.mics.Constant;
+import tien.dinh.navigationview.utils.CheckInternet;
+import tien.dinh.navigationview.utils.ShowDialog;
 
 /**
  * Created by DinhTien on 15-05-2016.
@@ -162,7 +164,14 @@ public class FragmentSoDoGheTang1 extends Fragment {
         btnChonGheTang1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setOnClickChonGhe();
+                if (CheckInternet.isConnected(getActivity())){
+                    setOnClickChonGhe();
+                }else{
+
+                    String title = "Warning";
+                    String message = "Vui lòng kiểm tra kết nối Internet.";
+                    ShowDialog.show(getActivity(), title, message);
+                }
             }
         });
 

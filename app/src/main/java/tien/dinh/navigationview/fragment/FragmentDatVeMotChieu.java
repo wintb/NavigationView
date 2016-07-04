@@ -42,6 +42,8 @@ import tien.dinh.navigationview.json.ReadJson;
 import tien.dinh.navigationview.mics.Constant;
 import tien.dinh.navigationview.mics.datetime.CompareDateTime;
 import tien.dinh.navigationview.mics.datetime.DatetimeFormater;
+import tien.dinh.navigationview.utils.CheckInternet;
+import tien.dinh.navigationview.utils.ShowDialog;
 
 /**
  * Created by VuVanThang on 3/29/2016.
@@ -95,7 +97,7 @@ public class FragmentDatVeMotChieu extends Fragment{
             @Override
             public void onClick(View v) {
 
-                //if (CheckInternet.isConnected(context)){
+                if (CheckInternet.isConnected(getActivity())){
 
                     //post data to server and get json string
                     readJsonChuyenDi = new ReadJson(txtChuyenDi.getText().toString(),txtDate.getText().toString());
@@ -116,11 +118,11 @@ public class FragmentDatVeMotChieu extends Fragment{
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     }
-//                }else{
-//                    String t = "Note";
-//                    String m = "Vui lòng kiểm tra kết nối Internet.";
-//                    ShowDialog.show(context,t,m);
-//                }
+                }else{
+                    String t = "Warning";
+                    String m = "Vui lòng kiểm tra kết nối Internet.";
+                    ShowDialog.show(getActivity(), t, m);
+                }
 
             }
         });

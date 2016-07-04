@@ -19,7 +19,7 @@
 
         <TextView
             android:id="@+id/fragment_vedadat_title"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:textColor="#FFFFFF"
             android:text="Thông tin vé đã đặt"
             android:layout_width="wrap_content"

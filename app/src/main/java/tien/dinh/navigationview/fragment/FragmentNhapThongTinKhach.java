@@ -14,7 +14,9 @@ import android.widget.TextView;
 import java.util.List;
 
 import tien.dinh.navigationview.R;
+import tien.dinh.navigationview.utils.CheckInternet;
 import tien.dinh.navigationview.utils.CheckNumber;
+import tien.dinh.navigationview.utils.ShowDialog;
 
 /**
  * Created by DinhTien on 29-05-2016.
@@ -51,53 +53,61 @@ public class FragmentNhapThongTinKhach extends Fragment {
             @Override
             public void onClick(View v) {
 
-                HoTen = editHoTen.getText().toString();
-                CMND = editCMND.getText().toString();
-                SDT = editSDT.getText().toString();
-                GhiChu = editGhiChu.getText().toString();
+                if (CheckInternet.isConnected(getActivity())){
 
-                if (HoTen.equalsIgnoreCase("")
-                        || CMND.equalsIgnoreCase("")
-                        || SDT.equalsIgnoreCase("")
-                        || GhiChu.equalsIgnoreCase("")) {
+                    HoTen = editHoTen.getText().toString();
+                    CMND = editCMND.getText().toString();
+                    SDT = editSDT.getText().toString();
+                    GhiChu = editGhiChu.getText().toString();
 
-                    txtThongBao.setVisibility(View.VISIBLE);
-                    txtThongBao.setText("Bạn cần phải nhập đầy đủ thông tin");
-                    return;
+                    if (HoTen.equalsIgnoreCase("")
+                            || CMND.equalsIgnoreCase("")
+                            || SDT.equalsIgnoreCase("")
+                            || GhiChu.equalsIgnoreCase("")) {
+
+                        txtThongBao.setVisibility(View.VISIBLE);
+                        txtThongBao.setText("Bạn cần phải nhập đầy đủ thông tin");
+                        return;
+                    }
+
+                    if (CMND.length() != 9 || !CheckNumber.checkNumber(CMND)){
+                        txtThongBao.setVisibility(View.VISIBLE);
+                        txtThongBao.setText("Số cmnd không phù hợp");
+                        return;
+                    }
+
+                    if ((SDT.length() < 10 || SDT.length() > 11) || !CheckNumber.checkNumber(SDT)){
+                        txtThongBao.setVisibility(View.VISIBLE);
+                        txtThongBao.setText("Số điện thoại không phù hợp");
+                        return;
+                    }
+
+                    Bundle data = getArguments();
+                    String MaChuyen = data.getString("MaChuyen");
+                    String MaTai = data.getString("MaTai");
+                    String TenChuyen = data.getString("TenChuyen");
+                    String GioDi = data.getString("GioDi");
+                    String NgayDi = data.getString("NgayDi");
+
+                    List<String> listSoGhe = FragmentSoDoGheTang1.listGheDaChonTang1;
+                    int soLuong = listSoGhe.size();
+                    String SoGhe = listSoGhe.get(0);
+
+                    String SDT_3SoCuoi = SDT.substring(SDT.length() - 3);
+                    String MaVe = SoGhe + SDT_3SoCuoi;
+
+
+                    Log.d("JSON_NHAP_THONG_TIN_VE", MaChuyen + "++" + MaTai);
+                    Log.d("LIST GHE", listSoGhe.toString());
+                    Log.d("SO LUONG", String.valueOf(soLuong));
+
+                    interfaceDatVe.clickDatVe(TenChuyen, GioDi, NgayDi, MaTai, MaChuyen, HoTen, CMND, SDT, GhiChu, listSoGhe, soLuong, MaVe);
+                }else{
+                    String t = "Warning";
+                    String m = "Vui lòng kiểm tra kết nối Internet.";
+                    ShowDialog.show(getActivity(), t, m);
                 }
 
-                if (CMND.length() != 9 || !CheckNumber.checkNumber(CMND)){
-                    txtThongBao.setVisibility(View.VISIBLE);
-                    txtThongBao.setText("Số cmnd không phù hợp");
-                    return;
-                }
-
-                if ((SDT.length() < 10 || SDT.length() > 11) || !CheckNumber.checkNumber(SDT)){
-                    txtThongBao.setVisibility(View.VISIBLE);
-                    txtThongBao.setText("Số điện thoại không phù hợp");
-                    return;
-                }
-
-                Bundle data = getArguments();
-                String MaChuyen = data.getString("MaChuyen");
-                String MaTai = data.getString("MaTai");
-                String TenChuyen = data.getString("TenChuyen");
-                String GioDi = data.getString("GioDi");
-                String NgayDi = data.getString("NgayDi");
-
-                List<String> listSoGhe = FragmentSoDoGheTang1.listGheDaChonTang1;
-                int soLuong = listSoGhe.size();
-                String SoGhe = listSoGhe.get(0);
-
-                String SDT_3SoCuoi = SDT.substring(SDT.length() - 3);
-                String MaVe = SoGhe + SDT_3SoCuoi;
-
-
-                Log.d("JSON_NHAP_THONG_TIN_VE", MaChuyen + "++" + MaTai);
-                Log.d("LIST GHE", listSoGhe.toString());
-                Log.d("SO LUONG", String.valueOf(soLuong));
-
-                interfaceDatVe.clickDatVe(TenChuyen, GioDi, NgayDi, MaTai, MaChuyen, HoTen, CMND, SDT, GhiChu, listSoGhe, soLuong, MaVe);
             }
         });
         return view;

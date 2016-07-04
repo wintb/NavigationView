@@ -19,6 +19,8 @@ import butterknife.ButterKnife;
 import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.json.JsonSuaVe;
 import tien.dinh.navigationview.mics.Constant;
+import tien.dinh.navigationview.utils.CheckInternet;
+import tien.dinh.navigationview.utils.ShowDialog;
 
 /**
  * Created by VuVanThang on 6/18/2016.
@@ -62,33 +64,43 @@ public class FragmentSuaThongTinVe extends Fragment {
         btnSuaVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                jsonSuaVe = new JsonSuaVe(editHoTen.getText().toString(),
-                        editSDT.getText().toString(),
-                        editCMND.getText().toString(),
-                        editNoiXuong.getText().toString(),
-                        MaChuyen,
-                        MaVe);
-                try {
-                    String result = new GoiWbServiceSuaVe().execute(Constant.URL_SUA_VE).get();
 
-                    new AlertDialog.Builder(getActivity()).setTitle("Sửa vé").setMessage(result)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                if (CheckInternet.isConnected(getActivity())){
 
-                                }
-                            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                    jsonSuaVe = new JsonSuaVe(editHoTen.getText().toString(),
+                            editSDT.getText().toString(),
+                            editCMND.getText().toString(),
+                            editNoiXuong.getText().toString(),
+                            MaChuyen,
+                            MaVe);
+                    try {
+                        String result = new GoiWbServiceSuaVe().execute(Constant.URL_SUA_VE).get();
 
-                        }
-                    }).show();
+                        new AlertDialog.Builder(getActivity()).setTitle("Sửa vé").setMessage(result)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
+                                    }
+                                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).show();
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+
+                    String title = "Warning";
+                    String message = "Vui lòng kiểm tra kết nối Internet.";
+                    ShowDialog.show(getActivity(), title, message);
                 }
+
             }
         });
 

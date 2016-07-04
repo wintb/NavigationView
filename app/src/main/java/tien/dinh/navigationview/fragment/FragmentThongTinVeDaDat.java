@@ -28,6 +28,8 @@ import tien.dinh.navigationview.dao.ThongTinVe;
 import tien.dinh.navigationview.json.JsonHuyVe;
 import tien.dinh.navigationview.json.JsonSoDoghe;
 import tien.dinh.navigationview.mics.Constant;
+import tien.dinh.navigationview.utils.CheckInternet;
+import tien.dinh.navigationview.utils.ShowDialog;
 
 /**
  * Created by VuVanThang on 5/25/2016.
@@ -107,65 +109,83 @@ public class FragmentThongTinVeDaDat extends Fragment {
         btnHuyve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // hien thong bao hoi nguoi dung co chac chan huy ve hay khong
-                new AlertDialog.Builder(getActivity()).setTitle("Hủy vé").setMessage("Bạn có chắc chắc muốn hủy vé ?")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                jsonHuyVe = new JsonHuyVe(thongTinVe.get(0).getMaChuyen(), thongTinVe.get(0).getMaVe());
-                                String result = null;
-                                try {
-                                    result = new GoiWebServiceHuyVe().execute(Constant.URL_HUY_VE).get();
-                                    // thong bao huy ve co thanh cong hay khong
-                                    new AlertDialog.Builder(getActivity()).setTitle("Hủy vé").setMessage(result)
-                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
 
-                                                }
-                                            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
+                if (CheckInternet.isConnected(getActivity())){
 
-                                        }
-                                    }).show();
+                    // hien thong bao hoi nguoi dung co chac chan huy ve hay khong
+                    new AlertDialog.Builder(getActivity()).setTitle("Hủy vé").setMessage("Bạn có chắc chắc muốn hủy vé ?")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    jsonHuyVe = new JsonHuyVe(thongTinVe.get(0).getMaChuyen(), thongTinVe.get(0).getMaVe());
+                                    String result = null;
+                                    try {
+                                        result = new GoiWebServiceHuyVe().execute(Constant.URL_HUY_VE).get();
+                                        // thong bao huy ve co thanh cong hay khong
+                                        new AlertDialog.Builder(getActivity()).setTitle("Hủy vé").setMessage(result)
+                                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
 
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                } catch (ExecutionException e) {
-                                    e.printStackTrace();
+                                                    }
+                                                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        }).show();
+
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    } catch (ExecutionException e) {
+                                        e.printStackTrace();
+                                    }
+
                                 }
+                            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                            }
-                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+                }else{
 
-                    }
-                }).show();
+                    String title = "Warning";
+                    String message = "Vui lòng kiểm tra kết nối Internet.";
+                    ShowDialog.show(getActivity(), title, message);
+                }
             }
         });
 
         btnDoiVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Constant.KEY_CHECK_FRAGMENT = 0;
-                //lấy chuỗi json các ghế đã chọn để đưa vào list
-                try {
-                    jsonSoDoghe = new JsonSoDoghe(thongTinVe.get(0).getMaChuyen());
-                    sodogheDoiVe = new GoiWbServiceSoDoGhe().execute(Constant.URL_SODOGHE).get();
-                    Log.d("JSON_SODOGHE_DOIVE:", sodogheDoiVe);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
+
+                if (CheckInternet.isConnected(getActivity())){
+
+                    Constant.KEY_CHECK_FRAGMENT = 0;
+                    //lấy chuỗi json các ghế đã chọn để đưa vào list
+                    try {
+                        jsonSoDoghe = new JsonSoDoghe(thongTinVe.get(0).getMaChuyen());
+                        sodogheDoiVe = new GoiWbServiceSoDoGhe().execute(Constant.URL_SODOGHE).get();
+                        Log.d("JSON_SODOGHE_DOIVE:", sodogheDoiVe);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+                    doighe.setDoiGhe(thongTinVe.get(0).getMaVe(),
+                            thongTinVe.get(0).getMaChuyen(),
+                            thongTinVe.get(0).getTenChuyen(),
+                            thongTinVe.get(0).getGioDi(),
+                            thongTinVe.get(0).getNgayDi(),
+                            thongTinVe.get(0).getSDTKhach());
+                }else{
+
+                    String title = "Warning";
+                    String message = "Vui lòng kiểm tra kết nối Internet.";
+                    ShowDialog.show(getActivity(), title, message);
                 }
-                doighe.setDoiGhe(thongTinVe.get(0).getMaVe(),
-                        thongTinVe.get(0).getMaChuyen(),
-                        thongTinVe.get(0).getTenChuyen(),
-                        thongTinVe.get(0).getGioDi(),
-                        thongTinVe.get(0).getNgayDi(),
-                        thongTinVe.get(0).getSDTKhach());
 
             }
         });
@@ -173,12 +193,21 @@ public class FragmentThongTinVeDaDat extends Fragment {
         btnSuaVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                suaVe.setSuaVe(thongTinVe.get(0).getHoTen(),
-                        thongTinVe.get(0).getSDTKhach(),
-                        thongTinVe.get(0).getCMND(),
-                        thongTinVe.get(0).getGhiChu(),
-                        thongTinVe.get(0).getMaChuyen(),
-                        thongTinVe.get(0).getMaVe());
+
+                if (CheckInternet.isConnected(getActivity())){
+                    suaVe.setSuaVe(thongTinVe.get(0).getHoTen(),
+                            thongTinVe.get(0).getSDTKhach(),
+                            thongTinVe.get(0).getCMND(),
+                            thongTinVe.get(0).getGhiChu(),
+                            thongTinVe.get(0).getMaChuyen(),
+                            thongTinVe.get(0).getMaVe());
+                }else{
+
+                    String title = "Warning";
+                    String message = "Vui lòng kiểm tra kết nối Internet.";
+                    ShowDialog.show(getActivity(), title, message);
+                }
+
             }
         });
 

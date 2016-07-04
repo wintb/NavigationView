@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/fragment_nhapthongtinve_title"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:textColor="#FFFFFF"
         android:text="Nhập thông tin hành khách"
         android:layout_width="match_parent"

@@ -7,8 +7,8 @@
 
     <CalendarView
         android:id="@+id/calendarID"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:background="#F2C896"
         android:selectedDateVerticalBar="@color/colorAccent"
         android:tag="my tag" />

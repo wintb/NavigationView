@@ -15,7 +15,7 @@
 
         <TextView
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:layout_width="0dp"
             android:textStyle="bold"
             android:layout_height="match_parent"
@@ -26,7 +26,7 @@
 
         <TextView
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="Giờ Đi"
@@ -36,7 +36,7 @@
 
         <TextView
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="Giờ Đến"
@@ -45,7 +45,7 @@
 
         <TextView
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="Giá Vé"

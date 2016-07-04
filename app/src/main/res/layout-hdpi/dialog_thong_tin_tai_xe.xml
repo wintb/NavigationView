@@ -17,14 +17,14 @@
             android:layout_weight="1"
             android:gravity="left"
             android:text="Tài xế: "
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:textColor="#2c3e50"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:id="@+id/txtTaiXe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -42,14 +42,14 @@
             android:layout_weight="1"
             android:gravity="left"
             android:text="Phụ xe: "
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:textColor="#2c3e50"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:id="@+id/txtPhuXe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -67,14 +67,14 @@
             android:layout_weight="1"
             android:gravity="left"
             android:text="Biển số xe: "
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:textColor="#2c3e50"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:id="@+id/txtBienSoXe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -92,14 +92,14 @@
             android:layout_weight="1"
             android:gravity="left"
             android:text="Số điện thoại: "
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:textColor="#2c3e50"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:id="@+id/txtSoDienthoai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
