@@ -61,16 +61,21 @@
 
     <!-- Lien he -->
     <string name="lienhe">
-        Nha xe UIT xin kính chào quý khách!\n
+        Nhà xe UIT xin kính chào quý khách!\n
+        Mọi vấn đề thắc mắc xin quý khách liên hệ nhà xe UIT\n
         Địa chỉ : ktx khu B - DHQG HCM.\n
-        Số điện thoại : 0839171625
+        Số điện thoại : 0839171625\n\n
+        Liên lạc thông tin nhóm Lập trình ứng dụng :\n
+        Trịnh Đình Tiến : 12520741\n
+        Trần Bá Đạt     : 12520065\n
+        Vũ Văn Thắng    : 12520392
     </string>
 
 
 
     <!-- list title -->
 
-    <string name="title1">title 1</string>
+    <string name="title1">Tôi muốn đặt vé thì làm như thế nào?</string>
     <string name="title2">title 2</string>
     <string name="title3">title 3</string>
     <string name="title4">title 4</string>
@@ -79,7 +84,13 @@
 
     <!-- list content -->
 
-    <string name="content1">content 1</string>
+    <string name="content1">
+        Khi bạn muốn đặt vé, trước tiên phải lựa chọn chuyến xe bạn muốn đi dựa trên tuyến chạy và ngày khỏi hành.\n
+        Khi danh sách các chuyến hiện lên, bạn chọn chuyến mong muốn và chọn biểu tượng mũi tên next để đến sơ đồ ghế của
+        xe. Bạn click một cái là chọn ghế, click cái thứ hai là bỏ chọn ghế, bạn chỉ được đặt tối đa 2 ghế. Sau khi chọn
+        ghế xong chọn nút chọn ghế để nhập thông tin cá nhân hành khách, sau khi nhập xong bạn cần thực hiện bước xác nhận,
+        khi xác nhận xong là bạn đã đặt vé thành công.
+    </string>
     <string name="content2">content 2</string>
     <string name="content3">content 3</string>
     <string name="content4">content 4</string>

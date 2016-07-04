@@ -7,7 +7,7 @@
     <TextView
         android:textSize="25dp"
         android:textColor="#FFFFFF"
-        android:text="Sua thong tin khach hang "
+        android:text="Sửa thông tin khách hàng"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -88,7 +88,7 @@
             android:gravity="center"
             android:textColor="#fff"
             android:textSize="20dp"
-            android:text="Sua Ve"/>
+            android:text="Sửa vé"/>
     </RelativeLayout>
 
 </LinearLayout>
