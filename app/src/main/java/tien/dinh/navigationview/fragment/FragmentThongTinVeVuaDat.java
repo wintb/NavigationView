@@ -2,6 +2,7 @@ package tien.dinh.navigationview.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,6 +28,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import tien.dinh.navigationview.R;
+import tien.dinh.navigationview.activity.MainActivity;
 import tien.dinh.navigationview.mics.Constant;
 
 /**
@@ -126,7 +128,19 @@ public class FragmentThongTinVeVuaDat extends Fragment {
 
                 try {
                     String result = new goiWebservice().execute(Constant.INSERT_URL).get();
-                    if (result.equalsIgnoreCase("Đặt vé thành công !")) {
+
+                    if (result.equalsIgnoreCase("")) {
+                        new AlertDialog.Builder(getActivity())
+                                .setTitle("Lỗi kết nối server. ")
+                                .setMessage("")
+                                .setIcon(R.drawable.warning)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //backDatveFragment.setBackDatVe();
+                                    }
+                                }).show();
+                    }else{
                         new AlertDialog.Builder(getActivity())
                                 .setTitle(result)
                                 .setMessage("\n\n" + "Quay trở lại menu chính để xem chi tiết vé đã đặt")
@@ -134,32 +148,13 @@ public class FragmentThongTinVeVuaDat extends Fragment {
                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        backDatveFragment.setBackDatVe();
-                                    }
-                                }).show();
-                    }else if(result.equalsIgnoreCase("Đặt vé không thành công!")){
-                        new AlertDialog.Builder(getActivity())
-                                .setTitle(result)
-                                .setMessage("\n\n" + "Lỗi kết nối server. Xin vui lòng thử lại!")
-                                .setIcon(R.drawable.warning)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                }).show();
-                    }else if (result.equalsIgnoreCase("")){
-                        new AlertDialog.Builder(getActivity())
-                                .setTitle("Đặt vé không thành công")
-                                .setMessage("\n\n" + "Lỗi kết nối server. Xin vui lòng thử lại!")
-                                .setIcon(R.drawable.warning)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
+                                        //backDatveFragment.setBackDatVe();
+                                        Intent activityIntent = new Intent(getActivity(), MainActivity.class);
+                                        startActivity(activityIntent);
                                     }
                                 }).show();
                     }
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {

@@ -38,12 +38,10 @@ import java.util.concurrent.ExecutionException;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tien.dinh.navigationview.R;
-import tien.dinh.navigationview.mics.Constant;
 import tien.dinh.navigationview.json.ReadJson;
+import tien.dinh.navigationview.mics.Constant;
 import tien.dinh.navigationview.mics.datetime.CompareDateTime;
 import tien.dinh.navigationview.mics.datetime.DatetimeFormater;
-import tien.dinh.navigationview.utils.CheckInternet;
-import tien.dinh.navigationview.utils.ShowDialog;
 
 /**
  * Created by VuVanThang on 3/29/2016.
@@ -277,7 +275,7 @@ public class FragmentDatVeMotChieu extends Fragment{
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setMessage("Creating Product..");
+            progressDialog.setMessage("Loading..");
             progressDialog.setIndeterminate(false);
             progressDialog.setCancelable(true);
             progressDialog.show();
@@ -295,13 +293,13 @@ public class FragmentDatVeMotChieu extends Fragment{
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            progressDialog.dismiss();
             arrayList = new ArrayList<String>();
             try {
                 JSONArray MangDanhSachChuyen = new JSONArray(s);
                 for (int i = 0; i < MangDanhSachChuyen.length(); i++) {
                     JSONObject ChuyenDi = MangDanhSachChuyen.getJSONObject(i);
                     arrayList.add(ChuyenDi.getString("TenChuyen"));
-
                     Log.d("JSON_OBJECT", ChuyenDi.getString("TenChuyen").toString());
                 }
 
@@ -314,10 +312,11 @@ public class FragmentDatVeMotChieu extends Fragment{
 
                     }
                 });
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            progressDialog.dismiss();
+
         }
 
     }
