@@ -2,6 +2,7 @@ package tien.dinh.navigationview.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import java.util.concurrent.ExecutionException;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tien.dinh.navigationview.R;
+import tien.dinh.navigationview.activity.MainActivity;
 import tien.dinh.navigationview.dao.ThongTinVe;
 import tien.dinh.navigationview.json.JsonHuyVe;
 import tien.dinh.navigationview.json.JsonSoDoghe;
@@ -126,7 +128,8 @@ public class FragmentThongTinVeDaDat extends Fragment {
                                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
-
+                                                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                                                        startActivity(intent);
                                                     }
                                                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                             @Override

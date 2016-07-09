@@ -1,6 +1,7 @@
 package tien.dinh.navigationview.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,20 +45,28 @@ public class AdapterHuongDan extends PagerAdapter {
         ImageView imageView = (ImageView) itemView.findViewById(R.id.fragment_huongdan_icon);
         TextView textView = (TextView) itemView.findViewById(R.id.fragment_huongdan_title);
 
+        Typeface face1 = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Regular.ttf");
+        Typeface face2 = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Bold.ttf");
+        textView.setTypeface(face1);
+
         switch (position) {
             case 0:
-                BitmapLoader.LoadImageNotScale(context, imageView, R.drawable.icon_timchuyen);
-                BitmapLoader.LoadImageNotScale(context, imageBackground, R.drawable.background_guide_scan);
+                BitmapLoader.LoadImageNotScale(context, imageView, R.drawable.icon_huongdan_timchuyen);
+                BitmapLoader.LoadImageNotScale(context, imageBackground, R.drawable.background_huongdan);
                 break;
 
             case 1:
-                BitmapLoader.LoadImageNotScale(context, imageView, R.drawable.icon_order_guide);
-                BitmapLoader.LoadImageNotScale(context, imageBackground, R.drawable.background_guide__all_food_drink);
+                BitmapLoader.LoadImageNotScale(context, imageView, R.drawable.iocn_b);
+                BitmapLoader.LoadImageNotScale(context, imageBackground, R.drawable.background_huongdan);
                 break;
 
             case 2:
-                BitmapLoader.LoadImageNotScale(context, imageView, R.drawable.icon_finish_food);
-                BitmapLoader.LoadImageNotScale(context, imageBackground, R.drawable.background_guide_payment_bill);
+                BitmapLoader.LoadImageNotScale(context, imageView, R.drawable.icon_c);
+                BitmapLoader.LoadImageNotScale(context, imageBackground, R.drawable.background_huongdan);
+                break;
+            case 3:
+                BitmapLoader.LoadImageNotScale(context, imageView, R.drawable.icon_d);
+                BitmapLoader.LoadImageNotScale(context, imageBackground, R.drawable.background_huongdan);
                 break;
         }
 

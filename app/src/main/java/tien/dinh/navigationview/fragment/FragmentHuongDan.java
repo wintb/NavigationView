@@ -31,8 +31,9 @@ public class FragmentHuongDan extends Fragment implements ViewPager.OnPageChange
 
     private String[] title = {
             "Chọn chuyến đi và ngày đi \n Nhấn Tìm chuyến để hiển thị danh sách các chuyến",
-            "Order all food and drinks \n whatever you want",
-            "Make a payment on your bill \n and enjoy you food"};
+            "Chọn ghế cho chuyến đi đã chọn",
+            "Điền thông tin khách hàng \n Yêu cầu xe trung chuyển ở phần ghi chú",
+            "Điền SDT và CMND để xem vé\n Sau đó thao tác xóa, sửa hoặc đổi vé"};
 
     @Nullable
     @Override

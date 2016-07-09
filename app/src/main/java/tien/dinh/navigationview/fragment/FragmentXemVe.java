@@ -1,6 +1,7 @@
 package tien.dinh.navigationview.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,10 +9,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +37,7 @@ public class FragmentXemVe extends Fragment{
     TextView txtThongBao;
     TextView txtTitleXemVe;
     Button btnXemVe;
+    LinearLayout layout_xemve;
     ReadJson ReadJsonThongTinVeKhach;
     String jsonThongTinVeKhach;
     OnNameSetListener onNameSetListener;
@@ -47,6 +52,8 @@ public class FragmentXemVe extends Fragment{
         txtThongBao = (TextView) view.findViewById(R.id.txtThongBao);
         txtTitleXemVe = (TextView) view.findViewById(R.id.fragment_xeve_title);
         btnXemVe = (Button) view.findViewById(R.id.btnXemVe);
+        layout_xemve = (LinearLayout) view.findViewById(R.id.layout_fragment_xemve);
+        setupUI(layout_xemve);
         setTypeFace();
 
         btnXemVe.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +93,33 @@ public class FragmentXemVe extends Fragment{
         
 
         return view;
+    }
+
+    public void setupUI( final View view) {
+
+        //Set up touch listener for non-text box views to hide keyboard.
+        if (!(view instanceof EditText)) {
+
+            view.setOnTouchListener(new View.OnTouchListener() {
+
+                public boolean onTouch(View v, MotionEvent event) {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    return false;
+                }
+
+            });
+        }
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+
+                View innerView = ((ViewGroup) view).getChildAt(i);
+
+                setupUI( innerView);
+            }
+        }
     }
 
     public interface OnNameSetListener{

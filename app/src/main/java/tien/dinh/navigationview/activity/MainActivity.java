@@ -1,33 +1,58 @@
 package tien.dinh.navigationview.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
+import com.github.siyamed.shapeimageview.CircularImageView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Arrays;
 import java.util.List;
 
 import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.adapter.AdapterDanhSachChuyen;
 import tien.dinh.navigationview.fragment.FragmentAbout;
+import tien.dinh.navigationview.fragment.FragmentDanhSachChuyen;
+import tien.dinh.navigationview.fragment.FragmentDatVeMotChieu;
 import tien.dinh.navigationview.fragment.FragmentHuongDan;
 import tien.dinh.navigationview.fragment.FragmentLienHe;
-import tien.dinh.navigationview.fragment.FragmentSuaThongTinVe;
-import tien.dinh.navigationview.fragment.FragmentThongTinVeVuaDat;
-import tien.dinh.navigationview.fragment.FragmentTabhostSoDoGhe;
-import tien.dinh.navigationview.fragment.FragmentSoDoGheTang1;
-import tien.dinh.navigationview.fragment.FragmentTabhostDatVe;
-import tien.dinh.navigationview.fragment.FragmentXemVe;
 import tien.dinh.navigationview.fragment.FragmentNhapThongTinKhach;
+import tien.dinh.navigationview.fragment.FragmentSoDoGheTang1;
+import tien.dinh.navigationview.fragment.FragmentSuaThongTinVe;
+import tien.dinh.navigationview.fragment.FragmentTabhostDatVe;
+import tien.dinh.navigationview.fragment.FragmentTabhostSoDoGhe;
 import tien.dinh.navigationview.fragment.FragmentThongTinVeDaDat;
-import tien.dinh.navigationview.fragment.FragmentDatVeMotChieu;
-import tien.dinh.navigationview.fragment.FragmentDanhSachChuyen;
+import tien.dinh.navigationview.fragment.FragmentThongTinVeVuaDat;
+import tien.dinh.navigationview.fragment.FragmentXemVe;
+import tien.dinh.navigationview.utils.BitmapLoader;
 
 /**
  * Created by VuVanThang on 5/17/2016.
@@ -45,12 +70,36 @@ public class MainActivity extends AppCompatActivity implements
     DrawerLayout drawerLayout;
     NavigationView navigation;
     ActionBarDrawerToggle drawerToggle;
+    TextView txtName;
+    TextView txtMail;
+    CircularImageView imgAvatar;
+    Button btnLogin_Logout;
+    Button btnShare;
+
+    //--------------------------------Facebook----------------------
+    private CallbackManager callbackManager;
+    private ShareDialog shareDialog;  // intialize facebook shareDialog.
+    private final Handler handler = new Handler();
+    private String profileUser;
+    private String userId;
+    private String email;
 
     @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_main);
+        navigation = (NavigationView) findViewById(R.id.navigation_view);
+        shareDialog = new ShareDialog(this);
+
+        View headerLayout = navigation.getHeaderView(0);
+        btnLogin_Logout = (Button)headerLayout.findViewById(R.id.nav_header_Login_Logout);
+        btnShare = (Button) headerLayout.findViewById(R.id.nav_header_Share);
+        txtName = (TextView) headerLayout.findViewById(R.id.nav_header_name);
+        txtMail = (TextView) headerLayout.findViewById(R.id.nav_header_mail);
+        imgAvatar = (CircularImageView) headerLayout.findViewById(R.id.nav_header_image_avatar);
 
 
         FragmentTabhostDatVe fragmentTabhostDatVe = new FragmentTabhostDatVe();
@@ -69,10 +118,34 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-
     private void initInstances() {
 
-        navigation = (NavigationView) findViewById(R.id.navigation_view);
+        if (btnLogin_Logout.getText().equals("Login Facebook")){
+            btnShare.setVisibility(View.GONE);
+        }else if (btnLogin_Logout.getText().equals("Logout Facebook")){
+            btnShare.setVisibility(View.VISIBLE);
+        }
+
+        btnLogin_Logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (btnLogin_Logout.getText().equals("Login Facebook")) {
+                    LoginFacebook();
+
+                } else if (btnLogin_Logout.getText().equals("Logout Facebook")) {
+                    LogoutFacebook();
+                }
+
+            }
+        });
+
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShareFacebook();
+            }
+        });
+
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -123,6 +196,8 @@ public class MainActivity extends AppCompatActivity implements
                         navigation.setCheckedItem(id);
                         drawerLayout.closeDrawer(navigation);
                         break;
+
+
                 }
 
                 return false;
@@ -131,6 +206,104 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
+    //--------------------------------------API Facebook--------------------------------------------
+
+    private void ShareFacebook(){
+
+        if (ShareDialog.canShow(ShareLinkContent.class)) {
+            ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                    .setContentTitle("How to integrate Linkedin from your app")
+                    .setImageUrl(Uri.parse("https://www.numetriclabz.com/wp-content/uploads/2015/11/114.png"))
+                    .setContentDescription(
+                            "simple LinkedIn integration")
+                    .setContentUrl(Uri.parse("https://www.numetriclabz.com/android-linkedin-integration-login-tutorial/"))
+                    .build();
+
+            shareDialog.show(linkContent);  // Show facebook ShareDialog
+        }
+    }
+
+    private void LoginFacebook(){
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile","email"));
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(final LoginResult loginResult) {
+
+                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(final JSONObject object, final GraphResponse response) {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Log.d("MainActivityGraph", response.toString());
+                                    Log.d("MainActivity", object.toString());
+                                    profileUser = object.getString("name");
+                                    userId = object.getString("id");
+                                    email = object.getString("email");
+                                    txtMail.setText(email);
+                                    txtName.setText(profileUser);
+
+                                    Glide.with(getApplicationContext())
+                                            .load("https://graph.facebook.com/" + userId + "/picture??width=100&&height=100")
+                                            .asBitmap()
+                                            .into(imgAvatar);
+                                    btnLogin_Logout.setText("Logout Facebook");
+                                    btnShare.setVisibility(View.VISIBLE);
+
+                                    /*Glide.with(getApplicationContext())
+                                            .load(urlPic)
+                                            .asBitmap()
+                                            .override(500, Target.SIZE_ORIGINAL)
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                            .skipMemoryCache(true)
+                                            .into(imgAvatar);*/
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                    }
+                });
+
+                Bundle data = new Bundle();
+                data.putString("fields", "id,name,picture,email");
+                request.setParameters(data);
+                request.executeAsync();
+
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
+    }
+
+    private void LogoutFacebook(){
+        LoginManager.getInstance().logOut();
+        txtName.setText("");
+        txtMail.setText("");
+        BitmapLoader.LoadImageNotScale(this,imgAvatar,R.drawable.icon_avatar);
+        btnLogin_Logout.setText("Login Facebook");
+        btnShare.setVisibility(View.GONE);
+    }
+
+
+    //----------------------------------------------------------------------------------------------
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     public void onPostCreate(Bundle savedInstanceState) {

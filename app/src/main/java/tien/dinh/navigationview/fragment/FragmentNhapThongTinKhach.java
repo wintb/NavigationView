@@ -1,14 +1,19 @@
 package tien.dinh.navigationview.fragment;
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -26,6 +31,7 @@ public class FragmentNhapThongTinKhach extends Fragment {
     TextView editHoTen, editSDT, editCMND, editGhiChu, txtThongBao, txtTitle;
     Button btnDatVe;
     DatVe interfaceDatVe;
+    LinearLayout layout_NhapThongTinKhach;
 
     private String HoTen = "";
     private String CMND = "";
@@ -44,6 +50,8 @@ public class FragmentNhapThongTinKhach extends Fragment {
         btnDatVe = (Button)view.findViewById(R.id.btnDatVe);
         txtThongBao = (TextView)view.findViewById(R.id.txtThongBao);
         txtTitle = (TextView) view.findViewById(R.id.fragment_nhapthongtinve_title);
+        layout_NhapThongTinKhach = (LinearLayout) view.findViewById(R.id.layout_fragment_nhapthongtin);
+        setupUI(layout_NhapThongTinKhach);
         setTypeFace();
 
         interfaceDatVe = (DatVe) getActivity();
@@ -112,6 +120,34 @@ public class FragmentNhapThongTinKhach extends Fragment {
         });
         return view;
     }
+
+    public void setupUI( final View view) {
+
+        //Set up touch listener for non-text box views to hide keyboard.
+        if (!(view instanceof EditText)) {
+
+            view.setOnTouchListener(new View.OnTouchListener() {
+
+                public boolean onTouch(View v, MotionEvent event) {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    return false;
+                }
+
+            });
+        }
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+
+                View innerView = ((ViewGroup) view).getChildAt(i);
+
+                setupUI( innerView);
+            }
+        }
+    }
+
 
     private void setTypeFace(){
         Typeface face1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");

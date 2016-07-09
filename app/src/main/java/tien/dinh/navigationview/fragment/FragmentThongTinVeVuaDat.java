@@ -30,6 +30,8 @@ import java.util.concurrent.ExecutionException;
 import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.activity.MainActivity;
 import tien.dinh.navigationview.mics.Constant;
+import tien.dinh.navigationview.utils.CheckInternet;
+import tien.dinh.navigationview.utils.ShowDialog;
 
 /**
  * Created by DinhTien on 31-05-2016.
@@ -125,41 +127,48 @@ public class FragmentThongTinVeVuaDat extends Fragment {
         txtXacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (CheckInternet.isConnected(getActivity())){
+                    try {
+                        String result = new goiWebservice().execute(Constant.INSERT_URL).get();
 
-                try {
-                    String result = new goiWebservice().execute(Constant.INSERT_URL).get();
+                        if (result.equalsIgnoreCase("")) {
+                            new AlertDialog.Builder(getActivity())
+                                    .setTitle("Lỗi kết nối server. ")
+                                    .setMessage("")
+                                    .setIcon(R.drawable.warning)
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //backDatveFragment.setBackDatVe();
+                                        }
+                                    }).show();
+                        }else{
+                            new AlertDialog.Builder(getActivity())
+                                    .setTitle(result)
+                                    .setMessage("\n\n" + "Quay trở lại menu chính để xem chi tiết vé đã đặt")
+                                    .setIcon(R.drawable.success)
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //backDatveFragment.setBackDatVe();
+                                            Intent activityIntent = new Intent(getActivity(), MainActivity.class);
+                                            startActivity(activityIntent);
+                                        }
+                                    }).show();
+                        }
 
-                    if (result.equalsIgnoreCase("")) {
-                        new AlertDialog.Builder(getActivity())
-                                .setTitle("Lỗi kết nối server. ")
-                                .setMessage("")
-                                .setIcon(R.drawable.warning)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        //backDatveFragment.setBackDatVe();
-                                    }
-                                }).show();
-                    }else{
-                        new AlertDialog.Builder(getActivity())
-                                .setTitle(result)
-                                .setMessage("\n\n" + "Quay trở lại menu chính để xem chi tiết vé đã đặt")
-                                .setIcon(R.drawable.success)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        //backDatveFragment.setBackDatVe();
-                                        Intent activityIntent = new Intent(getActivity(), MainActivity.class);
-                                        startActivity(activityIntent);
-                                    }
-                                }).show();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
                     }
+                }else{
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
+                    String title = "Warning";
+                    String message = "Vui lòng kiểm tra kết nối Internet.";
+                    ShowDialog.show(getActivity(), title, message);
                 }
+
 
             }
         });

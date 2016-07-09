@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Đặt vé xe khách</string>
+    <string name="facebook_app_id">529620640556271</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -76,10 +77,10 @@
     <!-- list title -->
 
     <string name="title1">Tôi muốn đặt vé thì làm như thế nào?</string>
-    <string name="title2">title 2</string>
-    <string name="title3">title 3</string>
-    <string name="title4">title 4</string>
-    <string name="title5">title 5</string>
+    <string name="title2">Làm sao để xem và quản lý được vé của tôi đã đặt?</string>
+    <string name="title3">Khi đi xe, làm sao để tôi xác nhận với nhà xe về vé của tôi?</string>
+    <string name="title4">Một người có thể đại diện đặt vé cho nhiều người được không?</string>
+    <string name="title5">Vé của tôi có được đảm bảo không bị hủy ngang hay mất ghế hoặc mất thông tin cá nhân không?</string>
 
 
     <!-- list content -->
@@ -91,8 +92,22 @@
         ghế xong chọn nút chọn ghế để nhập thông tin cá nhân hành khách, sau khi nhập xong bạn cần thực hiện bước xác nhận,
         khi xác nhận xong là bạn đã đặt vé thành công.
     </string>
-    <string name="content2">content 2</string>
-    <string name="content3">content 3</string>
-    <string name="content4">content 4</string>
-    <string name="content5">content 5</string>
+    <string name="content2">
+        Khi đã đặt vé thì bạn vào phần xem vé, nhập số điện thoại và số chứng minh nhân dân mà bạn đã nhập khi đặt vé.
+        Trong đó có  tất cả thông tin cá nhân bạn đã cung cấp và thông tin vé bạn đã đặt. Bạn có thể thao tác trên vé
+        của mình như : sửa vé, đổi vé, hủy vé.
+    </string>
+    <string name="content3">
+        Khi bạn đặt vé thì nhà xe đã cung cấp cho bạn một mã vé, bạn sẽ dùng mã vé này để xác nhận với nhà xe trước khi
+        lên xe khởi hành.
+    </string>
+    <string name="content4">
+        Một người có thể đại diện đặt vé cho tối đa 2 người, và bạn chỉ được cung cấp 1 mã vé để xác nhận chung cho 2 vé
+        của bạn.
+    </string>
+    <string name="content5">
+        Hoàn toàn không bạn nhé!\n
+        Vé của bạn hoàn toàn được bảo mật an toàn thông tin cá nhân của bạn và sẽ không có việc vé của bạn bị hủy, mất
+        hay cho người khác sử dụng khi bạn đã đặt.
+    </string>
 </resources>

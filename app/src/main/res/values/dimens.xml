@@ -32,7 +32,9 @@
 
     <!--navigation header-->
     <dimen name="navigation_header_menu_height_width">60dp</dimen>
-    <dimen name="navigation_header_menu_height_width_image">120dp</dimen>
+    <dimen name="navigation_header_menu_height_width_image">80dp</dimen>
+    <dimen name="navigation_header_button_width">100dp</dimen>
+    <dimen name="navigation_header_button_height">28dp</dimen>
 
     <!--thong tin ve da dat-->
     <dimen name="thongtinvedadat_button_width">70dp</dimen>
