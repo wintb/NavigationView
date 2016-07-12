@@ -39,8 +39,11 @@ import java.util.List;
 
 import tien.dinh.navigationview.R;
 import tien.dinh.navigationview.adapter.AdapterDanhSachChuyen;
+import tien.dinh.navigationview.adapter.AdapterDanhSachNhaXe;
+import tien.dinh.navigationview.dialog.DialogNhaXeDetail;
 import tien.dinh.navigationview.fragment.FragmentAbout;
 import tien.dinh.navigationview.fragment.FragmentDanhSachChuyen;
+import tien.dinh.navigationview.fragment.FragmentDanhSachNhaXe;
 import tien.dinh.navigationview.fragment.FragmentDatVeMotChieu;
 import tien.dinh.navigationview.fragment.FragmentHuongDan;
 import tien.dinh.navigationview.fragment.FragmentLienHe;
@@ -64,7 +67,9 @@ public class MainActivity extends AppCompatActivity implements
         FragmentNhapThongTinKhach.DatVe,
         FragmentThongTinVeDaDat.DoiGhe,
         FragmentThongTinVeVuaDat.backDatve,
-        FragmentThongTinVeDaDat.SuaVe{
+        FragmentThongTinVeDaDat.SuaVe,
+        AdapterDanhSachNhaXe.NhaXeDetail
+{
 
     DrawerLayout drawerLayout;
     NavigationView navigation;
@@ -101,11 +106,12 @@ public class MainActivity extends AppCompatActivity implements
         imgAvatar = (CircularImageView) headerLayout.findViewById(R.id.nav_header_image_avatar);
 
 
-        //FragmentTabhostDatVe fragmentTabhostDatVe = new FragmentTabhostDatVe();
-        FragmentDatVeMotChieu fragmentTabhostDatVe = new FragmentDatVeMotChieu();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentholder, fragmentTabhostDatVe);
-        fragmentTransaction.commit();
+
+        FragmentDanhSachNhaXe fragmentDanhSachNhaXe = new FragmentDanhSachNhaXe(getBaseContext());
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentholder,fragmentDanhSachNhaXe)
+                .commit();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         drawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.opendrawer, R.string.closedrawer);
@@ -504,5 +510,11 @@ public class MainActivity extends AppCompatActivity implements
                 .addToBackStack("suave")
                 .commit();
 
+    }
+
+    @Override
+    public void goDetail() {
+        Intent intent = new Intent(this, DialogNhaXeDetail.class);
+        startActivity(intent);
     }
 }
