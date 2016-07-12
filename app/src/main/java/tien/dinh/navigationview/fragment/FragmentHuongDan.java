@@ -40,7 +40,7 @@ public class FragmentHuongDan extends Fragment implements ViewPager.OnPageChange
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_huongdan, container, false);
         ButterKnife.bind(this,rootView);
-
+        getActivity().setTitle("Hướng dẫn");
         viewPagerApdapter = new AdapterHuongDan(getActivity(), title);
         guide_viewpager.setAdapter(viewPagerApdapter);
         guide_viewpager.setCurrentItem(0);

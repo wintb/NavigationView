@@ -47,7 +47,6 @@ import tien.dinh.navigationview.fragment.FragmentLienHe;
 import tien.dinh.navigationview.fragment.FragmentNhapThongTinKhach;
 import tien.dinh.navigationview.fragment.FragmentSoDoGheTang1;
 import tien.dinh.navigationview.fragment.FragmentSuaThongTinVe;
-import tien.dinh.navigationview.fragment.FragmentTabhostDatVe;
 import tien.dinh.navigationview.fragment.FragmentTabhostSoDoGhe;
 import tien.dinh.navigationview.fragment.FragmentThongTinVeDaDat;
 import tien.dinh.navigationview.fragment.FragmentThongTinVeVuaDat;
@@ -102,7 +101,8 @@ public class MainActivity extends AppCompatActivity implements
         imgAvatar = (CircularImageView) headerLayout.findViewById(R.id.nav_header_image_avatar);
 
 
-        FragmentTabhostDatVe fragmentTabhostDatVe = new FragmentTabhostDatVe();
+        //FragmentTabhostDatVe fragmentTabhostDatVe = new FragmentTabhostDatVe();
+        FragmentDatVeMotChieu fragmentTabhostDatVe = new FragmentDatVeMotChieu();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentholder, fragmentTabhostDatVe);
         fragmentTransaction.commit();
@@ -154,7 +154,8 @@ public class MainActivity extends AppCompatActivity implements
                     case R.id.navigation_item_1:
                         //Do some thing here
                         // add navigation drawer item onclick method here
-                        FragmentTabhostDatVe fragmentTabhostDatVe = new FragmentTabhostDatVe();
+                        //FragmentTabhostDatVe fragmentTabhostDatVe = new FragmentTabhostDatVe();
+                        FragmentDatVeMotChieu fragmentTabhostDatVe = new FragmentDatVeMotChieu();
                         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.fragmentholder, fragmentTabhostDatVe).addToBackStack(null);
                         fragmentTransaction.commit();
@@ -475,7 +476,8 @@ public class MainActivity extends AppCompatActivity implements
      */
     @Override
     public void setBackDatVe() {
-        FragmentTabhostDatVe fragmentTabhostDatVe = new FragmentTabhostDatVe();
+        //FragmentTabhostDatVe fragmentTabhostDatVe = new FragmentTabhostDatVe();
+        FragmentDatVeMotChieu fragmentTabhostDatVe = new FragmentDatVeMotChieu();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentholder, fragmentTabhostDatVe)

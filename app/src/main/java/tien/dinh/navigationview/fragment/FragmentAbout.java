@@ -38,6 +38,7 @@ public class FragmentAbout extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_about,container,false);
+        getActivity().setTitle("About");
         recyclerAbout = (RecyclerView)view.findViewById(R.id.recyclerAbout);
         listItemses = new ArrayList<>();
         setRecyclerAbout(recyclerAbout);

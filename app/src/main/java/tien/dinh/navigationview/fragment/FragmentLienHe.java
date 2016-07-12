@@ -20,6 +20,7 @@ public class FragmentLienHe extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lien_he,container,false);
+        getActivity().setTitle("Liên hệ");
         txtLienHe = (TextView)view.findViewById(R.id.txtLienHe);
         return view;
     }

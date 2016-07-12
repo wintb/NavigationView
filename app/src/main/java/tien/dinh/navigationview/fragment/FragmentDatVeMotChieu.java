@@ -79,6 +79,7 @@ public class FragmentDatVeMotChieu extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_dat_ve_mot_chieu,container,false);
         ButterKnife.bind(this,rootView);
+        getActivity().setTitle("Tìm chuyến");
         setTypeFace();
 
         //Lấy ngày hiện tại lên textview

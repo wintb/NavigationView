@@ -47,6 +47,7 @@ public class FragmentXemVe extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_xem_ve,container,false);
+        getActivity().setTitle("Xem vé");
         editCMND = (EditText) view.findViewById(R.id.editCMND);
         editSDT = (EditText) view.findViewById(R.id.editSDT);
         txtThongBao = (TextView) view.findViewById(R.id.txtThongBao);
