@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements
 
 
 
-        FragmentDanhSachNhaXe fragmentDanhSachNhaXe = new FragmentDanhSachNhaXe(getBaseContext());
+        FragmentDanhSachNhaXe fragmentDanhSachNhaXe = new FragmentDanhSachNhaXe(MainActivity.this);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentholder,fragmentDanhSachNhaXe)
@@ -157,22 +157,30 @@ public class MainActivity extends AppCompatActivity implements
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int id = menuItem.getItemId();
                 switch (id) {
+                    case R.id.navigation_item_0:
+                        FragmentDanhSachNhaXe fragmentDanhSachNhaXe = new FragmentDanhSachNhaXe(MainActivity.this);
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragmentholder, fragmentDanhSachNhaXe)
+                                .addToBackStack(null)
+                                .commit();
+                        navigation.setCheckedItem(id);
+                        drawerLayout.closeDrawer(navigation);
                     case R.id.navigation_item_1:
-                        //Do some thing here
-                        // add navigation drawer item onclick method here
-                        //FragmentTabhostDatVe fragmentTabhostDatVe = new FragmentTabhostDatVe();
                         FragmentDatVeMotChieu fragmentTabhostDatVe = new FragmentDatVeMotChieu();
-                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragmentholder, fragmentTabhostDatVe).addToBackStack(null);
-                        fragmentTransaction.commit();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragmentholder, fragmentTabhostDatVe)
+                                .commit();
                         navigation.setCheckedItem(id);
                         drawerLayout.closeDrawer(navigation);
                         break;
                     case R.id.navigation_item_2:
                         FragmentXemVe fragmentXemVe = new FragmentXemVe();
-                        FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction2.replace(R.id.fragmentholder, fragmentXemVe);
-                        fragmentTransaction2.commit();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragmentholder, fragmentXemVe)
+                                .commit();
                         navigation.setCheckedItem(id);
                         drawerLayout.closeDrawer(navigation);
                         break;

@@ -33,7 +33,7 @@ public class AdapterDanhSachNhaXe extends RecyclerView.Adapter<AdapterDanhSachNh
     public ViewHolderNhaXe onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.custom_fragment_danh_sach_nha_xe,parent,false);
+                .inflate(R.layout.custom_fragment_danh_sach_nha_xe, parent, false);
         ViewHolderNhaXe viewHolderNhaXe = new ViewHolderNhaXe(view);
         return viewHolderNhaXe;
     }
@@ -55,7 +55,6 @@ public class AdapterDanhSachNhaXe extends RecyclerView.Adapter<AdapterDanhSachNh
         public ViewHolderNhaXe(View itemView) {
             super(itemView);
             imgNhaXe = (ImageView)itemView.findViewById(R.id.imgNhaXe);
-
             imgNhaXe.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

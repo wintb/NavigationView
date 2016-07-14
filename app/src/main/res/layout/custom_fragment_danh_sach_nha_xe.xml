@@ -4,11 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/rounded_intro_nha_xe">
+    >
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imgNhaXe"
-        android:src="@drawable/icon_avatar"/>
+        android:src="@drawable/icon_avatar"
+        android:background="@drawable/rounded_intro_nha_xe"/>
 </LinearLayout>

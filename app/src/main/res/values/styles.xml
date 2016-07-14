@@ -12,4 +12,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="ThemeDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowBackground">@drawable/rounded_intro_nha_xe</item>
+    </style>
+
 </resources>
