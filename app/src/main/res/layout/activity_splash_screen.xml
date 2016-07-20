@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splash"
-    tools:context="tien.dinh.navigationview.activity.SplashScreenActivity">
+    tools:context="om.bluebirdaward.busticket.activity.SplashScreenActivity">
 
     <TextView
         android:layout_width="wrap_content"

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "tien.dinh.navigationview"
+        applicationId "com.bluebirdaward.busticket"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
