@@ -6,6 +6,6 @@ package om.bluebirdaward.busticket.interfaces;
 public interface Response {
 
     void onStart();
-    void onSuccess(int error_code, String message, Object obj);
+    void onSuccess(int code, String message, Object obj);
     void onFailure();
 }

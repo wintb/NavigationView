@@ -67,8 +67,7 @@ public class MainActivity extends AppCompatActivity implements
         FragmentNhapThongTinKhach.DatVe,
         FragmentThongTinVeDaDat.DoiGhe,
         FragmentThongTinVeVuaDat.backDatve,
-        FragmentThongTinVeDaDat.SuaVe,
-        AdapterDanhSachNhaXe.NhaXeDetail
+        FragmentThongTinVeDaDat.SuaVe
 {
 
     DrawerLayout drawerLayout;
@@ -520,9 +519,4 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    @Override
-    public void goDetail() {
-        Intent intent = new Intent(this, DialogNhaXeDetail.class);
-        startActivity(intent);
-    }
 }
