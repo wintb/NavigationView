@@ -9,7 +9,7 @@ public class Constant {
      * KEY_CHECK_FRAGMENT = 0 : sơ đồ ghế cho xem vé
      * KEY_CHECK_FRAGMENT = 1 :sơ đồ ghế cho đặt vé
      */
-    public static final String ROOT_URL = "http://doanchuyennganh.96.lt/";
+    public static final String ROOT_URL = "http://doanchuyennganh.96.lt/index.php/api/";
     public static int KEY_CHECK_FRAGMENT = 2;
     public static final String URL_TAIXE = ROOT_URL + "json_tai_xe.php";
     public static final String URL_SODOGHE = ROOT_URL + "Json_so_do_ghe.php";

@@ -8,26 +8,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import om.bluebirdaward.busticket.R;
+import om.bluebirdaward.busticket.dao.NhaXe.ListNhaXe;
 import om.bluebirdaward.busticket.dialog.DialogNhaXeDetail;
 
 /**
  * Created by Trinh Dinh Tien on 7/10/2016.
  */
-public class AdapterDanhSachNhaXe extends RecyclerView.Adapter<AdapterDanhSachNhaXe.ViewHolderNhaXe>{
+public class AdapterDanhSachNhaXe extends RecyclerView.Adapter<AdapterDanhSachNhaXe.ViewHolderNhaXe> {
 
     private Context context;
-    private ArrayList arrayList;
-    NhaXeDetail nhaXeDetail;
+    private ArrayList<ListNhaXe> listNhaXe = new ArrayList<>();
 
-    public AdapterDanhSachNhaXe(Context context, ArrayList arrayList){
+    public AdapterDanhSachNhaXe(Context context) {
         this.context = context;
-        this.arrayList = arrayList;
-        //nhaXeDetail = (NhaXeDetail) context;
     }
 
+    public void setArrayListNhaXe(ArrayList<ListNhaXe> arr) {
+        listNhaXe = arr;
+        notifyDataSetChanged();
+    }
 
     @Override
     public ViewHolderNhaXe onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -41,24 +45,27 @@ public class AdapterDanhSachNhaXe extends RecyclerView.Adapter<AdapterDanhSachNh
     @Override
     public void onBindViewHolder(ViewHolderNhaXe holder, int position) {
 
+        final ListNhaXe nhaXe = listNhaXe.get(position);
+        Picasso.with(context)
+                .load(nhaXe.url_photo)
+                .into(holder.imgNhaXe);
     }
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return listNhaXe.size();
     }
 
-    class ViewHolderNhaXe extends RecyclerView.ViewHolder{
+    class ViewHolderNhaXe extends RecyclerView.ViewHolder {
 
         public ImageView imgNhaXe;
 
         public ViewHolderNhaXe(View itemView) {
             super(itemView);
-            imgNhaXe = (ImageView)itemView.findViewById(R.id.imgNhaXe);
+            imgNhaXe = (ImageView) itemView.findViewById(R.id.imgNhaXe);
             imgNhaXe.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    nhaXeDetail.goDetail();
                     Intent intent = new Intent(context, DialogNhaXeDetail.class);
                     context.startActivity(intent);
                 }
@@ -67,7 +74,4 @@ public class AdapterDanhSachNhaXe extends RecyclerView.Adapter<AdapterDanhSachNh
 
     }
 
-    public interface NhaXeDetail{
-        void goDetail();
-    }
 }
