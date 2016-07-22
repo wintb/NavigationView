@@ -9,15 +9,15 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_avatar"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:id="@+id/imgNhaXeDetail"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Text gioi thieu ve nha xe"
         android:gravity="center"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:id="@+id/txtAboutNhaXeDetail"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,14 +26,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/phone_contact"
+            android:src="@drawable/phone"
             android:id="@+id/imgPhone"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0978055271"
-            android:id="@+id/txtPhone"
+            android:id="@+id/txtPhoneNhaXeDetail"
             android:layout_marginLeft="5dp"/>
     </LinearLayout>
     <LinearLayout
@@ -54,6 +53,7 @@
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:id="@+id/ratingNhaXeDetail"/>
 
 </LinearLayout>

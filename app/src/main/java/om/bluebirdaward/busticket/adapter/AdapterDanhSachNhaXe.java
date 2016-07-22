@@ -2,6 +2,7 @@ package om.bluebirdaward.busticket.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,8 +48,19 @@ public class AdapterDanhSachNhaXe extends RecyclerView.Adapter<AdapterDanhSachNh
 
         final ListNhaXe nhaXe = listNhaXe.get(position);
         Picasso.with(context)
-                .load(nhaXe.url_photo)
+                .load(nhaXe.image)
                 .into(holder.imgNhaXe);
+
+        holder.imgNhaXe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("carmaker_id",nhaXe.id);
+                Intent intent = new Intent(context, DialogNhaXeDetail.class);
+                intent.putExtra("my_id",bundle);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -63,13 +75,7 @@ public class AdapterDanhSachNhaXe extends RecyclerView.Adapter<AdapterDanhSachNh
         public ViewHolderNhaXe(View itemView) {
             super(itemView);
             imgNhaXe = (ImageView) itemView.findViewById(R.id.imgNhaXe);
-            imgNhaXe.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, DialogNhaXeDetail.class);
-                    context.startActivity(intent);
-                }
-            });
+
         }
 
     }
