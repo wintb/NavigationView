@@ -11,130 +11,111 @@
         android:background="@color/colormain"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
 
-        <TextView
-            android:gravity="center"
-            android:id="@+id/Fragment_DanhSachchuyen_txtChuyenDi"
-            android:text="Tỉnh A -> Tỉnh B"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:paddingTop="3dp"
-            android:paddingBottom="8dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:gravity="center"
-            android:id="@+id/Fragment_DanhSachchuyen_txtNgayDi"
-            android:text="Ngày a-b-c"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:paddingBottom="8dp"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thai Binh"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#FFFFFF"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ha Noi"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:id="@+id/layoutLocate">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/placeholder"
+                android:layout_weight="1"
+                android:layout_gravity="center"/>
 
-        <TextView
-            android:gravity="center"
-            android:id="@+id/Fragment_DanhSachchuyen_txtLoTrinh"
-            android:text="Lộ trình 100km"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:paddingBottom="8dp"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bus" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/placeholder"
+                android:layout_weight="1"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:weightSum="4">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/rounded_line"
+                />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/rounded_line"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1000 km"
+                android:textColor="#FFFFFF"
+                android:gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="18/07/2016"
+                android:textColor="#FFFFFF"
+                android:gravity="center"/>
+        </LinearLayout>
     </LinearLayout>
 
-
-    <!--Danh sach cac chuyen xe di trong ngay-->
-    <TextView
-        android:id="@+id/Fragment_DanhSachchuyen_txtTitleDanhSachChuyen"
-        android:gravity="center"
-        android:textColor="@color/colormain"
-        android:textSize="25dp"
-        android:text="Danh sách các chuyến"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        >
-
-        <TextView
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textSize="@dimen/text_sise_larger1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Mã Tài"
-            android:id="@+id/Fragment_DanhSachchuyen_txtTai"
-            android:layout_weight="1"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/rounded_main"/>
-
-        <TextView
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textSize="@dimen/text_sise_larger1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Giờ Đi"
-            android:id="@+id/Fragment_DanhSachchuyen_txtGioDi"
-            android:layout_weight="1"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/rounded_main"/>
-
-        <TextView
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textSize="@dimen/text_sise_larger1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Giờ Đến"
-            android:id="@+id/Fragment_DanhSachchuyen_txtGioDen"
-            android:layout_weight="1"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/rounded_main"/>
-
-        <TextView
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textSize="@dimen/text_sise_larger1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Giá Vé"
-            android:id="@+id/Fragment_DanhSachchuyen_txtGiaVe"
-            android:layout_weight="1"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/rounded_main"/>
-
-        <TextView
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textSize="@dimen/text_sise_larger1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Chọn"
-            android:id="@+id/Fragment_DanhSachchuyen_txtChon"
-            android:layout_weight="1"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/rounded_main"/>
-    </TableRow>
-
-
-    <ListView
-        android:dividerHeight="7dp"
-        android:id="@+id/DanhSachChuyenDi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp">
-
-    </ListView>
-
-
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </LinearLayout>
