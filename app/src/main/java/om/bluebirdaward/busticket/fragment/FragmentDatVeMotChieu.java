@@ -335,6 +335,8 @@ public class FragmentDatVeMotChieu extends Fragment{
                             txtChuyenDi.setText(name.get(position).toString());
                         }
                     });
+                }else {
+
                 }
             }
 
