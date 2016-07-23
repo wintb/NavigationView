@@ -20,4 +20,17 @@ public class ShowDialog {
         dialog.show();
     }
 
+    private static ProgressDialog progressDialog;
+    public static void showLoading(Context context){
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setIndeterminate(false);
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+    }
+
+    public static void dimissLoading(){
+        progressDialog.dismiss();
+    }
+
 }

@@ -21,27 +21,22 @@ import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import om.bluebirdaward.busticket.R;
+import om.bluebirdaward.busticket.dao.NhaXe.ChuyenDi;
+import om.bluebirdaward.busticket.dao.NhaXe.HangXe;
+import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.json.ReadJson;
-import om.bluebirdaward.busticket.mics.Constant;
 import om.bluebirdaward.busticket.mics.datetime.CompareDateTime;
 import om.bluebirdaward.busticket.mics.datetime.DatetimeFormater;
+import om.bluebirdaward.busticket.request.ListChuyenDiRequest;
+import om.bluebirdaward.busticket.request.ListHangXeRequest;
 import om.bluebirdaward.busticket.utils.CheckInternet;
 import om.bluebirdaward.busticket.utils.ShowDialog;
 
@@ -62,6 +57,14 @@ public class FragmentDatVeMotChieu extends Fragment{
     ImageView imgChuyenDi;
     @Bind(R.id.btnTimChuyenTab1)
     Button btnTimChuyen;
+    @Bind(R.id.txtHangXe)
+    TextView txtHangXe;
+    @Bind(R.id.layout_hangxe)
+    RelativeLayout layout_hangxe;
+    @Bind(R.id.layout_chuyendi)
+    RelativeLayout layout_chuyendi;
+    @Bind(R.id.layout_ngaydi)
+    RelativeLayout layout_ngaydi;
 
     Context context;
     String date,months,years;
@@ -87,9 +90,11 @@ public class FragmentDatVeMotChieu extends Fragment{
         datetimeFormater.datetimecurrent(txtDate);
         // So sánh ngày hiện tại với ngày đã chọn
         compareDateTime = new CompareDateTime(getActivity());
+
+        //Chọn hãng xe
+        chonHangXe();
         //chọn chuyến đi
         chonChuyen();
-
         //chon ngay thang di
         ChonNgay();
 
@@ -99,26 +104,7 @@ public class FragmentDatVeMotChieu extends Fragment{
             public void onClick(View v) {
 
                 if (CheckInternet.isConnected(getActivity())){
-
-                    //post data to server and get json string
-                    readJsonChuyenDi = new ReadJson(txtChuyenDi.getText().toString(),txtDate.getText().toString());
-                    try {
-                        Json_DanhSach_Chuyen = new GoiWebService().execute(Constant.URL_TIMCHUYEN_MOTCHIEU).get();
-                        Log.d("TEST_JSON_JSON_JSON:",Json_DanhSach_Chuyen);
-                        if (Json_DanhSach_Chuyen.equalsIgnoreCase("[]")){
-                            Toast.makeText(getActivity(), "Không có chuyến này trong ngày", Toast.LENGTH_LONG).show();
-                        }else {
-                            Log.d("JSON_TEST","TEST_TEST_TEST");
-                            // send data to fragment FragmentDanhSachChuyen class
-                            String tenchuyendi = txtChuyenDi.getText().toString();
-                            String ngaydi = txtDate.getText().toString();
-                            onNameSetListener.setChuyenDi_NgayDi(tenchuyendi, ngaydi, Json_DanhSach_Chuyen);
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    }
+                    onNameSetListener.setChuyenDi_NgayDi(IdHangXe, txtHangXe.getText().toString(), txtDate.getText().toString());
                 }else{
                     String t = "Warning";
                     String m = "Vui lòng kiểm tra kết nối Internet.";
@@ -149,7 +135,7 @@ public class FragmentDatVeMotChieu extends Fragment{
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setMessage("Creating Product..");
+            progressDialog.setMessage("Loading...");
             progressDialog.setIndeterminate(false);
             progressDialog.setCancelable(true);
             progressDialog.show();
@@ -187,19 +173,47 @@ public class FragmentDatVeMotChieu extends Fragment{
 
     }
 
-
-    //--------------------------------------------CHOOSE TRIP-------------------------------------------------------------
-
-    public void chonChuyen(){
-        imgChuyenDi.setOnClickListener(new View.OnClickListener() {
+    private void chonHangXe(){
+        layout_hangxe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 LayoutInflater inflater1 = (LayoutInflater) getContext().getSystemService(context.LAYOUT_INFLATER_SERVICE);
                 LinearLayout linearLayout = (LinearLayout) inflater1.inflate(R.layout.dialog_ten_chuyen, null, false);
                 listView = (ListView) linearLayout.findViewById(R.id.list);
-                DocJSON docJSON = new DocJSON();
-                docJSON.execute(Constant.URL_TENCACCHUYEN);
+                getLisHangXe();
+
+                new AlertDialog.Builder(getActivity()).setTitle("List Trip").setMessage("Click to select trip")
+                        .setView(linearLayout)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                txtHangXe.setText("");
+                            }
+                        }).show();
+            }
+        });
+    }
+
+    //--------------------------------------------CHOOSE TRIP-------------------------------------------------------------
+
+    private void chonChuyen(){
+        layout_chuyendi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                LayoutInflater inflater1 = (LayoutInflater) getContext().getSystemService(context.LAYOUT_INFLATER_SERVICE);
+                LinearLayout linearLayout = (LinearLayout) inflater1.inflate(R.layout.dialog_ten_chuyen, null, false);
+                listView = (ListView) linearLayout.findViewById(R.id.list);
+                /*DocJSON docJSON = new DocJSON();
+                docJSON.execute(Constant.URL_TENCACCHUYEN);*/
+                getListChuyenDi(Integer.parseInt(IdHangXe));
 
                 new AlertDialog.Builder(getActivity()).setTitle("List Trip").setMessage("Click to select trip")
                         .setView(linearLayout)
@@ -222,7 +236,6 @@ public class FragmentDatVeMotChieu extends Fragment{
     //---------------------------------------CHOOSE DATE TIME FOR TRIP-----------------------------------------------------
 
     public void ChonNgay(){
-
         imgDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -238,12 +251,9 @@ public class FragmentDatVeMotChieu extends Fragment{
                         months = Integer.toString(month+1);
                         years = Integer.toString(year);
                         compareDateTime.comparedatetime(dayOfMonth,month+1,year);
-
-
                     }
 
                 });
-
                 new AlertDialog.Builder(getActivity()).setTitle("Calendar").setMessage("Chọn ngày đi")
                         .setView(ll)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -254,108 +264,85 @@ public class FragmentDatVeMotChieu extends Fragment{
                                 String date_month_year = date + "/" + months + "/" + years;
                                 datetimeFormater.FormatDateTime(date_month_year, txtDate);
                                 //txtDate.setText(date_month_year);
-
                             }
                         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                     }
                 }).show();
-
             }
         });
     }
 
 
-    //----------------------------------READ DATE FROM JSON FILE ------------------------------------------------
-
-    private class DocJSON extends AsyncTask<String, Void, String> {
-
-        private ProgressDialog progressDialog;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setMessage("Loading..");
-            progressDialog.setIndeterminate(false);
-            progressDialog.setCancelable(true);
-            progressDialog.show();
-
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            publishProgress();
-            return docNoiDung_Tu_URL(params[0]);
-
-        }
-
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            progressDialog.dismiss();
-            arrayList = new ArrayList<String>();
-            try {
-                JSONArray MangDanhSachChuyen = new JSONArray(s);
-                for (int i = 0; i < MangDanhSachChuyen.length(); i++) {
-                    JSONObject ChuyenDi = MangDanhSachChuyen.getJSONObject(i);
-                    arrayList.add(ChuyenDi.getString("TenChuyen"));
-                    Log.d("JSON_OBJECT", ChuyenDi.getString("TenChuyen").toString());
-                }
-
-                ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), R.layout.custom_dialog_ten_chuyen, arrayList);
-                listView.setAdapter(arrayAdapter);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        txtChuyenDi.setText(arrayList.get(position).toString());
-
-                    }
-                });
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-    }
-
-
-    //đọc nội dung từ URL
-    private static String docNoiDung_Tu_URL(String theUrl)
-    {
-        StringBuilder content = new StringBuilder();
-        try
-        {
-            // create a url object
-            URL url = new URL(theUrl);
-            // create a urlconnection object
-            URLConnection urlConnection = url.openConnection();
-            // wrap the urlconnection in a bufferedreader
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-            String line;
-            // read from the urlconnection via the bufferedreader
-            while ((line = bufferedReader.readLine()) != null)
-            {
-                content.append(line + "\n");
-            }
-            bufferedReader.close();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-        return content.toString();
-    }
-
-
-
     //=================================API==========================================================
+    private String IdHangXe;
+    public void getLisHangXe() {
 
+        ListHangXeRequest.getListHangXe(new Response() {
+            @Override
+            public void onStart() {
+            }
 
+            @Override
+            public void onSuccess(int code, String message, Object obj) {
+
+                if (code == 0) {
+                    final ArrayList<String> name = new ArrayList<>();
+                    final ArrayList<HangXe> list = (ArrayList<HangXe>) obj;
+                    for (int i = 0; i< list.size(); i++){
+                        name.add(list.get(i).carmaker);
+                    }
+                    ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), R.layout.custom_dialog_ten_chuyen, name);
+                    listView.setAdapter(arrayAdapter);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            txtHangXe.setText(name.get(position).toString());
+                            IdHangXe = list.get(position).id;
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure() {
+                Log.d("NOTE", "kiem tra lai ket noi");
+            }
+        });
+    }
+
+    private void getListChuyenDi(int id){
+        ListChuyenDiRequest.getListChuyenDi(id,new Response() {
+            @Override
+            public void onStart() {
+            }
+
+            @Override
+            public void onSuccess(int code, String message, Object obj) {
+
+                if (code == 0) {
+                    final ArrayList<String> name = new ArrayList<>();
+                    final ArrayList<ChuyenDi> list = (ArrayList<ChuyenDi>) obj;
+                    for (int i = 0; i < list.size(); i++) {
+                        name.add(list.get(i).route);
+                    }
+                    ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), R.layout.custom_dialog_ten_chuyen, name);
+                    listView.setAdapter(arrayAdapter);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            txtChuyenDi.setText(name.get(position).toString());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure() {
+                Log.d("NOTE", "kiem tra lai ket noi");
+            }
+        });
+    }
 
 }

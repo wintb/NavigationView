@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,25 +85,6 @@ public class AdapterDanhSachChuyen extends BaseAdapter {
         txtGioDi.setText(_chuyen.getGioDi());
         txtGioDen.setText(_chuyen.getGioDen());
         txtGiaVe.setText(_chuyen.getGiaVe());
-
-        //Tô đậm những item đã full ghế
-        /*select_tongSoGhe = new Select_TongSoGhe(_chuyen.getMaChuyen());
-
-        try {
-            String TongSoGhe = new GoiWebserviceTongSoGhe().execute(Constant.URL_TONG_SO_GHE).get();
-            Log.d("TongSoGhe","-----"+TongSoGhe);
-            tongghe = Integer.parseInt(TongSoGhe);
-
-            if (tongghe >= 6){
-                itemDanhSachChuyen.setBackgroundColor(Color.parseColor("#1abc9c"));
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }catch (NumberFormatException e){
-            e.printStackTrace();
-        }*/
 
         //xem chi tiet tai xe
         xemChiTietTaiXe(txtTai);
@@ -207,6 +189,18 @@ public class AdapterDanhSachChuyen extends BaseAdapter {
 
                         }
                     }).show();
+        }
+    }
+
+
+    //-------------------------------------View Holder----------------------------------------------
+    public static class DanhSachChuyenViewHolder extends RecyclerView.ViewHolder{
+        private Context context;
+        protected View rootView;
+
+
+        public DanhSachChuyenViewHolder(View itemView) {
+            super(itemView);
         }
     }
 

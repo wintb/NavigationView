@@ -39,8 +39,6 @@ import java.util.List;
 
 import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.adapter.AdapterDanhSachChuyen;
-import om.bluebirdaward.busticket.adapter.AdapterDanhSachNhaXe;
-import om.bluebirdaward.busticket.dialog.DialogNhaXeDetail;
 import om.bluebirdaward.busticket.fragment.FragmentAbout;
 import om.bluebirdaward.busticket.fragment.FragmentDanhSachChuyen;
 import om.bluebirdaward.busticket.fragment.FragmentDanhSachNhaXe;
@@ -161,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.fragmentholder, fragmentDanhSachNhaXe)
-                                .addToBackStack(null)
                                 .commit();
                         navigation.setCheckedItem(id);
                         drawerLayout.closeDrawer(navigation);
