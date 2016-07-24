@@ -1,37 +1,31 @@
 package om.bluebirdaward.busticket.fragment;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.AsyncTask;
+import android.app.Dialog;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
+import com.google.gson.Gson;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import om.bluebirdaward.busticket.R;
-import om.bluebirdaward.busticket.activity.MainActivity;
-import om.bluebirdaward.busticket.mics.Constant;
-import om.bluebirdaward.busticket.utils.CheckInternet;
-import om.bluebirdaward.busticket.utils.ShowDialog;
+import om.bluebirdaward.busticket.interfaces.Response;
+import om.bluebirdaward.busticket.request.ThongTinVeVuaDatRequest;
 
 /**
  * Created by DinhTien on 31-05-2016.
@@ -64,9 +58,13 @@ public class FragmentThongTinVeVuaDat extends Fragment {
     private String TenChuyen;
     private String GioDi;
     private String NgayDi;
+    private String code_trip;
+
 
     backDatve backDatveFragment;
     String ThongBao;
+    protected String StringForEncode;
+    protected String md5Qrcode;
 
 
     @Nullable
@@ -101,14 +99,15 @@ public class FragmentThongTinVeVuaDat extends Fragment {
         //SoGhe = data.getString("SoGhe");
         SoLuong = data.getInt("SoLuong");
         MaChuyen = data.getString("MaChuyen");
+        code_trip = data.getString("code_trip");
         TenChuyen = data.getString("TenChuyen");
         GioDi = data.getString("GioDi");
         NgayDi = data.getString("NgayDi");
 
-        for (int i = 0; i < FragmentSoDoGheTang1.listGheDaChonTang1.size(); i++){
+        for (int i = 0; i < FragmentTabhostSoDoGhe.listGheDaChonTang1.size(); i++){
 
             SoGhe += data.getString("SoGhe" + (i+1));
-            if (i < FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1)
+            if (i < FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1)
                 SoGhe += " - ";
         }
 
@@ -124,52 +123,21 @@ public class FragmentThongTinVeVuaDat extends Fragment {
         txtGioDiVuaDat.setText(GioDi);
         txtNgayDiVuaDat.setText(NgayDi);
 
+        StringForEncode = txtCMNDVuaDat.getText().toString() + txtSDTVuaDat.getText().toString() + System.currentTimeMillis();
+        md5Qrcode = md5(StringForEncode);
+
         txtXacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (CheckInternet.isConnected(getActivity())){
-                    try {
-                        String result = new goiWebservice().execute(Constant.INSERT_URL).get();
-
-                        if (result.equalsIgnoreCase("")) {
-                            new AlertDialog.Builder(getActivity())
-                                    .setTitle("Lỗi kết nối server. ")
-                                    .setMessage("")
-                                    .setIcon(R.drawable.warning)
-                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            //backDatveFragment.setBackDatVe();
-                                        }
-                                    }).show();
-                        }else{
-                            new AlertDialog.Builder(getActivity())
-                                    .setTitle(result)
-                                    .setMessage("\n\n" + "Quay trở lại menu chính để xem chi tiết vé đã đặt")
-                                    .setIcon(R.drawable.success)
-                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            //backDatveFragment.setBackDatVe();
-                                            Intent activityIntent = new Intent(getActivity(), MainActivity.class);
-                                            startActivity(activityIntent);
-                                        }
-                                    }).show();
-                        }
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    }
-                }else{
-
-                    String title = "Warning";
-                    String message = "Vui lòng kiểm tra kết nối Internet.";
-                    ShowDialog.show(getActivity(), title, message);
-                }
-
-
+                xacnhan_datve(new Gson().toJson(FragmentTabhostSoDoGhe.listGheDaChonTang1),
+                        txtHoTenVuaDat.getText().toString(),
+                        txtCMNDVuaDat.getText().toString(),
+                        txtSDTVuaDat.getText().toString(),
+                        md5Qrcode,
+                        txtSLVeVuaDat.getText().toString(),
+                        txtGhiChuVuaDat.getText().toString(),
+                        MaChuyen,
+                        code_trip);
             }
         });
 
@@ -188,63 +156,140 @@ public class FragmentThongTinVeVuaDat extends Fragment {
     }
 
 
-    //============== AsyncTask class =================//
+    protected String md5(final String s) {
+        final String MD5 = "MD5";
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest
+                    .getInstance(MD5);
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
 
-    private class goiWebservice extends AsyncTask<String, Integer, String>{
+            // Create Hex String
+            StringBuilder hexString = new StringBuilder();
+            for (byte aMessageDigest : messageDigest) {
+                String h = Integer.toHexString(0xFF & aMessageDigest);
+                while (h.length() < 2)
+                    h = "0" + h;
+                hexString.append(h);
+            }
+            return hexString.toString();
 
-        @Override
-        protected String doInBackground(String... params) {
-            return makePostRequest(params[0]);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
+        return "";
+    }
 
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+
+    //-----------------------------------------API--------------------------------------------------
+
+
+    private void xacnhan_datve(final String seat, String fullname, String identity_number, String phone,
+                               String qrcode, String quantity, String note, String id_tripdate, String code_trip){
+
+        ThongTinVeVuaDatRequest.getThongTinVeVuaDat(seat, fullname, identity_number, phone, qrcode,
+                quantity, note, id_tripdate, code_trip, new Response() {
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(int code, String message, Object obj) {
+                        if (code == 1){
+                            shơDialogSuccess_error("Đặt vé không thành công !", R.drawable.error, "Vui lòng thử lại.");
+
+                        } else {
+                            shơDialogSuccess_error("Đặt vé thành công !", R.drawable.success, "");
+                            showDialogQrcode(md5Qrcode);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        shơDialogSuccess_error("Đặt vé không thành công !", R.drawable.error, "Vui lòng thử lại.");
+                    }
+                });
+
+    }
+
+    //--------------------------DIALOG--------------------------------------------------------------
+
+    private Dialog dialog;
+
+    public void shơDialogSuccess_error( String title, int image, String message){
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.custom_layout_dialog);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+        TextView txtTitle = (TextView) dialog.findViewById(R.id.VeVuaDat_txtTitle);
+        ImageView imgStatus = (ImageView) dialog.findViewById(R.id.VeVuaDat_imgStatus);
+        TextView txtMessage = (TextView) dialog.findViewById(R.id.VeVuaDat_message);
+        Button btnOK = (Button) dialog.findViewById(R.id.VeDaDat_btnOK);
+
+        txtTitle.setText(title);
+        imgStatus.setImageResource(image);
+        txtMessage.setText(message);
+
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dimissDialog();
+            }
+        });
+
+    }
+
+    public void showDialogQrcode( String qrcode){
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.custom_layout_dialog_qrcode);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+        ImageView imgQrcode = (ImageView) dialog.findViewById(R.id.imgQrCode);
+        Button btnQrcodeOK = (Button) dialog.findViewById(R.id.QRcode_btnOK);
+        createQrCode(qrcode, imgQrcode);
+        addImageToGallery();
+
+        btnQrcodeOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backDatveFragment.setBackDatVe();
+            }
+        });
+
+    }
+
+    public void dimissDialog(){
+        dialog.dismiss();
+    }
+
+
+    private Bitmap bmp;
+    public void createQrCode(String qrcode, ImageView imageView){
+        QRCodeWriter writer = new QRCodeWriter();
+        try {
+            BitMatrix bitMatrix = writer.encode(qrcode, BarcodeFormat.QR_CODE, 512, 512);
+            int width = bitMatrix.getWidth();
+            int height = bitMatrix.getHeight();
+            bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                }
+            }
+            imageView.setImageBitmap(bmp);
+
+        } catch (WriterException e) {
+            e.printStackTrace();
         }
     }
 
 
-
-
-    //================== Post request ===============//
-
-    public String makePostRequest(String url){
-
-        String result = "";
-        HttpClient httpClient = new DefaultHttpClient();
-
-        // url server
-        HttpPost httpPost = new HttpPost(url);
-
-        // cac tham so truyen vao
-        List nameValuePair = new ArrayList(10);
-        nameValuePair.add(new BasicNameValuePair("action","insert"));
-        nameValuePair.add(new BasicNameValuePair("CMND",CMND));
-        nameValuePair.add(new BasicNameValuePair("SDTKhach",SDTKhach));
-        nameValuePair.add(new BasicNameValuePair("HoTen",HoTen));
-        nameValuePair.add(new BasicNameValuePair("GhiChu",GhiChu));
-        nameValuePair.add(new BasicNameValuePair("MaChuyen",MaChuyen));
-        nameValuePair.add(new BasicNameValuePair("MaTai",MaTai));
-        nameValuePair.add(new BasicNameValuePair("MaVe",MaVe));
-        nameValuePair.add(new BasicNameValuePair("SoGhe",SoGhe));
-        nameValuePair.add(new BasicNameValuePair("SoLuong",String.valueOf(SoLuong)));
-
-        // encode post data
-        try {
-            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            HttpResponse httpResponse = httpClient.execute(httpPost);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            result = EntityUtils.toString(httpEntity);
-            ThongBao = result;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return result;
+    public void addImageToGallery(){
+        MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), bmp, "ImageQRCODE", "ImageQRCODE");
     }
+
 }

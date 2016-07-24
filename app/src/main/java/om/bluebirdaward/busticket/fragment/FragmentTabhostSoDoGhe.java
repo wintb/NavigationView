@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -48,12 +49,16 @@ public class FragmentTabhostSoDoGhe extends Fragment{
     private Toolbar toolbar;
     private List<String> data;
 
-    private String MaChuyen;
+    private String code_trip;
+    private String id_tripdate;
+    private String code_driver;
     private String MaVe;
     private String SDTKhach;
     private String TenChuyen;
     private String GioDi;
     private String NgayDi;
+    public static ArrayList<String> listGheDaChonTang1;
+
 
     public FragmentTabhostSoDoGhe(){
 
@@ -63,14 +68,18 @@ public class FragmentTabhostSoDoGhe extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_tabhost_so_do_ghe_1, container, false);
-        ButterKnife.bind(this,rootView);
+        ButterKnife.bind(this, rootView);
         setTypeFace();
         //get data from fragment previous
+        listGheDaChonTang1 = new ArrayList<>();
         Bundle data = getArguments();
         txtChuyenDi.setText(data.getString("ChuyenDi"));
         txtGioDi.setText(data.getString("GioDi"));
         txtNgayDi.setText(data.getString("NgayDi"));
-        MaChuyen = data.getString("MaChuyen");
+        code_trip = data.getString("code_trip");
+        id_tripdate = data.getString("id_tripdate");
+        code_driver = data.getString("code_driver");
+
         MaVe = data.getString("MaVe");
         SDTKhach = data.getString("SDTKhach");
         TenChuyen = txtChuyenDi.getText().toString();
@@ -100,7 +109,9 @@ public class FragmentTabhostSoDoGhe extends Fragment{
         FragmentSoDoGheTang1 fragmentSoDoGheTang1 = new FragmentSoDoGheTang1();
         FragmentSoDoGheTang2 fragmentSoDoGheTang2 = new FragmentSoDoGheTang2();
         Bundle dataDoiGhe = new Bundle();
-        dataDoiGhe.putString("MaChuyen",MaChuyen);
+        dataDoiGhe.putString("code_trip",code_trip);
+        dataDoiGhe.putString("id_tripdate", id_tripdate);
+        dataDoiGhe.putString("code_driver", code_driver);
         dataDoiGhe.putString("MaVe",MaVe);
         dataDoiGhe.putString("SDTKhach", SDTKhach);
         dataDoiGhe.putString("TenChuyen",TenChuyen);

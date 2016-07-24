@@ -1,11 +1,17 @@
 package om.bluebirdaward.busticket.interfaces;
 
+import om.bluebirdaward.busticket.dao.DanhSachChuyen.ReponseDanhSachChuyen;
 import om.bluebirdaward.busticket.dao.NhaXe.ReponseListChuyenDi;
 import om.bluebirdaward.busticket.dao.NhaXe.ReponseListHangXe;
 import om.bluebirdaward.busticket.dao.NhaXe.ResponseListNhaXe;
 import om.bluebirdaward.busticket.dao.NhaXeDetail.ResponseNhaXeDetail;
+import om.bluebirdaward.busticket.dao.SoDoghe.ReponseSoDoGhe;
+import om.bluebirdaward.busticket.dao.ThongTinVeVuaDat.ReponseThongTinVeVuaDat;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 /**
@@ -25,4 +31,25 @@ public interface Request {
 
     @GET("detailCarmaker/{id}")
     Call<ResponseNhaXeDetail> getNhaXeDetail(@Path("id") int id);
+
+    @FormUrlEncoded
+    @POST("getListTripDateByCarmaker")
+    Call<ReponseDanhSachChuyen> getDanhSachChuyen( @Field("id_carmaker") String id_carmaker, @Field("route") String route, @Field("date") String date);
+
+    @FormUrlEncoded
+    @POST("getListSeat")
+    Call<ReponseSoDoGhe> getSoDoGhe(@Field("id_tripdate") String id_tripdate);
+
+    @FormUrlEncoded
+    @POST("insertCustomerAndTicket")
+    Call<ReponseThongTinVeVuaDat> getThongTinVeVuaDat(@Field("seat")String seat,
+                                                      @Field("fullname") String fullname,
+                                                      @Field("identity_number") String identity_number,
+                                                      @Field("phone") String phone,
+                                                      @Field("qrcode") String qrcode,
+                                                      @Field("quantity") String quantity,
+                                                      @Field("note") String note,
+                                                      @Field("id_tripdate") String id_tripdate,
+                                                      @Field("code_trip") String code_trip);
+
 }

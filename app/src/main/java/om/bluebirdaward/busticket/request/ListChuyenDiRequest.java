@@ -3,6 +3,7 @@ package om.bluebirdaward.busticket.request;
 import om.bluebirdaward.busticket.dao.NhaXe.ReponseListChuyenDi;
 import om.bluebirdaward.busticket.interfaces.Request;
 import om.bluebirdaward.busticket.interfaces.Response;
+import om.bluebirdaward.busticket.utils.ShowDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -18,7 +19,13 @@ public class ListChuyenDiRequest {
         call.enqueue(new Callback<ReponseListChuyenDi>() {
             @Override
             public void onResponse(Call<ReponseListChuyenDi> call, retrofit2.Response<ReponseListChuyenDi> response) {
-                resp.onSuccess(response.body().code, response.body().message, response.body().data);
+                if (response.body()!=null) {
+                    resp.onSuccess(response.body().code, response.body().message, response.body().data);
+                }else{
+
+                    ShowDialog.dimissLoading();
+                }
+
             }
 
             @Override

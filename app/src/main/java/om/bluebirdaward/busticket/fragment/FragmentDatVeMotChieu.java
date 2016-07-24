@@ -2,12 +2,11 @@ package om.bluebirdaward.busticket.fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,7 +17,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -32,7 +30,6 @@ import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.dao.NhaXe.ChuyenDi;
 import om.bluebirdaward.busticket.dao.NhaXe.HangXe;
 import om.bluebirdaward.busticket.interfaces.Response;
-import om.bluebirdaward.busticket.json.ReadJson;
 import om.bluebirdaward.busticket.mics.datetime.CompareDateTime;
 import om.bluebirdaward.busticket.mics.datetime.DatetimeFormater;
 import om.bluebirdaward.busticket.request.ListChuyenDiRequest;
@@ -51,10 +48,6 @@ public class FragmentDatVeMotChieu extends Fragment{
     TextView txtDate;
     @Bind(R.id.txtChuyenDi)
     TextView txtChuyenDi;
-    @Bind(R.id.imgDate)
-    ImageView imgDate;
-    @Bind(R.id.imgChuyenDi)
-    ImageView imgChuyenDi;
     @Bind(R.id.btnTimChuyenTab1)
     Button btnTimChuyen;
     @Bind(R.id.txtHangXe)
@@ -71,11 +64,9 @@ public class FragmentDatVeMotChieu extends Fragment{
     DatetimeFormater datetimeFormater;
     CompareDateTime compareDateTime;
     ListView listView;
-    ArrayList<String> arrayList;
-
-    String Json_DanhSach_Chuyen ;
     OnNameSetListener onNameSetListener;
-    ReadJson readJsonChuyenDi;
+
+    private final Handler handler = new Handler();
 
     @Nullable
     @Override
@@ -104,7 +95,7 @@ public class FragmentDatVeMotChieu extends Fragment{
             public void onClick(View v) {
 
                 if (CheckInternet.isConnected(getActivity())){
-                    onNameSetListener.setChuyenDi_NgayDi(IdHangXe, txtHangXe.getText().toString(), txtDate.getText().toString());
+                    onNameSetListener.setChuyenDi_NgayDi(IdHangXe, txtChuyenDi.getText().toString(), txtDate.getText().toString());
                 }else{
                     String t = "Warning";
                     String m = "Vui lòng kiểm tra kết nối Internet.";
@@ -126,41 +117,10 @@ public class FragmentDatVeMotChieu extends Fragment{
         btnTimChuyen.setTypeface(face1);
     }
 
-
-    //--------------------------POST DATA TO SERVER AND GET DATA FROM SERVER------------------------------
-
-    private class GoiWebService extends AsyncTask<String, Void, String>{
-        private ProgressDialog progressDialog;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setMessage("Loading...");
-            progressDialog.setIndeterminate(false);
-            progressDialog.setCancelable(true);
-            progressDialog.show();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            publishProgress();
-            return readJsonChuyenDi.makePostRequestChuyenDi(params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            //Json_DanhSach_Chuyen = s;
-            super.onPostExecute(s);
-            Log.d("JSON DANH SACH CHUYEN: ", s);
-            progressDialog.dismiss();
-
-        }
-    }
-
     //------------------------------------INTERFACE FOR SEND DATA TO FRAGMENT LIST TRIP -------------------------------
 
     public interface OnNameSetListener{
-         public void setChuyenDi_NgayDi(String ChuyenDi, String NgayDi, String json);
+         public void setChuyenDi_NgayDi(String idHangXe, String ChuyenDi, String NgayDi);
     }
 
 
@@ -183,7 +143,7 @@ public class FragmentDatVeMotChieu extends Fragment{
                 listView = (ListView) linearLayout.findViewById(R.id.list);
                 getLisHangXe();
 
-                new AlertDialog.Builder(getActivity()).setTitle("List Trip").setMessage("Click to select trip")
+                new AlertDialog.Builder(getActivity()).setTitle("Chọn hãng xe")
                         .setView(linearLayout)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
@@ -213,9 +173,9 @@ public class FragmentDatVeMotChieu extends Fragment{
                 listView = (ListView) linearLayout.findViewById(R.id.list);
                 /*DocJSON docJSON = new DocJSON();
                 docJSON.execute(Constant.URL_TENCACCHUYEN);*/
-                getListChuyenDi(Integer.parseInt(IdHangXe));
+                getListChuyenDi(IdHangXe);
 
-                new AlertDialog.Builder(getActivity()).setTitle("List Trip").setMessage("Click to select trip")
+                new AlertDialog.Builder(getActivity()).setTitle("Chọn chuyến")
                         .setView(linearLayout)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
@@ -236,7 +196,7 @@ public class FragmentDatVeMotChieu extends Fragment{
     //---------------------------------------CHOOSE DATE TIME FOR TRIP-----------------------------------------------------
 
     public void ChonNgay(){
-        imgDate.setOnClickListener(new View.OnClickListener() {
+        layout_ngaydi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -248,9 +208,9 @@ public class FragmentDatVeMotChieu extends Fragment{
                     public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 
                         date = Integer.toString(dayOfMonth);
-                        months = Integer.toString(month+1);
+                        months = Integer.toString(month + 1);
                         years = Integer.toString(year);
-                        compareDateTime.comparedatetime(dayOfMonth,month+1,year);
+                        compareDateTime.comparedatetime(dayOfMonth, month + 1, year);
                     }
 
                 });
@@ -279,6 +239,13 @@ public class FragmentDatVeMotChieu extends Fragment{
     private String IdHangXe;
     public void getLisHangXe() {
 
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                ShowDialog.showLoading(getActivity());
+            }
+        });
+
         ListHangXeRequest.getListHangXe(new Response() {
             @Override
             public void onStart() {
@@ -286,7 +253,7 @@ public class FragmentDatVeMotChieu extends Fragment{
 
             @Override
             public void onSuccess(int code, String message, Object obj) {
-
+                ShowDialog.dimissLoading();
                 if (code == 0) {
                     final ArrayList<String> name = new ArrayList<>();
                     final ArrayList<HangXe> list = (ArrayList<HangXe>) obj;
@@ -312,39 +279,62 @@ public class FragmentDatVeMotChieu extends Fragment{
         });
     }
 
-    private void getListChuyenDi(int id){
-        ListChuyenDiRequest.getListChuyenDi(id,new Response() {
-            @Override
-            public void onStart() {
-            }
+    private void getListChuyenDi(String id){
 
-            @Override
-            public void onSuccess(int code, String message, Object obj) {
-
-                if (code == 0) {
-                    final ArrayList<String> name = new ArrayList<>();
-                    final ArrayList<ChuyenDi> list = (ArrayList<ChuyenDi>) obj;
-                    for (int i = 0; i < list.size(); i++) {
-                        name.add(list.get(i).route);
-                    }
-                    ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), R.layout.custom_dialog_ten_chuyen, name);
-                    listView.setAdapter(arrayAdapter);
-                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            txtChuyenDi.setText(name.get(position).toString());
-                        }
-                    });
-                }else {
-
+        if (id != null){
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    ShowDialog.showLoading(getActivity());
                 }
-            }
+            });
 
-            @Override
-            public void onFailure() {
-                Log.d("NOTE", "kiem tra lai ket noi");
-            }
-        });
+            ListChuyenDiRequest.getListChuyenDi(Integer.parseInt(id), new Response() {
+                @Override
+                public void onStart() {
+                }
+
+                @Override
+                public void onSuccess(int code, String message, Object obj) {
+                    ShowDialog.dimissLoading();
+                    if (code == 0) {
+                        final ArrayList<String> name = new ArrayList<>();
+
+                        final ArrayList<ChuyenDi> list = (ArrayList<ChuyenDi>) obj;
+
+                        for (int i = 0; i < list.size(); i++) {
+                            name.add(list.get(i).route);
+                        }
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), R.layout.custom_dialog_ten_chuyen, name);
+                        listView.setAdapter(arrayAdapter);
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                txtChuyenDi.setText(name.get(position).toString());
+                            }
+                        });
+                    }
+                    if (code == 1) {
+                        setListEmpty();
+                    }
+                }
+
+                @Override
+                public void onFailure() {
+                    setListEmpty();
+                }
+            });
+        }else {
+            setListEmpty();
+        }
+    }
+
+
+    private void setListEmpty(){
+        ArrayList<String> name = new ArrayList<>();
+        name.add("Chưa chọn hãng");
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), R.layout.custom_dialog_ten_chuyen, name);
+        listView.setAdapter(arrayAdapter);
     }
 
 }

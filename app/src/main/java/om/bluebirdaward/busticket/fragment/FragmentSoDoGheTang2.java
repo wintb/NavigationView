@@ -12,19 +12,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import om.bluebirdaward.busticket.R;
-import om.bluebirdaward.busticket.adapter.AdapterDanhSachChuyen;
+import om.bluebirdaward.busticket.dao.SoDoghe.SoDoghe;
 import om.bluebirdaward.busticket.dao.Ve;
-import om.bluebirdaward.busticket.mics.Constant;
+import om.bluebirdaward.busticket.interfaces.Response;
+import om.bluebirdaward.busticket.request.SoDoGheRepuest;
 
 /**
  * Created by DinhTien on 15-05-2016.
@@ -108,33 +105,31 @@ public class FragmentSoDoGheTang2 extends Fragment {
 
     public static List<String> listGheDaChonTang2;
     private List<Ve> list;
-    List<String> listGhe;
+    ArrayList<String> listGhe;
+
+    //------------------api--------------------
+    String TenChuyen;
+    String GioDi;
+    String NgayDi;
+    String code_trip;
+    String id_tripdate;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_so_do_ghe_tang_2,container,false);
-        ButterKnife.bind(this,rootView);
+        ButterKnife.bind(this, rootView);
         setTypeFace();
         list = new ArrayList<>();
         listGhe = new ArrayList<>();
-        // KEY_CHECK_FRAGMENT == 1 Fragment
-        if (Constant.KEY_CHECK_FRAGMENT == 1){
-            listGheDaChonTang2 = new ArrayList<String>();
-            Gson gson =new Gson();
-            Type listType = new TypeToken<List<Ve>>(){}.getType();
-            list =  gson.fromJson(AdapterDanhSachChuyen.sodoghe, listType);
-            splitString();
-        }else if (Constant.KEY_CHECK_FRAGMENT == 0){
-            listGheDaChonTang2 = new ArrayList<String>();
-            Gson gson =new Gson();
-            Type listType = new TypeToken<List<Ve>>(){}.getType();
-            list =  gson.fromJson(FragmentThongTinVeDaDat.sodogheDoiVe, listType);
-            splitString();
-        }
+        Bundle data = getArguments();
+        TenChuyen = data.getString("TenChuyen");
+        GioDi = data.getString("GioDi");
+        NgayDi = data.getString("NgayDi");
+        code_trip = data.getString("code_trip");
+        id_tripdate = data.getString("id_tripdate");
 
-        //set color cho ghế đã được người khác chọn
-        setColorGheDaChon();
+        getSoDoGheDaDat(id_tripdate);
         //set color khi click chon ghe
         setColorClickChonGhe();
 
@@ -152,25 +147,8 @@ public class FragmentSoDoGheTang2 extends Fragment {
 
     //==============================================================================================
 
-    //tách chuỗi
-    private void splitString(){
-        //lấy danh sách ghế trong list vé và trong list string
-        for (int i = 0 ; i<list.size(); i++){
-            listGhe.add(list.get(i).getSoGhe());
-        }
-        //tách vé có số lượng nhiều hơn 2
-        for (int j = 0; j < listGhe.size(); j++){
-            if (listGhe.get(j).length() > 3){
-                String[] temp = listGhe.get(j).split(" - ");
-                listGhe.remove(j);
-                for (int i = 0 ; i < temp.length; i++) {
-                    listGhe.add(temp[i]);
-                }
-            }
-        }
-    }
 
-    private void setColorGheDaChon(){
+    private void setColorGheDaChon(ArrayList<String> listGhe){
         setGheDachon1(A1T, listGhe);
         setGheDachon1(B1T, listGhe);
         setGheDachon1(C1T, listGhe);
@@ -224,9 +202,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_A1T == true) {
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon1);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_A1T = false;
                     }
@@ -236,7 +214,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     return;
                 } else {
                     imageView.setImageResource(R.drawable.ghetrong1);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_A1T = true;
                     return;
@@ -250,9 +228,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_A2T == true) {
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon2);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_A2T = false;
                     }else {
@@ -261,7 +239,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     return;
                 } else {
                     imageView.setImageResource(R.drawable.ghetrong2);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_A2T = true;
                     return;
@@ -275,9 +253,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_A3T == true) {
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon3);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_A3T = false;
                     }
@@ -287,7 +265,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     return;
                 } else {
                     imageView.setImageResource(R.drawable.ghetrong3);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_A3T = true;
                     return;
@@ -301,9 +279,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_A4T == true) {
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon4);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_A4T = false;
                     }else{
@@ -312,7 +290,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     return;
                 } else {
                     imageView.setImageResource(R.drawable.ghetrong4);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_A4T = true;
                     return;
@@ -326,9 +304,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_A5T == true) {
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon5);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_A5T = false;
                     }else{
@@ -337,7 +315,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     return;
                 } else {
                     imageView.setImageResource(R.drawable.ghetrong5);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_A5T = true;
                     return;
@@ -351,9 +329,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_B1T == true){
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon1);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_B1T = false;
                     }else{
@@ -361,7 +339,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     }
                 }else{
                     imageView.setImageResource(R.drawable.ghetrong1);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_B1T = true;
                 }
@@ -374,9 +352,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_B2T == true){
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon2);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_B2T = false;
                     }else{
@@ -384,7 +362,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     }
                 }else{
                     imageView.setImageResource(R.drawable.ghetrong2);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_B2T = true;
                 }
@@ -397,9 +375,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_B3T == true){
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon3);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_B3T = false;
                     }else{
@@ -407,7 +385,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     }
                 }else{
                     imageView.setImageResource(R.drawable.ghetrong3);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_B3T = true;
                 }
@@ -420,9 +398,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_B4T == true){
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon4);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_B4T = false;
                     }else {
@@ -430,7 +408,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     }
                 }else{
                     imageView.setImageResource(R.drawable.ghetrong4);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_B4T = true;
                 }
@@ -443,9 +421,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_B5T == true){
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon5);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_B5T = false;
                     }else {
@@ -453,7 +431,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     }
                 }else{
                     imageView.setImageResource(R.drawable.ghetrong5);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_B5T = true;
                 }
@@ -466,9 +444,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_C1T == true){
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon1);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_C1T = false;
                     }else{
@@ -476,7 +454,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     }
                 }else{
                     imageView.setImageResource(R.drawable.ghetrong1);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_C1T = true;
                 }
@@ -489,9 +467,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_C2T == true){
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon2);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_C2T = false;
                     }else{
@@ -499,7 +477,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     }
                 }else{
                     imageView.setImageResource(R.drawable.ghetrong2);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_C2T = true;
                 }
@@ -512,9 +490,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_C3T == true){
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon3);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_C3T = false;
                     }else{
@@ -522,7 +500,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     }
                 }else{
                     imageView.setImageResource(R.drawable.ghetrong3);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_C3T = true;
                 }
@@ -535,9 +513,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_C4T == true){
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon4);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_C4T = false;
                     }else{
@@ -545,7 +523,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     }
                 }else{
                     imageView.setImageResource(R.drawable.ghetrong4);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_C4T = true;
                 }
@@ -558,9 +536,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_C5T == true){
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon5);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_C5T = false;
                     }else{
@@ -568,7 +546,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     }
                 }else{
                     imageView.setImageResource(R.drawable.ghetrong5);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_C5T = true;
                 }
@@ -581,9 +559,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_D1T == true){
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon1);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_D1T = false;
                     }else{
@@ -591,7 +569,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     }
                 }else{
                     imageView.setImageResource(R.drawable.ghetrong1);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_D1T = true;
                 }
@@ -604,9 +582,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_D2T == true){
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon2);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_D2T = false;
                     }else {
@@ -614,7 +592,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     }
                 }else{
                     imageView.setImageResource(R.drawable.ghetrong2);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_D2T = true;
                 }
@@ -627,9 +605,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_D3T == true){
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon3);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_D3T = false;
                     }else {
@@ -637,7 +615,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     }
                 }else{
                     imageView.setImageResource(R.drawable.ghetrong3);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_D3T = true;
                 }
@@ -650,9 +628,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_D4T == true){
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon4);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_D4T = false;
                     }else{
@@ -660,7 +638,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     }
                 }else{
                     imageView.setImageResource(R.drawable.ghetrong4);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_D4T = true;
                 }
@@ -673,9 +651,9 @@ public class FragmentSoDoGheTang2 extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Check_D5T == true){
-                    if (FragmentSoDoGheTang1.listGheDaChonTang1.size()<2) {
+                    if (FragmentTabhostSoDoGhe.listGheDaChonTang1.size()<2) {
                         imageView.setImageResource(R.drawable.ghedangchon5);
-                        FragmentSoDoGheTang1.listGheDaChonTang1.add(imageView.getTag().toString());
+                        FragmentTabhostSoDoGhe.listGheDaChonTang1.add(imageView.getTag().toString());
                         Log.d("JSON_DATVE_TANG1:", "Da dat ghe " + imageView.getTag().toString());
                         Check_D5T = false;
                     }else {
@@ -683,7 +661,7 @@ public class FragmentSoDoGheTang2 extends Fragment {
                     }
                 }else{
                     imageView.setImageResource(R.drawable.ghetrong5);
-                    FragmentSoDoGheTang1.listGheDaChonTang1.remove(FragmentSoDoGheTang1.listGheDaChonTang1.size() - 1);
+                    FragmentTabhostSoDoGhe.listGheDaChonTang1.remove(FragmentTabhostSoDoGhe.listGheDaChonTang1.size() - 1);
                     Log.d("JSON_DATVE_TANG1:", "Da huy ghe " + imageView.getTag().toString());
                     Check_D5T = true;
                 }
@@ -736,5 +714,30 @@ public class FragmentSoDoGheTang2 extends Fragment {
                 imageView.setEnabled(false);
             }
         }
+    }
+
+    //----------------------------API---------------------------------------------------------------
+    private void getSoDoGheDaDat(String id_tripdate){
+        SoDoGheRepuest.getSoDoGhe(id_tripdate, new Response() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(int code, String message, Object obj) {
+                ArrayList<SoDoghe> soDoghes = (ArrayList<SoDoghe>) obj;
+                for (int i = 0; i < soDoghes.size(); i++) {
+                    listGhe.add(soDoghes.get(i).seat);
+                }
+
+                setColorGheDaChon(listGhe);
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
     }
 }

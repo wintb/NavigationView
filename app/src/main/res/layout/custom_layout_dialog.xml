@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/VeVuaDat_txtTitle"
+        android:textSize="20sp"
+        android:textColor="#2c3e50"
+        android:text="Đặt vé thành công !"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/distance_small"/>
+
+    <TextView
+        android:paddingBottom="@dimen/distance_large"
+        android:id="@+id/VeVuaDat_message"
+        android:text="Vui lòng thử lại ."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/VeVuaDat_imgStatus"
+        android:src="@drawable/success"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:layout_marginBottom="50dp"
+            android:id="@+id/VeDaDat_btnOK"
+            android:text="OK"
+            android:textAllCaps="false"
+            android:layout_marginTop="@dimen/distance_large"
+            android:background="@drawable/rect_layout"
+            android:layout_width="100dp"
+            android:layout_height="35dp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

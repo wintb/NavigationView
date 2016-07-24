@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.facebook.CallbackManager;
@@ -162,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements
                                 .commit();
                         navigation.setCheckedItem(id);
                         drawerLayout.closeDrawer(navigation);
+                        break;
                     case R.id.navigation_item_1:
                         FragmentDatVeMotChieu fragmentTabhostDatVe = new FragmentDatVeMotChieu();
                         getSupportFragmentManager()
@@ -207,7 +207,8 @@ public class MainActivity extends AppCompatActivity implements
                         navigation.setCheckedItem(id);
                         drawerLayout.closeDrawer(navigation);
                         break;
-
+                    default:
+                        break;
 
                 }
 
@@ -356,36 +357,36 @@ public class MainActivity extends AppCompatActivity implements
     //----------------------------------SEND DATA FROM FRAGMENT TO FRAGMENT TO SHOW LIST TRIP---------------------------------
 
     @Override
-    public void setChuyenDi_NgayDi(String ChuyenDi, String NgayDi, String json) {
-        if (json == "[]"){
-            Toast.makeText(getApplication(), "No Trip on day", Toast.LENGTH_LONG).show();
-        }else {
-            FragmentDanhSachChuyen danhSachChuyen = new FragmentDanhSachChuyen();
-            Bundle data = new Bundle();
-            data.putString("ChuyenDi", ChuyenDi);
-            data.putString("NgayDi", NgayDi);
-            data.putString("JsonChuyen", json);
-            danhSachChuyen.setArguments(data);
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentholder, danhSachChuyen);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-        }
+    public void setChuyenDi_NgayDi(String idHangXe, String ChuyenDi, String NgayDi) {
+        FragmentDanhSachChuyen danhSachChuyen = new FragmentDanhSachChuyen();
+        Bundle data = new Bundle();
+        data.putString("ChuyenDi", ChuyenDi);
+        data.putString("NgayDi", NgayDi);
+        data.putString("idHangXe", idHangXe);
+        danhSachChuyen.setArguments(data);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentholder, danhSachChuyen);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
-    private String MaChuyen_temp;
-    private String MaTai_temp;
+    private String code_trip_temp;
+    private String code_driver_temp;
+    private String id_tripdate_temp;
 
     @Override
-    public void setSoDoGhe(String TenChuyen, String GioDi, String NgayDi,String MaChuyen, String MaTai) {
+    public void setSoDoGhe(String TenChuyen, String GioDi, String NgayDi,String code_trip, String id_tripdate, String code_driver) {
         FragmentTabhostSoDoGhe datVe_fragment = new FragmentTabhostSoDoGhe();
         Bundle data = new Bundle();
         data.putString("ChuyenDi", TenChuyen);
         data.putString("GioDi", GioDi);
         data.putString("NgayDi", NgayDi);
-        data.putString("MaChuyen", MaChuyen);
-        MaChuyen_temp = MaChuyen;
-        MaTai_temp = MaTai;
+        data.putString("code_trip", code_trip);
+        data.putString("id_tripdate", id_tripdate);
+        data.putString("code_driver", code_driver);
+        code_trip_temp = code_trip;
+        code_driver_temp = code_driver;
+        id_tripdate_temp  = id_tripdate;
         datVe_fragment.setArguments(data);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentholder, datVe_fragment);
@@ -409,8 +410,9 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void clickChonGhe(String TenChuyen, String GioDi, String NgayDi) {
         Bundle data = new Bundle();
-        data.putString("MaChuyen",MaChuyen_temp);
-        data.putString("MaTai", MaTai_temp);
+        data.putString("id_tripdate",id_tripdate_temp);
+        data.putString("code_driver", code_driver_temp);
+        data.putString("code_trip", code_trip_temp);
         data.putString("TenChuyen", TenChuyen);
         data.putString("GioDi", GioDi);
         data.putString("NgayDi", NgayDi);
@@ -426,7 +428,7 @@ public class MainActivity extends AppCompatActivity implements
 
 
     @Override
-    public void clickDatVe(String TenChuyen, String GioDi, String NgayDi, String MaTai, String MaChuyen, String HoTen, String CMND,
+    public void clickDatVe(String TenChuyen, String GioDi, String NgayDi, String MaTai, String MaChuyen, String code_trip, String HoTen, String CMND,
                            String SDT, String GhiChu, List<String> listSoGhe, int SoLuong, String MaVe) {
 
         Bundle data = new Bundle();
@@ -435,6 +437,7 @@ public class MainActivity extends AppCompatActivity implements
         data.putString("NgayDi", NgayDi);
         data.putString("MaTai",MaTai);
         data.putString("MaChuyen",MaChuyen);
+        data.putString("code_trip", code_trip);
         data.putString("HoTen",HoTen);
         data.putString("CMND",CMND);
         data.putString("SDT",SDT);

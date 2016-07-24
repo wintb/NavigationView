@@ -38,7 +38,7 @@ public class FragmentDanhSachNhaXe extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getListNhaXe();
+
     }
 
     @Nullable
@@ -48,6 +48,7 @@ public class FragmentDanhSachNhaXe extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_danh_sach_nha_xe, container, false);
         recyclerNhaXe = (RecyclerView) view.findViewById(R.id.recyclerNhaXe);
         SetRecyclerNhaXe();
+        getListNhaXe();
         return view;
     }
 

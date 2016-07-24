@@ -1,66 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:orientation="horizontal"
-    android:weightSum="7"
-    android:paddingTop="15dp"
-    android:paddingBottom="15dp"
-    android:layout_height="wrap_content"
     android:id="@+id/layout_custom_danhsachchuyen"
-    android:background="@drawable/rounded_item_list_trip">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <TableRow
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="4"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:gravity="center"
-            android:textSize="15dp"
-            android:layout_width="0dp"
-            android:textStyle="bold"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Mã Tài"
-            android:id="@+id/txtTai"
+            android:layout_weight="3"
+            android:padding="5dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/danhsachchuyen_AvatarCarMaker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            />
+            android:orientation="vertical"
+            android:padding="5dp">
 
-        <TextView
-            android:gravity="center"
-            android:textSize="15dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Giờ Đi"
-            android:id="@+id/txtGioDi"
-            android:layout_weight="1"
-            />
+            <TextView
+                android:id="@+id/danhsachchuyen_txtCarmaker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Xe Hoang Long"
+                android:textColor="#ef0606"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:paddingBottom="5dp"/>
 
-        <TextView
-            android:gravity="center"
-            android:textSize="15dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Giờ Đến"
-            android:id="@+id/txtGioDen"
-            android:layout_weight="1" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="5dp">
 
-        <TextView
-            android:gravity="center"
-            android:textSize="15dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Giá Vé"
-            android:id="@+id/txtGiaVe"
-            android:layout_weight="1" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <ImageView
+                        android:id="@+id/danhsachchuyen_imgTai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/steering_wheel" />
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:id="@+id/txtChon"
-            android:src="@drawable/right_arrow"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            />
+                    <TextView
+                        android:id="@+id/danhsachchuyen_txtTai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="tai 1"
+                        android:layout_gravity="center"
+                        android:paddingLeft="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:id="@+id/danhsachchuyen_imgDienThoai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/phone" />
 
-    </TableRow>
+                    <TextView
+                        android:id="@+id/danhsachchuyen_txtDienThoai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0978055271"
+                        android:layout_gravity="center"
+                        android:paddingLeft="10dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/clock" />
+
+                <TextView
+                    android:id="@+id/danhsachchuyen_giodi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="17h:30:00"
+                    android:layout_gravity="center"
+                    android:paddingLeft="10dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/time" />
+
+                <TextView
+                    android:id="@+id/danhsachchuyen_thoigian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="25 tieng"
+                    android:layout_gravity="center"
+                    android:paddingLeft="10dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/coin" />
+
+                    <TextView
+                        android:id="@+id/danhsachchuyen_gia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="400000 VND"
+                        android:layout_gravity="center"
+                        android:paddingLeft="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <Button
+                        android:id="@+id/danhsachchuyen_btnChon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:text="Chon"
+                        android:background="@drawable/rounded_button"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/rounded_line"/>
 
 </LinearLayout>

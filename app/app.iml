@@ -79,6 +79,9 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.14.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.siyamed/android-shape-imageview/0.9.3/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/me.dm7.barcodescanner/core/1.8.4/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/me.dm7.barcodescanner/zbar/1.8.4/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/me.dm7.barcodescanner/zxing/1.8.4/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-safeguard" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-support" />
@@ -101,8 +104,11 @@
     <orderEntry type="library" exported="" name="gson-2.6.2" level="project" />
     <orderEntry type="library" exported="" name="picasso-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="org.jbundle.util.osgi.wrapped.org.apache.http.client-4.1.2" level="project" />
+    <orderEntry type="library" exported="" name="core-3.2.1" level="project" />
     <orderEntry type="library" exported="" name="bolts-tasks-1.4.0" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-23.2.1" level="project" />
+    <orderEntry type="library" exported="" name="zbar-1.8.4" level="project" />
+    <orderEntry type="library" exported="" name="core-1.8.4" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.4.0" level="project" />
     <orderEntry type="library" exported="" name="httpclient-4.3.6" level="project" />
     <orderEntry type="library" exported="" name="bolts-android-1.4.0" level="project" />
@@ -112,6 +118,7 @@
     <orderEntry type="library" exported="" name="appcompat-v7-23.2.1" level="project" />
     <orderEntry type="library" exported="" name="facebook-android-sdk-4.14.0" level="project" />
     <orderEntry type="library" exported="" name="retrofit-2.0.2" level="project" />
+    <orderEntry type="library" exported="" name="zxing-1.8.4" level="project" />
     <orderEntry type="library" exported="" name="converter-gson-2.0.2" level="project" />
     <orderEntry type="library" exported="" name="design-23.2.1" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-23.4.0" level="project" />

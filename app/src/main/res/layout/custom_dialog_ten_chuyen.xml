@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:padding="15dp"
     android:textColor="#354b60"
+    android:text="Không có dữ liệu này"
     android:textSize="20dp">
 
 </TextView>

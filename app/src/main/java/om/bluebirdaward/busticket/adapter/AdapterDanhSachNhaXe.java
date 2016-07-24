@@ -30,7 +30,7 @@ public class AdapterDanhSachNhaXe extends RecyclerView.Adapter<AdapterDanhSachNh
     }
 
     public void setArrayListNhaXe(ArrayList<ListNhaXe> arr) {
-        listNhaXe = arr;
+        this.listNhaXe = arr;
         notifyDataSetChanged();
     }
 
@@ -48,7 +48,7 @@ public class AdapterDanhSachNhaXe extends RecyclerView.Adapter<AdapterDanhSachNh
 
         final ListNhaXe nhaXe = listNhaXe.get(position);
         Picasso.with(context)
-                .load(nhaXe.image)
+                .load(nhaXe.image_thumb)
                 .into(holder.imgNhaXe);
 
         holder.imgNhaXe.setOnClickListener(new View.OnClickListener() {
