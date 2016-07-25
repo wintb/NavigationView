@@ -365,7 +365,6 @@ public class MainActivity extends AppCompatActivity implements
         danhSachChuyen.setArguments(data);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentholder, danhSachChuyen);
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
@@ -389,7 +388,6 @@ public class MainActivity extends AppCompatActivity implements
         datVe_fragment.setArguments(data);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentholder, datVe_fragment);
-        fragmentTransaction.addToBackStack("SoDoGhe");
         fragmentTransaction.commit();
 
     }
@@ -409,7 +407,6 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentholder,nhap_thong_tin_fragment)
-                .addToBackStack("sodoghe")
                 .commit();
     }
 
@@ -443,7 +440,6 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentholder,thongTinVeVuaDatFragment)
-                .addToBackStack("nhapthongtin")
                 .commit();
     }
 
@@ -467,7 +463,6 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentholder,datVe_fragment)
-                .addToBackStack("doighe")
                 .commit();
     }
 
@@ -501,7 +496,6 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentholder,fragmentSuaThongTinVe)
-                .addToBackStack("suave")
                 .commit();
 
     }

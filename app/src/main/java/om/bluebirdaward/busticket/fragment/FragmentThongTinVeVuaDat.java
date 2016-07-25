@@ -26,6 +26,8 @@ import java.security.NoSuchAlgorithmException;
 import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.request.ThongTinVeVuaDatRequest;
+import om.bluebirdaward.busticket.utils.BitmapLoader;
+import om.bluebirdaward.busticket.utils.ShowDialog;
 
 /**
  * Created by DinhTien on 31-05-2016.
@@ -188,6 +190,7 @@ public class FragmentThongTinVeVuaDat extends Fragment {
     private void xacnhan_datve(final String seat, String fullname, String identity_number, String phone,
                                String qrcode, String quantity, String note, String id_tripdate, String code_trip){
 
+        ShowDialog.showLoading(getActivity());
         ThongTinVeVuaDatRequest.getThongTinVeVuaDat(seat, fullname, identity_number, phone, qrcode,
                 quantity, note, id_tripdate, code_trip, new Response() {
                     @Override
@@ -197,12 +200,12 @@ public class FragmentThongTinVeVuaDat extends Fragment {
 
                     @Override
                     public void onSuccess(int code, String message, Object obj) {
+                        ShowDialog.dimissLoading();
                         if (code == 1){
                             shơDialogSuccess_error("Đặt vé không thành công !", R.drawable.error, "Vui lòng thử lại.");
 
-                        } else {
-                            shơDialogSuccess_error("Đặt vé thành công !", R.drawable.success, "");
-                            showDialogQrcode(md5Qrcode);
+                        } else if(code == 0){
+                            shơDialogSuccess_error("Đặt vé thành công !", R.drawable.success_new, "Nhấn OK để tiếp tục");
                         }
                     }
 
@@ -230,13 +233,15 @@ public class FragmentThongTinVeVuaDat extends Fragment {
         Button btnOK = (Button) dialog.findViewById(R.id.VeDaDat_btnOK);
 
         txtTitle.setText(title);
-        imgStatus.setImageResource(image);
+        //imgStatus.setImageResource(image);
+        BitmapLoader.LoadImageNotScale(getActivity(), imgStatus, image);
         txtMessage.setText(message);
 
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dimissDialog();
+                showDialogQrcode(md5Qrcode);
             }
         });
 
@@ -256,6 +261,7 @@ public class FragmentThongTinVeVuaDat extends Fragment {
         btnQrcodeOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dimissDialog();
                 backDatveFragment.setBackDatVe();
             }
         });

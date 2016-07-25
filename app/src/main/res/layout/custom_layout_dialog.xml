@@ -23,9 +23,9 @@
 
     <ImageView
         android:id="@+id/VeVuaDat_imgStatus"
-        android:src="@drawable/success"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:src="@drawable/success_new"
+        android:layout_width="45dp"
+        android:layout_height="45dp" />
 
 
     <LinearLayout
@@ -35,12 +35,13 @@
 
 
         <Button
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="30dp"
             android:id="@+id/VeDaDat_btnOK"
             android:text="OK"
+            android:textColor="#FFF"
             android:textAllCaps="false"
             android:layout_marginTop="@dimen/distance_large"
-            android:background="@drawable/rect_layout"
+            android:background="@drawable/rect_button_dialog"
             android:layout_width="100dp"
             android:layout_height="35dp" />
 

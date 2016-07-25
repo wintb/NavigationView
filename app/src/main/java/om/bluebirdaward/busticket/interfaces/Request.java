@@ -1,20 +1,20 @@
 package om.bluebirdaward.busticket.interfaces;
 
-import om.bluebirdaward.busticket.dao.DanhSachChuyen.ReponseDanhSachChuyen;
 import java.util.Map;
 
+import om.bluebirdaward.busticket.dao.DanhSachChuyen.ReponseDanhSachChuyen;
 import om.bluebirdaward.busticket.dao.NhaXe.ReponseListChuyenDi;
 import om.bluebirdaward.busticket.dao.NhaXe.ReponseListHangXe;
 import om.bluebirdaward.busticket.dao.NhaXe.ResponseListNhaXe;
 import om.bluebirdaward.busticket.dao.NhaXeDetail.ResponseNhaXeDetail;
-import om.bluebirdaward.busticket.dao.SoDoGhe.ReponseSoDoGhe;
+import om.bluebirdaward.busticket.dao.SoDoghe.ReponseSoDoGhe;
 import om.bluebirdaward.busticket.dao.ThongTinVeVuaDat.ReponseThongTinVeVuaDat;
 import om.bluebirdaward.busticket.dao.customer.ResponseInfoCustomer;
 import om.bluebirdaward.busticket.dao.parent.ResponseVO;
 import retrofit2.Call;
 import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;

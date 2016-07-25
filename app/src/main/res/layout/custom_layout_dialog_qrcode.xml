@@ -30,8 +30,10 @@
         android:id="@+id/QRcode_btnOK"
         android:text="OK"
         android:textAllCaps="false"
+        android:textColor="#FFF"
+        android:layout_marginBottom="30dp"
         android:layout_marginTop="@dimen/distance_large"
-        android:background="@drawable/rect_layout"
+        android:background="@drawable/rect_button_dialog"
         android:layout_width="100dp"
         android:layout_height="35dp" />
 
