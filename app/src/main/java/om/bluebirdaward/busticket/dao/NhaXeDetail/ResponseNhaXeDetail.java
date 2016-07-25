@@ -1,7 +1,5 @@
 package om.bluebirdaward.busticket.dao.NhaXeDetail;
 
-import java.util.ArrayList;
-
 import om.bluebirdaward.busticket.dao.parent.ResponseVO;
 
 /**

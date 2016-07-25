@@ -3,42 +3,26 @@ package om.bluebirdaward.busticket.fragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import om.bluebirdaward.busticket.R;
-import om.bluebirdaward.busticket.activity.MainActivity;
-import om.bluebirdaward.busticket.dao.ThongTinVe;
 import om.bluebirdaward.busticket.dao.customer.Ticket;
 import om.bluebirdaward.busticket.interfaces.Response;
-import om.bluebirdaward.busticket.json.JsonHuyVe;
-import om.bluebirdaward.busticket.json.JsonSoDoghe;
-import om.bluebirdaward.busticket.mics.Constant;
 import om.bluebirdaward.busticket.request.DeleteCustomerRequest;
-import om.bluebirdaward.busticket.request.EditCustomerRequest;
 import om.bluebirdaward.busticket.utils.CheckInternet;
 import om.bluebirdaward.busticket.utils.ShowDialog;
 
@@ -200,7 +184,7 @@ public class FragmentThongTinVeDaDat extends Fragment {
 
                 if (CheckInternet.isConnected(getActivity())) {
 
-                    FragmentNhapThongTinKhach editInfo = new FragmentNhapThongTinKhach();
+                    FragmentSuaThongTinVe editInfo = new FragmentSuaThongTinVe();
                     myContext.getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragmentholder, editInfo)
                             .commit();

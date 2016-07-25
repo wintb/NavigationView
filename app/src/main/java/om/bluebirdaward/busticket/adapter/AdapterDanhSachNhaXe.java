@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import om.bluebirdaward.busticket.R;
-import om.bluebirdaward.busticket.dao.nhaxe.ListNhaXe;
+import om.bluebirdaward.busticket.dao.NhaXe.ListNhaXe;
 import om.bluebirdaward.busticket.dialog.DialogNhaXeDetail;
 
 /**

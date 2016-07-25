@@ -21,7 +21,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.adapter.AdapterDanhSachChuyen;
-import om.bluebirdaward.busticket.dao.danhsachchuyen.DanhSachChuyen;
+import om.bluebirdaward.busticket.dao.DanhSachChuyen.DanhSachChuyen;
 import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.mics.Constant;
 import om.bluebirdaward.busticket.request.DanhSachChuyenRequest;

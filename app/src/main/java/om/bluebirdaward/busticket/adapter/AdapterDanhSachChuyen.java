@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import om.bluebirdaward.busticket.R;
-import om.bluebirdaward.busticket.dao.danhsachchuyen.DanhSachChuyen;
+import om.bluebirdaward.busticket.dao.DanhSachChuyen.DanhSachChuyen;
 
 /**
  * Created by VuVanThang on 5/11/2016.

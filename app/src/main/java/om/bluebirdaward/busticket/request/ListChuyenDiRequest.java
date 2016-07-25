@@ -1,6 +1,6 @@
 package om.bluebirdaward.busticket.request;
 
-import om.bluebirdaward.busticket.dao.nhaxe.ReponseListChuyenDi;
+import om.bluebirdaward.busticket.dao.NhaXe.ReponseListChuyenDi;
 import om.bluebirdaward.busticket.interfaces.Request;
 import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.utils.ShowDialog;

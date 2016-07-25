@@ -1,6 +1,6 @@
 package om.bluebirdaward.busticket.request;
 
-import om.bluebirdaward.busticket.dao.nhaxedetail.ResponseNhaXeDetail;
+import om.bluebirdaward.busticket.dao.NhaXeDetail.ResponseNhaXeDetail;
 import om.bluebirdaward.busticket.interfaces.Request;
 import om.bluebirdaward.busticket.interfaces.Response;
 import retrofit2.Call;
