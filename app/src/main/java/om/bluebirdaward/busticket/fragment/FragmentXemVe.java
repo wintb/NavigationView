@@ -7,6 +7,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,11 +22,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import om.bluebirdaward.busticket.R;
+import om.bluebirdaward.busticket.dao.customer.InfoCustomer;
+import om.bluebirdaward.busticket.dao.customer.ResponseInfoCustomer;
+import om.bluebirdaward.busticket.dao.customer.Ticket;
+import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.json.ReadJson;
 import om.bluebirdaward.busticket.mics.Constant;
+import om.bluebirdaward.busticket.request.InfoCustomerRequest;
 import om.bluebirdaward.busticket.utils.CheckInternet;
 import om.bluebirdaward.busticket.utils.ShowDialog;
 
@@ -38,9 +50,10 @@ public class FragmentXemVe extends Fragment{
     TextView txtTitleXemVe;
     Button btnXemVe;
     LinearLayout layout_xemve;
-    ReadJson ReadJsonThongTinVeKhach;
-    String jsonThongTinVeKhach;
-    OnNameSetListener onNameSetListener;
+    private FragmentActivity myContext;
+    private InfoCustomer infoCustomer;
+    private Ticket ticket;
+    private ArrayList<Ticket> arrTicket;
 
 
     @Nullable
@@ -61,32 +74,14 @@ public class FragmentXemVe extends Fragment{
             @Override
             public void onClick(View v) {
 
-                if (CheckInternet.isConnected(getActivity())){
+                if (CheckInternet.isConnected(getActivity())) {
+                    viewInfoCustomer();
 
-                    ReadJsonThongTinVeKhach = new ReadJson("",editCMND.getText().toString(),editSDT.getText().toString());
-                    //Kiểm tra đã nhập đủ thông tin các ô hay chưa
-                    if (editSDT.getText().toString().equalsIgnoreCase("") || editCMND.getText().toString().equalsIgnoreCase("") ){
-                        txtThongBao.setVisibility(View.VISIBLE);
-                    }else {
-                        try {
-                            //gọi webservice
-                            jsonThongTinVeKhach = new GoiWebService().execute(Constant.URL_THONGTINVE).get();
-                            if (jsonThongTinVeKhach.equalsIgnoreCase("[]")){
-                                Toast.makeText(getActivity(),"Thông tin nhập vào không chính xác!",Toast.LENGTH_LONG).show();
-                            }else {
-                                onNameSetListener.setThongTinVe(jsonThongTinVeKhach);
-                            }
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        } catch (ExecutionException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }else{
+                } else {
 
                     String title = "Warning";
                     String message = "Vui lòng kiểm tra kết nối Internet.";
-                    ShowDialog.show(getActivity(),title,message);
+                    ShowDialog.show(getActivity(), title, message);
                 }
 
             }
@@ -96,6 +91,63 @@ public class FragmentXemVe extends Fragment{
         return view;
     }
 
+    public void viewInfoCustomer(){
+
+        Map<String,String> data = new HashMap<>();
+        data.put("identity_number",editCMND.getText().toString());
+        data.put("phone", editSDT.getText().toString());
+        data.put("type", String.valueOf(1));
+
+        InfoCustomerRequest.getInfoCustomer(data, new Response() {
+            @Override
+            public void onStart() {
+            }
+
+            @Override
+            public void onSuccess(int code, String message, Object obj) {
+
+                if (code == 0) {
+                    ArrayList<InfoCustomer> infoCustomerArrayList = (ArrayList<InfoCustomer>) obj;
+                    infoCustomer = infoCustomerArrayList.get(0);
+                    setData();
+                }
+            }
+
+            @Override
+            public void onFailure() {
+                Log.d("FAIL", "OK");
+            }
+        });
+    }
+
+
+    public void setData(){
+        int i=0;
+        arrTicket = infoCustomer.ticket;
+        Bundle data = new Bundle();
+        for (Ticket t:arrTicket){
+            i++;
+            data.putSerializable("ticket_"+i, t);
+        }
+        data.putInt("quantity", infoCustomer.quantity);
+        data.putInt("id", infoCustomer.id);
+        data.putInt("id_tripdate", infoCustomer.id_tripdate);
+        data.putString("identity_number", infoCustomer.identity_number);
+        data.putString("note", infoCustomer.note);
+        data.putString("start", infoCustomer.start);
+        data.putString("date", infoCustomer.date);
+        data.putString("phone", infoCustomer.phone);
+        data.putString("fullname",infoCustomer.fullname);
+        data.putString("route", infoCustomer.route);
+        data.putString("code_driver",infoCustomer.code_driver);
+        data.putString("create_date",infoCustomer.create_date);
+
+        FragmentThongTinVeDaDat xemVe = new FragmentThongTinVeDaDat();
+        xemVe.setArguments(data);
+        myContext.getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentholder, xemVe)
+                .commit();
+    }
     public void setupUI( final View view) {
 
         //Set up touch listener for non-text box views to hide keyboard.
@@ -123,18 +175,12 @@ public class FragmentXemVe extends Fragment{
         }
     }
 
-    public interface OnNameSetListener{
-        public void setThongTinVe(String json);
-    }
-
     @Override
     public void onAttach(Activity activity) {
+        myContext=(FragmentActivity) activity;
         super.onAttach(activity);
-        try {
-            onNameSetListener = (OnNameSetListener)activity;
-        } catch (Exception e){throw new ClassCastException(activity.toString() + " must implement OnNameSetListener");}
-
     }
+
 
     private void setTypeFace(){
         Typeface face1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
@@ -144,23 +190,6 @@ public class FragmentXemVe extends Fragment{
         txtThongBao.setTypeface(face1);
         txtTitleXemVe .setTypeface(face1);
         btnXemVe.setTypeface(face1);
-    }
-
-    //--------------------------POST DATA TO SERVER AND GET DATA FROM SERVER------------------------------
-
-    private class GoiWebService extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... params) {
-            return ReadJsonThongTinVeKhach.makePostRequestThongTinVe(params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            //Json_DanhSach_Chuyen = s;
-            Log.d("JSON THONG TIN VE: ", s);
-            super.onPostExecute(s);
-        }
     }
 
 }

@@ -18,7 +18,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import om.bluebirdaward.busticket.R;
-import om.bluebirdaward.busticket.dao.SoDoghe.SoDoghe;
+import om.bluebirdaward.busticket.dao.sodoghe.SoDoghe;
 import om.bluebirdaward.busticket.dao.Ve;
 import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.request.SoDoGheRepuest;

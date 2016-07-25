@@ -193,7 +193,7 @@
                 <TableRow
                     android:padding="3dp">
                     <TextView
-                        android:text="Tài"
+                        android:text="Tài:"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_column="1" />
@@ -204,22 +204,6 @@
                         android:layout_height="wrap_content"
                         android:layout_column="1"
                         android:id="@+id/txtVeMaTai" />
-                </TableRow>
-
-                <TableRow
-                    android:padding="3dp">
-                    <TextView
-                        android:text="Biển số xe: "
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                    <TextView
-                        android:paddingLeft="7dp"
-                        android:text="Biển số xe của tài xe"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:id="@+id/txtVeBienSoXe" />
                 </TableRow>
 
                 <TableRow

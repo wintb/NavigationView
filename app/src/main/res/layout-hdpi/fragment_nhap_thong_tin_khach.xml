@@ -39,7 +39,8 @@
         android:padding="10dp"
         android:textSize="20dp"
         android:background="@drawable/rect"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:inputType="number"/>
     <EditText
         android:id="@+id/editNhapCMND"
         android:layout_width="250dp"
@@ -51,6 +52,7 @@
         android:textSize="20dp"
         android:background="@drawable/rect"
         android:layout_marginTop="20dp"
+        android:inputType="number"
         />
     <EditText
         android:id="@+id/editNhapGhichu"

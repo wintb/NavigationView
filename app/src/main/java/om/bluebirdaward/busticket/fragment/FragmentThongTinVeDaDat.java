@@ -1,5 +1,6 @@
 package om.bluebirdaward.busticket.fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +21,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import butterknife.Bind;
@@ -27,9 +32,13 @@ import butterknife.ButterKnife;
 import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.activity.MainActivity;
 import om.bluebirdaward.busticket.dao.ThongTinVe;
+import om.bluebirdaward.busticket.dao.customer.Ticket;
+import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.json.JsonHuyVe;
 import om.bluebirdaward.busticket.json.JsonSoDoghe;
 import om.bluebirdaward.busticket.mics.Constant;
+import om.bluebirdaward.busticket.request.DeleteCustomerRequest;
+import om.bluebirdaward.busticket.request.EditCustomerRequest;
 import om.bluebirdaward.busticket.utils.CheckInternet;
 import om.bluebirdaward.busticket.utils.ShowDialog;
 
@@ -52,14 +61,14 @@ public class FragmentThongTinVeDaDat extends Fragment {
     TextView txtSoGhe;
     @Bind(R.id.txtVeMaTai)
     TextView txtMaTai;
-    @Bind(R.id.txtVeBienSoXe)
-    TextView txtBienSo;
     @Bind(R.id.txtVeTenChuyenDi)
     TextView txtTenChuyen;
     @Bind(R.id.txtVeNgayDi)
     TextView txtTextNgayDi;
     @Bind(R.id.txtVeGioDi)
     TextView txtGioDi;
+    @Bind(R.id.txtNgayDatVe)
+    TextView txtNgayDatVe;
     @Bind(R.id.btnHuyVe)
     Button btnHuyve;
     @Bind(R.id.btnDoiVe)
@@ -73,85 +82,107 @@ public class FragmentThongTinVeDaDat extends Fragment {
     @Bind(R.id.fragment_vedadat_thongtinve)
     TextView ttxVeDadatThongTinVe;
 
-    DoiGhe doighe;
-    private JsonSoDoghe jsonSoDoghe;
-    public static String sodogheDoiVe;
-    private JsonHuyVe jsonHuyVe;
-    private SuaVe suaVe;
-
+    private ArrayList<Ticket> arrTicket = new ArrayList<>();
+    private String phone;
+    private String identity_number;
+    private String fullname;
+    private String note;
+    private int quantity;
+    private String date;
+    private String start;
+    private String code_driver;
+    private String route;
+    private String create_date;
+    private String soghe = "";
+    private FragmentActivity myContext;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_thong_tin_ve_da_dat,container,false);
-        ButterKnife.bind(this,view);
+        View view = inflater.inflate(R.layout.fragment_thong_tin_ve_da_dat, container, false);
+        ButterKnife.bind(this, view);
         setTypeFace();
 
-        doighe = (DoiGhe) getActivity();
-        suaVe = (SuaVe) getActivity();
+        Bundle data = this.getArguments();
 
-        //Lấy dữ liệu từ fragment FragmentXemVe
-        Bundle data = getArguments();
-        String ThongTinVeKhach = data.getString("JsonThongTinVe");
-        Type listType = new TypeToken<List<ThongTinVe>>(){}.getType();
-        final List<ThongTinVe> thongTinVe  =  new Gson().fromJson(ThongTinVeKhach, listType);
+        phone = data.getString("phone");
+        identity_number = data.getString("identity_number");
+        fullname = data.getString("fullname");
+        note = data.getString("note");
+        quantity = data.getInt("quantity");
+        date = data.getString("date");
+        start = data.getString("start");
+        code_driver = data.getString("code_driver");
+        route = data.getString("route");
+        create_date = data.getString("create_date");
 
-        txtHoTen.setText(thongTinVe.get(0).getHoTen());
-        txtSDT.setText(thongTinVe.get(0).getSDTKhach());
-        txtCMND.setText(thongTinVe.get(0).getCMND());
-        txtGhiChu.setText(thongTinVe.get(0).getGhiChu());
-        txtMaVe.setText(thongTinVe.get(0).getMaVe());
-        txtSoGhe.setText(thongTinVe.get(0).getSoGhe());
-        txtMaTai.setText(thongTinVe.get(0).getMaTai());
-        txtBienSo.setText(thongTinVe.get(0).getBienSo());
-        txtTenChuyen.setText(thongTinVe.get(0).getTenChuyen());
-        txtTextNgayDi.setText(thongTinVe.get(0).getNgayDi());
-        txtGioDi.setText(thongTinVe.get(0).getGioDi());
+        txtHoTen.setText(fullname);
+        txtSDT.setText(phone);
+        txtCMND.setText(identity_number);
+        txtGhiChu.setText(note);
+        txtSoGhe.setText(String.valueOf(quantity));
+        txtTextNgayDi.setText(date);
+        txtGioDi.setText(start);
+        for (int i = 0; i < data.getInt("quantity"); i++) {
+            arrTicket.add((Ticket) data.getSerializable("ticket_" + (i + 1)));
+        }
+        for (int i = 0; i < arrTicket.size(); i++) {
+            soghe += arrTicket.get(i).seat;
+            if (i < arrTicket.size() - 1)
+                soghe += " - ";
 
+        }
+        txtMaVe.setText(soghe);
+        txtMaTai.setText(code_driver);
+        txtTenChuyen.setText(route);
+        txtNgayDatVe.setText(create_date);
+
+        deleteTicket();
+        editTicket();
+        changeTicket();
+
+
+        return view;
+    }
+
+    public void deleteTicket(){
         btnHuyve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (CheckInternet.isConnected(getActivity())){
+                if (CheckInternet.isConnected(getActivity())) {
+
+                    final Map<String, String> data = new HashMap<>();
+                    data.put("identity_number", identity_number);
+                    data.put("phone", phone);
 
                     // hien thong bao hoi nguoi dung co chac chan huy ve hay khong
                     new AlertDialog.Builder(getActivity()).setTitle("Hủy vé").setMessage("Bạn có chắc chắc muốn hủy vé ?")
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    jsonHuyVe = new JsonHuyVe(thongTinVe.get(0).getMaChuyen(), thongTinVe.get(0).getMaVe());
-                                    String result = null;
-                                    try {
-                                        result = new GoiWebServiceHuyVe().execute(Constant.URL_HUY_VE).get();
-                                        // thong bao huy ve co thanh cong hay khong
-                                        new AlertDialog.Builder(getActivity()).setTitle("Hủy vé").setMessage(result)
-                                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog, int which) {
-                                                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                                                        startActivity(intent);
-                                                    }
-                                                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
+                                    DeleteCustomerRequest.deleteCustomer(data, new Response() {
+                                        @Override
+                                        public void onStart() {
+                                        }
 
-                                            }
-                                        }).show();
+                                        @Override
+                                        public void onSuccess(int code, String message, Object obj) {
+                                        }
 
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    } catch (ExecutionException e) {
-                                        e.printStackTrace();
-                                    }
+                                        @Override
+                                        public void onFailure() {
+                                        }
+                                    });
+                                }
+                            })
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
                                 }
-                            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    }).show();
-                }else{
+                            }).show();
+                } else {
 
                     String title = "Warning";
                     String message = "Vui lòng kiểm tra kết nối Internet.";
@@ -159,30 +190,38 @@ public class FragmentThongTinVeDaDat extends Fragment {
                 }
             }
         });
+    }
 
+    public void editTicket(){
+
+        btnSuaVe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (CheckInternet.isConnected(getActivity())) {
+
+                    FragmentNhapThongTinKhach editInfo = new FragmentNhapThongTinKhach();
+                    myContext.getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragmentholder, editInfo)
+                            .commit();
+                } else {
+
+                    String title = "Warning";
+                    String message = "Vui lòng kiểm tra kết nối Internet.";
+                    ShowDialog.show(getActivity(), title, message);
+                }
+
+            }
+        });
+    }
+
+    public void changeTicket(){
         btnDoiVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (CheckInternet.isConnected(getActivity())){
 
-                    Constant.KEY_CHECK_FRAGMENT = 0;
-                    //lấy chuỗi json các ghế đã chọn để đưa vào list
-                    try {
-                        jsonSoDoghe = new JsonSoDoghe(thongTinVe.get(0).getMaChuyen());
-                        sodogheDoiVe = new GoiWbServiceSoDoGhe().execute(Constant.URL_SODOGHE).get();
-                        Log.d("JSON_SODOGHE_DOIVE:", sodogheDoiVe);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    }
-                    doighe.setDoiGhe(thongTinVe.get(0).getMaVe(),
-                            thongTinVe.get(0).getMaChuyen(),
-                            thongTinVe.get(0).getTenChuyen(),
-                            thongTinVe.get(0).getGioDi(),
-                            thongTinVe.get(0).getNgayDi(),
-                            thongTinVe.get(0).getSDTKhach());
                 }else{
 
                     String title = "Warning";
@@ -192,33 +231,9 @@ public class FragmentThongTinVeDaDat extends Fragment {
 
             }
         });
-
-        btnSuaVe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (CheckInternet.isConnected(getActivity())){
-                    suaVe.setSuaVe(thongTinVe.get(0).getHoTen(),
-                            thongTinVe.get(0).getSDTKhach(),
-                            thongTinVe.get(0).getCMND(),
-                            thongTinVe.get(0).getGhiChu(),
-                            thongTinVe.get(0).getMaChuyen(),
-                            thongTinVe.get(0).getMaVe());
-                }else{
-
-                    String title = "Warning";
-                    String message = "Vui lòng kiểm tra kết nối Internet.";
-                    ShowDialog.show(getActivity(), title, message);
-                }
-
-            }
-        });
-
-
-        return view;
     }
 
-    private void setTypeFace(){
+    private void setTypeFace() {
         Typeface face1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
         Typeface face2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Bold.ttf");
         ttxVeDadatTitle.setTypeface(face1);
@@ -229,46 +244,17 @@ public class FragmentThongTinVeDaDat extends Fragment {
         btnSuaVe.setTypeface(face1);
     }
 
-
-
-
-
-
-    //-------------------------SELECT SOGHE TỪ SERVER ĐỂ KIỂM TRA GHẾ ĐÃ CHỌN-----------------------
-
-    private class GoiWbServiceSoDoGhe extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... params) {
-            return jsonSoDoghe.makePostRequestSoDoGhe(params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }
+    @Override
+    public void onAttach(Activity activity) {
+        myContext=(FragmentActivity) activity;
+        super.onAttach(activity);
     }
 
-    //-----------------------POST DATA LÊN SERVER ĐỂ HUY VE-----------------------------------------
-
-    private class GoiWebServiceHuyVe extends AsyncTask<String, Void, String>{
-
-        @Override
-        protected String doInBackground(String... params) {
-            return jsonHuyVe.makePostRequest_HuyVe(params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }
-    }
-
-    public interface DoiGhe{
+    public interface DoiGhe {
         void setDoiGhe(String MaVe, String MaChuyen, String TenChuyen, String GioDi, String NgayDi, String SDTKhach);
     }
 
-    public interface SuaVe{
+    public interface SuaVe {
         void setSuaVe(String HoTen, String SDT, String CMND, String NoiXuong, String MaChuyen, String MaVe);
     }
 }

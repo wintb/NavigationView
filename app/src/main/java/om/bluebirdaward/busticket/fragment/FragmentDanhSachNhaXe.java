@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.adapter.AdapterDanhSachNhaXe;
-import om.bluebirdaward.busticket.dao.NhaXe.ListNhaXe;
+import om.bluebirdaward.busticket.dao.nhaxe.ListNhaXe;
 import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.request.ListNhaXeRequest;
 

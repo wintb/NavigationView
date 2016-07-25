@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import om.bluebirdaward.busticket.R;
-import om.bluebirdaward.busticket.dao.NhaXeDetail.NhaXeDetail;
+import om.bluebirdaward.busticket.dao.nhaxedetail.NhaXeDetail;
 import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.request.NhaXeDetailResponse;
 

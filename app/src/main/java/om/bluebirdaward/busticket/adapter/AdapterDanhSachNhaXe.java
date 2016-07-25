@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import om.bluebirdaward.busticket.R;
-import om.bluebirdaward.busticket.dao.NhaXe.ListNhaXe;
+import om.bluebirdaward.busticket.dao.nhaxe.ListNhaXe;
 import om.bluebirdaward.busticket.dialog.DialogNhaXeDetail;
 
 /**
@@ -48,7 +48,7 @@ public class AdapterDanhSachNhaXe extends RecyclerView.Adapter<AdapterDanhSachNh
 
         final ListNhaXe nhaXe = listNhaXe.get(position);
         Picasso.with(context)
-                .load(nhaXe.image_thumb)
+                .load(nhaXe.image)
                 .into(holder.imgNhaXe);
 
         holder.imgNhaXe.setOnClickListener(new View.OnClickListener() {

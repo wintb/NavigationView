@@ -59,7 +59,6 @@ import om.bluebirdaward.busticket.utils.BitmapLoader;
 public class MainActivity extends AppCompatActivity implements
         FragmentDatVeMotChieu.OnNameSetListener,
         AdapterDanhSachChuyen.SoDoGhe,
-        FragmentXemVe.OnNameSetListener,
         FragmentSoDoGheTang1.ChonGhe,
         FragmentNhapThongTinKhach.DatVe,
         FragmentThongTinVeDaDat.DoiGhe,
@@ -393,18 +392,6 @@ public class MainActivity extends AppCompatActivity implements
         fragmentTransaction.addToBackStack("SoDoGhe");
         fragmentTransaction.commit();
 
-    }
-
-    @Override
-    public void setThongTinVe(String json) {
-        FragmentThongTinVeDaDat xemVe = new FragmentThongTinVeDaDat();
-        Bundle data = new Bundle();
-        data.putString("JsonThongTinVe",json);
-        xemVe.setArguments(data);
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentholder, xemVe);
-        fragmentTransaction.addToBackStack("xemve");
-        fragmentTransaction.commit();
     }
 
     @Override
