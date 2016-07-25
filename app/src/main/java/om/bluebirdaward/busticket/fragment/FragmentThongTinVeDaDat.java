@@ -185,7 +185,7 @@ public class FragmentThongTinVeDaDat extends Fragment {
                 } else {
 
                     String title = "Warning";
-                    String message = "Vui lòng kiểm tra kết nối Internet.";
+                    String message = "Vui lòng kiểm tra kết nối Internet";
                     ShowDialog.show(getActivity(), title, message);
                 }
             }
