@@ -14,6 +14,10 @@
             android:id="@+id/navigation_item_2"
             android:icon="@drawable/viewticket"
             android:title="@string/navigation_view_item_2" />
+        <item
+            android:id="@+id/navigation_item_6"
+            android:icon="@drawable/qrcode"
+            android:title="@string/navigation_view_item_6" />
     </group>
 
     <item

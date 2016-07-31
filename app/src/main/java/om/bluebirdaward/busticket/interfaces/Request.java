@@ -2,6 +2,7 @@ package om.bluebirdaward.busticket.interfaces;
 
 import java.util.Map;
 
+import om.bluebirdaward.busticket.dao.ChuyenDi.ResponseChuyenDi2Params;
 import om.bluebirdaward.busticket.dao.DanhSachChuyen.ReponseDanhSachChuyen;
 import om.bluebirdaward.busticket.dao.NhaXe.ReponseListChuyenDi;
 import om.bluebirdaward.busticket.dao.NhaXe.ReponseListHangXe;
@@ -68,5 +69,12 @@ public interface Request {
     @FormUrlEncoded
     @POST("changeInfoCustomer")
     Call<ResponseInfoCustomer> editTicket(@FieldMap Map<String,String> field);
+
+    @GET("getListTrip")
+    Call<ResponseChuyenDi2Params> getTenChuyenDi2Params();
+
+    @FormUrlEncoded
+    @POST("getListTripDate")
+    Call<ReponseDanhSachChuyen> getDanhSachChuyen2Params(@Field("route") String route, @Field("date") String date);
 
 }

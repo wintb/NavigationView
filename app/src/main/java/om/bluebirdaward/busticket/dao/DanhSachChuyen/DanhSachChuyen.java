@@ -16,4 +16,5 @@ public class DanhSachChuyen {
     public String code_driver;
     public String carmaker;
     public String phone;
+    public String image;
 }

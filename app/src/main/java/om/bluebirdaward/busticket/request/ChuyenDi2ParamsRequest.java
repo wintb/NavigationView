@@ -1,32 +1,31 @@
 package om.bluebirdaward.busticket.request;
 
-import om.bluebirdaward.busticket.dao.NhaXe.ResponseListNhaXe;
+import om.bluebirdaward.busticket.dao.ChuyenDi.ResponseChuyenDi2Params;
 import om.bluebirdaward.busticket.interfaces.Request;
 import om.bluebirdaward.busticket.interfaces.Response;
 import retrofit2.Call;
 import retrofit2.Callback;
 
 /**
- * Created by Trinh Dinh Tien on 7/20/2016.
+ * Created by VuVanThang on 7/26/2016.
  */
-public class ListNhaXeRequest {
-
-    public static void getListNhaXe(final Response resp) {
+public class ChuyenDi2ParamsRequest {
+    public static void getTenChuyenDi2Params(final Response resp) {
         resp.onStart();
         Request client = HandlerRequest.createService(Request.class);
-        Call<ResponseListNhaXe> call = client.getListNhaXe();
-        call.enqueue(new Callback<ResponseListNhaXe>() {
+        Call<ResponseChuyenDi2Params> call = client.getTenChuyenDi2Params();
+        call.enqueue(new Callback<ResponseChuyenDi2Params>() {
             @Override
-            public void onResponse(Call<ResponseListNhaXe> call, retrofit2.Response<ResponseListNhaXe> response) {
+            public void onResponse(Call<ResponseChuyenDi2Params> call, retrofit2.Response<ResponseChuyenDi2Params> response) {
                 if (response.body() != null) {
                     resp.onSuccess(response.body().code, response.body().message, response.body().data);
-                }else {
+                }else{
                     resp.onFailure();
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseListNhaXe> call, Throwable t) {
+            public void onFailure(Call<ResponseChuyenDi2Params> call, Throwable t) {
                 resp.onFailure();
             }
         });

@@ -21,17 +21,20 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import om.bluebirdaward.busticket.R;
+import om.bluebirdaward.busticket.dao.ChuyenDi.ChuyenDi2Params;
 import om.bluebirdaward.busticket.dao.NhaXe.ChuyenDi;
 import om.bluebirdaward.busticket.dao.NhaXe.HangXe;
 import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.mics.datetime.CompareDateTime;
 import om.bluebirdaward.busticket.mics.datetime.DatetimeFormater;
+import om.bluebirdaward.busticket.request.ChuyenDi2ParamsRequest;
 import om.bluebirdaward.busticket.request.ListChuyenDiRequest;
 import om.bluebirdaward.busticket.request.ListHangXeRequest;
 import om.bluebirdaward.busticket.utils.CheckInternet;
@@ -67,6 +70,7 @@ public class FragmentDatVeMotChieu extends Fragment{
     OnNameSetListener onNameSetListener;
 
     private final Handler handler = new Handler();
+    public static int checkParams = 1;
 
     @Nullable
     @Override
@@ -95,7 +99,22 @@ public class FragmentDatVeMotChieu extends Fragment{
             public void onClick(View v) {
 
                 if (CheckInternet.isConnected(getActivity())){
-                    onNameSetListener.setChuyenDi_NgayDi(IdHangXe, txtChuyenDi.getText().toString(), txtDate.getText().toString());
+
+                    if ((txtHangXe.getText().toString().equalsIgnoreCase("")
+                            && txtChuyenDi.getText().toString().equalsIgnoreCase(""))){
+                        Toast.makeText(getActivity(), "Bạn chưa nhập đủ thông tin", Toast.LENGTH_LONG).show();
+                    }
+                    else if ((!txtHangXe.getText().toString().equalsIgnoreCase("") && txtChuyenDi.getText().toString().equalsIgnoreCase(""))){
+                        Toast.makeText(getActivity(), "Bạn chưa nhập đủ thông tin", Toast.LENGTH_LONG).show();
+                    }else if(txtHangXe.getText().toString().equalsIgnoreCase("")
+                            && !txtChuyenDi.getText().toString().equalsIgnoreCase("")){
+                        checkParams = 2;
+                        onNameSetListener.setChuyenDi_NgayDi(IdHangXe, txtChuyenDi.getText().toString(), txtDate.getText().toString());
+                    }else {
+                        checkParams = 3;
+                        onNameSetListener.setChuyenDi_NgayDi(IdHangXe, txtChuyenDi.getText().toString(), txtDate.getText().toString());
+                    }
+
                 }else{
                     String t = "Warning";
                     String m = "Vui lòng kiểm tra kết nối Internet.";
@@ -171,8 +190,6 @@ public class FragmentDatVeMotChieu extends Fragment{
                 LayoutInflater inflater1 = (LayoutInflater) getContext().getSystemService(context.LAYOUT_INFLATER_SERVICE);
                 LinearLayout linearLayout = (LinearLayout) inflater1.inflate(R.layout.dialog_ten_chuyen, null, false);
                 listView = (ListView) linearLayout.findViewById(R.id.list);
-                /*DocJSON docJSON = new DocJSON();
-                docJSON.execute(Constant.URL_TENCACCHUYEN);*/
                 getListChuyenDi(IdHangXe);
 
                 new AlertDialog.Builder(getActivity()).setTitle("Chọn chuyến")
@@ -220,10 +237,8 @@ public class FragmentDatVeMotChieu extends Fragment{
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                //String date_month_year = years + "-" + months + "-" + date;
                                 String date_month_year = date + "/" + months + "/" + years;
                                 datetimeFormater.FormatDateTime(date_month_year, txtDate);
-                                //txtDate.setText(date_month_year);
                             }
                         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -281,7 +296,7 @@ public class FragmentDatVeMotChieu extends Fragment{
 
     private void getListChuyenDi(String id){
 
-        if (id != null){
+        if (!txtHangXe.getText().toString().equalsIgnoreCase("")){
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -325,16 +340,64 @@ public class FragmentDatVeMotChieu extends Fragment{
                 }
             });
         }else {
-            setListEmpty();
+            //setListEmpty();
+            getListRoute2Params();
         }
     }
 
 
     private void setListEmpty(){
         ArrayList<String> name = new ArrayList<>();
-        name.add("Chưa chọn hãng");
+        name.add("Không có chuyến");
         ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), R.layout.custom_dialog_ten_chuyen, name);
         listView.setAdapter(arrayAdapter);
     }
+
+
+    private void getListRoute2Params(){
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                ShowDialog.showLoading(getActivity());
+            }
+        });
+
+        ChuyenDi2ParamsRequest.getTenChuyenDi2Params(new Response() {
+            @Override
+            public void onStart() {
+            }
+
+            @Override
+            public void onSuccess(int code, String message, Object obj) {
+                ShowDialog.dimissLoading();
+                if (code == 0) {
+                    final ArrayList<String> name = new ArrayList<>();
+
+                    final ArrayList<ChuyenDi2Params> list = (ArrayList<ChuyenDi2Params>) obj;
+
+                    for (int i = 0; i < list.size(); i++) {
+                        name.add(list.get(i).route);
+                    }
+                    ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), R.layout.custom_dialog_ten_chuyen, name);
+                    listView.setAdapter(arrayAdapter);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            txtChuyenDi.setText(name.get(position).toString());
+                        }
+                    });
+                }
+                if (code == 1) {
+                    setListEmpty();
+                }
+            }
+
+            @Override
+            public void onFailure() {
+                setListEmpty();
+            }
+        });
+    }
+
 
 }

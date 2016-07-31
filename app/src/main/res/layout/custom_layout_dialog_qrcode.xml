@@ -16,7 +16,7 @@
     <TextView
         android:paddingBottom="@dimen/distance_large"
         android:textColor="#2c3e50"
-        android:text="Mã này được lưu trong thư mục ảnh Gallery"
+        android:text="Mã này được lưu trong phần Mã xác nhận"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

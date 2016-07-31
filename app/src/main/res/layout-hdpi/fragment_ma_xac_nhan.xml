@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2ecc71"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="Mã xác nhận khách hàng"
+        android:textColor="#FFF"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/distance_largest"
+        android:textSize="@dimen/text_size_largest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/imgMaXacNhan"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/distance_largest"
+        android:layout_marginBottom="@dimen/distance_large"
+        android:src="@drawable/empty"
+        android:layout_width="300dp"
+        android:layout_height="300dp" />
+
+    <TextView
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="#FFF"
+        android:text="Khi thanh toán vé, mã xác nhận này \n sẽ được nhà xe kiểm tra \n tính xác thực của vé."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:gravity="center"
+        android:textColor="#FFF"
+        android:text="Chúc quý khách thượng lộ bình an!"
+        android:layout_marginTop="@dimen/distance_largest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

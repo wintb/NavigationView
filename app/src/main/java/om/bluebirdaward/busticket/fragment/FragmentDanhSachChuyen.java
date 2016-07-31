@@ -12,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +22,7 @@ import om.bluebirdaward.busticket.adapter.AdapterDanhSachChuyen;
 import om.bluebirdaward.busticket.dao.DanhSachChuyen.DanhSachChuyen;
 import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.mics.Constant;
+import om.bluebirdaward.busticket.request.DanhSachChuyen2paramsRequest;
 import om.bluebirdaward.busticket.request.DanhSachChuyenRequest;
 import om.bluebirdaward.busticket.utils.ShowDialog;
 
@@ -44,7 +43,7 @@ public class FragmentDanhSachChuyen extends Fragment {
     @Bind(R.id.recyclerDanhSachChuyen)
     RecyclerView recyclerDanhSachChuyen;
     String idHangXe ;
-    Gson gson;
+
     AdapterDanhSachChuyen customApdaterOneTrip;
     public String ChuyenDi;
     public String NgayDi;
@@ -59,15 +58,23 @@ public class FragmentDanhSachChuyen extends Fragment {
         Bundle data = getArguments();
 
         ngaydi.setText(data.getString("NgayDi"));
-
         idHangXe = data.getString("idHangXe");
         ChuyenDi = data.getString("ChuyenDi");
-        splitString(ChuyenDi);
         NgayDi = data.getString("NgayDi");
+
+        splitString(ChuyenDi);
+
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerDanhSachChuyen.setLayoutManager(mLayoutManager);
-        getDanhSachChuyen(idHangXe, ChuyenDi, NgayDi);
+
+        if (FragmentDatVeMotChieu.checkParams == 2){
+            getDanhSachChuyen2Parrams(ChuyenDi, NgayDi);
+        }
+        if (FragmentDatVeMotChieu.checkParams == 3){
+            getDanhSachChuyen(idHangXe, ChuyenDi, NgayDi);
+        }
+
 
         return rootView;
 
@@ -110,7 +117,6 @@ public class FragmentDanhSachChuyen extends Fragment {
                     recyclerDanhSachChuyen.setAdapter(customApdaterOneTrip);
                 }else{
                     ArrayList<DanhSachChuyen> list = new ArrayList<DanhSachChuyen>();
-                    //khoangcach.setText(list.get(0).far+" Km");
                     customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list);
                     recyclerDanhSachChuyen.setAdapter(customApdaterOneTrip);
                 }
@@ -119,7 +125,6 @@ public class FragmentDanhSachChuyen extends Fragment {
             @Override
             public void onFailure() {
                 ArrayList<DanhSachChuyen> list = new ArrayList<DanhSachChuyen>();
-                //khoangcach.setText(list.get(0).far+" Km");
                 customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list);
                 recyclerDanhSachChuyen.setAdapter(customApdaterOneTrip);
 
@@ -128,5 +133,38 @@ public class FragmentDanhSachChuyen extends Fragment {
         });
     }
 
+
+    private void getDanhSachChuyen2Parrams(String route, String date){
+        ShowDialog.showLoading(getActivity());
+        DanhSachChuyen2paramsRequest.getDanhSachChuyen2Params(route, date, new Response() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(int code, String message, Object obj) {
+                ShowDialog.dimissLoading();
+                if (code == 0) {
+                    ArrayList<DanhSachChuyen> list = (ArrayList<DanhSachChuyen>) obj;
+                    khoangcach.setText(list.get(0).far + " Km");
+                    customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list);
+                    recyclerDanhSachChuyen.setAdapter(customApdaterOneTrip);
+                } else {
+                    ArrayList<DanhSachChuyen> list = new ArrayList<DanhSachChuyen>();
+                    customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list);
+                    recyclerDanhSachChuyen.setAdapter(customApdaterOneTrip);
+                }
+            }
+
+            @Override
+            public void onFailure() {
+                ArrayList<DanhSachChuyen> list = new ArrayList<DanhSachChuyen>();
+                customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list);
+                recyclerDanhSachChuyen.setAdapter(customApdaterOneTrip);
+                Log.d("NOTE", "kiem tra lai ket noi");
+            }
+        });
+    }
 
 }

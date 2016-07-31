@@ -20,8 +20,11 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.interfaces.Response;
@@ -256,7 +259,8 @@ public class FragmentThongTinVeVuaDat extends Fragment {
         ImageView imgQrcode = (ImageView) dialog.findViewById(R.id.imgQrCode);
         Button btnQrcodeOK = (Button) dialog.findViewById(R.id.QRcode_btnOK);
         createQrCode(qrcode, imgQrcode);
-        addImageToGallery();
+        //addImageToGallery();
+        SaveImage(bmp);
 
         btnQrcodeOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -296,6 +300,27 @@ public class FragmentThongTinVeVuaDat extends Fragment {
 
     public void addImageToGallery(){
         MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), bmp, "ImageQRCODE", "ImageQRCODE");
+    }
+
+    private void SaveImage(Bitmap finalBitmap) {
+
+        File myDir = new File("/sdcard/BusTicket/");
+        myDir.mkdirs();
+        Random generator = new Random();
+        int n = 10000;
+        n = generator.nextInt(n);
+        String fname = "Image"+".jpg";
+        File file = new File (myDir, fname);
+        if (file.exists ()) file.delete ();
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+            out.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

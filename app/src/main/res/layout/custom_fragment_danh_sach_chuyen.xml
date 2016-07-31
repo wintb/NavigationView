@@ -20,8 +20,8 @@
 
             <ImageView
                 android:id="@+id/danhsachchuyen_AvatarCarMaker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
                 android:src="@mipmap/ic_launcher" />
         </LinearLayout>
 
@@ -161,7 +161,8 @@
                         android:id="@+id/danhsachchuyen_btnChon"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:text="Chon"
+                        android:textAllCaps="false"
+                        android:text="Chọn"
                         android:background="@drawable/rounded_button"
                         />
                 </LinearLayout>

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.dao.DanhSachChuyen.DanhSachChuyen;
+import om.bluebirdaward.busticket.utils.BitmapLoader;
 
 /**
  * Created by VuVanThang on 5/11/2016.
@@ -50,6 +51,7 @@ public class AdapterDanhSachChuyen extends RecyclerView.Adapter<AdapterDanhSachC
         danhSachChuyenViewHolder.txtThoiGian.setText(danhSachChuyen.time);
         danhSachChuyenViewHolder.txtGia.setText(danhSachChuyen.price);
         danhSachChuyenViewHolder.txtDienThoai.setText(danhSachChuyen.phone);
+        BitmapLoader.LoadImageNotScale(context,danhSachChuyenViewHolder.avatar,danhSachChuyen.image);
 
         danhSachChuyenViewHolder.btnChon.setOnClickListener(new View.OnClickListener() {
             @Override

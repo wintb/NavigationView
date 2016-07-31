@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <RelativeLayout
         android:layout_marginTop="30dp"
         android:id="@+id/layout_Title_VeMotChieu"
@@ -36,160 +35,167 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rect_layout">
 
-    <RelativeLayout
-        android:id="@+id/layoutHangXe"
-        android:layout_below="@+id/layout_Title_VeMotChieu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="10dp">
+        <RelativeLayout
+            android:id="@+id/layoutHangXe"
+            android:layout_below="@+id/layout_Title_VeMotChieu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:paddingBottom="@dimen/distance_normal"
-                android:text="Chọn Hãng"
-                android:textColor="#34495e"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <RelativeLayout
-                android:id="@+id/layout_hangxe"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/txtHangXe"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    android:hint="Chọn hãng xe"
-                    android:padding="10dp"
-                    android:textSize="20dp"
-                    android:background="@drawable/rect"/>
-
-                <ImageView
-                    android:id="@+id/imgHangXe"
+                    android:paddingBottom="@dimen/distance_normal"
+                    android:text="Chọn Hãng"
+                    android:textColor="#34495e"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#fff"
-                    android:layout_marginLeft="210dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/date1"
-                    />
+                    android:layout_height="wrap_content" />
 
-            </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/layout_hangxe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/txtHangXe"
+                        android:layout_width="250dp"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:hint="Chọn hãng xe"
+                        android:padding="10dp"
+                        android:textSize="20dp"
+                        android:background="@drawable/rect"/>
 
-    </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/imgHangXe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#fff"
+                        android:layout_marginLeft="210dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/date1"
+                        />
 
+                </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/layout_txtChuyenDiMotChieu"
-        android:layout_below="@+id/layoutHangXe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="20dp">
+            </LinearLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        </RelativeLayout>
 
-            <TextView
-                android:paddingBottom="@dimen/distance_normal"
-                android:text="Chọn Chuyến"
-                android:textColor="#34495e"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+        <View
+            android:layout_marginBottom="@dimen/distance_large"
+            android:layout_marginLeft="@dimen/distance_normal"
+            android:layout_marginRight="@dimen/distance_normal"
+            android:background="#FFF"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
 
-            <RelativeLayout
-                android:id="@+id/layout_chuyendi"
+        <RelativeLayout
+            android:id="@+id/layout_txtChuyenDiMotChieu"
+            android:layout_below="@+id/layoutHangXe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/txtChuyenDi"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    android:hint="Chọn Chuyến đi"
-                    android:padding="10dp"
-                    android:textSize="20dp"
-                    android:background="@drawable/rect"/>
-
-                <ImageView
-                    android:id="@+id/imgChuyenDi"
+                    android:paddingBottom="@dimen/distance_normal"
+                    android:text="Chọn Chuyến"
+                    android:textColor="#34495e"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#fff"
-                    android:layout_marginLeft="210dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/transport1"
-                    />
+                    android:layout_height="wrap_content" />
 
-            </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/layout_chuyendi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/txtChuyenDi"
+                        android:layout_width="250dp"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:hint="Chọn Chuyến đi"
+                        android:padding="10dp"
+                        android:textSize="20dp"
+                        android:background="@drawable/rect"/>
 
-    </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/imgChuyenDi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#fff"
+                        android:layout_marginLeft="210dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/transport1"
+                        />
 
-    <RelativeLayout
-        android:id="@+id/layout_ChonChuyenDi"
-        android:layout_below="@+id/layout_txtChuyenDiMotChieu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="5dp">
+                </RelativeLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            </LinearLayout>
 
-            <TextView
-                android:paddingBottom="@dimen/distance_normal"
-                android:text="Chọn Ngày"
-                android:textColor="#34495e"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+        </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/layout_ngaydi"
+        <RelativeLayout
+            android:id="@+id/layout_ChonChuyenDi"
+            android:layout_below="@+id/layout_txtChuyenDiMotChieu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/txtDate"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:textSize="20dp"
-                    android:background="@drawable/rect"/>
-
-                <ImageView
-                    android:id="@+id/imgDate"
+                    android:paddingBottom="@dimen/distance_normal"
+                    android:text="Chọn Ngày"
+                    android:textColor="#34495e"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#fff"
-                    android:layout_marginLeft="210dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/date1"
-                    />
+                    android:layout_height="wrap_content" />
 
-            </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/layout_ngaydi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/txtDate"
+                        android:layout_width="250dp"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textSize="20dp"
+                        android:background="@drawable/rect"/>
 
-    </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/imgDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#fff"
+                        android:layout_marginLeft="210dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/date1"
+                        />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
     </LinearLayout>
 

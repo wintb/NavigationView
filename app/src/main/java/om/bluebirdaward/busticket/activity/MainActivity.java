@@ -44,6 +44,7 @@ import om.bluebirdaward.busticket.fragment.FragmentDanhSachNhaXe;
 import om.bluebirdaward.busticket.fragment.FragmentDatVeMotChieu;
 import om.bluebirdaward.busticket.fragment.FragmentHuongDan;
 import om.bluebirdaward.busticket.fragment.FragmentLienHe;
+import om.bluebirdaward.busticket.fragment.FragmentMaXacNhan;
 import om.bluebirdaward.busticket.fragment.FragmentNhapThongTinKhach;
 import om.bluebirdaward.busticket.fragment.FragmentSoDoGheTang1;
 import om.bluebirdaward.busticket.fragment.FragmentSuaThongTinVe;
@@ -202,6 +203,15 @@ public class MainActivity extends AppCompatActivity implements
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.fragmentholder, fragmentAbout)
+                                .commit();
+                        navigation.setCheckedItem(id);
+                        drawerLayout.closeDrawer(navigation);
+                        break;
+                    case R.id.navigation_item_6:
+                        FragmentMaXacNhan fragmentMaXacNhan = new FragmentMaXacNhan();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragmentholder, fragmentMaXacNhan)
                                 .commit();
                         navigation.setCheckedItem(id);
                         drawerLayout.closeDrawer(navigation);
@@ -365,6 +375,7 @@ public class MainActivity extends AppCompatActivity implements
         danhSachChuyen.setArguments(data);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentholder, danhSachChuyen);
+        fragmentTransaction.addToBackStack("");
         fragmentTransaction.commit();
     }
 
@@ -388,6 +399,7 @@ public class MainActivity extends AppCompatActivity implements
         datVe_fragment.setArguments(data);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentholder, datVe_fragment);
+        fragmentTransaction.addToBackStack("");
         fragmentTransaction.commit();
 
     }
@@ -407,6 +419,7 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentholder,nhap_thong_tin_fragment)
+                .addToBackStack("")
                 .commit();
     }
 
@@ -440,6 +453,7 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentholder,thongTinVeVuaDatFragment)
+                .addToBackStack("")
                 .commit();
     }
 
