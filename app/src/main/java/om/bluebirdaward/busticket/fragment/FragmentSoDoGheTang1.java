@@ -25,7 +25,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.activity.MainActivity;
-import om.bluebirdaward.busticket.dao.SoDoghe.SoDoghe;
+import om.bluebirdaward.busticket.dao.SoDoGhe.SoDoghe;
 import om.bluebirdaward.busticket.dao.Ve;
 import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.json.JsonDoiGhe;

@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.facebook.CallbackManager;
@@ -63,8 +64,7 @@ public class MainActivity extends AppCompatActivity implements
         FragmentSoDoGheTang1.ChonGhe,
         FragmentNhapThongTinKhach.DatVe,
         FragmentThongTinVeDaDat.DoiGhe,
-        FragmentThongTinVeVuaDat.backDatve,
-        FragmentThongTinVeDaDat.SuaVe
+        FragmentThongTinVeVuaDat.backDatve
 {
 
     DrawerLayout drawerLayout;
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements
     CircularImageView imgAvatar;
     Button btnLogin_Logout;
     Button btnShare;
+    boolean doubleBackToExitPressedOnce = false;
 
     //--------------------------------Facebook----------------------
     private CallbackManager callbackManager;
@@ -118,6 +119,25 @@ public class MainActivity extends AppCompatActivity implements
 
         initInstances();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
     private void initInstances() {
@@ -491,27 +511,6 @@ public class MainActivity extends AppCompatActivity implements
                 .beginTransaction()
                 .replace(R.id.fragmentholder, fragmentTabhostDatVe)
                 .commit();
-    }
-
-    @Override
-    public void setSuaVe(String HoTen, String SDT, String CMND, String NoiXuong, String MaChuyen, String MaVe) {
-
-        Bundle data = new Bundle();
-        data.putString("HoTen",HoTen);
-        data.putString("SDT",SDT);
-        data.putString("CMND",CMND);
-        data.putString("NoiXuong", NoiXuong);
-        data.putString("MaChuyen", MaChuyen);
-        data.putString("MaVe", MaVe);
-
-        FragmentSuaThongTinVe fragmentSuaThongTinVe = new FragmentSuaThongTinVe();
-        fragmentSuaThongTinVe.setArguments(data);
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragmentholder,fragmentSuaThongTinVe)
-                .commit();
-
     }
 
 }

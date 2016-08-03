@@ -2,7 +2,7 @@ package om.bluebirdaward.busticket.request;
 
 import android.util.Log;
 
-import om.bluebirdaward.busticket.dao.SoDoghe.ReponseSoDoGhe;
+import om.bluebirdaward.busticket.dao.SoDoGhe.ReponseSoDoGhe;
 import om.bluebirdaward.busticket.interfaces.Request;
 import om.bluebirdaward.busticket.interfaces.Response;
 import retrofit2.Call;

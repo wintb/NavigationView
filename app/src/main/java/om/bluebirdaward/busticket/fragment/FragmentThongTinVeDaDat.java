@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +22,7 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import om.bluebirdaward.busticket.R;
+import om.bluebirdaward.busticket.abstracts.AbstractResponse;
 import om.bluebirdaward.busticket.dao.customer.Ticket;
 import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.request.DeleteCustomerRequest;
@@ -67,6 +70,7 @@ public class FragmentThongTinVeDaDat extends Fragment {
     TextView ttxVeDadatThongTinVe;
 
     private ArrayList<Ticket> arrTicket = new ArrayList<>();
+    private int id;
     private String phone;
     private String identity_number;
     private String fullname;
@@ -89,6 +93,7 @@ public class FragmentThongTinVeDaDat extends Fragment {
 
         Bundle data = this.getArguments();
 
+        id = data.getInt("id");
         phone = data.getString("phone");
         identity_number = data.getString("identity_number");
         fullname = data.getString("fullname");
@@ -129,7 +134,7 @@ public class FragmentThongTinVeDaDat extends Fragment {
         return view;
     }
 
-    public void deleteTicket(){
+    public void deleteTicket() {
         btnHuyve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,17 +150,19 @@ public class FragmentThongTinVeDaDat extends Fragment {
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    DeleteCustomerRequest.deleteCustomer(data, new Response() {
-                                        @Override
-                                        public void onStart() {
-                                        }
-
+                                    DeleteCustomerRequest.deleteCustomer(data, new AbstractResponse() {
                                         @Override
                                         public void onSuccess(int code, String message, Object obj) {
+                                            if (code == 0) {
+                                                String mMessage = "Hủy vé thành công";
+                                                ShowDialog.alertDialog(getActivity(), mMessage);
+                                            }
                                         }
 
                                         @Override
                                         public void onFailure() {
+                                            String mMessage = "Hủy vé không thành công, xin kiểm tra lại.";
+                                            ShowDialog.alertDialog(getActivity(), mMessage);
                                         }
                                     });
                                 }
@@ -168,49 +175,46 @@ public class FragmentThongTinVeDaDat extends Fragment {
                             }).show();
                 } else {
 
-                    String title = "Warning";
-                    String message = "Vui lòng kiểm tra kết nối Internet";
-                    ShowDialog.show(getActivity(), title, message);
+                    String message = "Vui lòng kiểm tra kết nối Internet.";
+                    ShowDialog.alertDialog(getActivity(), message);
                 }
             }
         });
     }
 
-    public void editTicket(){
+    public void editTicket() {
 
         btnSuaVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (CheckInternet.isConnected(getActivity())) {
-
-                    FragmentSuaThongTinVe editInfo = new FragmentSuaThongTinVe();
-                    myContext.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragmentholder, editInfo)
-                            .commit();
+                    setData();
                 } else {
 
-                    String title = "Warning";
                     String message = "Vui lòng kiểm tra kết nối Internet.";
-                    ShowDialog.show(getActivity(), title, message);
+                    ShowDialog.alertDialog(getActivity(), message);
                 }
 
             }
         });
     }
 
-    public void changeTicket(){
+    public void changeTicket() {
         btnDoiVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (CheckInternet.isConnected(getActivity())){
-
-                }else{
-
-                    String title = "Warning";
+                if (CheckInternet.isConnected(getActivity())) {
+                    FragmentTabhostSoDoGhe datVe_fragment = new FragmentTabhostSoDoGhe();
+//                    datVe_fragment.setArguments(data);
+                    myContext.getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragmentholder,datVe_fragment)
+                            .commit();
+                } else {
                     String message = "Vui lòng kiểm tra kết nối Internet.";
-                    ShowDialog.show(getActivity(), title, message);
+                    ShowDialog.alertDialog(getActivity(), message);
                 }
 
             }
@@ -230,7 +234,7 @@ public class FragmentThongTinVeDaDat extends Fragment {
 
     @Override
     public void onAttach(Activity activity) {
-        myContext=(FragmentActivity) activity;
+        myContext = (FragmentActivity) activity;
         super.onAttach(activity);
     }
 
@@ -238,7 +242,19 @@ public class FragmentThongTinVeDaDat extends Fragment {
         void setDoiGhe(String MaVe, String MaChuyen, String TenChuyen, String GioDi, String NgayDi, String SDTKhach);
     }
 
-    public interface SuaVe {
-        void setSuaVe(String HoTen, String SDT, String CMND, String NoiXuong, String MaChuyen, String MaVe);
+    public void setData() {
+
+        Bundle data = new Bundle();
+        data.putInt("id", id);
+        data.putString("identity_number", identity_number);
+        data.putString("note", note);
+        data.putString("phone", phone);
+        data.putString("fullname", fullname);
+
+        FragmentSuaThongTinVe editInfo = new FragmentSuaThongTinVe();
+        editInfo.setArguments(data);
+        myContext.getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentholder, editInfo)
+                .commit();
     }
 }

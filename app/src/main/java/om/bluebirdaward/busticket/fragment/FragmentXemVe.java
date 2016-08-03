@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import om.bluebirdaward.busticket.R;
+import om.bluebirdaward.busticket.abstracts.AbstractResponse;
 import om.bluebirdaward.busticket.dao.customer.InfoCustomer;
 import om.bluebirdaward.busticket.dao.customer.ResponseInfoCustomer;
 import om.bluebirdaward.busticket.dao.customer.Ticket;
@@ -75,13 +76,17 @@ public class FragmentXemVe extends Fragment{
             public void onClick(View v) {
 
                 if (CheckInternet.isConnected(getActivity())) {
-                    viewInfoCustomer();
+                    if (editCMND.getText().toString().equalsIgnoreCase("")
+                            || editSDT.getText().toString().equalsIgnoreCase("")){
+                        txtThongBao.setVisibility(View.VISIBLE);
+                        txtThongBao.setText("Bạn cần phải nhập đầy đủ thông tin");
+                    }else
+                        viewInfoCustomer();
 
                 } else {
 
-                    String title = "Warning";
                     String message = "Vui lòng kiểm tra kết nối Internet.";
-                    ShowDialog.show(getActivity(), title, message);
+                    ShowDialog.alertDialog(getActivity(), message);
                 }
 
             }
@@ -99,8 +104,10 @@ public class FragmentXemVe extends Fragment{
         data.put("type", String.valueOf(1));
 
         InfoCustomerRequest.getInfoCustomer(data, new Response() {
+
             @Override
             public void onStart() {
+                ShowDialog.showLoading(getActivity());
             }
 
             @Override
@@ -110,12 +117,14 @@ public class FragmentXemVe extends Fragment{
                     ArrayList<InfoCustomer> infoCustomerArrayList = (ArrayList<InfoCustomer>) obj;
                     infoCustomer = infoCustomerArrayList.get(0);
                     setData();
+                    ShowDialog.dimissLoading();
                 }
             }
 
             @Override
             public void onFailure() {
-                Log.d("FAIL", "OK");
+                String message = "Vui lòng kiểm tra và thử lại.";
+                ShowDialog.alertDialog(getActivity(), message);
             }
         });
     }

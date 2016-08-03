@@ -16,7 +16,7 @@ public class EditCustomerRequest {
     public static void editCustomer(Map<String, String> data, final Response resp) {
         resp.onStart();
         Request client = HandlerRequest.createService(Request.class);
-        Call<ResponseInfoCustomer> call = client.getInfoCustomer(data);
+        Call<ResponseInfoCustomer> call = client.editTicket(data);
         call.enqueue(new Callback<ResponseInfoCustomer>() {
             @Override
             public void onResponse(Call<ResponseInfoCustomer> call, retrofit2.Response<ResponseInfoCustomer> response) {

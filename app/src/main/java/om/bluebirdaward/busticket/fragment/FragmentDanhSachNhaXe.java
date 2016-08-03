@@ -17,6 +17,7 @@ import om.bluebirdaward.busticket.adapter.AdapterDanhSachNhaXe;
 import om.bluebirdaward.busticket.dao.NhaXe.ListNhaXe;
 import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.request.ListNhaXeRequest;
+import om.bluebirdaward.busticket.utils.ShowDialog;
 
 /**
  * Created by Trinh Dinh Tien on 7/10/2016.
@@ -66,6 +67,7 @@ public class FragmentDanhSachNhaXe extends android.support.v4.app.Fragment {
         ListNhaXeRequest.getListNhaXe(new Response() {
             @Override
             public void onStart() {
+                ShowDialog.showLoading(getActivity());
             }
 
             @Override
@@ -74,6 +76,7 @@ public class FragmentDanhSachNhaXe extends android.support.v4.app.Fragment {
                 if (code == 0) {
                     listNhaXes = (ArrayList<ListNhaXe>) obj;
                     adapterDanhSachNhaXe.setArrayListNhaXe(listNhaXes);
+                    ShowDialog.dimissLoading();
                 }
             }
 
