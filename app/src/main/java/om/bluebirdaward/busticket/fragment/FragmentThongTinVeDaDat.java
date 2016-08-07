@@ -81,6 +81,7 @@ public class FragmentThongTinVeDaDat extends Fragment {
     private String code_driver;
     private String route;
     private String create_date;
+    private int id_tripdate;
     private String soghe = "";
     private FragmentActivity myContext;
 
@@ -94,6 +95,7 @@ public class FragmentThongTinVeDaDat extends Fragment {
         Bundle data = this.getArguments();
 
         id = data.getInt("id");
+        id_tripdate = data.getInt("id_tripdate");
         phone = data.getString("phone");
         identity_number = data.getString("identity_number");
         fullname = data.getString("fullname");
@@ -206,12 +208,7 @@ public class FragmentThongTinVeDaDat extends Fragment {
             public void onClick(View v) {
 
                 if (CheckInternet.isConnected(getActivity())) {
-                    FragmentTabhostSoDoGhe datVe_fragment = new FragmentTabhostSoDoGhe();
-//                    datVe_fragment.setArguments(data);
-                    myContext.getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragmentholder,datVe_fragment)
-                            .commit();
+                    changeSeat();
                 } else {
                     String message = "Vui lòng kiểm tra kết nối Internet.";
                     ShowDialog.alertDialog(getActivity(), message);
@@ -255,6 +252,22 @@ public class FragmentThongTinVeDaDat extends Fragment {
         editInfo.setArguments(data);
         myContext.getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentholder, editInfo)
+                .commit();
+    }
+
+    public void changeSeat(){
+        Bundle data = new Bundle();
+        data.putString("ChuyenDi", route);
+        data.putString("GioDi", start);
+        data.putString("NgayDi", date);
+//        data.putString("code_trip", code_trip);
+        data.putInt("id_tripdate", id_tripdate);
+        data.putString("code_driver", code_driver);
+
+        FragmentTabhostSoDoGhe datVe_fragment = new FragmentTabhostSoDoGhe();
+        myContext.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentholder,datVe_fragment)
                 .commit();
     }
 }

@@ -123,6 +123,7 @@ public class FragmentXemVe extends Fragment{
 
             @Override
             public void onFailure() {
+                ShowDialog.dimissLoading();
                 String message = "Vui lòng kiểm tra và thử lại.";
                 ShowDialog.alertDialog(getActivity(), message);
             }
