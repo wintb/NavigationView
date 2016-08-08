@@ -141,7 +141,7 @@ public class FragmentXemVe extends Fragment{
         }
         data.putInt("quantity", infoCustomer.quantity);
         data.putInt("id", infoCustomer.id);
-        data.putInt("id_tripdate", infoCustomer.id_tripdate);
+        data.putString("id_tripdate", infoCustomer.id_tripdate);
         data.putString("identity_number", infoCustomer.identity_number);
         data.putString("note", infoCustomer.note);
         data.putString("start", infoCustomer.start);

@@ -77,4 +77,8 @@ public interface Request {
     @POST("getListTripDate")
     Call<ReponseDanhSachChuyen> getDanhSachChuyen2Params(@Field("route") String route, @Field("date") String date);
 
+    @FormUrlEncoded
+    @POST("changeSeat")
+    Call<ResponseVO> changeSeat(@Field("seat")String seat, @Field("id")int id);
+
 }

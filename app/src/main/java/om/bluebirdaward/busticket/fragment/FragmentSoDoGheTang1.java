@@ -1,5 +1,6 @@
 package om.bluebirdaward.busticket.fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +34,7 @@ import om.bluebirdaward.busticket.dao.Ve;
 import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.json.JsonDoiGhe;
 import om.bluebirdaward.busticket.mics.Constant;
+import om.bluebirdaward.busticket.request.ChangeSeatRequest;
 import om.bluebirdaward.busticket.request.SoDoGheRepuest;
 import om.bluebirdaward.busticket.utils.CheckInternet;
 import om.bluebirdaward.busticket.utils.ShowDialog;
@@ -129,6 +134,10 @@ public class FragmentSoDoGheTang1 extends Fragment {
     String code_trip;
     String id_tripdate;
     String code_driver;
+    String phone;
+    String identity_number;
+    int id;
+    private FragmentActivity myContext;
 
     public static FragmentSoDoGheTang1 newInstance() {
 
@@ -153,6 +162,9 @@ public class FragmentSoDoGheTang1 extends Fragment {
         code_trip = data.getString("code_trip");
         id_tripdate = data.getString("id_tripdate");
         code_driver = data.getString("code_driver");
+        identity_number = data.getString("identity_number");
+        phone = data.getString("phone");
+        id = data.getInt("id");
 
         getSoDoGheDaDat(id_tripdate);
         //set color khi click chon ghe
@@ -175,6 +187,12 @@ public class FragmentSoDoGheTang1 extends Fragment {
         });
 
         return rootView;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        myContext = (FragmentActivity) activity;
+        super.onAttach(activity);
     }
 
     @Override
@@ -273,55 +291,30 @@ public class FragmentSoDoGheTang1 extends Fragment {
             if (Constant.KEY_CHECK_FRAGMENT == 1) {
                 chonGhe.clickChonGhe(TenChuyen, GioDi, NgayDi);
             }else if (Constant.KEY_CHECK_FRAGMENT == 0){
-                Bundle data = getArguments();
-                String MaChuyen = data.getString("MaChuyen");
-                String MaVe = data.getString("MaVe");
-                String SDTKhach = data.getString("SDTKhach");
-                String SDT_3SoCuoi = SDTKhach.substring(SDTKhach.length() - 3);
-                String MaVeThayDoi = FragmentTabhostSoDoGhe.listGheDaChonTang1.get(0) + SDT_3SoCuoi;
+               ChangeSeatRequest.changeSeat(new Gson().toJson(FragmentTabhostSoDoGhe.listGheDaChonTang1),
+                      id,new Response() {
+                           @Override
+                           public void onStart() {
 
-                jsonDoiGhe = new JsonDoiGhe(MaChuyen, MaVe,FragmentTabhostSoDoGhe.listGheDaChonTang1.get(0),MaVeThayDoi);
-                String result = null;
-                try {
-                    result = new WebserviceDoiGhe().execute(Constant.URL_DOI_GHE).get();
+                           }
 
-                    new AlertDialog.Builder(getActivity()).setTitle("Doi Ghe").setMessage(result)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    //getFragmentManager().beginTransaction().replace(R.id.fragmentholder,new FragmentXemVe()).commit();
-                                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                                    startActivity(intent);
-                                }
-                            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                           @Override
+                           public void onSuccess(int code, String message, Object obj) {
+                               if (code == 0)
+                                   ShowDialog.alertDialogResult(myContext,"Đổi vé thành công","Nhấn OK để tiếp tục",code);
+                               else
+                                   ShowDialog.alertDialogResult(myContext, "Đổi vé không thành công", "Vui lòng thử lại",code);
+                           }
 
-                        }
-                    }).show();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
+                           @Override
+                           public void onFailure() {
+                               ShowDialog.alertDialogResult(myContext, "Đổi vé không thành công", "Vui lòng thử lại.",-1);
+                           }
+                       });
             }
         }
     }
 
-
-    //-------------------------------GOI WEBSERVICE ĐỂ ĐỔI GHẾ -------------------------------------
-    public class WebserviceDoiGhe extends AsyncTask<String, Void, String>{
-
-        @Override
-        protected String doInBackground(String... params) {
-            return jsonDoiGhe.makePostRequest_DoiGhe(params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }
-    }
 
     //--------------------------------SET COLOR KHI CLICK CHỌN GHẾ----------------------------------
     private void chongheA1D(final ImageView imageView){

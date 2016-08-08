@@ -14,7 +14,7 @@ public class InfoCustomer {
     public String start;
     public String note;
     public String identity_number;
-    public int id_tripdate;
+    public String id_tripdate;
     public int quantity;
     public String route;
     public String code_driver;

@@ -61,7 +61,6 @@ public class FragmentDanhSachNhaXe extends android.support.v4.app.Fragment {
     }
 
 
-    //==================================API ========================================================
     public void getListNhaXe() {
 
         ListNhaXeRequest.getListNhaXe(new Response() {

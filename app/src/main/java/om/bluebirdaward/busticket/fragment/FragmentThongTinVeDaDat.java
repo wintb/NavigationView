@@ -25,6 +25,7 @@ import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.abstracts.AbstractResponse;
 import om.bluebirdaward.busticket.dao.customer.Ticket;
 import om.bluebirdaward.busticket.interfaces.Response;
+import om.bluebirdaward.busticket.mics.Constant;
 import om.bluebirdaward.busticket.request.DeleteCustomerRequest;
 import om.bluebirdaward.busticket.utils.CheckInternet;
 import om.bluebirdaward.busticket.utils.ShowDialog;
@@ -81,7 +82,7 @@ public class FragmentThongTinVeDaDat extends Fragment {
     private String code_driver;
     private String route;
     private String create_date;
-    private int id_tripdate;
+    private String id_tripdate;
     private String soghe = "";
     private FragmentActivity myContext;
 
@@ -95,7 +96,7 @@ public class FragmentThongTinVeDaDat extends Fragment {
         Bundle data = this.getArguments();
 
         id = data.getInt("id");
-        id_tripdate = data.getInt("id_tripdate");
+        id_tripdate = data.getString("id_tripdate");
         phone = data.getString("phone");
         identity_number = data.getString("identity_number");
         fullname = data.getString("fullname");
@@ -208,6 +209,7 @@ public class FragmentThongTinVeDaDat extends Fragment {
             public void onClick(View v) {
 
                 if (CheckInternet.isConnected(getActivity())) {
+                    Constant.KEY_CHECK_FRAGMENT = 0;
                     changeSeat();
                 } else {
                     String message = "Vui lòng kiểm tra kết nối Internet.";
@@ -257,14 +259,15 @@ public class FragmentThongTinVeDaDat extends Fragment {
 
     public void changeSeat(){
         Bundle data = new Bundle();
-        data.putString("ChuyenDi", route);
-        data.putString("GioDi", start);
-        data.putString("NgayDi", date);
-//        data.putString("code_trip", code_trip);
-        data.putInt("id_tripdate", id_tripdate);
+        data.putInt("id", id);
         data.putString("code_driver", code_driver);
+        data.putString("id_tripdate",id_tripdate);
+        data.putString("ChuyenDi",route);
+        data.putString("GioDi",start);
+        data.putString("NgayDi", date);
 
         FragmentTabhostSoDoGhe datVe_fragment = new FragmentTabhostSoDoGhe();
+        datVe_fragment.setArguments(data);
         myContext.getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentholder,datVe_fragment)

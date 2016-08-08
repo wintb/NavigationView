@@ -8,7 +8,7 @@ public class NhaXeDetail {
     public String intro;
     public String image;
     public String carmaker;
-    public int ratingAverage;
+    public float ratingAverage;
     public String email;
     public String phone;
 }

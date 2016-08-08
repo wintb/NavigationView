@@ -205,16 +205,16 @@ public class FragmentThongTinVeVuaDat extends Fragment {
                     public void onSuccess(int code, String message, Object obj) {
                         ShowDialog.dimissLoading();
                         if (code == 1){
-                            shơDialogSuccess_error("Đặt vé không thành công !", R.drawable.error, "Vui lòng thử lại.");
+                            showDialogSuccess_error("Đặt vé không thành công !", R.drawable.error, "Vui lòng thử lại.");
 
                         } else if(code == 0){
-                            shơDialogSuccess_error("Đặt vé thành công !", R.drawable.success_new, "Nhấn OK để tiếp tục");
+                            showDialogSuccess_error("Đặt vé thành công !", R.drawable.success_new, "Nhấn OK để tiếp tục");
                         }
                     }
 
                     @Override
                     public void onFailure() {
-                        shơDialogSuccess_error("Đặt vé không thành công !", R.drawable.error, "Vui lòng thử lại.");
+                        showDialogSuccess_error("Đặt vé không thành công !", R.drawable.error, "Vui lòng thử lại.");
                     }
                 });
 
@@ -224,7 +224,7 @@ public class FragmentThongTinVeVuaDat extends Fragment {
 
     private Dialog dialog;
 
-    public void shơDialogSuccess_error( String title, int image, String message){
+    public void showDialogSuccess_error(String title, int image, String message){
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.custom_layout_dialog);
         dialog.setCanceledOnTouchOutside(false);

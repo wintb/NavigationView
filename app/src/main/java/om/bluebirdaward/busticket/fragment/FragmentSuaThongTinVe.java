@@ -1,5 +1,6 @@
 package om.bluebirdaward.busticket.fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -55,6 +57,7 @@ public class FragmentSuaThongTinVe extends Fragment {
     private String fullname;
     private String note;
     private int id;
+    private FragmentActivity myContext;
 
 
 
@@ -119,8 +122,7 @@ public class FragmentSuaThongTinVe extends Fragment {
 
                         @Override
                         public void onFailure() {
-                            String message = "Sửa thông tin không thành công, xin kiểm tra lại.";
-                            ShowDialog.alertDialog(getActivity(), message);
+                            ShowDialog.alertDialogResult(myContext, "Sửa thông tin không thành công", "Vui lòng thử lại.", -1);
                         }
                     });
 
@@ -133,6 +135,12 @@ public class FragmentSuaThongTinVe extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        myContext = (FragmentActivity) activity;
+        super.onAttach(activity);
     }
 
     public void setupUI( final View view) {

@@ -57,6 +57,7 @@ public class FragmentTabhostSoDoGhe extends Fragment{
     private String TenChuyen;
     private String GioDi;
     private String NgayDi;
+    private int id;
     public static ArrayList<String> listGheDaChonTang1;
 
 
@@ -82,6 +83,7 @@ public class FragmentTabhostSoDoGhe extends Fragment{
 
         MaVe = data.getString("MaVe");
         SDTKhach = data.getString("SDTKhach");
+        id = data.getInt("id");
         TenChuyen = txtChuyenDi.getText().toString();
         GioDi = txtGioDi.getText().toString();
         NgayDi = txtNgayDi.getText().toString();
@@ -117,6 +119,7 @@ public class FragmentTabhostSoDoGhe extends Fragment{
         dataDoiGhe.putString("TenChuyen",TenChuyen);
         dataDoiGhe.putString("GioDi", GioDi);
         dataDoiGhe.putString("NgayDi", NgayDi);
+        dataDoiGhe.putInt("id", id);
 
         fragmentSoDoGheTang1.setArguments(dataDoiGhe);
         fragmentSoDoGheTang2.setArguments(dataDoiGhe);
