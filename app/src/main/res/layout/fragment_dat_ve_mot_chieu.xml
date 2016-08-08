@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="@dimen/distance_largest"
             android:layout_marginTop="10dp">
 
             <LinearLayout
@@ -88,10 +88,10 @@
         </RelativeLayout>
 
         <View
-            android:layout_marginBottom="@dimen/distance_large"
-            android:layout_marginLeft="@dimen/distance_normal"
-            android:layout_marginRight="@dimen/distance_normal"
-            android:background="#FFF"
+            android:layout_marginBottom="@dimen/distance_largest"
+            android:layout_marginLeft="@dimen/distance_largest"
+            android:layout_marginRight="@dimen/distance_largest"
+            android:background="#bdc3c7"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
@@ -227,6 +227,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <Button
                 android:id="@+id/btnTimChuyenTab1"
                 android:layout_width="250dp"
@@ -239,6 +240,7 @@
                 android:textSize="20dp"
                 android:text="Tìm Chuyến"
                 />
+
         </RelativeLayout>
 
     </LinearLayout>

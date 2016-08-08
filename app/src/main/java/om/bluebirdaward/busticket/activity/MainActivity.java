@@ -473,7 +473,6 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentholder,thongTinVeVuaDatFragment)
-                .addToBackStack("")
                 .commit();
     }
 
