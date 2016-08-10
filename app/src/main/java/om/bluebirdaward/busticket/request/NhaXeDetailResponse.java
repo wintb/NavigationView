@@ -11,7 +11,7 @@ import retrofit2.Callback;
  */
 public class NhaXeDetailResponse {
 
-    public static void getNhaXeDetail(int id, final Response resp) {
+    public static void getNhaXeDetail(String id, final Response resp) {
         resp.onStart();
         Request client = HandlerRequest.createService(Request.class);
         Call<ResponseNhaXeDetail> call = client.getNhaXeDetail(id);

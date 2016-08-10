@@ -80,10 +80,10 @@ public class FragmentTabhostSoDoGhe extends Fragment{
         code_trip = data.getString("code_trip");
         id_tripdate = data.getString("id_tripdate");
         code_driver = data.getString("code_driver");
-
         MaVe = data.getString("MaVe");
         SDTKhach = data.getString("SDTKhach");
         id = data.getInt("id");
+
         TenChuyen = txtChuyenDi.getText().toString();
         GioDi = txtGioDi.getText().toString();
         NgayDi = txtNgayDi.getText().toString();

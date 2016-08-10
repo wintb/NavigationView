@@ -60,12 +60,11 @@ public class FragmentSuaThongTinVe extends Fragment {
     private FragmentActivity myContext;
 
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sua_thong_tin_ve, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         setupUI(layout_suathongtinve);
 
         Bundle data = this.getArguments();
@@ -86,7 +85,7 @@ public class FragmentSuaThongTinVe extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (CheckInternet.isConnected(getActivity())){
+                if (CheckInternet.isConnected(getActivity())) {
 
                     final Map<String, String> data = new HashMap<>();
                     data.put("fullname", editHoTen.getText().toString());
@@ -103,21 +102,8 @@ public class FragmentSuaThongTinVe extends Fragment {
                         @Override
                         public void onSuccess(int code, String message, Object obj) {
 
-                            if (code == 0) {
-                                new AlertDialog.Builder(getActivity()).setTitle("Sửa vé").setMessage("Edit success")
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Intent intent = new Intent(getActivity(), MainActivity.class);
-                                                startActivity(intent);
-                                            }
-                                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                }).show();
-                            }
+                            if (code == 0)
+                                ShowDialog.alertDialogResult(myContext,"Sửa vé thành công", "nhấn OK để tiếp tục",code);
                         }
 
                         @Override
@@ -126,7 +112,7 @@ public class FragmentSuaThongTinVe extends Fragment {
                         }
                     });
 
-                }else{
+                } else {
 
                     String message = "Vui lòng kiểm tra kết nối Internet.";
                     ShowDialog.alertDialog(getActivity(), message);
@@ -143,7 +129,7 @@ public class FragmentSuaThongTinVe extends Fragment {
         super.onAttach(activity);
     }
 
-    public void setupUI( final View view) {
+    public void setupUI(final View view) {
 
         //Set up touch listener for non-text box views to hide keyboard.
         if (!(view instanceof EditText)) {
@@ -165,7 +151,7 @@ public class FragmentSuaThongTinVe extends Fragment {
 
                 View innerView = ((ViewGroup) view).getChildAt(i);
 
-                setupUI( innerView);
+                setupUI(innerView);
             }
         }
     }

@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements
         AdapterDanhSachChuyen.SoDoGhe,
         FragmentSoDoGheTang1.ChonGhe,
         FragmentNhapThongTinKhach.DatVe,
-        FragmentThongTinVeDaDat.DoiGhe,
         FragmentThongTinVeVuaDat.backDatve
 {
 
@@ -473,29 +472,6 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentholder,thongTinVeVuaDatFragment)
-                .commit();
-    }
-
-    /**
-     * Đổi ghế trong chuyến xe đã đặt sau khi điền thông tin và xem vé
-     * @param MaVe
-     * @param MaChuyen
-     */
-    @Override
-    public void setDoiGhe(String MaVe, String MaChuyen, String TenChuyen, String GioDi, String NgayDi, String SDTKhach) {
-        Bundle data = new Bundle();
-        data.putString("MaVe", MaVe);
-        data.putString("MaChuyen",MaChuyen);
-        data.putString("ChuyenDi",TenChuyen);
-        data.putString("GioDi",GioDi);
-        data.putString("NgayDi",NgayDi);
-        data.putString("SDTKhach",SDTKhach);
-
-        FragmentTabhostSoDoGhe datVe_fragment = new FragmentTabhostSoDoGhe();
-        datVe_fragment.setArguments(data);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragmentholder,datVe_fragment)
                 .commit();
     }
 

@@ -27,7 +27,7 @@ public class DialogNhaXeDetail extends Activity {
 
     private ImageView imgPhone, imgNhaXe;
     private TextView txtPhone, txtAbout, txtRating;
-    private int carmaker_id;
+    private String carmaker_id;
     private NhaXeDetail nhaXeDetail;
     private RatingBar ratingNhaXeDetail;
     private RelativeLayout layout_dialog_nhaxe;
@@ -54,7 +54,7 @@ public class DialogNhaXeDetail extends Activity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("my_id");
-        carmaker_id = bundle.getInt("carmaker_id");
+        carmaker_id = bundle.getString("carmaker_id");
         getNhaXeDetail(carmaker_id);
     }
 
@@ -78,7 +78,7 @@ public class DialogNhaXeDetail extends Activity {
         ratingNhaXeDetail.setRating(nhaXeDetail.ratingAverage);
     }
 
-    public void getNhaXeDetail(int id) {
+    public void getNhaXeDetail(String id) {
 
         NhaXeDetailResponse.getNhaXeDetail(id, new Response() {
             @Override

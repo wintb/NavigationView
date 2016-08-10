@@ -141,48 +141,24 @@ public class FragmentThongTinVeDaDat extends Fragment {
         btnHuyve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (CheckInternet.isConnected(getActivity())) {
-
-                    final Map<String, String> data = new HashMap<>();
-                    data.put("identity_number", identity_number);
-                    data.put("phone", phone);
-
-                    // hien thong bao hoi nguoi dung co chac chan huy ve hay khong
-                    new AlertDialog.Builder(getActivity()).setTitle("Hủy vé").setMessage("Bạn có chắc chắc muốn hủy vé ?")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    DeleteCustomerRequest.deleteCustomer(data, new AbstractResponse() {
-                                        @Override
-                                        public void onSuccess(int code, String message, Object obj) {
-                                            if (code == 0) {
-                                                String mMessage = "Hủy vé thành công";
-                                                ShowDialog.alertDialog(getActivity(), mMessage);
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure() {
-                                            String mMessage = "Hủy vé không thành công, xin kiểm tra lại.";
-                                            ShowDialog.alertDialog(getActivity(), mMessage);
-                                        }
-                                    });
-                                }
-                            })
-                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            }).show();
-                } else {
-
-                    String message = "Vui lòng kiểm tra kết nối Internet.";
-                    ShowDialog.alertDialog(getActivity(), message);
+                ShowDialog.alertDialogConfirm(myContext, "Bạn có chắc chắc muốn hủy vé?");
+                if (Constant.CHECK_CONFIRM == 1) {
+                    if (Constant.CHECK_CONFIRM != 0) {
+                        okDelete();
+                    }
                 }
             }
         });
+    }
+
+    public void okDelete() {
+
+        if (CheckInternet.isConnected(getActivity())) {
+            delete();
+        } else {
+            String message = "Vui lòng kiểm tra kết nối Internet.";
+            ShowDialog.alertDialog(getActivity(), message);
+        }
     }
 
     public void editTicket() {
@@ -237,10 +213,6 @@ public class FragmentThongTinVeDaDat extends Fragment {
         super.onAttach(activity);
     }
 
-    public interface DoiGhe {
-        void setDoiGhe(String MaVe, String MaChuyen, String TenChuyen, String GioDi, String NgayDi, String SDTKhach);
-    }
-
     public void setData() {
 
         Bundle data = new Bundle();
@@ -257,20 +229,51 @@ public class FragmentThongTinVeDaDat extends Fragment {
                 .commit();
     }
 
-    public void changeSeat(){
+    public void changeSeat() {
         Bundle data = new Bundle();
         data.putInt("id", id);
         data.putString("code_driver", code_driver);
-        data.putString("id_tripdate",id_tripdate);
-        data.putString("ChuyenDi",route);
-        data.putString("GioDi",start);
+        data.putString("id_tripdate", id_tripdate);
+        data.putString("ChuyenDi", route);
+        data.putString("GioDi", start);
         data.putString("NgayDi", date);
 
         FragmentTabhostSoDoGhe datVe_fragment = new FragmentTabhostSoDoGhe();
         datVe_fragment.setArguments(data);
         myContext.getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragmentholder,datVe_fragment)
+                .replace(R.id.fragmentholder, datVe_fragment)
                 .commit();
+    }
+
+    public void delete() {
+
+        final Map<String, String> data = new HashMap<>();
+        data.put("identity_number", identity_number);
+        data.put("phone", phone);
+
+        DeleteCustomerRequest.deleteCustomer(data, new Response() {
+
+            @Override
+            public void onStart() {
+                ShowDialog.showLoading(getActivity());
+            }
+
+            @Override
+            public void onSuccess(int code, String message, Object obj) {
+                if (code == 0) {
+                    ShowDialog.dimissLoading();
+                    String mMessage = "Hủy vé thành công";
+                    ShowDialog.alertDialog(getActivity(), mMessage);
+                }
+            }
+
+            @Override
+            public void onFailure() {
+                ShowDialog.dimissLoading();
+                String mMessage = "Hủy vé không thành công, xin kiểm tra lại.";
+                ShowDialog.alertDialog(getActivity(), mMessage);
+            }
+        });
     }
 }

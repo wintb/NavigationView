@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +51,7 @@ public class FragmentXemVe extends Fragment{
     TextView txtThongBao;
     TextView txtTitleXemVe;
     Button btnXemVe;
-    LinearLayout layout_xemve;
+    RelativeLayout layout_xemve;
     private FragmentActivity myContext;
     private InfoCustomer infoCustomer;
     private Ticket ticket;
@@ -65,9 +66,9 @@ public class FragmentXemVe extends Fragment{
         editCMND = (EditText) view.findViewById(R.id.editCMND);
         editSDT = (EditText) view.findViewById(R.id.editSDT);
         txtThongBao = (TextView) view.findViewById(R.id.txtThongBao);
-        txtTitleXemVe = (TextView) view.findViewById(R.id.fragment_xeve_title);
+        //txtTitleXemVe = (TextView) view.findViewById(R.id.fragment_xeve_title);
         btnXemVe = (Button) view.findViewById(R.id.btnXemVe);
-        layout_xemve = (LinearLayout) view.findViewById(R.id.layout_fragment_xemve);
+        layout_xemve = (RelativeLayout) view.findViewById(R.id.layout_fragment_xemve);
         setupUI(layout_xemve);
         setTypeFace();
 
@@ -198,7 +199,7 @@ public class FragmentXemVe extends Fragment{
         editCMND.setTypeface(face1);
         editSDT.setTypeface(face1);
         txtThongBao.setTypeface(face1);
-        txtTitleXemVe .setTypeface(face1);
+        //txtTitleXemVe .setTypeface(face1);
         btnXemVe.setTypeface(face1);
     }
 

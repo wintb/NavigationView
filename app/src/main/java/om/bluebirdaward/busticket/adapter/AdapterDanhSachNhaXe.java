@@ -55,7 +55,7 @@ public class AdapterDanhSachNhaXe extends RecyclerView.Adapter<AdapterDanhSachNh
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putInt("carmaker_id",nhaXe.id);
+                bundle.putString("carmaker_id",nhaXe.id);
                 Intent intent = new Intent(context, DialogNhaXeDetail.class);
                 intent.putExtra("my_id",bundle);
                 context.startActivity(intent);

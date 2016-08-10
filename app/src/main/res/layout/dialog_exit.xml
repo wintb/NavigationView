@@ -8,12 +8,12 @@
     android:padding="40dp">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Do you want exit?"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_gravity="center"
+        android:gravity="center"
         android:id="@+id/txtQuestion"/>
 
     <LinearLayout
@@ -24,21 +24,21 @@
         android:layout_gravity="center">
 
         <Button
-            android:id="@+id/btnOk"
+            android:id="@+id/btnYes"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:background="@drawable/rounded_button"
+            android:layout_height="35dp"
+            android:background="@drawable/rect_button_dialog"
             android:text="Yes"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btnCancel"
+            android:id="@+id/btnNo"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/rounded_button"
+            android:background="@drawable/rect_button_dialog"
             android:text="No"
             android:textAllCaps="false"
             android:textColor="@android:color/white"

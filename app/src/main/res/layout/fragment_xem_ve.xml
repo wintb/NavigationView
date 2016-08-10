@@ -1,76 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layout_fragment_xemve"
-    android:orientation="vertical">
+    android:gravity="center"
+    android:background="#5fe4db">
 
-    <TextView
-        android:id="@+id/fragment_xeve_title"
-        android:gravity="center"
+
+    <!--<TextView-->
+        <!--android:id="@+id/fragment_xeve_title"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Bạn vui lòng điền đầy đủ thông tin"-->
+        <!--android:textSize="23sp"-->
+        <!--android:layout_marginTop="50dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:textColor="@color/colormain"/>-->
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bạn vui lòng điền đầy đủ thông tin"
-        android:textSize="23sp"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:textColor="@color/colormain"/>
-
-
-    <EditText
-        android:id="@+id/editCMND"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:hint="Nhập Số CMND"
-        android:padding="10dp"
-        android:textSize="18sp"
-        android:background="@drawable/rect"
-        android:layout_marginTop="30dp"
-        android:inputType="number"
-        />
-    <EditText
-        android:id="@+id/editSDT"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:hint="Nhập Số Điện Thoại"
-        android:padding="10dp"
-        android:textSize="18sp"
-        android:background="@drawable/rect"
-        android:inputType="number"
-        android:layout_marginTop="30dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtThongBao"
-        android:layout_marginTop="10dp"
-        android:padding="13dp"
-        android:text="Bạn cần phải nhập đầy đủ thông tin để xem vé"
-        android:textColor="#FFF20D0D"
-        android:gravity="center"
-        android:visibility="gone"
-        />
-
-    <RelativeLayout
-        android:paddingTop="30dp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btnXemVe"
+        android:layout_marginLeft="@dimen/distance_largest"
+        android:layout_marginRight="@dimen/distance_largest"
+        android:orientation="vertical"
+        android:background="@drawable/rect_layout">
+        <EditText
+            android:id="@+id/editCMND"
             android:layout_width="250dp"
             android:layout_height="50dp"
-            android:background="@drawable/rect_button"
-            android:layout_gravity="center"
             android:gravity="center"
-            android:textColor="#fff"
-            android:textAllCaps="false"
-            android:textSize="20dp"
-            android:text="Xem Vé"/>
-    </RelativeLayout>
+            android:layout_gravity="center"
+            android:hint="Nhập Số CMND"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:background="@drawable/rect"
+            android:layout_marginTop="30dp"
+            android:inputType="number"
+            />
+        <EditText
+            android:id="@+id/editSDT"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:hint="Nhập Số Điện Thoại"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:background="@drawable/rect"
+            android:inputType="number"
+            android:layout_marginTop="30dp"/>
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtThongBao"
+            android:layout_marginTop="10dp"
+            android:padding="13dp"
+            android:text="Bạn cần phải nhập đầy đủ thông tin để xem vé"
+            android:textColor="#FFF20D0D"
+            android:gravity="center"
+            android:visibility="gone"
+            />
+
+        <RelativeLayout
+            android:paddingTop="30dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btnXemVe"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:background="@drawable/rect_button"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:textAllCaps="false"
+                android:textSize="20dp"
+                android:text="Xem Vé"
+                android:layout_marginBottom="10dp"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

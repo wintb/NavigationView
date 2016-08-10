@@ -36,7 +36,7 @@ public interface Request {
 
 
     @GET("detailCarmaker/{id}")
-    Call<ResponseNhaXeDetail> getNhaXeDetail(@Path("id") int id);
+    Call<ResponseNhaXeDetail> getNhaXeDetail(@Path("id") String id);
 
     @FormUrlEncoded
     @POST("getInfoCustomer")

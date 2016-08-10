@@ -16,6 +16,7 @@ import android.widget.TextView;
 import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.activity.MainActivity;
 import om.bluebirdaward.busticket.fragment.FragmentSuaThongTinVe;
+import om.bluebirdaward.busticket.mics.Constant;
 
 /**
  * Created by TranTy on 6/17/2016.
@@ -100,6 +101,33 @@ public class ShowDialog {
         });
     }
 
+    public static void alertDialogConfirm(final Activity context, String question) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.dialog_exit, null);
+        TextView txtQuestion = (TextView)view.findViewById(R.id.txtQuestion);
+        txtQuestion.setText(question);
+        Button btnNo = (Button) view.findViewById(R.id.btnNo);
+        Button btnYes = (Button) view.findViewById(R.id.btnYes);
+        alertDialogBuilder.setView(view);
+        final AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Constant.CHECK_CONFIRM = 1;
+                alertDialog.dismiss();
+            }
+        });
+
+    }
+
     public static void alertDialogCheckInternet(final Context context) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         LayoutInflater inflater = (LayoutInflater) context
@@ -112,33 +140,6 @@ public class ShowDialog {
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            }
-        });
-
-    }
-
-    public static void alertDialogExit(final Activity context, String question) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.dialog_exit, null);
-        TextView txtQuestion = (TextView)view.findViewById(R.id.txtQuestion);
-        txtQuestion.setText(question);
-        Button btnCancel = (Button) view.findViewById(R.id.btnCancel);
-        Button btnExit = (Button) view.findViewById(R.id.btnOk);
-        alertDialogBuilder.setView(view);
-        final AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.cancel();
-            }
-        });
-        btnExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-                context.finish();
             }
         });
 

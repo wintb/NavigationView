@@ -6,5 +6,5 @@ package om.bluebirdaward.busticket.dao.NhaXe;
 public class ListNhaXe {
     public String image;
     public String image_thumb;
-    public int id;
+    public String id;
 }

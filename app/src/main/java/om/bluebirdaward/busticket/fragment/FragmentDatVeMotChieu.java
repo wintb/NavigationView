@@ -45,8 +45,8 @@ import om.bluebirdaward.busticket.utils.ShowDialog;
  */
 public class FragmentDatVeMotChieu extends Fragment{
 
-    @Bind(R.id.fragment_motchieu_title)
-    TextView txtTitle;
+//    @Bind(R.id.fragment_motchieu_title)
+//    TextView txtTitle;
     @Bind(R.id.txtDate)
     TextView txtDate;
     @Bind(R.id.txtChuyenDi)
@@ -132,7 +132,7 @@ public class FragmentDatVeMotChieu extends Fragment{
         Typeface face2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Bold.ttf");
         txtDate.setTypeface(face1);
         txtChuyenDi.setTypeface(face1);
-        txtTitle.setTypeface(face1);
+        //txtTitle.setTypeface(face1);
         btnTimChuyen.setTypeface(face1);
     }
 

@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#5fe4db"
+    android:gravity="center">
 
-    <RelativeLayout
-        android:layout_marginTop="30dp"
-        android:id="@+id/layout_Title_VeMotChieu"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:paddingBottom="@dimen/distance_large"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!--<RelativeLayout-->
+    <!--android:layout_marginTop="30dp"-->
+    <!--android:id="@+id/layout_Title_VeMotChieu"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:gravity="center"-->
+    <!--android:paddingBottom="@dimen/distance_large"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
 
-        <TextView
-            android:id="@+id/fragment_motchieu_title"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textSize="25sp"
-            android:textColor="@color/colormain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ĐẶT VÉ XE"
-            />
+    <!--<TextView-->
+    <!--android:id="@+id/fragment_motchieu_title"-->
+    <!--android:gravity="center"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:textSize="25sp"-->
+    <!--android:textColor="@color/colormain"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="ĐẶT VÉ XE"-->
+    <!--/>-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
     <LinearLayout
         android:layout_below="@+id/layout_Title_VeMotChieu"
@@ -33,7 +35,8 @@
         android:layout_marginRight="@dimen/distance_largest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rect_layout">
+        android:background="@drawable/rect_layout"
+        android:layout_marginTop="30dp">
 
         <RelativeLayout
             android:id="@+id/layoutHangXe"
@@ -193,6 +196,20 @@
 
                 </RelativeLayout>
 
+                <Button
+                    android:id="@+id/btnTimChuyenTab1"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/rect_button"
+                    android:textAllCaps="false"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:textSize="20dp"
+                    android:text="Tìm Chuyến"
+                    android:layout_marginTop="20dp"
+                    />
+
             </LinearLayout>
 
         </RelativeLayout>
@@ -211,36 +228,38 @@
         android:gravity="center"/>
 -->
 
-    <LinearLayout
-        android:layout_below="@+id/layout_select"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:layout_marginLeft="@dimen/distance_largest"
-        android:layout_marginRight="@dimen/distance_largest"
-        android:layout_width="match_parent"
-        android:background="@drawable/rect_layout"
-        android:layout_marginTop="@dimen/distance_large"
-        android:layout_height="80dp">
+    <!--<LinearLayout-->
+    <!--android:layout_below="@+id/layout_select"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_marginLeft="@dimen/distance_largest"-->
+    <!--android:layout_marginRight="@dimen/distance_largest"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:background="@drawable/rect_layout"-->
+    <!--android:layout_marginTop="@dimen/distance_large"-->
+    <!--android:layout_height="80dp">-->
 
-        <RelativeLayout
-            android:layout_below="@+id/layout_select"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/btnTimChuyenTab1"
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:background="@drawable/rect_button"
-                android:textAllCaps="false"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="#fff"
-                android:textSize="20dp"
-                android:text="Tìm Chuyến"
-                />
-        </RelativeLayout>
+    <!--<RelativeLayout-->
+    <!--android:layout_below="@+id/layout_select"-->
+    <!--android:gravity="center"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
 
-    </LinearLayout>
+    <!--<Button-->
+    <!--android:id="@+id/btnTimChuyenTab1"-->
+    <!--android:layout_width="250dp"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:background="@drawable/rect_button"-->
+    <!--android:textAllCaps="false"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:gravity="center"-->
+    <!--android:textColor="#fff"-->
+    <!--android:textSize="20dp"-->
+    <!--android:text="Tìm Chuyến"-->
+    <!--/>-->
+
+    <!--</RelativeLayout>-->
+
+    <!--</LinearLayout>-->
 
 </RelativeLayout>

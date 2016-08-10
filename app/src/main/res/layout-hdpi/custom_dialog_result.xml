@@ -17,8 +17,9 @@
         android:textSize="20sp"
         android:textColor="#2c3e50"
         android:text="Vui lòng kiểm tra và thử lại"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:padding="@dimen/distance_small"/>
 
 
