@@ -79,6 +79,7 @@ public class DialogNhaXeDetail extends Activity {
     }
 
     public void getNhaXeDetail(String id) {
+        Log.d("DiaLogNhaXeDetail", "Id la: " + id);
 
         NhaXeDetailResponse.getNhaXeDetail(id, new Response() {
             @Override
@@ -90,17 +91,17 @@ public class DialogNhaXeDetail extends Activity {
             public void onSuccess(int code, String message, Object obj) {
 
                 if (code == 0) {
+                    ShowDialog.dimissLoading();
                     nhaXeDetail = (NhaXeDetail) obj;
                     addData();
-                    ShowDialog.dimissLoading();
                     layout_dialog_nhaxe.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure() {
-                ShowDialog.dimissLoading();
                 Toast.makeText(DialogNhaXeDetail.this, "fail", Toast.LENGTH_SHORT).show();
+                ShowDialog.dimissLoading();
             }
         });
     }

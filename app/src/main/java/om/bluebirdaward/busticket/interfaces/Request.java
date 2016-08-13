@@ -8,7 +8,7 @@ import om.bluebirdaward.busticket.dao.NhaXe.ReponseListChuyenDi;
 import om.bluebirdaward.busticket.dao.NhaXe.ReponseListHangXe;
 import om.bluebirdaward.busticket.dao.NhaXe.ResponseListNhaXe;
 import om.bluebirdaward.busticket.dao.NhaXeDetail.ResponseNhaXeDetail;
-import om.bluebirdaward.busticket.dao.SoDoGhe.ReponseSoDoGhe;
+import om.bluebirdaward.busticket.dao.SoDoghe.ReponseSoDoGhe;
 import om.bluebirdaward.busticket.dao.ThongTinVeVuaDat.ReponseThongTinVeVuaDat;
 import om.bluebirdaward.busticket.dao.customer.ResponseInfoCustomer;
 import om.bluebirdaward.busticket.dao.parent.ResponseVO;
@@ -35,8 +35,8 @@ public interface Request {
     Call<ReponseListChuyenDi> getListChuyenDi(@Path("id") int id);
 
 
-    @GET("detailCarmaker/{id}")
-    Call<ResponseNhaXeDetail> getNhaXeDetail(@Path("id") String id);
+    @GET("detailCarmaker/{id_carmaker}")
+    Call<ResponseNhaXeDetail> getNhaXeDetail(@Path("id_carmaker") String id_carmaker);
 
     @FormUrlEncoded
     @POST("getInfoCustomer")
