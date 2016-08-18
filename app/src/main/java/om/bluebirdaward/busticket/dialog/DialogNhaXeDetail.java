@@ -20,14 +20,14 @@ import com.squareup.picasso.Picasso;
 import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.dao.NhaXeDetail.NhaXeDetail;
 import om.bluebirdaward.busticket.interfaces.Response;
-import om.bluebirdaward.busticket.request.NhaXeDetailResponse;
+import om.bluebirdaward.busticket.request.NhaXeDetailRequest;
 import om.bluebirdaward.busticket.utils.ShowDialog;
 
 public class DialogNhaXeDetail extends Activity {
 
     private ImageView imgPhone, imgNhaXe;
     private TextView txtPhone, txtAbout, txtRating;
-    private String carmaker_id;
+    private int carmaker_id;
     private NhaXeDetail nhaXeDetail;
     private RatingBar ratingNhaXeDetail;
     private RelativeLayout layout_dialog_nhaxe;
@@ -54,7 +54,7 @@ public class DialogNhaXeDetail extends Activity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("my_id");
-        carmaker_id = bundle.getString("carmaker_id");
+        carmaker_id = bundle.getInt("carmaker_id");
         getNhaXeDetail(carmaker_id);
     }
 
@@ -78,10 +78,10 @@ public class DialogNhaXeDetail extends Activity {
         //ratingNhaXeDetail.setRating(nhaXeDetail.ratingAverage);
     }
 
-    private void getNhaXeDetail(String id) {
+    private void getNhaXeDetail(int id) {
         Log.d("DiaLogNhaXeDetail", "Id la: " + id);
 
-        NhaXeDetailResponse.getNhaXeDetail(id, new Response() {
+        NhaXeDetailRequest.getNhaXeDetail(id, new Response() {
             @Override
             public void onStart() {
                 ShowDialog.showLoading(DialogNhaXeDetail.this);
