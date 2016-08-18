@@ -25,13 +25,23 @@
                 <TableRow
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
+                    android:gravity="center"
                     >
 
                     <ImageView
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:src="@drawable/ghedangchon"
-                        android:layout_column="2"/>
+                        android:layout_column="1"/>
+
+                    <ImageView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_column="3"/>
+                    <ImageView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_column="5"/>
 
                 </TableRow>
                 <TableRow
@@ -233,7 +243,9 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:text="D"
-                        android:textColor="#FFE70909"
+                        android:textSize="27sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/fragment_sodoghe_tang1_text_day_color"
                         android:layout_column="0" />
 
                     <ImageView
@@ -276,7 +288,7 @@
 
             </TableLayout>
 
-            </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>

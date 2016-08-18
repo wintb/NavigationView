@@ -36,6 +36,10 @@
     <dimen name="navigation_header_button_width">100dp</dimen>
     <dimen name="navigation_header_button_height">28dp</dimen>
 
+    <!--So Do Ghe-->
+    <dimen name="SoDoGhe_button_height_chon">40dp</dimen>
+    <dimen name="SoDoGhe_Padding">10dp</dimen>
+
     <!--thong tin ve da dat-->
     <dimen name="thongtinvedadat_button_width">70dp</dimen>
     <dimen name="thongtinvedadat_button_height">40dp</dimen>

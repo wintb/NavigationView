@@ -25,13 +25,25 @@
                 <TableRow
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
+                    android:gravity="center"
                     >
 
                     <ImageView
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:src="@drawable/ghedangchon"
-                        android:layout_column="2"/>
+                        android:layout_column="1"/>
+
+                    <ImageView
+                        android:tag="@string/B1D"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_column="3"/>
+                    <ImageView
+                        android:tag="@string/A1D"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_column="5"/>
                     <!--<Button
                         android:id="@+id/btnChonGheTang1"
                         android:layout_width="wrap_content"
@@ -238,7 +250,9 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:text="D"
-                        android:textColor="#FFE70909"
+                        android:textSize="27sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/fragment_sodoghe_tang1_text_day_color"
                         android:layout_column="0" />
 
                     <ImageView
@@ -282,7 +296,6 @@
             </TableLayout>
 
             <LinearLayout
-                android:padding="@dimen/distance_large"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -290,7 +303,7 @@
                 <Button
                     android:id="@+id/btnChonGheTang1"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="@dimen/SoDoGhe_button_height_chon"
                     android:textAllCaps="false"
                     android:textColor="@color/fragment_sodoghe_tang1_text_color"
                     android:background="@drawable/rect_button"

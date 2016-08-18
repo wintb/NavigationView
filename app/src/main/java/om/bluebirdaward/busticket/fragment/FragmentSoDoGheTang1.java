@@ -1,11 +1,7 @@
 package om.bluebirdaward.busticket.fragment;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,12 +19,10 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import om.bluebirdaward.busticket.R;
-import om.bluebirdaward.busticket.activity.MainActivity;
 import om.bluebirdaward.busticket.dao.SoDoghe.SoDoghe;
 import om.bluebirdaward.busticket.dao.Ve;
 import om.bluebirdaward.busticket.interfaces.Response;
@@ -845,6 +839,9 @@ public class FragmentSoDoGheTang1 extends Fragment {
 
 
     //----------------------------API---------------------------------------------------------------
+
+
+
     private void getSoDoGheDaDat(String id_tripdate){
         ShowDialog.showLoading(getActivity());
         SoDoGheRepuest.getSoDoGhe(id_tripdate, new Response() {

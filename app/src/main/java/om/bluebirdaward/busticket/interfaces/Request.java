@@ -35,8 +35,8 @@ public interface Request {
     Call<ReponseListChuyenDi> getListChuyenDi(@Path("id") int id);
 
 
-    @GET("detailCarmaker/{id_carmaker}")
-    Call<ResponseNhaXeDetail> getNhaXeDetail(@Path("id_carmaker") String id_carmaker);
+    @GET("detailCarmaker/{id}")
+    Call<ResponseNhaXeDetail> getNhaXeDetail(@Path("id") String id);
 
     @FormUrlEncoded
     @POST("getInfoCustomer")

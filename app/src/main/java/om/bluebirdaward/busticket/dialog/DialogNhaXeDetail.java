@@ -58,7 +58,7 @@ public class DialogNhaXeDetail extends Activity {
         getNhaXeDetail(carmaker_id);
     }
 
-    public void addWidget() {
+    private void addWidget() {
         imgPhone = (ImageView) findViewById(R.id.imgPhone);
         txtPhone = (TextView) findViewById(R.id.txtPhoneNhaXeDetail);
         imgNhaXe = (ImageView) findViewById(R.id.imgNhaXeDetail);
@@ -68,17 +68,17 @@ public class DialogNhaXeDetail extends Activity {
         layout_dialog_nhaxe = (RelativeLayout)findViewById(R.id.layout_dialog_nhaxe);
     }
 
-    public void addData() {
+    private void addData() {
         Picasso.with(getBaseContext())
                 .load(nhaXeDetail.image)
                 .into(imgNhaXe);
         txtAbout.setText(nhaXeDetail.intro);
         txtPhone.setText(nhaXeDetail.phone);
         txtRating.setText(nhaXeDetail.ratingAverage + "/5");
-        ratingNhaXeDetail.setRating(nhaXeDetail.ratingAverage);
+        //ratingNhaXeDetail.setRating(nhaXeDetail.ratingAverage);
     }
 
-    public void getNhaXeDetail(String id) {
+    private void getNhaXeDetail(String id) {
         Log.d("DiaLogNhaXeDetail", "Id la: " + id);
 
         NhaXeDetailResponse.getNhaXeDetail(id, new Response() {
@@ -95,6 +95,7 @@ public class DialogNhaXeDetail extends Activity {
                     nhaXeDetail = (NhaXeDetail) obj;
                     addData();
                     layout_dialog_nhaxe.setVisibility(View.VISIBLE);
+
                 }
             }
 
