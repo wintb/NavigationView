@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -68,17 +69,31 @@ public class DialogNhaXeDetail extends Activity {
         layout_dialog_nhaxe = (RelativeLayout)findViewById(R.id.layout_dialog_nhaxe);
     }
 
-    private void addData() {
+    private void addData(final int id) {
         Picasso.with(getBaseContext())
                 .load(nhaXeDetail.image)
                 .into(imgNhaXe);
         txtAbout.setText(nhaXeDetail.intro);
         txtPhone.setText(nhaXeDetail.phone);
         txtRating.setText(nhaXeDetail.ratingAverage + "/5");
-        //ratingNhaXeDetail.setRating(nhaXeDetail.ratingAverage);
+        ratingNhaXeDetail.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("id_carmaker", id);
+                    bundle.putFloat("rating", ratingNhaXeDetail.getRating());
+                    Intent intent = new Intent(DialogNhaXeDetail.this, DialogRating.class);
+                    intent.putExtra("my_rating_bundle", bundle);
+                    startActivity(intent);
+                }
+                return true;
+            }
+        });
     }
 
-    private void getNhaXeDetail(int id) {
+    private void getNhaXeDetail(final int id) {
         Log.d("DiaLogNhaXeDetail", "Id la: " + id);
 
         NhaXeDetailRequest.getNhaXeDetail(id, new Response() {
@@ -93,7 +108,7 @@ public class DialogNhaXeDetail extends Activity {
                 if (code == 0) {
                     ShowDialog.dimissLoading();
                     nhaXeDetail = (NhaXeDetail) obj;
-                    addData();
+                    addData(id);
                     layout_dialog_nhaxe.setVisibility(View.VISIBLE);
 
                 }

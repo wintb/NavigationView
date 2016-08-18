@@ -61,8 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:id="@+id/ratingNhaXeDetail"
-            style="?android:attr/ratingBarStyleIndicator" />
+            />
     </LinearLayout>
-    <!--<include layout="@layout/activity_loading"/>-->
 
 </RelativeLayout>

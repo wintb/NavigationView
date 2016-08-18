@@ -81,4 +81,8 @@ public interface Request {
     @POST("changeSeat")
     Call<ResponseVO> changeSeat(@Field("seat")String seat, @Field("id")int id);
 
+    @FormUrlEncoded
+    @POST("RatingForCarmaker")
+    Call<ResponseVO> ratingForCarmaker(@Field("rating")String rating, @Field("id_carmaker")int id_carmaker);
+
 }
