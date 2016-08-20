@@ -1,55 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/layout_fragment_xemve"
-    android:gravity="center"
-    android:background="#5fe4db">
-
-
-    <!--<TextView-->
-        <!--android:id="@+id/fragment_xeve_title"-->
-        <!--android:gravity="center"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Bạn vui lòng điền đầy đủ thông tin"-->
-        <!--android:textSize="23sp"-->
-        <!--android:layout_marginTop="50dp"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:textColor="@color/colormain"/>-->
+    android:background="#84FFFF"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/distance_largest"
-        android:layout_marginRight="@dimen/distance_largest"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/rect_layout">
-        <EditText
-            android:id="@+id/editCMND"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:gravity="center"
+        android:layout_gravity="center"
+        android:id="@+id/layout_fragment_xemve"
+        >
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/search"
             android:layout_gravity="center"
-            android:hint="Nhập Số CMND"
-            android:padding="10dp"
-            android:textSize="18sp"
-            android:background="@drawable/rect"
-            android:layout_marginTop="30dp"
-            android:inputType="number"
             />
-        <EditText
-            android:id="@+id/editSDT"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:hint="Nhập Số Điện Thoại"
-            android:padding="10dp"
-            android:textSize="18sp"
-            android:background="@drawable/rect"
-            android:inputType="number"
-            android:layout_marginTop="30dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/phones"
+                android:layout_gravity="bottom"
+                android:layout_marginRight="10dp"/>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Số điện thoại"
+                    android:inputType="number"
+                    android:id="@+id/editSDT"/>
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/identifi"
+                android:layout_gravity="bottom"
+                android:layout_marginRight="10dp"/>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="CMND"
+                    android:inputType="number"
+                    android:id="@+id/editCMND"/>
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -63,25 +87,14 @@
             android:visibility="gone"
             />
 
-        <RelativeLayout
-            android:paddingTop="30dp"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/btnXemVe"
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:background="@drawable/rect_button"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="#fff"
-                android:textAllCaps="false"
-                android:textSize="20dp"
-                android:text="Xem Vé"
-                android:layout_marginBottom="10dp"/>
-        </RelativeLayout>
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Xem vé"
+            android:background="#26C6DA"
+            android:layout_marginTop="30dp"
+            android:id="@+id/btnXemVe"
+            android:textAllCaps="false"/>
     </LinearLayout>
-
-
-</RelativeLayout>
+</ScrollView>

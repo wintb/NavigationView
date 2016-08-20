@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -48,7 +49,7 @@ public class FragmentSuaThongTinVe extends Fragment {
     @Bind(R.id.editNhapHoTen)
     EditText editHoTen;
     @Bind(R.id.btnSuaVe)
-    Button btnSuaVe;
+    AppCompatButton btnSuaVe;
     @Bind(R.id.layout_fragment_suathongtinve)
     LinearLayout layout_suathongtinve;
 
@@ -65,7 +66,7 @@ public class FragmentSuaThongTinVe extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sua_thong_tin_ve, container, false);
         ButterKnife.bind(this, view);
-        setupUI(layout_suathongtinve);
+        //setupUI(layout_suathongtinve);
 
         Bundle data = this.getArguments();
 

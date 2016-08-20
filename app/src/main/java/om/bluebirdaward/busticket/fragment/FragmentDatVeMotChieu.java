@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -48,19 +50,19 @@ public class FragmentDatVeMotChieu extends Fragment{
 //    @Bind(R.id.fragment_motchieu_title)
 //    TextView txtTitle;
     @Bind(R.id.txtDate)
-    TextView txtDate;
+    EditText txtDate;
     @Bind(R.id.txtChuyenDi)
-    TextView txtChuyenDi;
+    EditText txtChuyenDi;
     @Bind(R.id.btnTimChuyenTab1)
-    Button btnTimChuyen;
+    AppCompatButton btnTimChuyen;
     @Bind(R.id.txtHangXe)
-    TextView txtHangXe;
+    EditText txtHangXe;
     @Bind(R.id.layout_hangxe)
-    RelativeLayout layout_hangxe;
+    LinearLayout layout_hangxe;
     @Bind(R.id.layout_chuyendi)
-    RelativeLayout layout_chuyendi;
+    LinearLayout layout_chuyendi;
     @Bind(R.id.layout_ngaydi)
-    RelativeLayout layout_ngaydi;
+    LinearLayout layout_ngaydi;
 
     Context context;
     String date,months,years;

@@ -1,265 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5fe4db"
-    android:gravity="center">
-
-    <!--<RelativeLayout-->
-        <!--android:layout_marginTop="30dp"-->
-        <!--android:id="@+id/layout_Title_VeMotChieu"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:gravity="center"-->
-        <!--android:paddingBottom="@dimen/distance_large"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/fragment_motchieu_title"-->
-            <!--android:gravity="center"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:textSize="25sp"-->
-            <!--android:textColor="@color/colormain"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="ĐẶT VÉ XE"-->
-            <!--/>-->
-
-    <!--</RelativeLayout>-->
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    android:background="#84FFFF">
 
     <LinearLayout
-        android:layout_below="@+id/layout_Title_VeMotChieu"
-        android:id="@+id/layout_select"
-        android:orientation="vertical"
-        android:layout_marginLeft="@dimen/distance_largest"
-        android:layout_marginRight="@dimen/distance_largest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rect_layout"
-        android:layout_marginTop="30dp">
+        android:id="@+id/layout_hangxe"
+        android:orientation="horizontal">
 
-        <RelativeLayout
-            android:id="@+id/layoutHangXe"
-            android:layout_below="@+id/layout_Title_VeMotChieu"
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/carmaker"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="10dp"
+            android:id="@+id/imgHangXe"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginBottom="@dimen/distance_largest"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp">
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="Nha Xe"
+                android:inputType="number"
+                android:id="@+id/txtHangXe"
+                />
 
-                <TextView
-                    android:paddingBottom="@dimen/distance_normal"
-                    android:text="Chọn Hãng"
-                    android:textColor="#34495e"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_chuyendi"
+        android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:id="@+id/layout_hangxe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imgChuyenDi"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/plane"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="10dp"/>
 
-                    <TextView
-                        android:id="@+id/txtHangXe"
-                        android:layout_width="250dp"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:hint="Chọn hãng xe"
-                        android:padding="10dp"
-                        android:textSize="20dp"
-                        android:background="@drawable/rect"/>
-
-                    <ImageView
-                        android:id="@+id/imgHangXe"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="#fff"
-                        android:layout_marginLeft="210dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/date1"
-                        />
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <View
-            android:layout_marginBottom="@dimen/distance_largest"
-            android:layout_marginLeft="@dimen/distance_largest"
-            android:layout_marginRight="@dimen/distance_largest"
-            android:background="#bdc3c7"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"/>
-
-        <RelativeLayout
-            android:id="@+id/layout_txtChuyenDiMotChieu"
-            android:layout_below="@+id/layoutHangXe"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/view1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginBottom="20dp">
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp">
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/txtChuyenDi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="Chuyen"
+                android:inputType="number" />
 
-                <TextView
-                    android:paddingBottom="@dimen/distance_normal"
-                    android:text="Chọn Chuyến"
-                    android:textColor="#34495e"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_ngaydi"
+        android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:id="@+id/layout_chuyendi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/txtChuyenDi"
-                        android:layout_width="250dp"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:hint="Chọn Chuyến đi"
-                        android:padding="10dp"
-                        android:textSize="20dp"
-                        android:background="@drawable/rect"/>
-
-                    <ImageView
-                        android:id="@+id/imgChuyenDi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="#fff"
-                        android:layout_marginLeft="210dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/transport1"
-                        />
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/layout_ChonChuyenDi"
-            android:layout_below="@+id/layout_txtChuyenDiMotChieu"
+        <ImageView
+            android:id="@+id/imgDate"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/calendar"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="10dp"/>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/view2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="5dp">
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp">
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/txtDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="Ngay xuat phat"
+                android:inputType="number" />
 
-                <TextView
-                    android:paddingBottom="@dimen/distance_normal"
-                    android:text="Chọn Ngày"
-                    android:textColor="#34495e"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <RelativeLayout
-                    android:id="@+id/layout_ngaydi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/txtDate"
-                        android:layout_width="250dp"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:textSize="20dp"
-                        android:background="@drawable/rect"/>
-
-                    <ImageView
-                        android:id="@+id/imgDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="#fff"
-                        android:layout_marginLeft="210dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/date1"
-                        />
-
-                </RelativeLayout>
-
-                <Button
-                    android:id="@+id/btnTimChuyenTab1"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/rect_button"
-                    android:textAllCaps="false"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textColor="#fff"
-                    android:textSize="20dp"
-                    android:text="Tìm Chuyến"
-                    android:layout_marginTop="20dp"
-                    />
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
+        </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
-
-    <!--<Button
-        android:id="@+id/btnNgayDiTab1"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:background="@drawable/rect"
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnTimChuyenTab1"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Chọn ngày"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"/>
--->
+        android:background="#26C6DA"
+        android:text="Tìm Chuyến"
+        android:layout_marginTop="30dp"/>
 
-    <!--<LinearLayout-->
-        <!--android:layout_below="@+id/layout_select"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:orientation="vertical"-->
-        <!--android:layout_marginLeft="@dimen/distance_largest"-->
-        <!--android:layout_marginRight="@dimen/distance_largest"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:background="@drawable/rect_layout"-->
-        <!--android:layout_marginTop="@dimen/distance_large"-->
-        <!--android:layout_height="80dp">-->
-
-        <!--<RelativeLayout-->
-            <!--android:layout_below="@+id/layout_select"-->
-            <!--android:gravity="center"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
-
-            <!--<Button-->
-                <!--android:id="@+id/btnTimChuyenTab1"-->
-                <!--android:layout_width="250dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:background="@drawable/rect_button"-->
-                <!--android:textAllCaps="false"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:gravity="center"-->
-                <!--android:textColor="#fff"-->
-                <!--android:textSize="20dp"-->
-                <!--android:text="Tìm Chuyến"-->
-                <!--/>-->
-
-        <!--</RelativeLayout>-->
-
-    <!--</LinearLayout>-->
-
-</RelativeLayout>
+</LinearLayout>

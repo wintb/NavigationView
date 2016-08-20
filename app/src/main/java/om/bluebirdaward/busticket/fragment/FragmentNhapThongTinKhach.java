@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -28,11 +29,11 @@ import om.bluebirdaward.busticket.utils.ShowDialog;
  */
 public class FragmentNhapThongTinKhach extends Fragment {
 
-    TextView editHoTen, editSDT, editCMND, editGhiChu, txtThongBao, txtTitle;
-    Button btnDatVe;
+    EditText editHoTen, editSDT, editCMND, editGhiChu;
+    TextView txtThongBao, txtTitle;
+    AppCompatButton btnDatVe;
     DatVe interfaceDatVe;
     LinearLayout layout_NhapThongTinKhach;
-
     private String HoTen = "";
     private String CMND = "";
     private String SDT  = "";
@@ -43,15 +44,15 @@ public class FragmentNhapThongTinKhach extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_nhap_thong_tin_khach,container,false);
 
-        editCMND = (TextView)view.findViewById(R.id.editNhapCMND);
-        editGhiChu = (TextView)view.findViewById(R.id.editNhapGhichu);
-        editSDT = (TextView)view.findViewById(R.id.editNhapSDT);
-        editHoTen = (TextView)view.findViewById(R.id.editNhapHoTen);
-        btnDatVe = (Button)view.findViewById(R.id.btnDatVe);
+        editCMND = (EditText)view.findViewById(R.id.editNhapCMND);
+        editGhiChu = (EditText)view.findViewById(R.id.editNhapGhichu);
+        editSDT = (EditText)view.findViewById(R.id.editNhapSDT);
+        editHoTen = (EditText)view.findViewById(R.id.editNhapHoTen);
+        btnDatVe = (AppCompatButton)view.findViewById(R.id.btnDatVe);
         txtThongBao = (TextView)view.findViewById(R.id.txtThongBao);
         txtTitle = (TextView) view.findViewById(R.id.fragment_nhapthongtinve_title);
         layout_NhapThongTinKhach = (LinearLayout) view.findViewById(R.id.layout_fragment_nhapthongtin);
-        setupUI(layout_NhapThongTinKhach);
+        //setupUI(layout_NhapThongTinKhach);
         setTypeFace();
 
         interfaceDatVe = (DatVe) getActivity();
@@ -122,32 +123,32 @@ public class FragmentNhapThongTinKhach extends Fragment {
         return view;
     }
 
-    public void setupUI( final View view) {
-
-        //Set up touch listener for non-text box views to hide keyboard.
-        if (!(view instanceof EditText)) {
-
-            view.setOnTouchListener(new View.OnTouchListener() {
-
-                public boolean onTouch(View v, MotionEvent event) {
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                    return false;
-                }
-
-            });
-        }
-        //If a layout container, iterate over children and seed recursion.
-        if (view instanceof ViewGroup) {
-
-            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
-
-                View innerView = ((ViewGroup) view).getChildAt(i);
-
-                setupUI( innerView);
-            }
-        }
-    }
+//    public void setupUI( final View view) {
+//
+//        //Set up touch listener for non-text box views to hide keyboard.
+//        if (!(view instanceof EditText)) {
+//
+//            view.setOnTouchListener(new View.OnTouchListener() {
+//
+//                public boolean onTouch(View v, MotionEvent event) {
+//                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+//                    return false;
+//                }
+//
+//            });
+//        }
+//        //If a layout container, iterate over children and seed recursion.
+//        if (view instanceof ViewGroup) {
+//
+//            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+//
+//                View innerView = ((ViewGroup) view).getChildAt(i);
+//
+//                setupUI( innerView);
+//            }
+//        }
+//    }
 
 
     private void setTypeFace(){

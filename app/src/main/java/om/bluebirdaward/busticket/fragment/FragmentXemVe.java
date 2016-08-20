@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -50,8 +51,8 @@ public class FragmentXemVe extends Fragment{
     EditText editSDT;
     TextView txtThongBao;
     TextView txtTitleXemVe;
-    Button btnXemVe;
-    RelativeLayout layout_xemve;
+    AppCompatButton btnXemVe;
+    LinearLayout layout_xemve;
     private FragmentActivity myContext;
     private InfoCustomer infoCustomer;
     private Ticket ticket;
@@ -67,9 +68,9 @@ public class FragmentXemVe extends Fragment{
         editSDT = (EditText) view.findViewById(R.id.editSDT);
         txtThongBao = (TextView) view.findViewById(R.id.txtThongBao);
         //txtTitleXemVe = (TextView) view.findViewById(R.id.fragment_xeve_title);
-        btnXemVe = (Button) view.findViewById(R.id.btnXemVe);
-        layout_xemve = (RelativeLayout) view.findViewById(R.id.layout_fragment_xemve);
-        setupUI(layout_xemve);
+        btnXemVe = (AppCompatButton) view.findViewById(R.id.btnXemVe);
+        layout_xemve = (LinearLayout) view.findViewById(R.id.layout_fragment_xemve);
+//        setupUI(layout_xemve);
         setTypeFace();
 
         btnXemVe.setOnClickListener(new View.OnClickListener() {
@@ -159,32 +160,32 @@ public class FragmentXemVe extends Fragment{
                 .replace(R.id.fragmentholder, xemVe)
                 .commit();
     }
-    public void setupUI( final View view) {
-
-        //Set up touch listener for non-text box views to hide keyboard.
-        if (!(view instanceof EditText)) {
-
-            view.setOnTouchListener(new View.OnTouchListener() {
-
-                public boolean onTouch(View v, MotionEvent event) {
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                    return false;
-                }
-
-            });
-        }
-        //If a layout container, iterate over children and seed recursion.
-        if (view instanceof ViewGroup) {
-
-            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
-
-                View innerView = ((ViewGroup) view).getChildAt(i);
-
-                setupUI( innerView);
-            }
-        }
-    }
+//    public void setupUI( final View view) {
+//
+//        //Set up touch listener for non-text box views to hide keyboard.
+//        if (!(view instanceof EditText)) {
+//
+//            view.setOnTouchListener(new View.OnTouchListener() {
+//
+//                public boolean onTouch(View v, MotionEvent event) {
+//                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+//                    return false;
+//                }
+//
+//            });
+//        }
+//        //If a layout container, iterate over children and seed recursion.
+//        if (view instanceof ViewGroup) {
+//
+//            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+//
+//                View innerView = ((ViewGroup) view).getChildAt(i);
+//
+//                setupUI( innerView);
+//            }
+//        }
+//    }
 
     @Override
     public void onAttach(Activity activity) {
