@@ -12,5 +12,5 @@
         android:id="@+id/imgNhaXe"
         android:src="@drawable/icon_avatar"
         android:background="@drawable/rounded_intro_nha_xe"
-        android:layout_margin="5dp"/>
+        android:layout_margin="2dp"/>
 </LinearLayout>

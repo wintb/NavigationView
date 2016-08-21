@@ -1,67 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_dialog_nhaxe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="om.bluebirdaward.busticket.dialog.DialogNhaXeDetail"
-    android:id="@+id/layout_dialog_nhaxe"
-    android:visibility="gone">
+    android:visibility="gone"
+    tools:context="om.bluebirdaward.busticket.dialog.DialogNhaXeDetail">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <ImageView
+            android:id="@+id/imgNhaXeDetail"
             android:layout_width="300dp"
             android:layout_height="170dp"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:id="@+id/imgNhaXeDetail"/>
+            android:layout_marginTop="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtCarmaker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Nhà Xe Phương Trang"
+                android:textColor="#d41421"
+                android:textSize="20dp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:id="@+id/txtAboutNhaXeDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:id="@+id/txtAboutNhaXeDetail"/>
+            android:layout_marginLeft="20dp"
+            android:text="Mọi phản hồi và thắc mắc vui lòng liên hệ theo : " />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Điện thoại : " />
+
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/phone"
                 android:id="@+id/imgPhone"
-                />
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/phones" />
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/txtPhoneNhaXeDetail"
-                android:layout_marginLeft="5dp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Email : " />
+
+            <ImageView
+                android:id="@+id/imgEmail"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/email" />
+
+            <TextView
+                android:id="@+id/txtEmailNhaXeDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Đánh giá nhà xe : "/>
+                android:text="Đánh giá nhà xe : "
+                android:textColor="#2e8fe4" />
+
             <TextView
+                android:id="@+id/txtRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:id="@+id/txtRating"/>
+                android:textColor="#2e8fe4" />
 
         </LinearLayout>
+
         <RatingBar
+            android:id="@+id/ratingNhaXeDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/ratingNhaXeDetail"
-            />
+            android:layout_gravity="center" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -128,20 +128,4 @@ public class ShowDialog {
 
     }
 
-    public static void alertDialogCheckInternet(final Context context) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.dialog_check_internet, null);
-        Button btnExit = (Button) view.findViewById(R.id.btnOk);
-        alertDialogBuilder.setView(view);
-        final AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-        btnExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-
-    }
 }

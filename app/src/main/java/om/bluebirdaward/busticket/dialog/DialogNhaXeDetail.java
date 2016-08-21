@@ -2,14 +2,18 @@ package om.bluebirdaward.busticket.dialog;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
@@ -21,13 +25,14 @@ import com.squareup.picasso.Picasso;
 import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.dao.NhaXeDetail.NhaXeDetail;
 import om.bluebirdaward.busticket.interfaces.Response;
+import om.bluebirdaward.busticket.mics.Constant;
 import om.bluebirdaward.busticket.request.NhaXeDetailRequest;
 import om.bluebirdaward.busticket.utils.ShowDialog;
 
 public class DialogNhaXeDetail extends Activity {
 
     private ImageView imgPhone, imgNhaXe;
-    private TextView txtPhone, txtAbout, txtRating;
+    private TextView txtPhone, txtAbout, txtRating, txtCarmaker,txtEmailNhaXeDetail;
     private int carmaker_id;
     private NhaXeDetail nhaXeDetail;
     private RatingBar ratingNhaXeDetail;
@@ -44,12 +49,15 @@ public class DialogNhaXeDetail extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:" + txtPhone.getText()));
-                if (ActivityCompat.checkSelfPermission(DialogNhaXeDetail.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    return;
+                alertCall(DialogNhaXeDetail.this,txtPhone.getText().toString());
+                if (Constant.CALL_EVENT == 1){
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+                    intent.setData(Uri.parse("tel:" + txtPhone.getText()));
+                    if (ActivityCompat.checkSelfPermission(DialogNhaXeDetail.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                    startActivity(intent);
                 }
-                startActivity(intent);
             }
         });
 
@@ -59,6 +67,7 @@ public class DialogNhaXeDetail extends Activity {
         getNhaXeDetail(carmaker_id);
     }
 
+
     private void addWidget() {
         imgPhone = (ImageView) findViewById(R.id.imgPhone);
         txtPhone = (TextView) findViewById(R.id.txtPhoneNhaXeDetail);
@@ -67,6 +76,8 @@ public class DialogNhaXeDetail extends Activity {
         txtRating = (TextView) findViewById(R.id.txtRating);
         ratingNhaXeDetail = (RatingBar)findViewById(R.id.ratingNhaXeDetail);
         layout_dialog_nhaxe = (RelativeLayout)findViewById(R.id.layout_dialog_nhaxe);
+        txtCarmaker = (TextView) findViewById(R.id.txtCarmaker);
+        txtEmailNhaXeDetail = (TextView) findViewById(R.id.txtEmailNhaXeDetail);
     }
 
     private void addData(final int id) {
@@ -75,6 +86,8 @@ public class DialogNhaXeDetail extends Activity {
                 .into(imgNhaXe);
         txtAbout.setText(nhaXeDetail.intro);
         txtPhone.setText(nhaXeDetail.phone);
+        txtCarmaker.setText(nhaXeDetail.carmaker);
+        txtEmailNhaXeDetail.setText(nhaXeDetail.email);
         txtRating.setText(nhaXeDetail.ratingAverage + "/5");
         ratingNhaXeDetail.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -120,5 +133,25 @@ public class DialogNhaXeDetail extends Activity {
                 ShowDialog.dimissLoading();
             }
         });
+    }
+
+    public static void alertCall(final Context context,String phone) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.dialog_check_internet, null);
+        Button btnCall = (Button) view.findViewById(R.id.btnCall);
+        btnCall.setText(" Call "+phone);
+        alertDialogBuilder.setView(view);
+        final AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+        btnCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Constant.CALL_EVENT = 1;
+                alertDialog.dismiss();
+            }
+        });
+
     }
 }

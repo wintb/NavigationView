@@ -9,4 +9,6 @@ public class NhaXeDetail {
     public String image;
     public String ratingAverage;
     public String phone;
+    public String email;
+    public String carmaker;
 }

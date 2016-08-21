@@ -12,4 +12,5 @@ public class Constant {
     public static final String ROOT_URL = "http://doanchuyennganh.96.lt/index.php/api/";
     public static int KEY_CHECK_FRAGMENT = 2;
     public static int CHECK_CONFIRM = 0;
+    public static int CALL_EVENT = 0;
 }
