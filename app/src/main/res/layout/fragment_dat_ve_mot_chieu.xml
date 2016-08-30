@@ -9,6 +9,17 @@
     android:background="#84FFFF">
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:src="@drawable/findtripicon"
+            />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/layout_hangxe"
@@ -33,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
-                android:hint="Nha Xe"
+                android:hint="Nhà xe"
                 android:inputType="number"
                 android:id="@+id/txtHangXe"
                 />
@@ -66,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
-                android:hint="Chuyen"
+                android:hint="Chuyến"
                 android:inputType="number" />
 
         </android.support.design.widget.TextInputLayout>
@@ -96,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
-                android:hint="Ngay xuat phat"
+                android:hint="Ngày xuất phát"
                 android:inputType="number" />
 
         </android.support.design.widget.TextInputLayout>
@@ -104,11 +115,12 @@
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnTimChuyenTab1"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="#26C6DA"
         android:text="Tìm Chuyến"
+        android:textAllCaps="false"
         android:layout_marginTop="30dp"/>
 
 </LinearLayout>

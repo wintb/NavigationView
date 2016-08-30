@@ -63,14 +63,15 @@
 
     <!-- Lien he -->
     <string name="lienhe">
-        Nhà xe UIT xin kính chào quý khách!\n
-        Mọi vấn đề thắc mắc xin quý khách liên hệ nhà xe UIT\n
-        Địa chỉ : ktx khu B - DHQG HCM.\n
-        Số điện thoại : 0839171625\n\n
-        Liên lạc thông tin nhóm Lập trình ứng dụng :\n
-        Trịnh Đình Tiến : 12520741\n
-        Trần Bá Đạt     : 12520065\n
-        Vũ Văn Thắng    : 12520392
+        Xin chào các bạn!\n
+        Mọi vấn đề thắc mắc cần xin hệ nhà xe bằng số điện thoại hay email của nhà xe.\n
+        Hoặc liên hệ trực tiếp với nhóm lập trình SaiGonStars:\n
+        Địa chỉ : ktx khu B - Đại học quốc gia Hồ Chí Minh.\n
+        Số điện thoại : 0978055271\n
+        Thông tin nhóm SaiGonStars:\n
+        Trịnh Đình Tiến : tientd.9x@gmail.com\n
+        Lê Hồng Thái    : 12520385@gm.uit.edu.vn\n
+        Vũ Văn Thắng    : 12520392@gm.uit.edu.vn\n
     </string>
 
 
@@ -98,7 +99,8 @@
         của mình như : sửa vé, đổi vé, hủy vé.
     </string>
     <string name="content3">
-        Khi bạn đặt vé thì nhà xe đã cung cấp cho bạn một mã vé, bạn sẽ dùng mã vé này để xác nhận với nhà xe trước khi
+        Khi bạn đặt vé thì nhà xe đã cung cấp cho bạn một mã vé dưới dạng mã QR Code được lưu trong phần \"Mã xác nhận\",
+        bạn sẽ dùng mã vé này để xác nhận với nhà xe trước khi
         lên xe khởi hành.
     </string>
     <string name="content4">

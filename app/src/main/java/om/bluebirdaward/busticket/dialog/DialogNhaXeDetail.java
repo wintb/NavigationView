@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ public class DialogNhaXeDetail extends Activity {
     private NhaXeDetail nhaXeDetail;
     private RatingBar ratingNhaXeDetail;
     private RelativeLayout layout_dialog_nhaxe;
+    private LinearLayout layoutcallphone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +47,16 @@ public class DialogNhaXeDetail extends Activity {
         setFinishOnTouchOutside(false);
 
         addWidget();
-        imgPhone.setOnClickListener(new View.OnClickListener() {
+        layoutcallphone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                alertCall(DialogNhaXeDetail.this,txtPhone.getText().toString());
-                if (Constant.CALL_EVENT == 1){
-                    Intent intent = new Intent(Intent.ACTION_CALL);
-                    intent.setData(Uri.parse("tel:" + txtPhone.getText()));
-                    if (ActivityCompat.checkSelfPermission(DialogNhaXeDetail.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                        return;
-                    }
-                    startActivity(intent);
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + txtPhone.getText()));
+                if (ActivityCompat.checkSelfPermission(DialogNhaXeDetail.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    return;
                 }
+                startActivity(intent);
             }
         });
 
@@ -78,6 +77,7 @@ public class DialogNhaXeDetail extends Activity {
         layout_dialog_nhaxe = (RelativeLayout)findViewById(R.id.layout_dialog_nhaxe);
         txtCarmaker = (TextView) findViewById(R.id.txtCarmaker);
         txtEmailNhaXeDetail = (TextView) findViewById(R.id.txtEmailNhaXeDetail);
+        layoutcallphone = (LinearLayout)findViewById(R.id.layoutcallphone);
     }
 
     private void addData(final int id) {
@@ -89,19 +89,30 @@ public class DialogNhaXeDetail extends Activity {
         txtCarmaker.setText(nhaXeDetail.carmaker);
         txtEmailNhaXeDetail.setText(nhaXeDetail.email);
         txtRating.setText(nhaXeDetail.ratingAverage + "/5");
-        ratingNhaXeDetail.setOnTouchListener(new View.OnTouchListener() {
+//        ratingNhaXeDetail.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//
+//                if (event.getAction() == MotionEvent.ACTION_UP) {
+//                    Bundle bundle = new Bundle();
+//                    bundle.putInt("id_carmaker", id);
+//                    bundle.putFloat("rating", ratingNhaXeDetail.getRating());
+//                    Intent intent = new Intent(DialogNhaXeDetail.this, DialogRating.class);
+//                    intent.putExtra("my_rating_bundle", bundle);
+//                    startActivity(intent);
+//                }
+//                return true;
+//            }
+//        });
+        ratingNhaXeDetail.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("id_carmaker", id);
-                    bundle.putFloat("rating", ratingNhaXeDetail.getRating());
-                    Intent intent = new Intent(DialogNhaXeDetail.this, DialogRating.class);
-                    intent.putExtra("my_rating_bundle", bundle);
-                    startActivity(intent);
-                }
-                return true;
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("id_carmaker", id);
+                bundle.putFloat("rating", ratingNhaXeDetail.getRating());
+                Intent intent = new Intent(DialogNhaXeDetail.this, DialogRating.class);
+                intent.putExtra("my_rating_bundle", bundle);
+                startActivity(intent);
             }
         });
     }

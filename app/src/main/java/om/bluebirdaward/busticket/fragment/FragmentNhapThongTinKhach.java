@@ -50,7 +50,7 @@ public class FragmentNhapThongTinKhach extends Fragment {
         editHoTen = (EditText)view.findViewById(R.id.editNhapHoTen);
         btnDatVe = (AppCompatButton)view.findViewById(R.id.btnDatVe);
         txtThongBao = (TextView)view.findViewById(R.id.txtThongBao);
-        txtTitle = (TextView) view.findViewById(R.id.fragment_nhapthongtinve_title);
+        //txtTitle = (TextView) view.findViewById(R.id.fragment_nhapthongtinve_title);
         layout_NhapThongTinKhach = (LinearLayout) view.findViewById(R.id.layout_fragment_nhapthongtin);
         //setupUI(layout_NhapThongTinKhach);
         setTypeFace();
@@ -156,7 +156,7 @@ public class FragmentNhapThongTinKhach extends Fragment {
         Typeface face2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Bold.ttf");
         editHoTen.setTypeface(face1);
         editSDT.setTypeface(face1);
-        txtTitle.setTypeface(face1);
+        //txtTitle.setTypeface(face1);
         editCMND.setTypeface(face1);
         editGhiChu.setTypeface(face1);
         txtThongBao.setTypeface(face1);

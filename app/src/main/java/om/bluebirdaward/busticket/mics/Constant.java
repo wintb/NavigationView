@@ -13,4 +13,5 @@ public class Constant {
     public static int KEY_CHECK_FRAGMENT = 2;
     public static int CHECK_CONFIRM = 0;
     public static int CALL_EVENT = 0;
+    public static int RATING_EVENT = 1;
 }

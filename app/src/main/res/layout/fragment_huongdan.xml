@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C08D62"
+    android:background="#FFFFFF"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -21,8 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:paddingBottom="41dp"
-            android:layout_marginBottom="60dp"
+            android:paddingBottom="20dp"
+            android:layout_marginBottom="20dp"
             android:gravity="center"
             android:orientation="horizontal" />
     </RelativeLayout>
