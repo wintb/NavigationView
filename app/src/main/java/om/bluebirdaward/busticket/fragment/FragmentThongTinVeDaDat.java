@@ -1,8 +1,6 @@
 package om.bluebirdaward.busticket.fragment;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +19,6 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import om.bluebirdaward.busticket.R;
-import om.bluebirdaward.busticket.abstracts.AbstractResponse;
 import om.bluebirdaward.busticket.dao.customer.Ticket;
 import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.mics.Constant;
@@ -226,6 +222,7 @@ public class FragmentThongTinVeDaDat extends Fragment {
         editInfo.setArguments(data);
         myContext.getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentholder, editInfo)
+                .addToBackStack("")
                 .commit();
     }
 
@@ -243,6 +240,7 @@ public class FragmentThongTinVeDaDat extends Fragment {
         myContext.getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentholder, datVe_fragment)
+                .addToBackStack("")
                 .commit();
     }
 

@@ -1,36 +1,28 @@
 package om.bluebirdaward.busticket.fragment;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.AppCompatButton;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import om.bluebirdaward.busticket.R;
-import om.bluebirdaward.busticket.activity.MainActivity;
 import om.bluebirdaward.busticket.interfaces.Response;
-import om.bluebirdaward.busticket.json.JsonSuaVe;
 import om.bluebirdaward.busticket.mics.Constant;
 import om.bluebirdaward.busticket.request.EditCustomerRequest;
 import om.bluebirdaward.busticket.utils.CheckInternet;
@@ -52,6 +44,8 @@ public class FragmentSuaThongTinVe extends Fragment {
     AppCompatButton btnSuaVe;
     @Bind(R.id.layout_fragment_suathongtinve)
     LinearLayout layout_suathongtinve;
+    @Bind(R.id.btnBack)
+    ImageView btnBack;
 
     private String phone;
     private String identity_number;
@@ -80,6 +74,20 @@ public class FragmentSuaThongTinVe extends Fragment {
         editSDT.setText(phone);
         editCMND.setText(identity_number);
         editNoiXuong.setText(note);
+
+        if (Constant.KEY_CHECK_FRAGMENT == 1){
+            btnBack.setVisibility(View.GONE);
+        }
+        if (Constant.KEY_CHECK_FRAGMENT == 0){
+            btnBack.setVisibility(View.VISIBLE);
+        }
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().popBackStack();
+            }
+        });
 
 
         btnSuaVe.setOnClickListener(new View.OnClickListener() {

@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.adapter.AdapterViewPager;
+import om.bluebirdaward.busticket.mics.Constant;
 
 /**
  * Created by DinhTien on 15-05-2016.
@@ -44,6 +46,8 @@ public class FragmentTabhostSoDoGhe extends Fragment{
     TabLayout tabLayout;
     @Bind(R.id.viewpager)
     ViewPager viewPager;
+    @Bind(R.id.btnBack)
+    ImageView btnBack;
 
     private FragmentActivity myContext;
     private Toolbar toolbar;
@@ -83,6 +87,20 @@ public class FragmentTabhostSoDoGhe extends Fragment{
         MaVe = data.getString("MaVe");
         SDTKhach = data.getString("SDTKhach");
         id = data.getInt("id");
+
+        if (Constant.KEY_CHECK_FRAGMENT == 1){
+            btnBack.setVisibility(View.GONE);
+        }
+        if (Constant.KEY_CHECK_FRAGMENT == 0){
+            btnBack.setVisibility(View.VISIBLE);
+        }
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().popBackStack();
+            }
+        });
 
         TenChuyen = txtChuyenDi.getText().toString();
         GioDi = txtGioDi.getText().toString();
