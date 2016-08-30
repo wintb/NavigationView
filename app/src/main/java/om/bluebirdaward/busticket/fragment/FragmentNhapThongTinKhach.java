@@ -156,7 +156,7 @@ public class FragmentNhapThongTinKhach extends Fragment {
         Typeface face2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Bold.ttf");
         editHoTen.setTypeface(face1);
         editSDT.setTypeface(face1);
-        //txtTitle.setTypeface(face1);
+        txtTitle.setTypeface(face1);
         editCMND.setTypeface(face1);
         editGhiChu.setTypeface(face1);
         txtThongBao.setTypeface(face1);
