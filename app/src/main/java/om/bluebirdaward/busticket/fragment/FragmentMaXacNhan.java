@@ -29,6 +29,7 @@ public class FragmentMaXacNhan extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        getActivity().setTitle("Mã xác nhận");
         ImageView imgMaXacNhan = (ImageView) view.findViewById(R.id.imgMaXacNhan);
         getMaXacNhan(imgMaXacNhan);
     }

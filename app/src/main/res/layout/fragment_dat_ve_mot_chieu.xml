@@ -6,23 +6,24 @@
     android:orientation="vertical"
     android:paddingLeft="30dp"
     android:paddingRight="30dp"
-    android:background="#84FFFF">
+    android:background="#ecf0f1">
 
     <LinearLayout
+        android:layout_marginBottom="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.AppCompatImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
-            android:src="@drawable/findtripicon"
-            />
+            android:src="@drawable/findtripicon" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/layout_hangxe"
+        android:onClick="true"
         android:orientation="horizontal">
 
         <ImageView
@@ -118,9 +119,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="#26C6DA"
+        android:background="@color/colormain"
         android:text="Tìm Chuyến"
+        android:textColor="#ffffff"
         android:textAllCaps="false"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="50dp"/>
+
 
 </LinearLayout>

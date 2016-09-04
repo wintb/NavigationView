@@ -41,7 +41,7 @@
                 android:layout_marginTop="@dimen/distance_largest"
                 android:gravity="center"
                 android:text="Scan Qr-Code on your table \n to get menu list "
-                android:textColor="#34495e"
+                android:textColor="#ffffff"
                 android:textSize="@dimen/text_size_large" />
         </LinearLayout>
 

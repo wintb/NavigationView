@@ -1,168 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#84FFFF"
+    android:background="#ffffff"
     android:paddingLeft="20dp"
     android:paddingRight="20dp">
 
-    <LinearLayout
-        android:id="@+id/layout_fragment_suathongtinve"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_marginBottom="@dimen/distance_largest"
-            android:id="@+id/btnBack"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/back"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="Sửa thông tin khách hàng"
-            android:textSize="20dp" />
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/layout_fragment_suathongtinve"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="bottom"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/person" />
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp">
-
-                <EditText
-                    android:id="@+id/editNhapHoTen"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Họ tên" />
-
-            </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="bottom"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/phones" />
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp">
-
-                <EditText
-                    android:id="@+id/editNhapSDT"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Số điện thoại"
-                    android:inputType="number" />
-
-            </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="bottom"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/identifi" />
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp">
-
-                <EditText
-                    android:id="@+id/editNhapCMND"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Số cmnd"
-                    android:inputType="number" />
-
-            </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="bottom"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/place" />
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp">
-
-                <EditText
-                    android:id="@+id/editNhapGhichu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Nơi xuống xe"
-                    android:inputType="textMultiLine" />
-
-            </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/txtThongBao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:padding="13dp"
-            android:text="Bạn cần phải nhập đầy đủ thông tin để đặt vé"
-            android:textColor="#FFF20D0D"
-            android:visibility="gone" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btnSuaVe"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:background="#26C6DA"
-            android:text="Sửa vé"
-            android:textAllCaps="false" />
+            android:orientation="vertical">
 
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Sửa thông tin khách hàng"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/person" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/editNhapHoTen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Họ tên" />
+
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/phones" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/editNhapSDT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Số điện thoại"
+                        android:inputType="number" />
+
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/identifi" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/editNhapCMND"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Số cmnd"
+                        android:inputType="number" />
+
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/place" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/editNhapGhichu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Nơi xuống xe"
+                        android:inputType="textMultiLine" />
+
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtThongBao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:padding="13dp"
+                android:text="Bạn cần phải nhập đầy đủ thông tin để đặt vé"
+                android:textColor="#FFF20D0D"
+                android:visibility="gone" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnSuaVe"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:background="@color/colormain"
+                android:textColor="#ffffff"
+                android:text="Sửa vé"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="30dp"
+        android:id="@+id/layout_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/back"/>
     </LinearLayout>
-</ScrollView>
+</RelativeLayout>

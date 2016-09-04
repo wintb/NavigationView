@@ -2,7 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="2dp">
+
+    <LinearLayout
+        android:id="@+id/layout_error"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <TextView
+            android:text="Lỗi kết nối. Vui lòng thử lại!"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btnTryAgain"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:textAllCaps="false"
+            android:textColor="@color/fragment_sodoghe_tang1_text_color"
+            android:background="@drawable/rect_button"
+            android:text="Thử lại"/>
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

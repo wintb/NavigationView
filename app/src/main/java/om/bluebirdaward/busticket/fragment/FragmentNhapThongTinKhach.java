@@ -1,6 +1,5 @@
 package om.bluebirdaward.busticket.fragment;
 
-import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,12 +7,10 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,6 +28,7 @@ public class FragmentNhapThongTinKhach extends Fragment {
 
     EditText editHoTen, editSDT, editCMND, editGhiChu;
     TextView txtThongBao, txtTitle;
+    ImageView btnBack;
     AppCompatButton btnDatVe;
     DatVe interfaceDatVe;
     LinearLayout layout_NhapThongTinKhach;
@@ -50,13 +48,20 @@ public class FragmentNhapThongTinKhach extends Fragment {
         editHoTen = (EditText)view.findViewById(R.id.editNhapHoTen);
         btnDatVe = (AppCompatButton)view.findViewById(R.id.btnDatVe);
         txtThongBao = (TextView)view.findViewById(R.id.txtThongBao);
-        //txtTitle = (TextView) view.findViewById(R.id.fragment_nhapthongtinve_title);
+        txtTitle = (TextView) view.findViewById(R.id.fragment_nhapthongtinve_title);
         layout_NhapThongTinKhach = (LinearLayout) view.findViewById(R.id.layout_fragment_nhapthongtin);
+        btnBack  = (ImageView) view.findViewById(R.id.btnBack);
         //setupUI(layout_NhapThongTinKhach);
         setTypeFace();
 
         interfaceDatVe = (DatVe) getActivity();
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().popBackStack();
+            }
+        });
 
         btnDatVe.setOnClickListener(new View.OnClickListener() {
             @Override

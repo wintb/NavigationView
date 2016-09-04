@@ -111,14 +111,18 @@ public class FragmentThongTinVeDaDat extends Fragment {
         txtSoGhe.setText(String.valueOf(quantity));
         txtTextNgayDi.setText(date);
         txtGioDi.setText(start);
-        for (int i = 0; i < data.getInt("quantity"); i++) {
-            arrTicket.add((Ticket) data.getSerializable("ticket_" + (i + 1)));
-        }
-        for (int i = 0; i < arrTicket.size(); i++) {
-            soghe += arrTicket.get(i).seat;
-            if (i < arrTicket.size() - 1)
-                soghe += " - ";
 
+        if (arrTicket.size()==0) {
+            arrTicket = new ArrayList<>();
+            for (int i = 0; i < data.getInt("quantity"); i++) {
+                arrTicket.add((Ticket) data.getSerializable("ticket_" + (i + 1)));
+            }
+            for (int i = 0; i < arrTicket.size(); i++) {
+                soghe += arrTicket.get(i).seat;
+                if (i < arrTicket.size() - 1)
+                    soghe += " - ";
+
+            }
         }
         txtMaVe.setText(soghe);
         txtMaTai.setText(code_driver);

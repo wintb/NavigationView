@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -89,6 +91,13 @@ public class FragmentSoDoGheTang1 extends Fragment {
     TextView txtTang1C;
     @Bind(R.id.btnChonGheTang1)
     Button btnChonGheTang1;
+    @Bind(R.id.layout_sodoghe1)
+    ScrollView layout_sodoghe1;
+
+    @Bind(R.id.layout_error)
+    LinearLayout layout_error;
+    @Bind(R.id.btnTryAgain)
+    Button btnTryAgain;
 
     boolean Check_A1D = true;
     boolean Check_A2D = true;
@@ -161,6 +170,7 @@ public class FragmentSoDoGheTang1 extends Fragment {
         id = data.getInt("id");
 
         getSoDoGheDaDat(id_tripdate);
+        setOnClickTryAgain(id_tripdate);
         //set color khi click chon ghe
         setColorClickChonGhe();
 
@@ -187,6 +197,12 @@ public class FragmentSoDoGheTang1 extends Fragment {
     public void onAttach(Activity activity) {
         myContext = (FragmentActivity) activity;
         super.onAttach(activity);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
     }
 
     @Override
@@ -844,6 +860,11 @@ public class FragmentSoDoGheTang1 extends Fragment {
 
     private void getSoDoGheDaDat(String id_tripdate){
         ShowDialog.showLoading(getActivity());
+        if (CheckInternet.isConnected(getActivity())){
+            layout_error.setVisibility(View.GONE);
+        }else{
+            layout_error.setVisibility(View.VISIBLE);
+        }
         SoDoGheRepuest.getSoDoGhe(id_tripdate, new Response() {
             @Override
             public void onStart() {
@@ -854,6 +875,7 @@ public class FragmentSoDoGheTang1 extends Fragment {
             public void onSuccess(int code, String message, Object obj) {
 
                 ShowDialog.dimissLoading();
+                layout_error.setVisibility(View.GONE);
                 if (code == 0) {
                     ArrayList<SoDoghe> soDoghes = (ArrayList<SoDoghe>) obj;
                     for (int i = 0; i < soDoghes.size(); i++) {
@@ -865,7 +887,17 @@ public class FragmentSoDoGheTang1 extends Fragment {
 
             @Override
             public void onFailure() {
+                ShowDialog.dimissLoading();
+                layout_error.setVisibility(View.VISIBLE);
+            }
+        });
+    }
 
+    private void setOnClickTryAgain(final String id_tripdate){
+        btnTryAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSoDoGheDaDat(id_tripdate);
             }
         });
     }

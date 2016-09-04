@@ -2,7 +2,7 @@ package om.bluebirdaward.busticket.activity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.Uri;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -22,18 +22,20 @@ import com.bumptech.glide.Glide;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.model.ShareContent;
+import com.facebook.share.model.ShareMediaContent;
+import com.facebook.share.model.SharePhoto;
 import com.facebook.share.widget.ShareDialog;
 import com.github.siyamed.shapeimageview.CircularImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,9 +50,7 @@ import om.bluebirdaward.busticket.fragment.FragmentLienHe;
 import om.bluebirdaward.busticket.fragment.FragmentMaXacNhan;
 import om.bluebirdaward.busticket.fragment.FragmentNhapThongTinKhach;
 import om.bluebirdaward.busticket.fragment.FragmentSoDoGheTang1;
-import om.bluebirdaward.busticket.fragment.FragmentSuaThongTinVe;
 import om.bluebirdaward.busticket.fragment.FragmentTabhostSoDoGhe;
-import om.bluebirdaward.busticket.fragment.FragmentThongTinVeDaDat;
 import om.bluebirdaward.busticket.fragment.FragmentThongTinVeVuaDat;
 import om.bluebirdaward.busticket.fragment.FragmentXemVe;
 import om.bluebirdaward.busticket.utils.BitmapLoader;
@@ -88,11 +88,11 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
-        callbackManager = CallbackManager.Factory.create();
+        //FacebookSdk.sdkInitialize(this.getApplicationContext());
+        //callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_main);
         navigation = (NavigationView) findViewById(R.id.navigation_view);
-        shareDialog = new ShareDialog(this);
+        //shareDialog = new ShareDialog(this);
 
         View headerLayout = navigation.getHeaderView(0);
         btnLogin_Logout = (Button)headerLayout.findViewById(R.id.nav_header_Login_Logout);
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements
 
 
 
-        FragmentDanhSachNhaXe fragmentDanhSachNhaXe = new FragmentDanhSachNhaXe(MainActivity.this);
+        FragmentDanhSachNhaXe fragmentDanhSachNhaXe = new FragmentDanhSachNhaXe();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentholder,fragmentDanhSachNhaXe)
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }
@@ -150,12 +150,12 @@ public class MainActivity extends AppCompatActivity implements
         btnLogin_Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (btnLogin_Logout.getText().equals("Login Facebook")) {
+                /*if (btnLogin_Logout.getText().equals("Login Facebook")) {
                     LoginFacebook();
 
                 } else if (btnLogin_Logout.getText().equals("Logout Facebook")) {
                     LogoutFacebook();
-                }
+                }*/
 
             }
         });
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShareFacebook();
+                //ShareFacebook();
             }
         });
 
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements
                 int id = menuItem.getItemId();
                 switch (id) {
                     case R.id.navigation_item_0:
-                        FragmentDanhSachNhaXe fragmentDanhSachNhaXe = new FragmentDanhSachNhaXe(MainActivity.this);
+                        FragmentDanhSachNhaXe fragmentDanhSachNhaXe = new FragmentDanhSachNhaXe();
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.fragmentholder, fragmentDanhSachNhaXe)
@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private void ShareFacebook(){
 
-        if (ShareDialog.canShow(ShareLinkContent.class)) {
+        /*if (ShareDialog.canShow(ShareLinkContent.class)) {
             ShareLinkContent linkContent = new ShareLinkContent.Builder()
                     .setContentTitle("How to integrate Linkedin from your app")
                     .setImageUrl(Uri.parse("https://www.numetriclabz.com/wp-content/uploads/2015/11/114.png"))
@@ -260,7 +260,18 @@ public class MainActivity extends AppCompatActivity implements
                     .build();
 
             shareDialog.show(linkContent);  // Show facebook ShareDialog
-        }
+
+        }*/
+
+        File path = new File("/sdcard/BusTicket/");
+        SharePhoto photo = new SharePhoto.Builder()
+                .setBitmap(BitmapFactory.decodeFile(path.getPath() + "/" + "Image" + ".jpg"))
+                .build();
+        ShareContent shareContent = new ShareMediaContent.Builder()
+                .addMedium(photo)
+                .build();
+        ShareDialog shareDialog = new ShareDialog(MainActivity.this);
+        shareDialog.show(shareContent, ShareDialog.Mode.AUTOMATIC);
     }
 
     private void LoginFacebook(){
@@ -404,7 +415,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void setSoDoGhe(String TenChuyen, String GioDi, String NgayDi,String code_trip, String id_tripdate, String code_driver) {
-        FragmentTabhostSoDoGhe datVe_fragment = new FragmentTabhostSoDoGhe();
+
         Bundle data = new Bundle();
         data.putString("ChuyenDi", TenChuyen);
         data.putString("GioDi", GioDi);
@@ -415,11 +426,12 @@ public class MainActivity extends AppCompatActivity implements
         code_trip_temp = code_trip;
         code_driver_temp = code_driver;
         id_tripdate_temp  = id_tripdate;
+        FragmentTabhostSoDoGhe datVe_fragment = new FragmentTabhostSoDoGhe();
         datVe_fragment.setArguments(data);
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentholder, datVe_fragment);
-        fragmentTransaction.addToBackStack("");
-        fragmentTransaction.commit();
+        getSupportFragmentManager().beginTransaction()
+        .replace(R.id.fragmentholder, datVe_fragment)
+        .addToBackStack("")
+        .commit();
 
     }
 
@@ -472,6 +484,7 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentholder,thongTinVeVuaDatFragment)
+                .addToBackStack("")
                 .commit();
     }
 

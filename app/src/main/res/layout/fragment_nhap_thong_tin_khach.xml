@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#84FFFF"
+    android:background="#ffffff"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     >
@@ -20,15 +20,16 @@
             android:orientation="vertical"
             android:layout_gravity="center">
 
-            <!--<TextView-->
-            <!--android:id="@+id/fragment_nhapthongtinve_title"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="30dp"-->
-            <!--android:gravity="center"-->
-            <!--android:text="Nhập thông tin hành khách"-->
-            <!--android:textColor="#1ccf28"-->
-            <!--android:textSize="25sp" />-->
+
+            <TextView
+            android:id="@+id/fragment_nhapthongtinve_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:text="Nhập thông tin hành khách"
+            android:textColor="#26C6DA"
+            android:textSize="25sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,6 +53,7 @@
                         android:id="@+id/editNhapHoTen"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:maxLength="20"
                         android:hint="Họ tên" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -81,6 +83,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Số điện thoại"
+                        android:maxLength="11"
                         android:inputType="number" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -110,6 +113,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Số cmnd"
+                        android:maxLength="10"
                         android:inputType="number" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -139,6 +143,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Nơi xuống xe"
+                        android:maxLength="100"
                         android:inputType="textMultiLine" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -158,13 +163,30 @@
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btnDatVe"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:background="#26C6DA"
+                android:background="@color/colormain"
                 android:text="Đặt vé"
+                android:textColor="#ffffff"
                 android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="30dp"
+        android:id="@+id/layout_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/back"/>
+    </LinearLayout>
+</RelativeLayout>

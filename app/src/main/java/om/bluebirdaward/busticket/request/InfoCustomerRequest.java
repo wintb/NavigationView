@@ -20,7 +20,11 @@ public class InfoCustomerRequest {
         call.enqueue(new Callback<ResponseInfoCustomer>() {
             @Override
             public void onResponse(Call<ResponseInfoCustomer> call, retrofit2.Response<ResponseInfoCustomer> response) {
-                resp.onSuccess(response.body().code, response.body().message, response.body().data);
+                if (response.body() != null && response.body().data != null) {
+                    resp.onSuccess(response.body().code, response.body().message, response.body().data);
+                }else{
+                    resp.onFailure();
+                }
             }
 
             @Override

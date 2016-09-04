@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#84FFFF"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp">
+    android:background="#ecf0f1"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/layout_fragment_xemve"
@@ -20,8 +18,9 @@
             android:layout_gravity="center">
 
             <android.support.v7.widget.AppCompatImageView
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_marginBottom="50dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_gravity="center"
                 android:src="@drawable/xemveicon" />
 
@@ -91,15 +90,23 @@
                 android:textColor="#FFF20D0D"
                 android:visibility="gone" />
 
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btnXemVe"
+            <LinearLayout
+                android:layout_marginTop="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:background="#26C6DA"
-                android:text="Xem vé"
-                android:textAllCaps="false" />
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btnXemVe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colormain"
+                    android:textColor="#ffffff"
+                    android:text="Xem vé"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

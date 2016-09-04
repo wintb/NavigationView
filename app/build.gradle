@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'release_keystore'
+            keyPassword '123456'
+            storeFile file('D:/PROJECT/AndroidStudio/NavigationView/release.keystore.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
-
     defaultConfig {
         applicationId "com.bluebirdaward.busticket"
         minSdkVersion 15

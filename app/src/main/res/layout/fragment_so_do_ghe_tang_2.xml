@@ -6,12 +6,37 @@
     android:scrollbars="vertical"
     android:background="#EDF5FA">
 
+    <LinearLayout
+        android:id="@+id/layout_error"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <TextView
+            android:text="Lỗi kết nối. Vui lòng thử lại!"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btnTryAgain"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:textAllCaps="false"
+            android:textColor="@color/fragment_sodoghe_tang1_text_color"
+            android:background="@drawable/rect_button"
+            android:text="Thử lại"/>
+
+    </LinearLayout>
+
     <ScrollView
+        android:id="@+id/layout_sodoghe2"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:scrollbars="none"
         android:layout_weight="1">
         <LinearLayout
+            android:layout_marginTop="40dp"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical">

@@ -140,30 +140,30 @@
         app:tabMode="fixed"
         app:tabGravity="fill"/>
 
-    <LinearLayout
-        android:layout_below="@+id/tabs"
-        android:id="@+id/layout_back"
-        android:paddingTop="@dimen/distance_normal"
-        android:paddingLeft="@dimen/distance_large"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#EDF5FA">
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/back"/>
-    </LinearLayout>
-
-
 
     <android.support.v4.view.ViewPager
-        android:layout_below="@+id/layout_back"
+        android:layout_below="@+id/tabs"
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:scrollbars="vertical"
         />
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="30dp"
+        android:id="@+id/layout_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#EDF5FA">
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/back"/>
+    </LinearLayout>
 
 </RelativeLayout>

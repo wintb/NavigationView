@@ -71,7 +71,7 @@
         Thông tin nhóm SaiGonStars:\n
         Trịnh Đình Tiến : tientd.9x@gmail.com\n
         Lê Hồng Thái    : 12520385@gm.uit.edu.vn\n
-        Vũ Văn Thắng    : 12520392@gm.uit.edu.vn\n
+        Vũ Văn Thắng    : vuvanthanguit@gmail.com\n
     </string>
 
 
@@ -88,10 +88,11 @@
 
     <string name="content1">
         Khi bạn muốn đặt vé, trước tiên phải lựa chọn chuyến xe bạn muốn đi dựa trên tuyến chạy và ngày khỏi hành.\n
-        Khi danh sách các chuyến hiện lên, bạn chọn chuyến mong muốn và chọn biểu tượng mũi tên next để đến sơ đồ ghế của
+        Khi danh sách các chuyến hiện lên, bạn chọn chuyến mong muốn và chọn nút "Chọn" để đến sơ đồ ghế của
         xe. Bạn click một cái là chọn ghế, click cái thứ hai là bỏ chọn ghế, bạn chỉ được đặt tối đa 2 ghế. Sau khi chọn
-        ghế xong chọn nút chọn ghế để nhập thông tin cá nhân hành khách, sau khi nhập xong bạn cần thực hiện bước xác nhận,
-        khi xác nhận xong là bạn đã đặt vé thành công.
+        ghế xong chọn nút "Chọn ghế" ghế để nhập thông tin cá nhân hành khách, sau khi nhập xong bạn cần thực hiện bước xác nhận,
+        khi xác nhận xong là bạn đã đặt vé thành công.\n
+        Sau khi hiện thông báo thành công. Sẽ xuất hiện một mã QR Code. Mã này dùng để xác nhận với nhà xe khi bạn đến thanh toán vé.
     </string>
     <string name="content2">
         Khi đã đặt vé thì bạn vào phần xem vé, nhập số điện thoại và số chứng minh nhân dân mà bạn đã nhập khi đặt vé.

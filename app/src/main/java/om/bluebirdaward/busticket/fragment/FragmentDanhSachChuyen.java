@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.mics.Constant;
 import om.bluebirdaward.busticket.request.DanhSachChuyen2paramsRequest;
 import om.bluebirdaward.busticket.request.DanhSachChuyenRequest;
+import om.bluebirdaward.busticket.utils.CheckInternet;
 import om.bluebirdaward.busticket.utils.ShowDialog;
 
 /**
@@ -39,6 +42,10 @@ public class FragmentDanhSachChuyen extends Fragment {
     TextView khoangcach;
     @Bind(R.id.danhsachchuyen_ngaydi)
     TextView ngaydi;
+    @Bind(R.id.layout_error)
+    LinearLayout layout_error;
+    @Bind(R.id.btnTryAgain)
+    Button btnTryAgain;
 
     @Bind(R.id.recyclerDanhSachChuyen)
     RecyclerView recyclerDanhSachChuyen;
@@ -75,6 +82,8 @@ public class FragmentDanhSachChuyen extends Fragment {
             getDanhSachChuyen(idHangXe, ChuyenDi, NgayDi);
         }
 
+        setOnClickTryAgain();
+
 
         return rootView;
 
@@ -101,6 +110,13 @@ public class FragmentDanhSachChuyen extends Fragment {
 
     private void getDanhSachChuyen(String id_carmaker, String route, String date){
         ShowDialog.showLoading(getActivity());
+
+        if (CheckInternet.isConnected(getActivity())){
+            layout_error.setVisibility(View.GONE);
+        }else{
+            layout_error.setVisibility(View.VISIBLE);
+        }
+
         DanhSachChuyenRequest.getDanhSachChuyen(id_carmaker, route, date, new Response() {
             @Override
             public void onStart() {
@@ -110,6 +126,7 @@ public class FragmentDanhSachChuyen extends Fragment {
             @Override
             public void onSuccess(int code, String message, Object obj) {
                 ShowDialog.dimissLoading();
+                layout_error.setVisibility(View.GONE);
                 if (code == 0) {
                     ArrayList<DanhSachChuyen> list = (ArrayList<DanhSachChuyen>) obj;
                     khoangcach.setText(list.get(0).far+" Km");
@@ -124,11 +141,27 @@ public class FragmentDanhSachChuyen extends Fragment {
 
             @Override
             public void onFailure() {
+                ShowDialog.dimissLoading();
                 ArrayList<DanhSachChuyen> list = new ArrayList<DanhSachChuyen>();
                 customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list);
                 recyclerDanhSachChuyen.setAdapter(customApdaterOneTrip);
-
+                layout_error.setVisibility(View.VISIBLE);
                 Log.d("NOTE", "kiem tra lai ket noi");
+            }
+        });
+    }
+
+    private void setOnClickTryAgain(){
+        btnTryAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (FragmentDatVeMotChieu.checkParams == 2){
+                    getDanhSachChuyen2Parrams(ChuyenDi, NgayDi);
+                }
+                if (FragmentDatVeMotChieu.checkParams == 3){
+                    getDanhSachChuyen(idHangXe, ChuyenDi, NgayDi);
+                }
             }
         });
     }
@@ -136,6 +169,11 @@ public class FragmentDanhSachChuyen extends Fragment {
 
     private void getDanhSachChuyen2Parrams(String route, String date){
         ShowDialog.showLoading(getActivity());
+        if (CheckInternet.isConnected(getActivity())){
+            layout_error.setVisibility(View.GONE);
+        }else{
+            layout_error.setVisibility(View.VISIBLE);
+        }
         DanhSachChuyen2paramsRequest.getDanhSachChuyen2Params(route, date, new Response() {
             @Override
             public void onStart() {
@@ -145,6 +183,7 @@ public class FragmentDanhSachChuyen extends Fragment {
             @Override
             public void onSuccess(int code, String message, Object obj) {
                 ShowDialog.dimissLoading();
+                layout_error.setVisibility(View.GONE);
                 if (code == 0) {
                     ArrayList<DanhSachChuyen> list = (ArrayList<DanhSachChuyen>) obj;
                     khoangcach.setText(list.get(0).far + " Km");
@@ -159,9 +198,11 @@ public class FragmentDanhSachChuyen extends Fragment {
 
             @Override
             public void onFailure() {
+                ShowDialog.dimissLoading();
                 ArrayList<DanhSachChuyen> list = new ArrayList<DanhSachChuyen>();
                 customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list);
                 recyclerDanhSachChuyen.setAdapter(customApdaterOneTrip);
+                layout_error.setVisibility(View.VISIBLE);
                 Log.d("NOTE", "kiem tra lai ket noi");
             }
         });

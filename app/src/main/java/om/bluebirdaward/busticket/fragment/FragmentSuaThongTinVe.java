@@ -23,7 +23,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.interfaces.Response;
-import om.bluebirdaward.busticket.mics.Constant;
 import om.bluebirdaward.busticket.request.EditCustomerRequest;
 import om.bluebirdaward.busticket.utils.CheckInternet;
 import om.bluebirdaward.busticket.utils.ShowDialog;
@@ -75,12 +74,6 @@ public class FragmentSuaThongTinVe extends Fragment {
         editCMND.setText(identity_number);
         editNoiXuong.setText(note);
 
-        if (Constant.KEY_CHECK_FRAGMENT == 1){
-            btnBack.setVisibility(View.GONE);
-        }
-        if (Constant.KEY_CHECK_FRAGMENT == 0){
-            btnBack.setVisibility(View.VISIBLE);
-        }
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

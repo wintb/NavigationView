@@ -205,16 +205,16 @@ public class FragmentThongTinVeVuaDat extends Fragment {
                     public void onSuccess(int code, String message, Object obj) {
                         ShowDialog.dimissLoading();
                         if (code == 1){
-                            showDialogSuccess_error("Đặt vé không thành công !", R.drawable.error, "Vui lòng thử lại.");
+                            showDialogSuccess_error("Đặt vé không thành công !", R.drawable.error, "Vui lòng thử lại.",true);
 
                         } else if(code == 0){
-                            showDialogSuccess_error("Đặt vé thành công !", R.drawable.success_new, "Nhấn OK để tiếp tục");
+                            showDialogSuccess_error("Đặt vé thành công !", R.drawable.success_new, "Nhấn OK để tiếp tục",false);
                         }
                     }
 
                     @Override
                     public void onFailure() {
-                        showDialogSuccess_error("Đặt vé không thành công !", R.drawable.error, "Vui lòng thử lại.");
+                        showDialogSuccess_error("Đặt vé không thành công !", R.drawable.error, "Vui lòng thử lại.",true);
                     }
                 });
 
@@ -224,7 +224,7 @@ public class FragmentThongTinVeVuaDat extends Fragment {
 
     private Dialog dialog;
 
-    public void showDialogSuccess_error(String title, int image, String message){
+    public void showDialogSuccess_error(String title, int image, String message, boolean checkError){
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.custom_layout_dialog);
         dialog.setCanceledOnTouchOutside(false);
@@ -240,13 +240,24 @@ public class FragmentThongTinVeVuaDat extends Fragment {
         BitmapLoader.LoadImageNotScale(getActivity(), imgStatus, image);
         txtMessage.setText(message);
 
-        btnOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dimissDialog();
-                showDialogQrcode(md5Qrcode);
-            }
-        });
+        if (checkError == true){
+            btnOK.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dimissDialog();
+                }
+            });
+        }else {
+            btnOK.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dimissDialog();
+                    showDialogQrcode(md5Qrcode);
+                }
+            });
+        }
+
+
 
     }
 

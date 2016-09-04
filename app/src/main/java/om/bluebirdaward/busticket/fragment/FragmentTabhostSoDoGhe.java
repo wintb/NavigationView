@@ -22,7 +22,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.adapter.AdapterViewPager;
-import om.bluebirdaward.busticket.mics.Constant;
 
 /**
  * Created by DinhTien on 15-05-2016.
@@ -88,16 +87,10 @@ public class FragmentTabhostSoDoGhe extends Fragment{
         SDTKhach = data.getString("SDTKhach");
         id = data.getInt("id");
 
-        if (Constant.KEY_CHECK_FRAGMENT == 1){
-            btnBack.setVisibility(View.GONE);
-        }
-        if (Constant.KEY_CHECK_FRAGMENT == 0){
-            btnBack.setVisibility(View.VISIBLE);
-        }
-
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                listGheDaChonTang1 = new ArrayList<String>();
                 getFragmentManager().popBackStack();
             }
         });
@@ -152,6 +145,11 @@ public class FragmentTabhostSoDoGhe extends Fragment{
     public void onAttach(Context context) {
         myContext=(FragmentActivity) context;
         super.onAttach(context);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
     public static FragmentTabhostSoDoGhe newInstance() {
