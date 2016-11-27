@@ -87,7 +87,9 @@ public class FragmentThongTinVeDaDat extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_thong_tin_ve_da_dat, container, false);
         ButterKnife.bind(this, view);
+        getActivity().setTitle("Vé đã đặt");
         setTypeFace();
+        //gftgrfgf
 
         Bundle data = this.getArguments();
 
