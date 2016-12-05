@@ -2,6 +2,7 @@ package om.bluebirdaward.busticket.fragment;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +23,7 @@ import butterknife.ButterKnife;
 import om.bluebirdaward.busticket.R;
 import om.bluebirdaward.busticket.adapter.AdapterDanhSachChuyen;
 import om.bluebirdaward.busticket.dao.DanhSachChuyen.DanhSachChuyen;
+import om.bluebirdaward.busticket.interfaces.OnLoadMoreListener;
 import om.bluebirdaward.busticket.interfaces.Response;
 import om.bluebirdaward.busticket.mics.Constant;
 import om.bluebirdaward.busticket.request.DanhSachChuyen2paramsRequest;
@@ -52,14 +54,16 @@ public class FragmentDanhSachChuyen extends Fragment {
     String idHangXe ;
 
     AdapterDanhSachChuyen customApdaterOneTrip;
+    ArrayList<DanhSachChuyen> list = new ArrayList<>();
     public String ChuyenDi;
     public String NgayDi;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_danh_sach_chuyen, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_danh_sach_chuyen_v1, container, false);
         ButterKnife.bind(this, rootView);
+        getActivity().setTitle("Danh sách chuyến");
         //setTypeFace();
         Constant.KEY_CHECK_FRAGMENT = 1;
         Bundle data = getArguments();
@@ -82,11 +86,29 @@ public class FragmentDanhSachChuyen extends Fragment {
             getDanhSachChuyen(idHangXe, ChuyenDi, NgayDi);
         }
 
+        //setOnLoadMoreRecycleview();
         setOnClickTryAgain();
 
 
         return rootView;
 
+    }
+
+    // set sự kiện load more cho danh sách hiển thị danh sách chuyến
+    private void setOnLoadMoreRecycleview(){
+        customApdaterOneTrip.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void OnLoadMore() {
+                Log.e("haint", "Load More");
+                list.add(null);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        customApdaterOneTrip.setLoaded();
+                    }
+                }, 5000);
+            }
+        });
     }
 
     private void setTypeFace(){
@@ -97,13 +119,15 @@ public class FragmentDanhSachChuyen extends Fragment {
 
     //tách chuỗi
     private void splitString(String name){
-        List<String> list= new ArrayList<>();
-        String[] temp = name.split(" -> ");
-        for (int i = 0 ; i < temp.length; i++) {
-            list.add(temp[i]);
+        if (name.equalsIgnoreCase("")) {
+            List<String> list = new ArrayList<>();
+            String[] temp = name.split(" -> ");
+            for (int i = 0; i < temp.length; i++) {
+                list.add(temp[i]);
+            }
+            NoiDi.setText(list.get(0));
+            NoiDen.setText(list.get(1));
         }
-        NoiDi.setText(list.get(0));
-        NoiDen.setText(list.get(1));
     }
 
     //=======================================API ===================================================
@@ -128,13 +152,13 @@ public class FragmentDanhSachChuyen extends Fragment {
                 ShowDialog.dimissLoading();
                 layout_error.setVisibility(View.GONE);
                 if (code == 0) {
-                    ArrayList<DanhSachChuyen> list = (ArrayList<DanhSachChuyen>) obj;
+                    list = (ArrayList<DanhSachChuyen>) obj;
                     khoangcach.setText(list.get(0).far+" Km");
-                    customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list);
+                    customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list, recyclerDanhSachChuyen);
                     recyclerDanhSachChuyen.setAdapter(customApdaterOneTrip);
                 }else{
-                    ArrayList<DanhSachChuyen> list = new ArrayList<DanhSachChuyen>();
-                    customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list);
+                    list = new ArrayList<DanhSachChuyen>();
+                    customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list, recyclerDanhSachChuyen);
                     recyclerDanhSachChuyen.setAdapter(customApdaterOneTrip);
                 }
             }
@@ -142,8 +166,8 @@ public class FragmentDanhSachChuyen extends Fragment {
             @Override
             public void onFailure() {
                 ShowDialog.dimissLoading();
-                ArrayList<DanhSachChuyen> list = new ArrayList<DanhSachChuyen>();
-                customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list);
+                list = new ArrayList<DanhSachChuyen>();
+                customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list, recyclerDanhSachChuyen);
                 recyclerDanhSachChuyen.setAdapter(customApdaterOneTrip);
                 layout_error.setVisibility(View.VISIBLE);
                 Log.d("NOTE", "kiem tra lai ket noi");
@@ -185,13 +209,13 @@ public class FragmentDanhSachChuyen extends Fragment {
                 ShowDialog.dimissLoading();
                 layout_error.setVisibility(View.GONE);
                 if (code == 0) {
-                    ArrayList<DanhSachChuyen> list = (ArrayList<DanhSachChuyen>) obj;
+                    list = (ArrayList<DanhSachChuyen>) obj;
                     khoangcach.setText(list.get(0).far + " Km");
-                    customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list);
+                    customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list, recyclerDanhSachChuyen);
                     recyclerDanhSachChuyen.setAdapter(customApdaterOneTrip);
                 } else {
                     ArrayList<DanhSachChuyen> list = new ArrayList<DanhSachChuyen>();
-                    customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list);
+                    customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list, recyclerDanhSachChuyen);
                     recyclerDanhSachChuyen.setAdapter(customApdaterOneTrip);
                 }
             }
@@ -199,8 +223,8 @@ public class FragmentDanhSachChuyen extends Fragment {
             @Override
             public void onFailure() {
                 ShowDialog.dimissLoading();
-                ArrayList<DanhSachChuyen> list = new ArrayList<DanhSachChuyen>();
-                customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list);
+                list = new ArrayList<DanhSachChuyen>();
+                customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list, recyclerDanhSachChuyen);
                 recyclerDanhSachChuyen.setAdapter(customApdaterOneTrip);
                 layout_error.setVisibility(View.VISIBLE);
                 Log.d("NOTE", "kiem tra lai ket noi");
