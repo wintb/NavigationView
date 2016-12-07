@@ -87,6 +87,7 @@ public class FragmentDanhSachChuyen extends Fragment {
         }
 
         //setOnLoadMoreRecycleview();
+        // set sự kiện click try again khi bị lỗi
         setOnClickTryAgain();
 
 
@@ -98,13 +99,16 @@ public class FragmentDanhSachChuyen extends Fragment {
     private void setOnLoadMoreRecycleview(){
         customApdaterOneTrip.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
-            public void OnLoadMore() {
+            public void onLoadMore() {
                 Log.e("haint", "Load More");
                 list.add(null);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        // notifi cho adapter
+                        customApdaterOneTrip.notifyDataSetChanged();
                         customApdaterOneTrip.setLoaded();
+
                     }
                 }, 5000);
             }
@@ -156,6 +160,8 @@ public class FragmentDanhSachChuyen extends Fragment {
                     khoangcach.setText(list.get(0).far+" Km");
                     customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list, recyclerDanhSachChuyen);
                     recyclerDanhSachChuyen.setAdapter(customApdaterOneTrip);
+                    setOnLoadMoreRecycleview();
+
                 }else{
                     list = new ArrayList<DanhSachChuyen>();
                     customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list, recyclerDanhSachChuyen);
@@ -213,6 +219,7 @@ public class FragmentDanhSachChuyen extends Fragment {
                     khoangcach.setText(list.get(0).far + " Km");
                     customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list, recyclerDanhSachChuyen);
                     recyclerDanhSachChuyen.setAdapter(customApdaterOneTrip);
+                    setOnLoadMoreRecycleview();
                 } else {
                     ArrayList<DanhSachChuyen> list = new ArrayList<DanhSachChuyen>();
                     customApdaterOneTrip = new AdapterDanhSachChuyen(getActivity(), list, recyclerDanhSachChuyen);

@@ -9,19 +9,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,13 +46,13 @@ public class FragmentDatVeMotChieu extends Fragment{
 //    @Bind(R.id.fragment_motchieu_title)
 //    TextView txtTitle;
     @Bind(R.id.txtDate)
-    EditText txtDate;
+    TextView txtDate;
     @Bind(R.id.txtChuyenDi)
-    EditText txtChuyenDi;
+    TextView txtChuyenDi;
     @Bind(R.id.btnTimChuyenTab1)
-    AppCompatButton btnTimChuyen;
+    LinearLayout btnTimChuyen;
     @Bind(R.id.txtHangXe)
-    EditText txtHangXe;
+    TextView txtHangXe;
     @Bind(R.id.layout_hangxe)
     LinearLayout layout_hangxe;
     @Bind(R.id.layout_chuyendi)
@@ -77,7 +73,7 @@ public class FragmentDatVeMotChieu extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_dat_ve_mot_chieu,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_dat_ve_mot_chieu_v1,container,false);
         ButterKnife.bind(this,rootView);
         getActivity().setTitle("Tìm chuyến");
         setTypeFace();
@@ -135,7 +131,6 @@ public class FragmentDatVeMotChieu extends Fragment{
         txtDate.setTypeface(face1);
         txtChuyenDi.setTypeface(face1);
         //txtTitle.setTypeface(face1);
-        btnTimChuyen.setTypeface(face1);
     }
 
     //------------------------------------INTERFACE FOR SEND DATA TO FRAGMENT LIST TRIP -------------------------------

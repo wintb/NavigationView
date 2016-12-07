@@ -1,6 +1,7 @@
 package om.bluebirdaward.busticket.activity;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -15,13 +16,19 @@ import java.security.NoSuchAlgorithmException;
  */
 public class MyApplication extends Application {
 
+    private static Context context;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        this.context = getApplicationContext();
         printHashKey();
 
     }
 
+    public static Context getContext(){
+        return context;
+    }
 
     public void printHashKey(){
         // Add code to print out the key hash

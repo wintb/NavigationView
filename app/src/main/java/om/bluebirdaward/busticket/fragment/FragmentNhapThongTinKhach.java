@@ -40,7 +40,7 @@ public class FragmentNhapThongTinKhach extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_nhap_thong_tin_khach,container,false);
+        View view = inflater.inflate(R.layout.fragment_nhap_thong_tin_khach_v1,container,false);
 
         editCMND = (EditText)view.findViewById(R.id.editNhapCMND);
         editGhiChu = (EditText)view.findViewById(R.id.editNhapGhichu);

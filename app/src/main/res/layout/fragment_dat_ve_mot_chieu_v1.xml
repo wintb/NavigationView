@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/background_v1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/layout_chuyendi"
+            android:onClick="true"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="2dp"
+            android:background="#393943"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_margin="10dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/trip_v1"/>
+            <TextView
+                android:id="@+id/txtChuyenDi"
+                android:text=""
+                android:hint="Chọn tuyến đi"
+                android:textColorHint="#fff"
+                android:textColor="#fff"
+                android:textSize="17sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:id="@+id/layout_ngaydi"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center"
+                android:onClick="true"
+                android:orientation="vertical"
+                android:layout_marginRight="1dp"
+                android:background="#E4E3E1"
+                android:layout_weight="1">
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/calendar_b"/>
+
+                <TextView
+                    android:id="@+id/txtDate"
+                    android:layout_marginTop="10dp"
+                    android:text="Chọn ngày đi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_hangxe"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:onClick="true"
+                android:layout_marginLeft="1dp"
+                android:background="#E4E3E1"
+                android:layout_weight="1">
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/label_v1"/>
+                <TextView
+                    android:id="@+id/txtHangXe"
+                    android:layout_marginTop="10dp"
+                    android:hint="Chọn hãng xe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnTimChuyenTab1"
+            android:onClick="true"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="#E4E3E1">
+
+            <ImageView
+                android:layout_margin="10dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/search_b"/>
+
+            <TextView
+                android:text="Tim Chuyen"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
